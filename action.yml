@@ -25,17 +25,8 @@ runs:
     - name: Commit documentation changes
       shell: bash
       run: |
-        echo ${INPUT_PAGES-BRANCH}
-        echo ${INPUT_PAGES_BRANCH}
-        echo ${INPUT_DOCS-FOLDER}
-
-        echo ${{ github.server_url }}
-        echo ${{ github.repository }}
-        echo ${{ inputs.pages-branch }}
-        echo ${{ inputs.docs-folder }}
-        
-        git clone ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git \
-          --branch ${INPUT_PAGES-BRANCH} \
+        git clone ${{ github.server_url }}/${{ github.repository }}.git \
+          --branch ${{ input.pages-branch }} \
           --single-branch nist-pages
         cd nist-pages
 
@@ -43,16 +34,16 @@ runs:
 
         # store built documents in directory named for current branch
         # remove any previous directory of that name
-        git rm -r --ignore-unmatch "${html}/${GITHUB_REF_NAME}"
-        cp -r ../${INPUT_DOCS-FOLDER}_build/html "${html}/${GITHUB_REF_NAME}"
+        git rm -r --ignore-unmatch "${html}/${{ github.ref_name }}"
+        cp -r "../${{ input.docs-folder }}_build/html" "${html}/${{ github.ref_name }}"
 
         # store built documents in latest/
         # (but only do this for default branch of repo)
-        if ${GITHUB_REF_NAME} == ${GITHUB_EVENT_REPOSITORY_DEFAULT_BRANCH}
+        if ${{ github.ref_name == github.event.repository.default_branch }}}
         then
           # remove any previous directory of that name
           git rm -r --ignore-unmatch "${html}/latest"
-          cp -r ../${INPUT_DOCS-FOLDER}_build/html "${html}/latest"
+          cp -r "../${{ input.docs-folder }}_build/html" "${html}/latest"
         fi
 
         # jekyll conflicts with sphinx' underlined directories and files
@@ -75,12 +66,12 @@ runs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git commit -m "Update documentation for ${GITHUB_REF_NAME}@${GITHUB_SHA}" -a || true
+        git commit -m "Update documentation for ${{ github.ref_name }}@${{ github.sha }}" -a || true
         # The above command will fail if no changes were present, so we ignore
         # the return code.
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        branch: ${INPUT_PAGES-BRANCH}
+        branch: ${{ input.pages-branch }}
         directory: nist-pages
-        github_token: ${GITHUB_TOKEN}
+        github_token: ${{ secret.token }}
