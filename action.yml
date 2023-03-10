@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Commit documentation changes
         run: |
-          git clone ${{ github.server_url }}/${{ github.repository }}.git \
+          git clone ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git \
             --branch ${INPUT_PAGES-BRANCH} \
             --single-branch nist-pages
           cd nist-pages
@@ -29,12 +29,12 @@ jobs:
 
           # store built documents in directory named for current branch
           # remove any previous directory of that name
-          git rm -r --ignore-unmatch "${html}/${{ github.ref_name }}"
-          cp -r ../${INPUT_DOCS-FOLDER}_build/html "${html}/${{ github.ref_name }}"
+          git rm -r --ignore-unmatch "${html}/${GITHUB_REF_NAME}"
+          cp -r ../${INPUT_DOCS-FOLDER}_build/html "${html}/${GITHUB_REF_NAME}"
 
           # store built documents in latest/
           # (but only do this for default branch of repo)
-          if ${{ github.ref_name == github.event.repository.default_branch }}
+          if ${GITHUB_REF_NAME} == ${GITHUB_EVENT_REPOSITORY_DEFAULT_BRANCH}
           then
             # remove any previous directory of that name
             git rm -r --ignore-unmatch "${html}/latest"
@@ -69,4 +69,4 @@ jobs:
         with:
           branch: ${INPUT_PAGES-BRANCH}
           directory: nist-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${GITHUB_TOKEN}
