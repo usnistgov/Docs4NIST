@@ -21,6 +21,9 @@ runs:
     - name: Commit documentation changes
       shell: bash
       run: |
+        echo ${INPUT_PAGES-BRANCH}
+        echo "${INPUT_PAGES-BRANCH}"
+
         git clone ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git \
           --branch ${INPUT_PAGES-BRANCH} \
           --single-branch nist-pages
