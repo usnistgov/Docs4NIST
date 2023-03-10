@@ -14,10 +14,6 @@ inputs:
     description: 
       The branch linked to your documentation server.
     default: 'nist-pages'
-  pages_branch:
-    description: 
-      The branch linked to your documentation server.
-    default: 'nist-pages'
 
 runs:
   using: "composite"
@@ -25,6 +21,8 @@ runs:
     - name: Commit documentation changes
       shell: bash
       run: |
+        echo ${{ input.pages-branch }}
+
         git clone ${{ github.server_url }}/${{ github.repository }}.git \
           --branch ${{ input.pages-branch }} \
           --single-branch nist-pages
