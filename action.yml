@@ -14,6 +14,10 @@ inputs:
     description: 
       The branch linked to your documentation server.
     default: 'nist-pages'
+  pages_branch:
+    description: 
+      The branch linked to your documentation server.
+    default: 'nist-pages'
 
 runs:
   using: "composite"
@@ -22,7 +26,8 @@ runs:
       shell: bash
       run: |
         echo ${INPUT_PAGES-BRANCH}
-        echo "${INPUT_PAGES-BRANCH}"
+        echo ${INPUT_PAGES_BRANCH}
+        echo ${INPUT_DOCS-FOLDER}
 
         git clone ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git \
           --branch ${INPUT_PAGES-BRANCH} \
