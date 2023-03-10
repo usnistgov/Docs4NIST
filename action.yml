@@ -70,4 +70,4 @@ runs:
       with:
         branch: ${{ inputs.pages-branch }}
         directory: nist-pages
-        github_token: ${{ secrets.token }}
+        github_token: ${{ github.token }}
