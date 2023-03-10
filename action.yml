@@ -31,6 +31,7 @@ runs:
         # store built documents in directory named for current branch
         # remove any previous directory of that name
         git rm -r --ignore-unmatch "${html}/${{ github.ref_name }}"
+        mkdir -p ${html}
         cp -r "../${{ inputs.docs-folder }}_build/html" "${html}/${{ github.ref_name }}"
 
         # store built documents in latest/
@@ -39,6 +40,7 @@ runs:
         then
           # remove any previous directory of that name
           git rm -r --ignore-unmatch "${html}/latest"
+          mkdir -p ${html}
           cp -r "../${{ inputs.docs-folder }}_build/html" "${html}/latest"
         fi
 
