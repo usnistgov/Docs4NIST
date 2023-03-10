@@ -29,6 +29,11 @@ runs:
         echo ${INPUT_PAGES_BRANCH}
         echo ${INPUT_DOCS-FOLDER}
 
+        echo ${{ github.server_url }}
+        echo ${{ github.repository }}
+        echo ${{ inputs.pages-branch }}
+        echo ${{ inputs.docs-folder }}
+        
         git clone ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git \
           --branch ${INPUT_PAGES-BRANCH} \
           --single-branch nist-pages
