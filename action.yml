@@ -21,10 +21,8 @@ runs:
     - name: Commit documentation changes
       shell: bash
       run: |
-        echo ${{ input.pages-branch }}
-
         git clone ${{ github.server_url }}/${{ github.repository }}.git \
-          --branch ${{ input.pages-branch }} \
+          --branch ${{ inputs.pages-branch }} \
           --single-branch nist-pages
         cd nist-pages
 
@@ -33,7 +31,7 @@ runs:
         # store built documents in directory named for current branch
         # remove any previous directory of that name
         git rm -r --ignore-unmatch "${html}/${{ github.ref_name }}"
-        cp -r "../${{ input.docs-folder }}_build/html" "${html}/${{ github.ref_name }}"
+        cp -r "../${{ inputs.docs-folder }}_build/html" "${html}/${{ github.ref_name }}"
 
         # store built documents in latest/
         # (but only do this for default branch of repo)
@@ -41,7 +39,7 @@ runs:
         then
           # remove any previous directory of that name
           git rm -r --ignore-unmatch "${html}/latest"
-          cp -r "../${{ input.docs-folder }}_build/html" "${html}/latest"
+          cp -r "../${{ inputs.docs-folder }}_build/html" "${html}/latest"
         fi
 
         # jekyll conflicts with sphinx' underlined directories and files
@@ -70,6 +68,6 @@ runs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        branch: ${{ input.pages-branch }}
+        branch: ${{ inputs.pages-branch }}
         directory: nist-pages
-        github_token: ${{ secret.token }}
+        github_token: ${{ secrets.token }}
