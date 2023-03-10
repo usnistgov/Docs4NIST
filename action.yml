@@ -4,35 +4,33 @@ name: NISTtheDocs2Death
 description: Deploys Sphinx-built documentation to https://pages.nist.gov
 author: Jonathan Guyer
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
-on:
-workflow_dispatch:
-  # Inputs the workflow accepts.
-  inputs:
-    name:
-      # Friendly description to be shown in the UI instead of 'name'
-      description: 'Person to greet'
-      # Default value if no value is explicitly provided
-      default: 'World'
-      # Input has to be provided for the workflow to run
-      required: true
+inputs:
+  docs-folder:
+    description:
+      The folder containing your sphinx docs.
+    required: true
+    default: "docs/"
+  pages-branch:
+    description: 
+      The branch linked to your documentation server.
+    default: 'nist-pages'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   push-pages:
     steps:
       - name: Commit documentation changes
         run: |
-          git clone ${{ github.server_url }}/${{ github.repository }}.git --branch nist-pages --single-branch nist-pages
+          git clone ${{ github.server_url }}/${{ github.repository }}.git \
+            --branch ${INPUT_PAGES-BRANCH} \
+            --single-branch nist-pages
           cd nist-pages
 
           html="html"
 
           # store built documents in directory named for current branch
+          # remove any previous directory of that name
           git rm -r --ignore-unmatch "${html}/${{ github.ref_name }}"
-          mkdir -p "${html}/${{ github.ref_name }}"
-          cp -r ../docs/_build/html/* "${html}/${{ github.ref_name }}"
+          cp -r ../${INPUT_DOCS-FOLDER}_build/html "${html}/${{ github.ref_name }}"
 
           # store built documents in latest/
           # (but only do this for default branch of repo)
@@ -69,6 +67,6 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          branch: nist-pages
+          branch: ${INPUT_PAGES-BRANCH}
           directory: nist-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
