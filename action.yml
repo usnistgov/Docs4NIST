@@ -49,6 +49,7 @@ runs:
 
         # build index.html with available documentation versions
         rm -f includes/versions.html
+        mkdir -p includes
         echo "<ul>" >> includes/versions.html
         for path in ${html}/*
         do
