@@ -48,16 +48,20 @@ runs:
         touch .nojekyll
 
         # build index.html with available documentation versions
-        rm -f index.html
-        cat _templates/index_header.html >> index.html
-        echo "<div class=\"documentation-versions\">" >> index.html
-        echo "<ul>" >> index.html
+        rm -f includes/versions.html
+        echo "<ul>" >> includes/versions.html
         for path in ${html}/*
         do
             version="${path##*/}"
-            echo "<li><a href=\"${path}\">${version}</a>" >> index.html
+            echo "<li><a href=\"${path}\">${version}</a>" >> includes/versions.html
         done
-        echo "</ul>" >> index.html
+        echo "</ul>" >> includes/versions.html
+
+        # build index.html with available documentation versions
+        rm -f index.html
+        cat _templates/index_header.html >> index.html
+        echo "<div class=\"documentation-versions\">" >> index.html
+        cat includes/versions.html >> index.html
         echo "</div>" >> index.html
         cat _templates/index_footer.html >> index.html
 
