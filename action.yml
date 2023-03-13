@@ -54,7 +54,7 @@ runs:
         for path in ${html}/*
         do
             version="${path##*/}"
-            echo "<li><a href=\"${path}\">${version}</a>" >> includes/versions.html
+            echo "<li><a href=\"/${path}\">${version}</a>" >> includes/versions.html
         done
         echo "</ul>" >> includes/versions.html
 
