@@ -50,6 +50,9 @@ runs:
         # build index.html with available documentation versions
         rm -f includes/versions.html
         mkdir -p includes
+
+        cat _templates/versions.html >> includes/versions.html
+
         echo "<ul>" >> includes/versions.html
         for path in ${html}/*
         do
