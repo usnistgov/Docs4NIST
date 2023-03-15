@@ -61,16 +61,16 @@ runs:
         versions_html = "${html}/${{ github.ref_name }}/${{ inputs.docs-folder }}_templates/versions.html"
 
 
-        echo "<div class=\"dropdown\">" > versions_html
-        echo "  <div class=\"dropdown-content\">" >> versions_html
-        echo "    <p>Versions</p>" >> versions_html
-        echo "<!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->" >> versions_html
-        echo "<iframe src=\"https://pages.nist.gov/steppyngstounes/includes/versions.html\" onload=\"this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()\"></iframe>" >> versions_html
-        echo "    <p>Downloads</p>" >> versions_html
-        echo "    <hr>" >> versions_html
-        echo "  </div>" >> versions_html
-        echo "  <button class=\"dropbtn\">v: ${{ github.ref_name }} ▲</button>" >> versions_html
-        echo "</div>" >> versions_html
+        echo "<div class=\"dropdown\">" > $versions_html
+        echo "  <div class=\"dropdown-content\">" >> $versions_html
+        echo "    <p>Versions</p>" >> $versions_html
+        echo "<!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->" >> $versions_html
+        echo "<iframe src=\"https://pages.nist.gov/steppyngstounes/includes/versions.html\" onload=\"this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()\"></iframe>" >> $versions_html
+        echo "    <p>Downloads</p>" >> $versions_html
+        echo "    <hr>" >> $versions_html
+        echo "  </div>" >> $versions_html
+        echo "  <button class=\"dropbtn\">v: ${{ github.ref_name }} ▲</button>" >> $versions_html
+        echo "</div>" >> $versions_html
 
         # build index.html with available documentation versions
         rm -f index.html
