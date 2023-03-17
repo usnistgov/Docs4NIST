@@ -60,7 +60,7 @@ runs:
 
         static_dir="${html}/${{ github.ref_name }}/_static"
         mkdir -p "${static_dir}"
-        versions_html="${static_dir}/versions.html"
+        versions_html="${static_dir}/versionss.html"
 
 
         echo "<div class=\"dropdown\">" > $versions_html
