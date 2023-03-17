@@ -58,7 +58,7 @@ runs:
             echo "<a href=\"/${{ github.event.repository.name }}/${path}/index.html\">${version}</a>" >> includes/versions.html
         done
 
-        static_dir="${html}/${{ github.ref_name }}/${{ inputs.docs-folder }}_static"
+        static_dir="${html}/${{ github.ref_name }}/_static"
         mkdir -p "${static_dir}"
         versions_html="${static_dir}/versions.html"
 
