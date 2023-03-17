@@ -18,6 +18,18 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/checkout@v3
+    - uses: usnistgov/sphinx-action@master
+      name: Build HTML
+      with:
+        docs-folder: docs/
+#       - uses: usnistgov/sphinx-action@master
+#         name: Build ePUB
+#         with:
+#           docs-folder: docs/
+#           build-command: make epub
+#       - uses: usnistgov/sphinx-action@latexpdf
+#         name: Build PDF
     - name: Commit documentation changes
       shell: bash
       run: |
@@ -68,10 +80,10 @@ runs:
         echo "<div class=\"dropdown\">" > $versions_html
         echo "  <div class=\"dropdown-content\">" >> $versions_html
         echo "    <p>Versions</p>" >> $versions_html
-        echo "<!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->" >> $versions_html
-        echo "<iframe src=\"https://pages.nist.gov/${{ github.event.repository.name }}/includes/versions.html?timestamp=`date +%s`\" \
-                onload=\"this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()\" \
-                ></iframe>" >> $versions_html
+        echo "      <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->" >> $versions_html
+        echo "      <iframe src=\"https://pages.nist.gov/${{ github.event.repository.name }}/includes/versions.html\" \
+                      onload=\"this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()\" \
+                      ></iframe>" >> $versions_html
         echo "    <p>Downloads</p>" >> $versions_html
         echo "    <hr>" >> $versions_html
         echo "  </div>" >> $versions_html
@@ -98,3 +110,14 @@ runs:
         branch: ${{ inputs.pages-branch }}
         directory: nist-pages
         github_token: ${{ github.token }}
+    - uses: actions/upload-artifact@v3
+      name: Upload Documentation Artifacts
+      with:
+        name: ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ github.sha }}
+        path: |
+          docs/_build/html
+#             docs/_build/epub/*.epub
+#             docs/_build/latex/${{ github.event.repository.name }}.pdf
+      # Use always() to always run this step to publish documentation
+      # artifacts even when there are failures
+      if: ${{ always() }}
