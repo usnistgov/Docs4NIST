@@ -49,6 +49,7 @@ runs:
           "${{ github.event.repository.default_branch }}" \
           "${{ inputs.pages-url }}"
         cd __nist-pages
+        pwd
         git status
     - name: Push changes
       uses: ad-m/github-push-action@master
