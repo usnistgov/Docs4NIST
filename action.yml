@@ -22,25 +22,26 @@ runs:
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
-        docs-folder: docs/
+        docs-folder: ${{ inputs.docs-folder }}
 #       - uses: usnistgov/sphinx-action@master
 #         name: Build ePUB
 #         with:
-#           docs-folder: docs/
+#           docs-folder: ${{ inputs.docs-folder }}
 #           build-command: make epub
 #       - uses: usnistgov/sphinx-action@latexpdf
 #         name: Build PDF
+#         with:
+#           docs-folder: ${{ inputs.docs-folder }}
     - name: Commit documentation changes
       shell: bash
       run: |
-        python ntd2d.py
-
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Update documentation for ${{ github.ref_name }}@${{ github.sha }}" -a || true
-        # The above command will fail if no changes were present, so we ignore
-        # the return code.
+        python ntd2d.py \
+          ${{ github.server_url }}/${{ github.repository }}.git \
+          "__nist-pages" \
+          ${{ inputs.docs-folder }} \
+          ${{ github.ref_name }} \
+          ${{ github.event.repository.default_branch }} \
+          ${{ inputs.pages-branch }}
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:

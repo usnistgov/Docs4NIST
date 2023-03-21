@@ -1,116 +1,214 @@
+import argparse
 import git
 import pathlib
-import shlib
+import shutil
+import textwrap
+from urllib.parse import urlparse
 
-def copy_docs(from, to, repo):
-# remove any previous directory of that name
-    repo.index.remove(to, r=True, ignore_unmatch=True)
-    shlib.copytree(from, to)
-    repo.index.add(to)
-    
-def get_versions(docs, project, nist_pages):
-    versions = []
-    for version in html.glob("*"):
-        href = File(f"/{project}") / version / "index.html"
-        versions.append(f'<a href="{href}">{version.name}</a>')
+class NISTtheDocs2Death(object):
+    def __init__(self, repo_url, to_path, docs_dir,
+                 branch, sha, default_branch, pages_branch="nist-pages",
+                 pages_url="https://pages.nist.gov"):
+        self.repo_url = repo_url
+        self.to_path = pathlib.Path(to_path)
+        self.docs_dir = pathlib.Path(docs_dir)
+        self.branch = branch
+        self.sha = sha
+        self.default_branch = default_branch
+        self.pages_branch = pages_branch
+        self.pages_url = pages_url
+
+        parsed = urlparse(self.repo_url)
+        self.repository = pathlib.PurePath(parsed.path).stem
+
+        self.build_dir = self.docs_dir / "_build" / "html"
         
-    versions = "/n".join(versions)
-    versions = textwrap.dedent(versions)
-    versions = textwrap.indent(versions, "  ")
-    
-    # build index.html with available documentation versions
-    return f"""
-        <div class="ntd2dwrapper">
-        {versions}
-        </div>
-    """
+        self.repo = None
+        self.working_dir = None
+        self.html_dir = None
+        self.versions_html = None
 
-def get_menu():
-    # static_dir="${html}/${{ github.ref_name }}/_static"
-    # versions_html="${static_dir}/versions.html"
-    
-    src = "https://pages.nist.gov/${{ github.event.repository.name }}/includes/versions.html"
-    
-    return f"""
-        <div class="dropdown">
-          <div class="dropdown-content">
-            <p>Versions</p>
-              {get_iframe(src)}
-            <p>Downloads</p>
-            <hr>
-          </div>
-          <button class="dropbtn">v: ${{ github.ref_name }} ▲</button>"
-        </div>
-    """
+    def clone(self):
+        self.repo = git.Repo.clone_from(self.repo_url,
+                                        to_path=self.to_path,
+                                        branch=self.pages_branch,
+                                        single_branch=True)
 
-def get_iframe(src):
-    onload = "this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"
-    return f"""
-        <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->"
-        <iframe src="{src}" onload="{onload}" ></iframe>"
-    """
+        self.working_dir = pathlib.Path(self.repo.working_dir)
+        self.html_dir = self.working_dir / "html"
 
-def get_index():
-    """build index.html with available documentation versions
-    """
-    template_fname = File("_templates/index.html")
-    if template_fname.exists():
-        with open(template_fname, mode='r') as template_file):
-            template = template_fname.read()
-    else:
-        template = """
+    def copy_html(self, branch):
+        dst = self.html_dir / branch
+
+        # remove any previous directory of that name
+        res = self.repo.index.remove(dst.as_posix(), working_tree=True,
+                               r=True, ignore_unmatch=True)
+        shutil.copytree(self.build_dir, dst)
+        self.repo.index.add(dst.as_posix())
+
+    def get_versions(self, from_dir, html_dir):
+        link_dir = (pathlib.PurePath("/") / self.repository
+                    / html_dir.relative_to(self.working_dir))
+        versions = []
+        for version in from_dir.glob("*"):
+            href = link_dir / version.name / "index.html"
+            versions.append(f'<a href="{href}">{version.name}</a>')
+
+        versions = "\n".join(versions)
+
+        # build index.html with available documentation versions
+        versions = textwrap.dedent("""\
+            <div class="ntd2dwrapper">
+            {versions}
+            </div>
+            """).format(versions=textwrap.indent(versions, "  "))
+
+        return versions
+
+    def get_menu(self):
+        # Need an absolute url because this gets included from
+        # many different levels
+        versions = self.get_iframe(self.versions_html.geturl())
+        return textwrap.dedent("""\
+            <div class="dropdown">
+              <div class="dropdown-content">
+                <p>Versions</p>
+                {versions}
+                <p>Downloads</p>
+                <hr>
+              </div>
+              <button class="dropbtn">v: {branch} ▲</button>"
+            </div>
+            """).format(versions=textwrap.indent(versions, "    "),
+                        branch=self.branch)
+
+    def get_iframe(self, src):
+        onload = "this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"
+        return textwrap.dedent(f"""
+            <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
+            <iframe src="{src}" onload="{onload}" ></iframe>
+            """)
+
+    def get_index(self):
+        """build index.html with available documentation versions
+        """
+        template_fname = pathlib.Path("_templates/index.html")
+        if template_fname.exists():
+            with open(template_fname, mode='r') as template_file:
+                template = template_fname.read()
+        else:
+            template = textwrap.dedent("""\
             <!doctype html>
             <html>
             <head>
-              <title>a title</title>        
+              <title>{repository} documentation</title>
             </head>
             <body>
               {versions}
             </body>
             </html>
-        """
+            """)
 
-    versions = f"""
-      <div class="documentation-versions">
-        {write_iframe("/includes/versions.html")}
-      </div>
-    """
-    
-    return template.format(**locals())
-    
-def blah():
-    nist_pages = pathlib.Path("..") / "nist-pages_test"
-    repo = git.Repo.clone_from("https://github.com/usnistgov/steppyngstounes.git", 
-                               to_path=nist_pages, 
-                               branch="nist-pages", single_branch=True)
-    
-# cd nist-pages
-# 
-# html="html"
+        # This can be a relative url, because all version should
+        # be on the same server
+        versions = self.get_iframe(self.versions_html.path)
+        versions = textwrap.dedent("""
+            <div class="documentation-versions">
+            {versions}
+            </div>
+            """).format(versions=textwrap.indent(versions, "  "))
 
-    build = "../${{ inputs.docs-folder }}_build/html"
-    branch = "${html}/${{ github.ref_name }}"
-    
-    # store built documents in directory named for current branch
-    copy_docs(build, nist_pages / html / ${{ github.ref_name }}, repo)
-    
-    # store built documents in latest/
-    # (but only do this for default branch of repo)
-    if ${{ github.ref_name == github.event.repository.default_branch }}:
-        copy_docs(build, nist_pages / html / "latest", repo)
+        return template.format(versions=textwrap.indent(versions, "  "),
+                               repository=self.repository)
 
-    
-    # jekyll conflicts with sphinx' underlined directories and files
-    (nist_pages / ".nojekyll").touch()
+    def set_versions_html(self, versions_html):
+        full_url = "/".join([self.pages_url,
+                             self.repository,
+                             str(versions_html.relative_to(self.working_dir))])
 
-    with open(nist_pages / "_includes" / "ntd2d_versions.html", mode='w') as version_file:
-        version_file.write(get_versions(html, "${{ github.event.repository.name }}")
+        self.versions_html = urlparse(full_url)
 
-    with open(..., mode='w', as menu_file):
-        menu_file.write(get_menu())
+    def write_nojekyll(self):
+        # jekyll conflicts with sphinx' underlined directories and files
+        nojekyll = self.working_dir / ".nojekyll"
+        nojekyll.touch()
+        self.repo.index.add(nojekyll)
 
-    with open(..., mode='w', as index_file):
-        index_file.write(get_index())
+    def write_global_versions(self):
+        includes = self.working_dir / "_includes"
+        includes.mkdir(exist_ok=True)
+        versions_html = includes / "ntd2d_versions.html"
+        with open(versions_html, mode='w') as version_file:
+            version_file.write(self.get_versions(from_dir=self.build_dir,
+                                                 html_dir=self.html_dir))
+        self.repo.index.add(versions_html)
+
+        self.set_versions_html(versions_html)
+
+    def write_local_versions(self):
+        static = self.html_dir / self.branch / "_static"
+        static.mkdir(exist_ok=True)
+        menu_html = static / "ntd2d_versions.html"
+        with open(menu_html, mode='w') as menu_file:
+            menu_file.write(self.get_menu())
+        self.repo.index.add(menu_html)
+
+    def write_index_html(self):
+        index_html = self.working_dir / "index.html"
+        with open(index_html, mode='w') as index_file:
+            index_file.write(self.get_index())
+        self.repo.index.add(index_html)
+
+    def commit(self):
+        if len(self.repo.index.diff("HEAD")) > 0:
+            # GitPython will make an empty commit if no changes,
+            # so only commit if things have actually changed
+            message = f"Update documentation for {self.branch}@{self.sha}"
+            author = git.Actor("GitHub Action", "action@github.com")
+            self.repo.index.commit(message=message, author=author)
+
+    def update_pages(self):
+        self.clone()
+
+        # replace any built documents in directory named for current branch
+        self.copy_html(branch=self.branch)
+
+        # replace any built documents in latest/
+        # (but only do this for default branch of repo)
+        if self.branch == self.default_branch:
+            self.copy_html(branch="latest")
+
+            # TODO: stable?
+
+        self.write_nojekyll()
+        self.write_global_versions()
+        self.write_local_versions()
+        self.write_index_html()
+
+        self.commit()
 
 if __name__ == "__main__":
-    pass
+    parser = argparse.ArgumentParser(
+                        prog='NistTheDocs2Death',
+                        description='Update nist-pages branch based on sphinx builds')
+
+    parser.add_argument('repo_url')
+    parser.add_argument('to_path')
+    parser.add_argument('docs_dir')
+    parser.add_argument('branch')
+    parser.add_argument('sha')
+    parser.add_argument('default_branch')
+    parser.add_argument('pages_branch')
+    parser.add_argument('pages_url')
+
+    args = parser.parse_args()
+
+    ntd2d = NISTtheDocs2Death(repo_url=args.repo_url,
+                              to_path=args.to_path,
+                              docs_dir=args.docs_dir,
+                              branch=args.branch,
+                              sha=args.sha,
+                              default_branch=args.default_branch,
+                              pages_branch=args.pages_branch,
+                              pages_url=args.pages_url)
+    ntd2d.update_pages()
