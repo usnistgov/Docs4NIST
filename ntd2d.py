@@ -10,12 +10,12 @@ class NISTtheDocs2Death(object):
     def __init__(self):
         self.repo_url = (f"{os.environ['GITHUB_SERVER_URL']}"
                          f"/{os.environ['GITHUB_REPOSITORY']}.git")
-        self.docs_dir = pathlib.Path(os.environ['INPUTS_DOCS_FOLDER'])
+        self.docs_dir = pathlib.Path(os.environ['INPUTS_DOCS-FOLDER'])
         self.branch = os.environ['GITHUB_REF_NAME']
         self.sha = os.environ['GITHUB_SHA']
         self.default_branch = os.environ['GITHUB_EVENT_REPOSITORY_DEFAULT_BRANCH']
-        self.pages_branch = os.environ['INPUTS_PAGES_BRANCH']
-        self.pages_url = os.environ['INPUTS_PAGES_URL']
+        self.pages_branch = os.environ['INPUTS_PAGES-BRANCH']
+        self.pages_url = os.environ['INPUTS_PAGES-URL']
 
         parsed = urlparse(self.repo_url)
         self.repository = pathlib.PurePath(parsed.path).stem
