@@ -42,11 +42,11 @@ runs:
       shell: bash
     - name: Commit documentation changes
       shell: bash
-      run: python "${{ github.action_path }}/ntd2d.py"
-      with:
-        docs-folder: ${{ inputs.docs-folder }}
-        pages-branch: ${{ inputs.pages-branch }}
-        pages-url: ${{ inputs.pages-url }}
+      run: |
+        INPUTS_DOCS_FOLDER=${{ inputs.docs-folder }} \
+        INPUTS_PAGES_BRANCH=${{ inputs.pages-branch }} \
+        INPUTS_PAGES_URL=${{ inputs.pages-url }} \
+        python "${{ github.action_path }}/ntd2d.py"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
