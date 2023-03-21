@@ -32,8 +32,11 @@ runs:
 #         name: Build PDF
 #         with:
 #           docs-folder: ${{ inputs.docs-folder }}
+    - uses: actions/setup-python@v4
+      with:
+        cache: 'pip'
+    - run: pip install GitPython
     - name: Commit documentation changes
-      shell: bash
       run: |
         python "${{ github.action_path }}/ntd2d.py" \
           ${{ github.server_url }}/${{ github.repository }}.git \
