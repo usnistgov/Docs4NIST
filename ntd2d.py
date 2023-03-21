@@ -187,4 +187,6 @@ class NISTtheDocs2Death(object):
         self.commit()
 
 if __name__ == "__main__":
+    print(os.environ)
+
     NISTtheDocs2Death().update_pages()
