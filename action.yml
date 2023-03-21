@@ -45,6 +45,7 @@ runs:
       run: |
         INPUTS_DOCS_FOLDER=${{ inputs.docs-folder }} \
         INPUTS_PAGES_BRANCH=${{ inputs.pages-branch }} \
+        INPUTS_DEFAULT_BRANCH=${{ github.event.repository.default_branch }} \
         INPUTS_PAGES_URL=${{ inputs.pages-url }} \
         python "${{ github.action_path }}/ntd2d.py"
     - name: Push changes
