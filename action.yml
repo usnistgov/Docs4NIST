@@ -36,8 +36,6 @@ runs:
 #         with:
 #           docs-folder: ${{ inputs.docs-folder }}
     - uses: actions/setup-python@v4
-      with:
-        cache: 'pip'
     - run: pip install GitPython
       shell: bash
     - name: Commit documentation changes
