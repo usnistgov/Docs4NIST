@@ -35,7 +35,6 @@ class NISTtheDocs2Death(object):
                                         single_branch=True)
 
         self.working_dir = pathlib.Path(self.repo.working_dir)
-        print("WORKING DIRECTORY:", self.working_dir)
         self.html_dir = self.working_dir / "html"
 
     def copy_html(self, branch):
