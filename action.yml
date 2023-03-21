@@ -36,7 +36,9 @@ runs:
       with:
         cache: 'pip'
     - run: pip install GitPython
+      shell: bash
     - name: Commit documentation changes
+      shell: bash
       run: |
         python "${{ github.action_path }}/ntd2d.py" \
           ${{ github.server_url }}/${{ github.repository }}.git \
