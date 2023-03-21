@@ -164,7 +164,7 @@ class NISTtheDocs2Death(object):
         if len(self.repo.index.diff("HEAD")) > 0:
             # GitPython will make an empty commit if no changes,
             # so only commit if things have actually changed
-            message = f"Update documentation for {self.branch}@{self.sha}"
+            message = f"Update documentation for {self.branch}@{self.sha[:7]}"
             author = git.Actor("GitHub Action", "action@github.com")
             self.repo.index.commit(message=message, author=author)
 
