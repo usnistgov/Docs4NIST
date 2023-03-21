@@ -7,15 +7,16 @@ import textwrap
 from urllib.parse import urlparse
 
 class NISTtheDocs2Death(object):
-    def __init__(self):
+    def __init__(self, docs_dir, default_branch, pages_branch, pages_url):
         self.repo_url = (f"{os.environ['GITHUB_SERVER_URL']}"
                          f"/{os.environ['GITHUB_REPOSITORY']}.git")
-        self.docs_dir = pathlib.Path(os.environ['INPUTS_DOCS_FOLDER'])
         self.branch = os.environ['GITHUB_REF_NAME']
         self.sha = os.environ['GITHUB_SHA']
-        self.default_branch = os.environ['INPUTS_DEFAULT_BRANCH']
-        self.pages_branch = os.environ['INPUTS_PAGES_BRANCH']
-        self.pages_url = os.environ['INPUTS_PAGES_URL']
+
+        self.docs_dir = pathlib.Path(docs_dir)
+        self.default_branch = default_branch
+        self.pages_branch = pages_branch
+        self.pages_url = pages_url
 
         parsed = urlparse(self.repo_url)
         self.repository = pathlib.PurePath(parsed.path).stem
@@ -186,7 +187,23 @@ class NISTtheDocs2Death(object):
 
         self.commit()
 
-if __name__ == "__main__":
-    print(os.environ)
+def main():
+    parser = argparse.ArgumentParser(
+                        prog='NistTheDocs2Death',
+                        description='Update nist-pages branch based on sphinx builds')
 
-    NISTtheDocs2Death().update_pages()
+    parser.add_argument('docs_dir')
+    parser.add_argument('default_branch')
+    parser.add_argument('pages_branch')
+    parser.add_argument('pages_url')
+
+    args = parser.parse_args()
+
+    ntd2d = NISTtheDocs2Death(docs_dir=args.docs_dir,
+                              default_branch=args.default_branch,
+                              pages_branch=args.pages_branch,
+                              pages_url=args.pages_url)
+    ntd2d.update_pages()
+
+if __name__ == "__main__":
+    main()
