@@ -43,6 +43,10 @@ runs:
     - name: Commit documentation changes
       shell: bash
       run: python "${{ github.action_path }}/ntd2d.py"
+      with:
+        docs-folder: ${{ inputs.docs-folder }}
+        pages-branch: ${{ inputs.pages-branch }}
+        pages-url: ${{ inputs.pages-url }}
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
