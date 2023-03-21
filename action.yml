@@ -45,13 +45,15 @@ runs:
           "__nist-pages" \
           ${{ inputs.docs-folder }} \
           ${{ github.ref_name }} \
+          ${{ github.sha }} \
           ${{ github.event.repository.default_branch }} \
-          ${{ inputs.pages-branch }}
+          ${{ inputs.pages-branch }} \
+          "https://pages.nist.gov"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         branch: ${{ inputs.pages-branch }}
-        directory: nist-pages
+        directory: __nist-pages
         github_token: ${{ github.token }}
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
