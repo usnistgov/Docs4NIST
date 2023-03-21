@@ -46,11 +46,11 @@ class NISTtheDocs2Death(object):
         shutil.copytree(self.build_dir, dst)
         self.repo.index.add(dst.as_posix())
 
-    def get_versions(self, from_dir, html_dir):
+    def get_versions(self, html_dir):
         link_dir = (pathlib.PurePath("/") / self.repository
                     / html_dir.relative_to(self.working_dir))
         versions = []
-        for version in from_dir.glob("*"):
+        for version in html_dir.glob("*"):
             href = link_dir / version.name / "index.html"
             versions.append(f'<a href="{href}">{version.name}</a>')
 
@@ -139,8 +139,7 @@ class NISTtheDocs2Death(object):
         includes.mkdir(exist_ok=True)
         versions_html = includes / "ntd2d_versions.html"
         with open(versions_html, mode='w') as version_file:
-            version_file.write(self.get_versions(from_dir=self.build_dir,
-                                                 html_dir=self.html_dir))
+            version_file.write(self.get_versions(html_dir=self.html_dir))
         self.repo.index.add(versions_html)
 
         self.set_versions_html(versions_html)
