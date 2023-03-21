@@ -35,21 +35,13 @@ runs:
     - name: Commit documentation changes
       shell: bash
       run: |
-          echo "PWD"
-          echo `pwd`
-          echo "."
-          ls
-          echo ".."
-          ls ..
-          echo "../.."
-          ls ../..
-#         python ntd2d.py \
-#           ${{ github.server_url }}/${{ github.repository }}.git \
-#           "__nist-pages" \
-#           ${{ inputs.docs-folder }} \
-#           ${{ github.ref_name }} \
-#           ${{ github.event.repository.default_branch }} \
-#           ${{ inputs.pages-branch }}
+        python "${{ github.action_path }}/ntd2d.py" \
+          ${{ github.server_url }}/${{ github.repository }}.git \
+          "__nist-pages" \
+          ${{ inputs.docs-folder }} \
+          ${{ github.ref_name }} \
+          ${{ github.event.repository.default_branch }} \
+          ${{ inputs.pages-branch }}
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
