@@ -1,22 +1,21 @@
 import argparse
 import git
+import os
 import pathlib
 import shutil
 import textwrap
 from urllib.parse import urlparse
 
 class NISTtheDocs2Death(object):
-    def __init__(self, repo_url, to_path, docs_dir,
-                 branch, sha, default_branch, pages_branch="nist-pages",
-                 pages_url="https://pages.nist.gov"):
-        self.repo_url = repo_url
-        self.to_path = pathlib.Path(to_path)
-        self.docs_dir = pathlib.Path(docs_dir)
-        self.branch = branch
-        self.sha = sha
-        self.default_branch = default_branch
-        self.pages_branch = pages_branch
-        self.pages_url = pages_url
+    def __init__(self):
+        self.repo_url = (f"{os.environ['GITHUB_SERVER_URL']}"
+                         f"/{os.environ['GITHUB_REPOSITORY']}.git")
+        self.docs_dir = pathlib.Path(os.environ['INPUTS_DOCS_FOLDER'])
+        self.branch = os.environ['GITHUB_REF_NAME']
+        self.sha = os.environ['GITHUB_SHA']
+        self.default_branch = os.environ['GITHUB_EVENT_REPOSITORY_DEFAULT_BRANCH']
+        self.pages_branch = os.environ['INPUTS_PAGES_BRANCH']
+        self.pages_url = os.environ['INPUTS_PAGES_URL']
 
         parsed = urlparse(self.repo_url)
         self.repository = pathlib.PurePath(parsed.path).stem
@@ -30,7 +29,7 @@ class NISTtheDocs2Death(object):
 
     def clone(self):
         self.repo = git.Repo.clone_from(self.repo_url,
-                                        to_path=self.to_path,
+                                        to_path="__nist-pages",
                                         branch=self.pages_branch,
                                         single_branch=True)
 
@@ -77,13 +76,14 @@ class NISTtheDocs2Death(object):
                 <p>Downloads</p>
                 <hr>
               </div>
-              <button class="dropbtn">v: {branch} ▲</button>"
+              <button class="dropbtn">v: {branch} ▲</button>
             </div>
             """).format(versions=textwrap.indent(versions, "    "),
                         branch=self.branch)
 
     def get_iframe(self, src):
-        onload = "this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"
+        onload = ("this.before((this.contentDocument.body"
+                  "||this.contentDocument).children[0]);this.remove()")
         return textwrap.dedent(f"""
             <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
             <iframe src="{src}" onload="{onload}" ></iframe>
@@ -187,27 +187,4 @@ class NISTtheDocs2Death(object):
         self.commit()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-                        prog='NistTheDocs2Death',
-                        description='Update nist-pages branch based on sphinx builds')
-
-    parser.add_argument('repo_url')
-    parser.add_argument('to_path')
-    parser.add_argument('docs_dir')
-    parser.add_argument('branch')
-    parser.add_argument('sha')
-    parser.add_argument('default_branch')
-    parser.add_argument('pages_branch')
-    parser.add_argument('pages_url')
-
-    args = parser.parse_args()
-
-    ntd2d = NISTtheDocs2Death(repo_url=args.repo_url,
-                              to_path=args.to_path,
-                              docs_dir=args.docs_dir,
-                              branch=args.branch,
-                              sha=args.sha,
-                              default_branch=args.default_branch,
-                              pages_branch=args.pages_branch,
-                              pages_url=args.pages_url)
-    ntd2d.update_pages()
+    NISTtheDocs2Death().update_pages()

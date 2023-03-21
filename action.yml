@@ -14,7 +14,10 @@ inputs:
     description: 
       The branch linked to your documentation server.
     default: 'nist-pages'
-
+  pages-url:
+    description:
+      URL of web server for served documentation.
+    default: 'https://pages.nist.gov'
 runs:
   using: "composite"
   steps:
@@ -39,16 +42,7 @@ runs:
       shell: bash
     - name: Commit documentation changes
       shell: bash
-      run: |
-        python "${{ github.action_path }}/ntd2d.py" \
-          ${{ github.server_url }}/${{ github.repository }}.git \
-          "__nist-pages" \
-          ${{ inputs.docs-folder }} \
-          ${{ github.ref_name }} \
-          ${{ github.sha }} \
-          ${{ github.event.repository.default_branch }} \
-          ${{ inputs.pages-branch }} \
-          "https://pages.nist.gov"
+      run: python "${{ github.action_path }}/ntd2d.py"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
