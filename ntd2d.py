@@ -152,6 +152,7 @@ class NISTtheDocs2Death(object):
         link_dir = (pathlib.PurePath("/") / self.repository
                     / self.html_dir.relative_to(self.working_dir))
         versions = []
+        print(self.variants)
         for version in self.variants:
             href = link_dir / version.name / "index.html"
             versions.append(f'<a href="{href}">{version.name}</a>')
