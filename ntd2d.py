@@ -70,14 +70,6 @@ class NISTtheDocs2Death(object):
         return self._latest
 
     @property
-    def latest_as_list(self):
-        latest = self.latest
-        if latest is None:
-            return []
-        else:
-            return [latest]
-
-    @property
     def stable(self):
         if self._stable is None:
             stable_versions = self.stable_versions
@@ -91,14 +83,6 @@ class NISTtheDocs2Death(object):
                 self._stable = stable
 
         return self._stable
-
-    @property
-    def stable_as_list(self):
-        stable = self.stable
-        if stable is None:
-            return []
-        else:
-            return [stable]
 
     @property
     def stable_versions(self):
@@ -146,8 +130,11 @@ class NISTtheDocs2Death(object):
         # variants = ["v1.0.0", "stables", "1.2.3", "latest", "4b1", "0.2", "neat_idea", "doesn't_work", "experiment"]
 
         if self._variants is None:
-            self._variants = (self.latest_as_list + self.stable_as_list
+            self._variants = ([self.latest, self.stable]
                               + self.versions + self.branches)
+            self._variants = [variant
+                              for variant in self._variants
+                              if variant is not None]
 
         return self._variants
 
