@@ -79,8 +79,11 @@ class NISTtheDocs2Death(object):
             if len(stable_versions) > 0:
                 self.copy_html(branch="latest",
                                src=self.html_dir / stable_versions[0])
+                self._stable = [stable_versions[0]]
+            else:
+                self._stable = []
 
-        return [self._stable]
+        return self._stable
 
     @property
     def stable_versions(self):
