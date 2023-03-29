@@ -65,9 +65,11 @@ class NISTtheDocs2Death(object):
             # (but only do this for default branch of repo)
             if self.branch == self.default_branch:
                 self.copy_html(branch="latest")
-                self._latest = "latest"
+                self._latest = ["latest"]
+            else:
+                self._latest = []
 
-        return [self._latest]
+        return self._latest
 
     @property
     def stable(self):
