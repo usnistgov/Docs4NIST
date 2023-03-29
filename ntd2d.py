@@ -66,10 +66,16 @@ class NISTtheDocs2Death(object):
             if self.branch == self.default_branch:
                 self.copy_html(branch="latest")
                 self._latest = ["latest"]
-            else:
-                self._latest = []
 
         return self._latest
+
+    @property
+    def latest_as_list(self):
+        latest = self.latest
+        if latest is None:
+            return []
+        else:
+            return [latest]
 
     @property
     def stable(self):
@@ -79,13 +85,20 @@ class NISTtheDocs2Death(object):
             # replace any built documents in stable/
             # (but only do this for highest non-prerelease version)
             if len(stable_versions) > 0:
-                self.copy_html(branch="latest",
-                               src=self.html_dir / stable_versions[0])
-                self._stable = [stable_versions[0]]
-            else:
-                self._stable = []
+                stable = stable_versions[0]
+                self.copy_html(branch=stable,
+                               src=self.html_dir / stable)
+                self._stable = stable
 
         return self._stable
+
+    @property
+    def stable_as_list(self):
+        stable = self.stable
+        if stable is None:
+            return []
+        else:
+            return [stable]
 
     @property
     def stable_versions(self):
@@ -133,19 +146,7 @@ class NISTtheDocs2Death(object):
         # variants = ["v1.0.0", "stables", "1.2.3", "latest", "4b1", "0.2", "neat_idea", "doesn't_work", "experiment"]
 
         if self._variants is None:
-
-#             # replace any built documents in latest/
-#             # (but only do this for default branch of repo)
-#             if self.branch == self.default_branch:
-#                 self.copy_html(branch="latest")
-
-#             # replace any built documents in stable/
-#             # (but only do this for highest non-prerelease version)
-#             if len(stable_versions) > 0:
-#                 self.copy_html(branch="latest",
-#                                src=self.html_dir / stable_versions[0])
-
-            self._variants = (self.latest + self.stable
+            self._variants = (self.latest_as_list + self.stable_as_list
                               + self.versions + self.branches)
 
         return self._variants
