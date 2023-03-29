@@ -156,13 +156,13 @@ class NISTtheDocs2Death(object):
         versions = []
         print(self.variants)
         for version in self.variants:
-            href = link_dir / version.name / "index.html"
-            versions.append(f'<a href="{href}">{version.name}</a>')
+            href = link_dir / version / "index.html"
+            versions.append(f'<a href="{href}">{version}</a>')
 
-        versions = "\n".join(versions)
+        versions = textwrap.indent("\n".join(versions), "  ")
 
-        version_template = self.load_template(name="versions.html")
-        return versions_template.format(versions=textwrap.indent(versions, "  "))
+        versions_template = self.load_template(name="versions.html")
+        return versions_template.format(versions=versions)
 
     def get_menu(self):
         # Need an absolute url because this gets included from
@@ -181,7 +181,7 @@ class NISTtheDocs2Death(object):
             template_fname = self.action_dir / "templates" / name
 
         with open(template_fname, mode='r') as template_file:
-            template = template_fname.read()
+            template = template_file.read()
 
         return template
 
