@@ -72,6 +72,8 @@ class NISTtheDocs2Death(object):
     @property
     def stable(self):
         if self._stable is None:
+            stable_versions = self.stable_versions
+
             # replace any built documents in stable/
             # (but only do this for highest non-prerelease version)
             if len(stable_versions) > 0:
