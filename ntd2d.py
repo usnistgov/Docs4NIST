@@ -31,6 +31,13 @@ class NISTtheDocs2Death(object):
         self.html_dir = None
         self.versions_html = None
 
+        self._branches = None
+        self._latest = None
+        self._stable = None
+        self._stable_versions = None
+        self._variants = None
+        self._versions = None
+
     def clone(self):
         self.repo = git.Repo.clone_from(self.repo_url,
                                         to_path="__nist-pages",
