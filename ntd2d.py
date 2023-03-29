@@ -24,7 +24,7 @@ class NISTtheDocs2Death(object):
 
         self.build_dir = self.docs_dir / "_build" / "html"
 
-        self.action_dir = pathlib.Path(__file__).parent()
+        self.action_dir = pathlib.Path(__file__).parent
 
         self.repo = None
         self.working_dir = None
@@ -76,7 +76,7 @@ class NISTtheDocs2Death(object):
     @property
     def stable_versions(self):
         if self._stable_versions is None:
-            self._stable_versions = [version, tag_or_branch
+            self._stable_versions = [(version, tag_or_branch)
                                      for version in self.versions
                                      if not version.is_prerelease]
 
