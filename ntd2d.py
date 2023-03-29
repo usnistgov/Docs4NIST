@@ -1,6 +1,7 @@
 import argparse
 import git
 import os
+from packaging.version import parse, InvalidVersion
 import pathlib
 import shutil
 import textwrap
@@ -22,7 +23,9 @@ class NISTtheDocs2Death(object):
         self.repository = pathlib.PurePath(parsed.path).stem
 
         self.build_dir = self.docs_dir / "_build" / "html"
-        
+
+        self.action_dir = pathlib.Path(__file__).parent()
+
         self.repo = None
         self.working_dir = None
         self.html_dir = None
@@ -37,90 +40,150 @@ class NISTtheDocs2Death(object):
         self.working_dir = pathlib.Path(self.repo.working_dir)
         self.html_dir = self.working_dir / "html"
 
-    def copy_html(self, branch):
+    def copy_html(self, branch, src=None):
         dst = self.html_dir / branch
 
         # remove any previous directory of that name
         res = self.repo.index.remove(dst.as_posix(), working_tree=True,
                                r=True, ignore_unmatch=True)
-        shutil.copytree(self.build_dir, dst)
+        if src is None:
+            src = self.build_dir
+        shutil.copytree(src, dst)
         self.repo.index.add(dst.as_posix())
 
-    def get_versions(self, html_dir):
+    @property
+    def latest(self):
+        if self._latest is None:
+            # replace any built documents in latest/
+            # (but only do this for default branch of repo)
+            if self.branch == self.default_branch:
+                self.copy_html(branch="latest")
+                self._latest = "latest"
+
+        return [self._latest]
+
+    @property
+    def stable(self):
+        if self._stable is None:
+            # replace any built documents in stable/
+            # (but only do this for highest non-prerelease version)
+            if len(stable_versions) > 0:
+                self.copy_html(branch="latest",
+                               src=self.html_dir / stable_versions[0])
+
+        return [self._stable]
+
+    @property
+    def stable_versions(self):
+        if self._stable_versions is None:
+            self._stable_versions = [version, tag_or_branch
+                                     for version in self.versions
+                                     if not version.is_prerelease]
+
+        return self._stable_versions
+
+    def _calc_branches_and_versions(self):
+        variants = [variant.name for variant in self.html_dir.glob("*")]
+
+        self._branches = []
+        self._versions = []
+        for variant in variants:
+            try:
+                # Check if it's a PEP 440 version.
+                # Retain the string literal for the tag or branch,
+                # but use the Version for sorting.
+                self._versions.append((parse(variant), variant))
+            except InvalidVersion:
+                self._branches.append(variant)
+        self._branches.sort()
+        self._versions.sort(reverse=True)
+
+    @property
+    def branches(self):
+        if self._branches is None:
+            self._calc_branches_and_versions()
+
+        return self._branches
+
+    @property
+    def versions(self):
+        if self._versions is None:
+            self._calc_branches_and_versions()
+
+        return self._versions
+
+    @property
+    def variants(self):
+        """Collect tags and versions with documentation
+        """
+        # variants = ["v1.0.0", "stables", "1.2.3", "latest", "4b1", "0.2", "neat_idea", "doesn't_work", "experiment"]
+
+        if self._variants is None:
+
+#             # replace any built documents in latest/
+#             # (but only do this for default branch of repo)
+#             if self.branch == self.default_branch:
+#                 self.copy_html(branch="latest")
+
+#             # replace any built documents in stable/
+#             # (but only do this for highest non-prerelease version)
+#             if len(stable_versions) > 0:
+#                 self.copy_html(branch="latest",
+#                                src=self.html_dir / stable_versions[0])
+
+            self._variants = (self.latest + self.stable
+                              + self.versions + self.branches)
+
+        return self._variants
+
+    def get_versions(self):
         link_dir = (pathlib.PurePath("/") / self.repository
-                    / html_dir.relative_to(self.working_dir))
+                    / self.html_dir.relative_to(self.working_dir))
         versions = []
-        for version in html_dir.glob("*"):
+        for version in self.variants:
             href = link_dir / version.name / "index.html"
             versions.append(f'<a href="{href}">{version.name}</a>')
 
         versions = "\n".join(versions)
 
-        # build index.html with available documentation versions
-        versions = textwrap.dedent("""\
-            <div class="ntd2dwrapper">
-            {versions}
-            </div>
-            """).format(versions=textwrap.indent(versions, "  "))
-
-        return versions
+        version_template = self.load_template(name="versions.html")
+        return versions_template.format(versions=textwrap.indent(versions, "  "))
 
     def get_menu(self):
         # Need an absolute url because this gets included from
         # many different levels
-        versions = self.get_iframe(self.versions_html.geturl())
-        return textwrap.dedent("""\
-            <div class="dropdown">
-              <div class="dropdown-content">
-                <p>Versions</p>
-                {versions}
-                <p>Downloads</p>
-                <hr>
-              </div>
-              <button class="dropbtn">v: {branch} ▲</button>
-            </div>
-            """).format(versions=textwrap.indent(versions, "    "),
-                        branch=self.branch)
+        versions = self.get_iframe(src=self.versions_html.geturl())
+
+        menu_template = self.load_template(name="menu.html")
+        return menu_template.format(versions=textwrap.indent(versions, "    "),
+                                    branch=self.branch)
+
+    def load_template(self, name):
+        # look in _templates/ directory of nist-pages branch
+        template_fname = self.working_dir / "_templates" / name
+        if not template_fname.exists():
+            # look in templates/ directory of this action
+            template_fname = self.action_dir / "templates" / name
+
+        with open(template_fname, mode='r') as template_file:
+            template = template_fname.read()
+
+        return template
 
     def get_iframe(self, src):
-        onload = ("this.before((this.contentDocument.body"
-                  "||this.contentDocument).children[0]);this.remove()")
-        return textwrap.dedent(f"""
-            <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
-            <iframe src="{src}" onload="{onload}" ></iframe>
-            """)
+        iframe_template = self.load_template(name="iframe.html")
+        return iframe_template.format(src=src)
 
     def get_index(self):
         """build index.html with available documentation versions
         """
-        template_fname = pathlib.Path("_templates/index.html")
-        if template_fname.exists():
-            with open(template_fname, mode='r') as template_file:
-                template = template_fname.read()
-        else:
-            template = textwrap.dedent("""\
-            <!doctype html>
-            <html>
-            <head>
-              <title>{repository} documentation</title>
-            </head>
-            <body>
-              {versions}
-            </body>
-            </html>
-            """)
-
         # This can be a relative url, because all version should
         # be on the same server
-        versions = self.get_iframe(self.versions_html.path)
-        versions = textwrap.dedent("""
-            <div class="documentation-versions">
-            {versions}
-            </div>
-            """).format(versions=textwrap.indent(versions, "  "))
+        versions = self.get_iframe(src=self.versions_html.path)
 
-        return template.format(versions=textwrap.indent(versions, "  "),
-                               repository=self.repository)
+        index_template = self.load_template(name="index.html")
+        return index_template.format(versions=textwrap.indent(versions, "    "),
+                                     repository=self.repository)
 
     def set_versions_html(self, versions_html):
         full_url = "/".join([self.pages_url,
@@ -140,7 +203,7 @@ class NISTtheDocs2Death(object):
         includes.mkdir(exist_ok=True)
         versions_html = includes / "ntd2d_versions.html"
         with open(versions_html, mode='w') as version_file:
-            version_file.write(self.get_versions(html_dir=self.html_dir))
+            version_file.write(self.get_versions())
         self.repo.index.add(versions_html)
 
         self.set_versions_html(versions_html)
@@ -173,12 +236,12 @@ class NISTtheDocs2Death(object):
         # replace any built documents in directory named for current branch
         self.copy_html(branch=self.branch)
 
-        # replace any built documents in latest/
-        # (but only do this for default branch of repo)
-        if self.branch == self.default_branch:
-            self.copy_html(branch="latest")
-
-            # TODO: stable?
+#         # replace any built documents in latest/
+#         # (but only do this for default branch of repo)
+#         if self.branch == self.default_branch:
+#             self.copy_html(branch="latest")
+# 
+#             # TODO: stable?
 
         self.write_nojekyll()
         self.write_global_versions()
