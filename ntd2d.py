@@ -7,6 +7,7 @@ import shutil
 import textwrap
 from urllib.parse import urlparse
 
+
 class NISTtheDocs2Death(object):
     def __init__(self, docs_dir, default_branch, pages_branch, pages_url):
         self.repo_url = (f"{os.environ['GITHUB_SERVER_URL']}"
@@ -51,7 +52,7 @@ class NISTtheDocs2Death(object):
         dst = self.html_dir / branch
 
         # remove any previous directory of that name
-        res = self.repo.index.remove(dst.as_posix(), working_tree=True,
+        self.repo.index.remove(dst.as_posix(), working_tree=True,
                                r=True, ignore_unmatch=True)
         if src is None:
             src = self.build_dir
@@ -87,8 +88,8 @@ class NISTtheDocs2Death(object):
     @property
     def stable_versions(self):
         if self._stable_versions is None:
-            self._stable_versions = [(version, tag_or_branch)
-                                     for version in self.versions
+            self._stable_versions = [(version, label)
+                                     for (version, label) in self.versions
                                      if not version.is_prerelease]
 
         return self._stable_versions
@@ -127,7 +128,8 @@ class NISTtheDocs2Death(object):
     def variants(self):
         """Collect tags and versions with documentation
         """
-        # variants = ["v1.0.0", "stables", "1.2.3", "latest", "4b1", "0.2", "neat_idea", "doesn't_work", "experiment"]
+        # variants = ["v1.0.0", "stables", "1.2.3", "latest", "4b1",
+        #             "0.2", "neat_idea", "doesn't_work", "experiment"]
 
         if self._variants is None:
             self._variants = ([self.latest, self.stable]
@@ -183,9 +185,10 @@ class NISTtheDocs2Death(object):
         # This can be a relative url, because all version should
         # be on the same server
         versions = self.get_iframe(src=self.versions_html.path)
+        versions = textwrap.indent(versions, "    ")
 
         index_template = self.load_template(name="index.html")
-        return index_template.format(versions=textwrap.indent(versions, "    "),
+        return index_template.format(versions=versions,
                                      repository=self.repository)
 
     def set_versions_html(self, versions_html):
@@ -243,7 +246,7 @@ class NISTtheDocs2Death(object):
 #         # (but only do this for default branch of repo)
 #         if self.branch == self.default_branch:
 #             self.copy_html(branch="latest")
-# 
+#
 #             # TODO: stable?
 
         self.write_nojekyll()
@@ -253,10 +256,12 @@ class NISTtheDocs2Death(object):
 
         self.commit()
 
+
 def main():
+    description = 'Update nist-pages branch based on sphinx builds'
     parser = argparse.ArgumentParser(
                         prog='NistTheDocs2Death',
-                        description='Update nist-pages branch based on sphinx builds')
+                        description=description)
 
     parser.add_argument('docs_dir')
     parser.add_argument('default_branch')
@@ -270,6 +275,7 @@ def main():
                               pages_branch=args.pages_branch,
                               pages_url=args.pages_url)
     ntd2d.update_pages()
+
 
 if __name__ == "__main__":
     main()
