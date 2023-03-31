@@ -242,13 +242,6 @@ class NISTtheDocs2Death(object):
         # replace any built documents in directory named for current branch
         self.copy_html(branch=self.branch)
 
-#         # replace any built documents in latest/
-#         # (but only do this for default branch of repo)
-#         if self.branch == self.default_branch:
-#             self.copy_html(branch="latest")
-#
-#             # TODO: stable?
-
         self.write_nojekyll()
         self.write_global_versions()
         self.write_local_versions()
