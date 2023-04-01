@@ -1,24 +1,21 @@
 #!/usr/bin/env python3
 import argparse
+import os
+
 from ntd2d_action.action import NISTtheDocs2Death
 
 def main():
     description = 'Update nist-pages branch based on sphinx builds'
     parser = argparse.ArgumentParser(
-                        prog='NistTheDocs2Death',
+                        prog='NISTTheDocs2Death',
                         description=description)
-
-    parser.add_argument('docs_dir')
-    parser.add_argument('default_branch')
-    parser.add_argument('pages_branch')
-    parser.add_argument('pages_url')
 
     args = parser.parse_args()
 
-    ntd2d = NISTtheDocs2Death(docs_dir=args.docs_dir,
-                              default_branch=args.default_branch,
-                              pages_branch=args.pages_branch,
-                              pages_url=args.pages_url)
+    ntd2d = NISTtheDocs2Death(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
+                              default_branch=os.environ['INPUT_DEFAULT-BRANCH'],
+                              pages_branch=os.environ['INPUT_PAGES-BRANCH'],
+                              pages_url=os.environ['INPUT_PAGES-URL'])
     ntd2d.update_pages()
 
 
