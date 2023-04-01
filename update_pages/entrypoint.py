@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from ntd2d_action.action import NISTtheDocs2Death
 
