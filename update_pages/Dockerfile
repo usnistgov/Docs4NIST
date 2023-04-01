@@ -14,7 +14,7 @@ RUN which git \
     ) \
     || ( \
       apk update --no-cache \
-      && apk add --no-cache git
+      && apk add --no-cache git \
     ) \
   )
 
