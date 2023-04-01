@@ -13,7 +13,7 @@ def main():
                                   pages_branch=os.environ['INPUT_PAGES-BRANCH'],
                                   pages_url=os.environ['INPUT_PAGES-URL'])
         ntd2d.update_pages()
-    elif action = 'borg_the_docs':
+    elif action == 'borg_the_docs':
         print("Borging the docs")
 
 if __name__ == "__main__":
