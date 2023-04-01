@@ -35,17 +35,15 @@ runs:
 #         name: Build PDF
 #         with:
 #           docs-folder: ${{ inputs.docs-folder }}
-    - uses: actions/setup-python@v4
-    - run: pip install GitPython
-      shell: bash
     - name: Commit documentation changes
-      shell: bash
-      run: |
-        python "${{ github.action_path }}/ntd2d.py" \
-          "${{ inputs.docs-folder }}" \
-          "${{ github.event.repository.default_branch }}" \
-          "${{ inputs.pages-branch }}" \
-          "${{ inputs.pages-url }}"
+      uses: docker://# my image
+      with:
+        entrypoint:  # command executable that need to be run in a container
+        args:  # args of the command that need to be run in a container
+          - ${{ inputs.docs-folder }}
+          - ${{ github.event.repository.default_branch }}
+          - ${{ inputs.pages-branch }}
+          - ${{ inputs.pages-url }}
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
