@@ -7,6 +7,11 @@ inputs:
       The folder containing your sphinx docs.
     required: true
     default: "docs/"
+  default-branch:
+    description:
+      The default branch configured in GitHub.
+    required: true
+    default: "main"
   pages-branch:
     description: 
       The branch linked to your documentation server.
