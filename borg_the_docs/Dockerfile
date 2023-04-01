@@ -19,6 +19,7 @@ RUN which git \
   )
 
 RUN pip install GitPython
+RUN pip install packaging
 
 ADD entrypoint.py /entrypoint.py
 ADD ntd2d_action /ntd2d_action
