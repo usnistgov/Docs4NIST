@@ -35,15 +35,12 @@ runs:
 #         name: Build PDF
 #         with:
 #           docs-folder: ${{ inputs.docs-folder }}
-    - name: Commit documentation changes
-      uses: docker://
+    - uses: usnistgov/ntd2d-action@main
+      name: Commit documentation changes
       with:
-        entrypoint:  # command executable that need to be run in a container
-        args: |
-          ${{ inputs.docs-folder }} |
-          ${{ github.event.repository.default_branch }} |
-          ${{ inputs.pages-branch }} |
-          ${{ inputs.pages-url }}
+        docs-folder: ${{ inputs.docs-folder }}
+        pages-branch: ${{ inputs.pages-branch }}
+        pages-url: ${{ inputs.pages-url }}
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
