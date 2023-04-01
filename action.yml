@@ -44,6 +44,7 @@ runs:
         pages-url: ${{ inputs.pages-url }}
     - shell: bash
       run: |
+        chown -R runner:docker __nist-pages
         ls -al __nist-pages
         ls -al __nist-pages/.git
     - name: Push changes
