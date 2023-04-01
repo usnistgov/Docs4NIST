@@ -36,7 +36,7 @@ runs:
 #         with:
 #           docs-folder: ${{ inputs.docs-folder }}
     - name: Commit documentation changes
-      uses: docker://Dockerfile
+      uses: ./Dockerfile
       with:
         entrypoint:  # command executable that need to be run in a container
         args: |
