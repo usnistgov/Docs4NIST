@@ -23,6 +23,4 @@ RUN pip install GitPython
 ADD entrypoint.py /entrypoint.py
 ADD ntd2d_action /ntd2d_action
 
-RUN chmod +x /entrypoint.sh
-
 ENTRYPOINT ["/entrypoint.py"]
