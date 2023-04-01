@@ -22,6 +22,11 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+    - name: Commit documentation changes
+      uses: usnistgov/ntd2d-action@main
+      args: borg_the_docs
+      with:
+        docs-folder: ${{ inputs.docs-folder }}
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
@@ -35,18 +40,18 @@ runs:
 #         name: Build PDF
 #         with:
 #           docs-folder: ${{ inputs.docs-folder }}
-    - uses: usnistgov/ntd2d-action@main
-      name: Commit documentation changes
+    - name: Commit documentation changes
+      uses: usnistgov/ntd2d-action@main
+      args: update_pages
       with:
         docs-folder: ${{ inputs.docs-folder }}
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
         pages-url: ${{ inputs.pages-url }}
-    - shell: bash
+    - name: Change ownership
+      shell: bash
       run: |
         sudo chown -R runner:docker __nist-pages
-        ls -al __nist-pages
-        ls -al __nist-pages/.git
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
