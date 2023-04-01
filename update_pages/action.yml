@@ -2,6 +2,10 @@ name: "NISTtheDocs2Death workhorse"
 description: "Python Container to do actual work"
 author: "Jonathan Guyer"
 inputs:
+  action:
+    description:
+      Subcommand to perform [borg_the_docs, update_pages].
+    required: true
   docs-folder:
     description:
       The folder containing your sphinx docs.
