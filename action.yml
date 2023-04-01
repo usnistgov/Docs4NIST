@@ -24,8 +24,8 @@ runs:
     - uses: actions/checkout@v3
     - name: Commit documentation changes
       uses: usnistgov/ntd2d-action@main
-      args: borg_the_docs
       with:
+        action: borg_the_docs
         docs-folder: ${{ inputs.docs-folder }}
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
@@ -42,8 +42,8 @@ runs:
 #           docs-folder: ${{ inputs.docs-folder }}
     - name: Commit documentation changes
       uses: usnistgov/ntd2d-action@main
-      args: update_pages
       with:
+        action: update_pages
         docs-folder: ${{ inputs.docs-folder }}
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
