@@ -3,18 +3,16 @@ import pathlib
 from .files import NoJekyllFile, VariantsFile, MenuFile, IndexFile
 
 class NISTtheDocs2Death:
-    def __init__(self, repo, docs_dir, pages_url):
+    def __init__(self, repo, docs, pages_url):
         self.repo = repo
-
-        self.docs_dir = pathlib.Path(docs_dir)
+        self.docs = docs
         self.pages_url = pages_url
 
     def update_pages(self, branch, sha):
         self.repo.clone(to_path="__nist-pages")
 
         # replace any built documents in directory named for current branch
-        self.repo.copy_html(src=self.docs_dir / "_build" / "html",
-                            branch=branch)
+        self.repo.copy_html(src=self.docs.html_dir, branch=branch)
 
         NoJekyllFile(repo=self.repo).write()
 
