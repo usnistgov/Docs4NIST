@@ -13,8 +13,9 @@ class Repository:
         self.docs = docs
         self.pages_url = pages_url
 
-        self.working_dir = None
-        self.variant_collection = None
+    @property
+    def working_dir(self):
+        return pathlib.Path(self.repo.working_dir)
 
     def add(self, *args, **kwargs):
         self.repo.index.add(*args, **kwargs)
@@ -24,10 +25,6 @@ class Repository:
                                         to_path=to_path,
                                         branch=self.branch,
                                         single_branch=True)
-
-        self.working_dir = pathlib.Path(self.repo.working_dir)
-
-        self.variant_collection = VariantCollection(repo=self)
 
     def commit(self, message):
         if len(self.repo.index.diff("HEAD")) > 0:
@@ -42,13 +39,15 @@ class Repository:
     def update_pages(self, branch, sha):
         self.clone(to_path="__nist-pages")
 
-        # replace any built documents in directory named for current branch
-        self.variant_collection.copy_html(src=self.docs.html_dir, branch=branch)
-
         NoJekyllFile(repo=self).write()
 
+        variant_collection = VariantCollection(repo=self)
+
+        # replace any built documents in directory named for current branch
+        variant_collection.copy_html(src=self.docs.html_dir, branch=branch)
+
         variants = VariantsFile(repo=self,
-                                variants=self.variant_collection,
+                                variants=variant_collection,
                                 pages_url=self.pages_url)
         variants.write()
 
