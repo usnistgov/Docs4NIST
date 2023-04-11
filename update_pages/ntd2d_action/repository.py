@@ -1,14 +1,17 @@
 import git
 import pathlib
 
+from .files import NoJekyllFile, VariantsFile, MenuFile, IndexFile
 from .versions import VariantCollection
 
 class Repository:
-    def __init__(self, server_url, repository, branch, default_branch):
+    def __init__(self, server_url, repository, branch, default_branch, docs, pages_url):
         self.url = f"{server_url}/{repository}.git"
         self.owner, self.repository = repository.split('/')
         self.branch = branch
         self.default_branch = default_branch
+        self.docs = docs
+        self.pages_url = pages_url
 
         self.working_dir = None
         self.variant_collection = None
@@ -41,3 +44,28 @@ class Repository:
 
     def remove(self, *args, **kwargs):
         self.repo.index.remove(*args, **kwargs)
+
+    def update_pages(self, branch, sha):
+        self.clone(to_path="__nist-pages")
+
+        # replace any built documents in directory named for current branch
+        self.copy_html(src=self.docs.html_dir, branch=branch)
+
+        NoJekyllFile(repo=self).write()
+
+        variants = VariantsFile(repo=self,
+                                variants=self.variant_collection,
+                                pages_url=self.pages_url)
+        variants.write()
+
+        # Need an absolute url because this gets included from
+        # many different levels
+        MenuFile(repo=self,
+                 current_branch=branch,
+                 variants_url=variants.get_url().geturl()).write()
+
+        # This can be a relative url, because all variants should
+        # be on the same server
+        IndexFile(repo=self, variants_url=variants.get_url().path).write()
+
+        self.commit(message=f"Update documentation for {branch}@{sha[:7]}")

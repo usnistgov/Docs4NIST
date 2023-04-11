@@ -2,7 +2,6 @@ import os
 import pytest
 
 from ntd2d_action.repository import Repository
-from ntd2d_action.action import NISTtheDocs2Death
 from ntd2d_action.sphinxdocs import SphinxDocs
 
 
@@ -24,16 +23,14 @@ def fake_filesystem():  # fs):
 
 
 def test_my_fakefs(fake_filesystem):
+    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+
     repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                       repository=os.environ['GITHUB_REPOSITORY'],
                       branch=os.environ['INPUT_PAGES-BRANCH'],
-                      default_branch=os.environ['INPUT_DEFAULT-BRANCH'])
+                      default_branch=os.environ['INPUT_DEFAULT-BRANCH'],
+                      docs=docs,
+                      pages_url=os.environ['INPUT_PAGES-URL'])
 
-    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
-
-    xx = NISTtheDocs2Death(repo=repo,
-                           docs=docs,
-                           pages_url=os.environ['INPUT_PAGES-URL'])
-
-    xx.update_pages(branch=os.environ['GITHUB_REF_NAME'],
-                    sha=os.environ['GITHUB_SHA'])
+    repo.update_pages(branch=os.environ['GITHUB_REF_NAME'],
+                      sha=os.environ['GITHUB_SHA'])
