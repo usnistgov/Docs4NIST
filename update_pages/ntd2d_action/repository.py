@@ -36,12 +36,6 @@ class Repository:
             author = git.Actor("GitHub Action", "action@github.com")
             self.repo.index.commit(message=message, author=author)
 
-    def copy_html(self, *args, **kwargs):
-        self.variant_collection.copy_html(*args, **kwargs)
-
-    def get_versions(self):
-        return self.variant_collection.get_versions()
-
     def remove(self, *args, **kwargs):
         self.repo.index.remove(*args, **kwargs)
 
@@ -49,7 +43,7 @@ class Repository:
         self.clone(to_path="__nist-pages")
 
         # replace any built documents in directory named for current branch
-        self.copy_html(src=self.docs.html_dir, branch=branch)
+        self.variant_collection.copy_html(src=self.docs.html_dir, branch=branch)
 
         NoJekyllFile(repo=self).write()
 
