@@ -2,7 +2,7 @@ import git
 import pathlib
 
 from .files import NoJekyllFile, VariantsFile, MenuFile, IndexFile
-from .versions import VariantCollection
+from .variants import VariantCollection
 
 class Repository:
     def __init__(self, server_url, repository, branch, default_branch, docs, pages_url):
