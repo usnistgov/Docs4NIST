@@ -1,7 +1,7 @@
 import git
 import pathlib
 
-from .files import NoJekyllFile, VariantsFile, MenuFile, IndexFile
+from .files.file import NoJekyllFile, VariantsFile, MenuFile, IndexFile
 from .variants import VariantCollection
 
 class Repository:
