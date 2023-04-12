@@ -5,10 +5,7 @@ class ThemeFile(File):
         self.docs_dir = docs_dir
         self.theme_dir = self.docs_dir / "ntd2d"
         self.inherited_theme = inherited_theme
-        super().__init__(path=self.make_path())
-
-    def make_path(self):
-        pass
+        super().__init__()
 
     def get_contents(self):
         conf_template = Template(name="theme.conf").read()

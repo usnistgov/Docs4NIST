@@ -8,10 +8,12 @@ class MenuFile(PagesFile):
     def __init__(self, repo, current_branch, variants_url):
         self.current_branch = current_branch
         self.variants_url = variants_url
-        path = (repo.working_dir / "html" / current_branch
+        super().__init__(repo=repo)
+
+    @property
+    def path(self):
+        return (self.repo.working_dir / "html" / self.current_branch
                 / "_static" / "ntd2d_menu.html")
-        super().__init__(repo=repo,
-                         path=path)
 
     def get_contents(self):
         versions = self.format_iframe(src=self.variants_url)

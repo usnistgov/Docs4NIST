@@ -1,6 +1,10 @@
 class File:
-    def __init__(self, path):
-        self.path = path
+    def __init__(self):
+        pass
+
+    @property
+    def path(self):
+        raise NotImplementedError
 
     def get_contents(self):
         return ""

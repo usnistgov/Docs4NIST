@@ -3,7 +3,9 @@ from .template import Template
 
 
 class ThemeConfFile(ThemeFile):
-    def make_path(self):
+
+    @property
+    def path(self):
         return self.theme_dir / "theme.conf"
 
     def get_contents(self):
