@@ -1,13 +1,12 @@
 import textwrap
 
-from .file import File
+from .themefile import ThemeFile
 from .template import Template
 
 
-class CSSFile(File):
-    def __init__(self, inherited_theme, path):
-        self.inherited_theme = inherited_theme
-        super().__init__(path=path)
+class CSSFile(ThemeFile):
+    def make_path(self):
+        return self.theme_dir / "static" / "ntd2d.css_t"
 
     def get_contents(self):
         contents = f'@import url("{self.inherited_theme}.css");\n\n'
