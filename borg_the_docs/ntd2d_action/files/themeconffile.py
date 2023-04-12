@@ -1,11 +1,10 @@
-from .file import File
+from .themefile import ThemeFile
 from .template import Template
 
 
-class ThemeConfFile(File):
-    def __init__(self, inherited_theme, path):
-        self.inherited_theme = inherited_theme
-        super().__init__(path=path)
+class ThemeConfFile(ThemeFile):
+    def make_path(self):
+        return self.theme_dir / "theme.conf"
 
     def get_contents(self):
         conf_template = Template(name="theme.conf").read()

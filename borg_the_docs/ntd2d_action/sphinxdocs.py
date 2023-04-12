@@ -33,14 +33,12 @@ class SphinxDocs:
         conf = self.read_conf()
         inherited_theme = conf.get("html_theme", "default")
 
-        theme_dir = self.docs_dir / "ntd2d"
-
-        theme_conf = ThemeConfFile(inherited_theme=inherited_theme,
-                                   path=theme_dir / "theme.conf")
+        theme_conf = ThemeConfFile(docs_dir=self.docs_dir,
+                                   inherited_theme=inherited_theme)
         theme_conf.write()
 
-        css = CSSFile(inherited_theme=inherited_theme,
-                      path=theme_dir / "static" / "ntd2d.css_t")
+        css = CSSFile(docs_dir=self.docs_dir,
+                      inherited_theme=inherited_theme)
         css.write()
 
         with self.conf_file.open(mode='a') as f:
