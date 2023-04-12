@@ -22,6 +22,10 @@ def main():
                           sha=os.environ['GITHUB_SHA'])
     elif action == 'borg_the_docs':
         print("Borging the docs")
+        docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+        print("Borging...")
+        docs.read_conf()
+        print("...the docs")
 
 if __name__ == "__main__":
     main()

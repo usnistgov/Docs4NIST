@@ -1,5 +1,6 @@
 import os
 import pytest
+import shutil
 
 from ntd2d_action.repository import Repository
 from ntd2d_action.sphinxdocs import SphinxDocs
@@ -23,7 +24,10 @@ def fake_filesystem():  # fs):
 
 
 def test_my_fakefs(fake_filesystem):
-    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+    shutil.copytree(os.environ['INPUT_DOCS-FOLDER'], "test_docs")
+
+    docs = SphinxDocs(docs_dir="test_docs")
+    docs.inject_theme()
 
     repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                       repository=os.environ['GITHUB_REPOSITORY'],
