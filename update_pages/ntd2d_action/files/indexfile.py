@@ -7,8 +7,11 @@ from .template import PagesTemplate
 class IndexFile(PagesFile):
     def __init__(self, repo, variants_url):
         self.variants_url = variants_url
-        super().__init__(repo=repo,
-                         path=repo.working_dir / "index.html")
+        super().__init__(repo=repo)
+
+    @property
+    def path(self):
+        return self.repo.working_dir / "index.html"
 
     def get_contents(self):
         """build index.html with available documentation versions

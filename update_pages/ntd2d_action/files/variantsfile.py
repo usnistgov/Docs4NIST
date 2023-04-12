@@ -9,9 +9,15 @@ class VariantsFile(PagesFile):
     def __init__(self, repo, variants, pages_url):
         self.variants = variants
         self.pages_url = pages_url
-        self.relative_path = "_includes/ntd2d_variants.html"
-        path = repo.working_dir / self.relative_path
-        super().__init__(repo=repo, path=path)
+        super().__init__(repo=repo)
+
+    @property
+    def path(self):
+        return self.repo.working_dir / self.relative_path
+
+    @property
+    def relative_path(self):
+        return "_includes/ntd2d_variants.html"
 
     def get_url(self):
         full_url = "/".join([self.pages_url,

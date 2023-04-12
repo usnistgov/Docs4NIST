@@ -5,7 +5,9 @@ from .template import Template
 
 
 class CSSFile(ThemeFile):
-    def make_path(self):
+
+    @property
+    def path(self):
         return self.theme_dir / "static" / "ntd2d.css_t"
 
     def get_contents(self):
