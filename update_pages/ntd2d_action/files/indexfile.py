@@ -1,10 +1,10 @@
 import textwrap
 
-from .file import File
-from .template import Template
+from .pagesfile import PagesFile
+from .template import PagesTemplate
 
 
-class IndexFile(File):
+class IndexFile(PagesFile):
     def __init__(self, repo, variants_url):
         self.variants_url = variants_url
         super().__init__(repo=repo,
@@ -16,7 +16,7 @@ class IndexFile(File):
         versions = self.format_iframe(src=self.variants_url)
         versions = textwrap.indent(versions, "    ")
 
-        index_template = Template(working_dir=self.repo.working_dir,
-                                  name="index.html").read()
+        index_template = PagesTemplate(working_dir=self.repo.working_dir,
+                                       name="index.html").read()
         return index_template.format(versions=versions,
                                      repository=self.repo.repository)

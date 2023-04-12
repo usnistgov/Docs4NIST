@@ -1,11 +1,11 @@
 import textwrap
 from urllib.parse import urlparse
 
-from .file import File
-from .template import Template
+from .pagesfile import PagesFile
+from .template import PagesTemplate
 
 
-class VariantsFile(File):
+class VariantsFile(PagesFile):
     def __init__(self, repo, variants, pages_url):
         self.variants = variants
         self.pages_url = pages_url
@@ -24,6 +24,6 @@ class VariantsFile(File):
         variants = self.variants.get_variants_html()
         variants = textwrap.indent("\n".join(variants), "  ")
 
-        variants_template = Template(working_dir=self.repo.working_dir,
-                                     name="variants.html").read()
+        variants_template = PagesTemplate(working_dir=self.repo.working_dir,
+                                          name="variants.html").read()
         return variants_template.format(variants=variants)

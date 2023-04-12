@@ -1,10 +1,10 @@
 import textwrap
 
-from .file import File
-from .template import Template
+from .pagesfile import PagesFile
+from .template import PagesTemplate
 
 
-class MenuFile(File):
+class MenuFile(PagesFile):
     def __init__(self, repo, current_branch, variants_url):
         self.current_branch = current_branch
         self.variants_url = variants_url
@@ -16,7 +16,7 @@ class MenuFile(File):
     def get_contents(self):
         versions = self.format_iframe(src=self.variants_url)
 
-        menu_template = Template(working_dir=self.repo.working_dir,
-                                 name="menu.html").read()
+        menu_template = PagesTemplate(working_dir=self.repo.working_dir,
+                                      name="menu.html").read()
         return menu_template.format(versions=textwrap.indent(versions, "    "),
                                     branch=self.current_branch)
