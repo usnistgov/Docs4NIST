@@ -1,0 +1,10 @@
+{{% extends "{inherited_theme}/layout.html" %}}
+
+{{%- block footer %}}
+
+{{{{ super() }}}}
+
+<!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
+<iframe src="{{{{ pathto('_static/ntd2d_menu.html', 1) }}}}" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
+
+{{%- endblock %}}

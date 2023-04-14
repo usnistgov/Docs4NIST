@@ -4,7 +4,7 @@ import textwrap
 
 import os
 
-from .files import CSSFile, ThemeConfFile
+from .files import FileTemplate, TemplateHierarchy
 
 
 class SphinxDocs:
@@ -33,19 +33,12 @@ class SphinxDocs:
         conf = self.read_conf()
         inherited_theme = conf.get("html_theme", "default")
 
-        theme_conf = ThemeConfFile(docs_dir=self.docs_dir,
-                                   inherited_theme=inherited_theme)
-        theme_conf.write()
+        templates = TemplateHierarchy(name="ntd2d",
+                                      destination_dir=self.docs_dir,
+                                      inherited_theme=inherited_theme)
+        templates.write()
 
-        css = CSSFile(docs_dir=self.docs_dir,
-                      inherited_theme=inherited_theme)
-        css.write()
+        suffix = FileTemplate(name="conf_suffix.py")
 
         with self.conf_file.open(mode='a') as f:
-            f.write(textwrap.dedent("""
-
-            # -- Injected automatically by NISTtheDocs2Death------------------------------
-
-            html_theme = "ntd2d"
-            html_theme_path = ["."]
-            """))
+            f.write(suffix.read())
