@@ -6,7 +6,7 @@ from ntd2d_action.repository import Repository
 from ntd2d_action.sphinxdocs import SphinxDocs
 
 
-@pytest.fixture
+# @pytest.fixture
 def fake_filesystem():  # fs):
     # fs.create_dir("docs/")
     # fs.create_dir("__nist-pages")
@@ -27,7 +27,7 @@ def test_my_fakefs(fake_filesystem):
     shutil.copytree(os.environ['INPUT_DOCS-FOLDER'], "test_docs")
 
     docs = SphinxDocs(docs_dir="test_docs")
-    docs.inject_theme()
+    docs.assimilate_theme()
 
     repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                       repository=os.environ['GITHUB_REPOSITORY'],
@@ -38,3 +38,6 @@ def test_my_fakefs(fake_filesystem):
 
     repo.update_pages(branch=os.environ['GITHUB_REF_NAME'],
                       sha=os.environ['GITHUB_SHA'])
+
+if __name__ == "__main__":
+    test_my_fakefs(fake_filesystem())
