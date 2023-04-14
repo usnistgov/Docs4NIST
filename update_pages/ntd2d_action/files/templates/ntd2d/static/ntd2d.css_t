@@ -1,11 +1,14 @@
-.dropbtn {
+@import url("{inherited_theme}.css");
+
+
+.dropbtn {{
   position: fixed;
   right: 20px;
   bottom: 20px;
   z-index: 400;
-}
+}}
 
-.dropdown {
+.dropdown {{
   position: fixed;
   display: inline-block;
   right: 20px;
@@ -14,9 +17,9 @@
   bottom: 20px;
   top: auto;
   height: auto;
-}
+}}
 
-.dropdown-content {
+.dropdown-content {{
   display: none;
   position: relative;
   background-color: #f1f1f1;
@@ -27,24 +30,24 @@
   left: auto;
   padding-left: 10px;
   padding-right: 10px;
-}
+}}
 
-div.sphinxsidebar .dropdown-content a {
+div.sphinxsidebar .dropdown-content a {{
   color: black;
 /*   padding: 12px 16px; */
   text-decoration: none;
   display: block;
   border-bottom: 0px;
-}
+}}
 
-div.sphinxsidebar .dropdown-content hr {
+div.sphinxsidebar .dropdown-content hr {{
   margin-left: -10px;
   width: 100%;
   margin-right: -10px;
-}
+}}
 
-.dropdown-content a:hover {background-color: #e0e0e0;}
+.dropdown-content a:hover {{background-color: #e0e0e0;}}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {{display: block;}}
 
-.dropdown:hover .dropbtn {background-color: 'ButtonBorder';}
+.dropdown:hover .dropbtn {{background-color: 'ButtonBorder';}}
