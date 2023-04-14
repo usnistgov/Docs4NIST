@@ -24,7 +24,7 @@ def main():
         print("Borging the docs")
         docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
         print("Borging...")
-        docs.read_conf()
+        docs.assimilate_theme()
         print("...the docs")
 
 if __name__ == "__main__":

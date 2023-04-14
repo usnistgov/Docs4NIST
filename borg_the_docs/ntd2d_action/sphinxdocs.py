@@ -11,7 +11,7 @@ class SphinxDocs:
     def html_dir(self):
         return self.docs_dir / "_build" / "html"
 
-    def inject_theme(self):
+    def assimilate_theme(self):
         conf = ConfFile(docs_dir=self.docs_dir)
         configuration = conf.read()
 
