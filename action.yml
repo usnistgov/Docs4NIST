@@ -23,7 +23,7 @@ runs:
   steps:
     - uses: actions/checkout@v3
     - name: Commit documentation changes
-      uses: usnistgov/ntd2d-action@main
+      uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
         action: borg_the_docs
         docs-folder: ${{ inputs.docs-folder }}
@@ -41,7 +41,7 @@ runs:
 #         with:
 #           docs-folder: ${{ inputs.docs-folder }}
     - name: Commit documentation changes
-      uses: usnistgov/ntd2d-action@main
+      uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
         action: update_pages
         docs-folder: ${{ inputs.docs-folder }}
