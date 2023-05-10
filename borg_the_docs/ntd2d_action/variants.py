@@ -46,7 +46,7 @@ class VariantCollection:
             # replace any built documents in stable/
             # (but only do this for highest non-prerelease version)
             if len(stable_versions) > 0:
-                stable = stable_versions[0]
+                stable = stable_versions[0][1]
                 self.copy_html(branch=stable,
                                src=self.html_dir / stable)
                 self._stable = stable
