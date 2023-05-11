@@ -1,4 +1,5 @@
 import git
+import github_action_utils as gha_utils
 import pathlib
 
 from .files import NoJekyllFile, VariantsFile, MenuFile, IndexFile
@@ -32,6 +33,8 @@ class Repository:
             # so only commit if things have actually changed
             author = git.Actor("GitHub Action", "action@github.com")
             self.repo.index.commit(message=message, author=author)
+
+            gha_utils.echo("Commit: " + message)
 
     def remove(self, *args, **kwargs):
         self.repo.index.remove(*args, **kwargs)
