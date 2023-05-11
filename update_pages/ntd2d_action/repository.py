@@ -63,4 +63,4 @@ class Repository:
 
         self.commit(message=f"Update documentation for {branch}@{sha[:7]}")
 
-        self.repo.pull()
+        self.repo.remotes.origin.pull()
