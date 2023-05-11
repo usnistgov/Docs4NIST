@@ -58,10 +58,14 @@ runs:
         branch: ${{ inputs.pages-branch }}
         directory: __nist-pages
         github_token: ${{ github.token }}
+    - name: Set env
+      run: |
+        artifact=${{ github.event.repository.name }}-${{ github.ref_name }}-${{ github.sha }}
+        echo "ARTIFACT_NAME=${artifact////_}" >> $GITHUB_ENV
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
-        name: ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ github.sha }}
+        name: ${{ env.ARTIFACT_NAME }}
         path: |
           docs/_build/html
 #             docs/_build/epub/*.epub
