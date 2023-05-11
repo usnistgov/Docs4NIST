@@ -24,12 +24,11 @@ runs:
     - uses: actions/checkout@v3
     - name: Set env
       shell: bash
-      # In a PR, github.ref_name can be, e.g., `12/merge`.
+      # In a PR, github.ref_name can be, e.g., `12/merge`,
       # which causes downstream grief.
       run: |
         refname=${{ github.ref_name }}
         echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
-        echo "::notice ::${SANITIZED_REF_NAME}"
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
