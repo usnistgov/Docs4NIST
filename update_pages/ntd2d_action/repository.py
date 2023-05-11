@@ -62,3 +62,5 @@ class Repository:
         IndexFile(repo=self, variants_url=variants.get_url().path).write()
 
         self.commit(message=f"Update documentation for {branch}@{sha[:7]}")
+
+        self.repo.pull()
