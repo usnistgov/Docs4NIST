@@ -63,6 +63,7 @@ runs:
       run: |
         artifact=${{ github.event.repository.name }}-${{ github.ref_name }}-${{ github.sha }}
         echo "ARTIFACT_NAME=${artifact////_}" >> $GITHUB_ENV
+        echo "::notice ::${ARTIFACT_NAME}"
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
