@@ -22,6 +22,14 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+    - name: Set env
+      shell: bash
+      # In a PR, github.ref_name can be, e.g., `12/merge`.
+      # which causes downstream grief.
+      run: |
+        refname=${{ github.ref_name }}
+        echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
+        echo "::notice ::${SANITIZED_REF_NAME}"
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
@@ -58,16 +66,10 @@ runs:
         branch: ${{ inputs.pages-branch }}
         directory: __nist-pages
         github_token: ${{ github.token }}
-    - name: Set env
-      shell: bash
-      run: |
-        artifact=${{ github.event.repository.name }}-${{ github.ref_name }}-${{ github.sha }}
-        echo "ARTIFACT_NAME=${artifact////_}" >> $GITHUB_ENV
-        echo "::notice ::${ARTIFACT_NAME}"
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
-        name: ${{ env.ARTIFACT_NAME }}
+        name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
           docs/_build/html
 #             docs/_build/epub/*.epub
