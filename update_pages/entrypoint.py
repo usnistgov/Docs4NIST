@@ -17,7 +17,7 @@ def main():
                           docs=docs,
                           pages_url=os.environ['INPUT_PAGES-URL'])
 
-        repo.update_pages(branch=os.environ['GITHUB_REF_NAME'],
+        repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
                           sha=os.environ['GITHUB_SHA'])
     elif action == 'borg_the_docs':
         docs.assimilate_theme()
