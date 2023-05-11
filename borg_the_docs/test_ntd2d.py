@@ -12,7 +12,7 @@ def fake_filesystem():  # fs):
     # fs.create_dir("__nist-pages")
     os.environ["GITHUB_SERVER_URL"] = "https://github.com"
     os.environ["GITHUB_REPOSITORY"] = "usnistgov/steppyngstounes"
-    os.environ["GITHUB_REF_NAME"] = "NISTtheDocs2Death"
+    os.environ["SANITIZED_REF_NAME"] = "NISTtheDocs2Death"
     os.environ["GITHUB_SHA"] = "deadbeef"
 
     os.environ['INPUT_DOCS-FOLDER'] = "/Users/guyer/Documents/research/FiPy/steppyngstounes/docs/"
@@ -36,7 +36,7 @@ def test_my_fakefs(fake_filesystem):
                       docs=docs,
                       pages_url=os.environ['INPUT_PAGES-URL'])
 
-    repo.update_pages(branch=os.environ['GITHUB_REF_NAME'],
+    repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
                       sha=os.environ['GITHUB_SHA'])
 
 if __name__ == "__main__":
