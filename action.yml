@@ -59,6 +59,7 @@ runs:
         directory: __nist-pages
         github_token: ${{ github.token }}
     - name: Set env
+      shell: bash
       run: |
         artifact=${{ github.event.repository.name }}-${{ github.ref_name }}-${{ github.sha }}
         echo "ARTIFACT_NAME=${artifact////_}" >> $GITHUB_ENV
