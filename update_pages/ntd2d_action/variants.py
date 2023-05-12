@@ -136,7 +136,7 @@ class VariantCollection:
 
         return self._variants
 
-    def get_variants_html(self):
+    def get_html(self):
         link_dir = (pathlib.PurePath("/") / self.repo.repository
                     / self.html_dir.relative_to(self.repo.working_dir))
         variants = []

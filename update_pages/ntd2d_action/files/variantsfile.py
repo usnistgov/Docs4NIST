@@ -27,7 +27,7 @@ class VariantsFile(PagesFile):
         return urlparse(full_url)
 
     def get_contents(self):
-        variants = self.variants.get_variants_html()
+        variants = self.variants.get_html()
         variants = textwrap.indent("\n".join(variants), "  ")
 
         variants_template = PagesTemplate(working_dir=self.repo.working_dir,
