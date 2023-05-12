@@ -71,3 +71,11 @@ class Repository:
         self.commit(message=f"Update documentation for {branch}@{sha[:7]}")
 
         self.repo.remotes.origin.pull()
+
+    @property
+    def heads(self):
+        return self.repo.heads
+
+    @property
+    def tags(self):
+        return self.repo.tags
