@@ -135,7 +135,7 @@ class VariantCollection:
                     / self.html_dir.relative_to(self.repo.working_dir))
         variants = []
         for variant in self.variants:
-            href = link_dir / variant / "index.html"
-            variants.append(f'<a href="{href}">{variant}</a>')
+            href = link_dir / variant.name / "index.html"
+            variants.append(f'<a href="{href}">{variant.name}</a>')
 
         return variants
