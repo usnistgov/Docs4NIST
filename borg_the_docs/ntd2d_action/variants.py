@@ -93,7 +93,13 @@ class VariantCollection:
             except InvalidVersion:
                 variant = Variant(repo=self.repo, name=variant)
 
-            if isinstance(variant, Version):
+            if ((variant.name not in self.repo.heads)
+                and (variant.name not in self.repo.tags)
+                and (variant.name not in ["latest", "stable"])):
+                # This variant has been removed from the repository,
+                # so remove the corresponding docs
+                del variant
+            elif isinstance(variant, Version):
                 self._versions.append(variant)
             else:
                 self._branches.append(variant)
