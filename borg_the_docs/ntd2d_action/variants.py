@@ -23,6 +23,8 @@ class Variant:
         clone = Variant(repo=self.repo, name=name)
         clone.copy_dir(src=self.dir)
 
+        return clone
+
     def __del__(self):
         self.rmdir()
 
