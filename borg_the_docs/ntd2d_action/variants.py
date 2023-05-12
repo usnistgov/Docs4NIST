@@ -54,7 +54,8 @@ class VariantCollection:
     @property
     def latest(self):
         if self._latest is None:
-            latest = [branch in self.branches if branch.name == "latest"]
+            latest = [branch for branch in self.branches
+                      if branch.name == "latest"]
             if len(latest) > 0:
                 self._latest = latest[0]
 
