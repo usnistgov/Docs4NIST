@@ -3,7 +3,7 @@ import github_action_utils as gha_utils
 import pathlib
 
 from .files import NoJekyllFile, VariantsFile, MenuFile, IndexFile
-from .variants import VariantCollection
+from .variants import Variant, VariantCollection
 
 class Repository:
     def __init__(self, server_url, repository, branch, default_branch, docs, pages_url):
@@ -44,13 +44,17 @@ class Repository:
 
         NoJekyllFile(repo=self).write()
 
-        variant_collection = VariantCollection(repo=self)
-
         # replace any built documents in directory named for current branch
-        variant_collection.copy_html(src=self.docs.html_dir, branch=branch)
+        variant = Variant(repo=self, name=branch)
+        variant.copy_dir(src=self.docs.html_dir)
+
+        if variant.name == self.default_branch:
+            # replace any built documents in latest/
+            # (but only do this for default branch of repo)
+            latest = variant.clone("latest")
 
         variants = VariantsFile(repo=self,
-                                variants=variant_collection,
+                                variants=VariantCollection(repo=self),
                                 pages_url=self.pages_url)
         variants.write()
 
