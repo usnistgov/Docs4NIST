@@ -34,7 +34,7 @@ class Repository:
             author = git.Actor("GitHub Action", "action@github.com")
             self.repo.index.commit(message=message, author=author)
 
-            gha_utils.echo("Commit: " + message)
+            gha_utils.notice(f"Committed '{message}'")
 
     def remove(self, *args, **kwargs):
         self.repo.index.remove(*args, **kwargs)
