@@ -92,7 +92,7 @@ class VariantCollection:
                 # but use the Version for sorting.
                 variant = Version(repo=self.repo, name=name)
             except InvalidVersion:
-                variant = Variant(repo=self.repo, name=variant)
+                variant = Variant(repo=self.repo, name=name)
 
             if ((variant.name not in self.repo.heads)
                 and (variant.name not in self.repo.tags)
