@@ -2,11 +2,45 @@ from packaging.version import parse, InvalidVersion
 import pathlib
 import shutil
 
+class Variant:
+    def __init__(self, repo, name):
+        self.repo = repo
+        self.name = name
+
+        self.dir = repo.working_dir / "html" / name
+
+    def rmdir(self):
+        self.repo.remove(self.dir.as_posix(), working_tree=True,
+                         r=True, ignore_unmatch=True)
+
+    def copy_dir(self, src):
+        # remove any previous directory of that name
+        self.rmdir()
+        shutil.copytree(src, self.dir)
+        self.repo.add(self.dir.as_posix())
+
+    def clone(self, name):
+        clone = Variant(repo=self.repo, name=name)
+        clone.copy_dir(src=self.dir)
+
+    def __del__(self):
+        self.rmdir()
+
+class Version(Variant):
+    """A Variant that satisfies the PEP 440 version specification
+
+    Raises
+    ------
+    InvalidVersion
+        If the name is not parsable by packaging.version
+    """
+    def __init__(self, repo, name):
+        super().__init__(repo=repo, name=name)
+        self.version = parse(name)
+
 class VariantCollection:
     def __init__(self, repo):
         self.repo = repo
-        self.branch = repo.branch
-        self.default_branch = repo.default_branch
 
         self.html_dir = repo.working_dir / "html"
 
@@ -17,63 +51,51 @@ class VariantCollection:
         self._variants = None
         self._versions = None
 
-    def copy_html(self, src, branch):
-        dst = self.html_dir / branch
-
-        # remove any previous directory of that name
-        self.repo.remove(dst.as_posix(), working_tree=True,
-                         r=True, ignore_unmatch=True)
-
-        shutil.copytree(src, dst)
-        self.repo.add(dst.as_posix())
-
     @property
     def latest(self):
         if self._latest is None:
-            # replace any built documents in latest/
-            # (but only do this for default branch of repo)
-            if self.branch == self.default_branch:
-                self.copy_html(branch="latest")
-                self._latest = ["latest"]
+            latest = [branch in self.branches if branch.name == "latest"]
+            if len(latest) > 0:
+                self._latest = latest[0]
 
         return self._latest
 
     @property
     def stable(self):
         if self._stable is None:
-            stable_versions = self.stable_versions
-
             # replace any built documents in stable/
             # (but only do this for highest non-prerelease version)
-            if len(stable_versions) > 0:
-                stable = stable_versions[0][1]
-                self.copy_html(branch=stable,
-                               src=self.html_dir / stable)
-                self._stable = stable
+            if len(self.stable_versions) > 0:
+                self._stable = self.stable_versions[0].clone("stable")
 
         return self._stable
 
     @property
     def stable_versions(self):
         if self._stable_versions is None:
-            self._stable_versions = [(version, label)
-                                     for (version, label) in self.versions
-                                     if not version.is_prerelease]
+            self._stable_versions = [version
+                                     for in self.versions
+                                     if not version.version.is_prerelease]
 
         return self._stable_versions
 
     def _calc_branches_and_versions(self):
-        variants = [variant.name for variant in self.html_dir.glob("*")]
+        names = [variant.name for variant in self.html_dir.glob("*")]
 
         self._branches = []
         self._versions = []
-        for variant in variants:
+        for name in names:
             try:
                 # Check if it's a PEP 440 version.
                 # Retain the string literal for the tag or branch,
                 # but use the Version for sorting.
-                self._versions.append((parse(variant), variant))
+                variant = Version(repo=self.repo, name=name)
             except InvalidVersion:
+                variant = Variant(repo=self.repo, name=variant)
+
+            if isinstance(variant, Version):
+                self._versions.append(variant)
+            else:
                 self._branches.append(variant)
         self._branches.sort()
         self._versions.sort(reverse=True)
