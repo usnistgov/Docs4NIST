@@ -75,7 +75,7 @@ class VariantCollection:
     def stable_versions(self):
         if self._stable_versions is None:
             self._stable_versions = [version
-                                     for in self.versions
+                                     for version in self.versions
                                      if not version.version.is_prerelease]
 
         return self._stable_versions
