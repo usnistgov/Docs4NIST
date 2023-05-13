@@ -2,6 +2,8 @@ from packaging.version import parse, InvalidVersion
 import pathlib
 import shutil
 
+from .files import VariantsFile, MenuFile, IndexFile
+
 class Variant:
     def __init__(self, repo, name):
         self.repo = repo
@@ -47,40 +49,33 @@ class VariantCollection:
         self.html_dir = repo.working_dir / "html"
 
         self._branches = None
-        self._latest = None
-        self._stable = None
-        self._stable_versions = None
         self._variants = None
         self._versions = None
 
     @property
     def latest(self):
-        if self._latest is None:
-            latest = [branch for branch in self.branches
-                      if branch.name == "latest"]
-            if len(latest) > 0:
-                self._latest = latest[0]
+        for branch in self.branches:
+            if branch.name == self.repo.default_branch:
+                # replace any built documents in latest/
+                # (but only do this for default branch of repo)
+                return branch.clone("latest")
 
-        return self._latest
+        return None
 
     @property
     def stable(self):
-        if self._stable is None:
-            # replace any built documents in stable/
-            # (but only do this for highest non-prerelease version)
-            if len(self.stable_versions) > 0:
-                self._stable = self.stable_versions[0].clone("stable")
-
-        return self._stable
+        # replace any built documents in stable/
+        # (but only do this for highest non-prerelease version)
+        if len(self.stable_versions) > 0:
+            return self.stable_versions[0].clone("stable")
+        else:
+            return None
 
     @property
     def stable_versions(self):
-        if self._stable_versions is None:
-            self._stable_versions = [version
-                                     for version in self.versions
-                                     if not version.version.is_prerelease]
-
-        return self._stable_versions
+        return [version
+                for version in self.versions
+                if not version.version.is_prerelease]
 
     def _calc_branches_and_versions(self):
         names = [variant.name for variant in self.html_dir.glob("*")]
@@ -97,8 +92,7 @@ class VariantCollection:
                 variant = Variant(repo=self.repo, name=name)
 
             if ((variant.name not in self.repo.heads)
-                and (variant.name not in self.repo.tags)
-                and (variant.name not in ["latest", "stable"])):
+                and (variant.name not in self.repo.tags)):
                 # This variant has been removed from the repository,
                 # so remove the corresponding docs
                 del variant
@@ -148,3 +142,21 @@ class VariantCollection:
             variants.append(f'<a href="{href}">{variant.name}</a>')
 
         return variants
+
+    def write_files(self, pages_url):
+        variants_file = VariantsFile(repo=self.repo,
+                                     variants=self,
+                                     pages_url=pages_url)
+        variants_file.write()
+
+        url = variants_file.get_url()
+
+        for variant in self.variants:
+            # Need an absolute url because this gets included from
+            # many different levels
+            MenuFile(variant=variant,
+                     variants_url=url.geturl()).write()
+
+        # This can be a relative url, because all variants should
+        # be on the same server
+        IndexFile(repo=self, variants_url=url.path).write()
