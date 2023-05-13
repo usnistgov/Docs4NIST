@@ -1,3 +1,4 @@
+import github_action_utils as gha_utils
 from packaging.version import parse, InvalidVersion
 import pathlib
 import shutil
@@ -53,13 +54,19 @@ class VariantCollection:
 
     @property
     def latest(self):
+        gha_utils.start_group("VariantCollection.latest")
+        latest = None
         for branch in self.branches:
+            gha_utils.notice(f"{branch.name} =?= {self.repo.default_branch}")
             if branch.name == self.repo.default_branch:
                 # replace any built documents in latest/
                 # (but only do this for default branch of repo)
-                return branch.clone("latest")
+                latest = branch.clone("latest")
+                gha_utils.notice(f"Cloned {branch.name} to {latest.name}")
+                break
 
-        return None
+        gha_utils.end_group()
+        return latest
 
     @property
     def stable(self):
