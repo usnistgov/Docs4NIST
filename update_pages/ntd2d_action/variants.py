@@ -49,7 +49,6 @@ class VariantCollection:
         self.html_dir = repo.working_dir / "html"
 
         self._branches = None
-        self._variants = None
         self._versions = None
 
     @property
@@ -124,14 +123,13 @@ class VariantCollection:
         # variants = ["v1.0.0", "stables", "1.2.3", "latest", "4b1",
         #             "0.2", "neat_idea", "doesn't_work", "experiment"]
 
-        if self._variants is None:
-            self._variants = ([self.latest, self.stable]
-                              + self.versions + self.branches)
-            self._variants = [variant
-                              for variant in self._variants
-                              if variant is not None]
+        variants = ([self.latest, self.stable]
+                    + self.versions + self.branches)
+        variants = [variant
+                    for variant in variants
+                    if variant is not None]
 
-        return self._variants
+        return variants
 
     def get_html(self):
         link_dir = (pathlib.PurePath("/") / self.repo.repository
