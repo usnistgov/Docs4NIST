@@ -159,4 +159,4 @@ class VariantCollection:
 
         # This can be a relative url, because all variants should
         # be on the same server
-        IndexFile(repo=self, variants_url=url.path).write()
+        IndexFile(repo=self.repo, variants_url=url.path).write()
