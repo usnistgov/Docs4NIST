@@ -28,6 +28,9 @@ class Variant:
 
         return clone
 
+    def __lt__(self, other):
+        return self.name < other.name
+
 class Version(Variant):
     """A Variant that satisfies the PEP 440 version specification
 
@@ -39,6 +42,12 @@ class Version(Variant):
     def __init__(self, repo, name):
         super().__init__(repo=repo, name=name)
         self.version = parse(name)
+
+    def __lt__(self, other):
+        if isinstance(other, Version):
+            return self.version < other.version
+        else:
+            return super().__lt__(other)
 
 class VariantCollection:
     def __init__(self, repo):
