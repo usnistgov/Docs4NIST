@@ -18,6 +18,10 @@ class Repository:
     def working_dir(self):
         return pathlib.Path(self.repo.working_dir)
 
+    @property
+    def refs(self):
+        return self.repo.refs
+
     def add(self, *args, **kwargs):
         self.repo.index.add(*args, **kwargs)
 
