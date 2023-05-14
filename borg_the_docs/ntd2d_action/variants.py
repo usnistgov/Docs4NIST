@@ -28,9 +28,6 @@ class Variant:
 
         return clone
 
-    def __del__(self):
-        self.rmdir()
-
 class Version(Variant):
     """A Variant that satisfies the PEP 440 version specification
 
@@ -49,33 +46,41 @@ class VariantCollection:
 
         self.html_dir = repo.working_dir / "html"
 
+        self._latest = None
+        self._stable = None
         self._branches = None
         self._versions = None
 
     @property
     def latest(self):
         gha_utils.start_group("VariantCollection.latest")
-        latest = None
-        for branch in self.branches:
-            gha_utils.notice(f"{branch.name} =?= {self.repo.default_branch}")
-            if branch.name == self.repo.default_branch:
-                # replace any built documents in latest/
-                # (but only do this for default branch of repo)
-                latest = branch.clone("latest")
-                gha_utils.notice(f"Cloned {branch.name} to {latest.name}")
-                break
+        if self._latest is None:
+            for branch in self.branches:
+                gha_utils.notice(f"{branch.name} =?= {self.repo.default_branch}")
+                if branch.name == self.repo.default_branch:
+                    # replace any built documents in latest/
+                    # (but only do this for default branch of repo)
+                    self._latest = branch.clone("latest")
+                    gha_utils.notice(f"Cloned {branch.name} to {self._latest.name}")
+                    break
 
         gha_utils.end_group()
-        return latest
+        return self._latest
 
     @property
     def stable(self):
-        # replace any built documents in stable/
-        # (but only do this for highest non-prerelease version)
-        if len(self.stable_versions) > 0:
-            return self.stable_versions[0].clone("stable")
-        else:
-            return None
+        gha_utils.start_group("VariantCollection.stable")
+        if self._stable is None:
+            # replace any built documents in stable/
+            # (but only do this for highest non-prerelease version)
+            if len(self.stable_versions) > 0:
+                self._stable = self.stable_versions[0].clone("stable")
+                gha_utils.notice(f"Cloned {self.stable_versions[0].name} to {self._stable.name}")
+            else:
+                self._stable = None
+
+        gha_utils.end_group()
+        return self._stable
 
     @property
     def stable_versions(self):
@@ -84,30 +89,45 @@ class VariantCollection:
                 if not version.version.is_prerelease]
 
     def _calc_branches_and_versions(self):
+        gha_utils.start_group("VariantCollection._calc_branches_and_versions")
+
         names = [variant.name for variant in self.html_dir.glob("*")]
+
+        gha_utils.notice(f"{type(self.repo.repo.remotes.origin.refs)} = {self.repo.repo.remotes.origin.refs}")
 
         self._branches = []
         self._versions = []
         for name in names:
+            gha_utils.start_group(f"{name}")
             try:
                 # Check if it's a PEP 440 version.
                 # Retain the string literal for the tag or branch,
                 # but use the Version for sorting.
                 variant = Version(repo=self.repo, name=name)
+                gha_utils.notice(f"Version({variant.name})")
             except InvalidVersion:
                 variant = Variant(repo=self.repo, name=name)
+                gha_utils.notice(f"Variant({variant.name})")
 
-            if ((variant.name not in self.repo.heads)
-                and (variant.name not in self.repo.tags)):
+            if variant.name in ["latest", "stable"]:
+                continue
+
+            if variant.name not in self.repo.repo.remotes.origin.refs:
                 # This variant has been removed from the repository,
                 # so remove the corresponding docs
-                del variant
+                gha_utils.notice(f"Deleting")
+                variant.rmdir()
             elif isinstance(variant, Version):
+                gha_utils.notice(f"Appending version")
                 self._versions.append(variant)
             else:
+                gha_utils.notice(f"Appending branch")
                 self._branches.append(variant)
+            gha_utils.end_group()
         self._branches.sort()
         self._versions.sort(reverse=True)
+
+        gha_utils.end_group()
 
     @property
     def branches(self):
