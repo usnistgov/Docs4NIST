@@ -24,8 +24,7 @@ class Repository:
     def clone(self, to_path):
         self.repo = git.Repo.clone_from(self.url,
                                         to_path=to_path,
-                                        branch=self.branch,
-                                        single_branch=True)
+                                        branch=self.branch)
 
     def commit(self, message):
         if len(self.repo.index.diff("HEAD")) > 0:
@@ -40,12 +39,24 @@ class Repository:
         self.repo.index.remove(*args, **kwargs)
 
     def update_pages(self, branch, sha):
+        gha_utils.start_group("Repository.update_pages")
+
         self.clone(to_path="__nist-pages")
+
+        gha_utils.notice(f"clone()")
 
         NoJekyllFile(repo=self).write()
 
+        gha_utils.notice(f".nojekyll")
+
         # replace any built documents in directory named for current branch
-        Variant(repo=self, name=branch).copy_dir(src=self.docs.html_dir)
+        variant = Variant(repo=self, name=branch)
+
+        gha_utils.notice(f"Variant {variant.name}")
+
+        variant.copy_dir(src=self.docs.html_dir)
+
+        gha_utils.notice(f"post")
 
         VariantCollection(repo=self).write_files(pages_url=self.pages_url)
 
@@ -53,10 +64,4 @@ class Repository:
 
         self.repo.remotes.origin.pull()
 
-    @property
-    def heads(self):
-        return self.repo.heads
-
-    @property
-    def tags(self):
-        return self.repo.tags
+        gha_utils.end_group()
