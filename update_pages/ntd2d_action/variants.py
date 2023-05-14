@@ -102,7 +102,7 @@ class VariantCollection:
 
         names = [variant.name for variant in self.html_dir.glob("*")]
 
-        gha_utils.notice(f"{type(self.repo.repo.remotes.origin.refs)} = {self.repo.repo.remotes.origin.refs}")
+        gha_utils.notice(f"{type(self.repo.refs)} = {self.repo.refs}")
 
         self._branches = []
         self._versions = []
