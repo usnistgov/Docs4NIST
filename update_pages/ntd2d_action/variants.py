@@ -125,6 +125,7 @@ class VariantCollection:
                 # This variant has been removed from the repository,
                 # so remove the corresponding docs
                 gha_utils.notice(f"Deleting")
+                gha_utils.notice(f"{variant.name} not in {self.repo.refs}")
 #                 variant.rmdir()
             elif isinstance(variant, Version):
                 gha_utils.notice(f"Appending version")
