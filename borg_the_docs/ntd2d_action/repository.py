@@ -41,7 +41,7 @@ class Repository:
             author = git.Actor("GitHub Action", "action@github.com")
             self.repo.index.commit(message=message, author=author)
 
-            gha_utils.notice(f"Committed '{message}'")
+            gha_utils.debug(f"Committed '{message}'")
 
     def remove(self, *args, **kwargs):
         self.repo.index.remove(*args, **kwargs)
@@ -51,20 +51,20 @@ class Repository:
 
         self.clone(to_path="__nist-pages")
 
-        gha_utils.notice(f"clone()")
+        gha_utils.debug(f"clone()")
 
         NoJekyllFile(repo=self).write()
 
-        gha_utils.notice(f".nojekyll")
+        gha_utils.debug(f".nojekyll")
 
         # replace any built documents in directory named for current branch
         variant = Variant(repo=self, name=branch)
 
-        gha_utils.notice(f"Variant {variant.name}")
+        gha_utils.debug(f"Variant {variant.name}")
 
         variant.copy_dir(src=self.docs.html_dir)
 
-        gha_utils.notice(f"post")
+        gha_utils.debug(f"post")
 
         VariantCollection(repo=self).write_files(pages_url=self.pages_url)
 

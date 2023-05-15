@@ -65,12 +65,12 @@ class VariantCollection:
         gha_utils.start_group("VariantCollection.latest")
         if self._latest is None:
             for branch in self.branches:
-                gha_utils.notice(f"{branch.name} =?= {self.repo.default_branch}")
+                gha_utils.debug(f"{branch.name} =?= {self.repo.default_branch}")
                 if branch.name == self.repo.default_branch:
                     # replace any built documents in latest/
                     # (but only do this for default branch of repo)
                     self._latest = branch.clone("latest")
-                    gha_utils.notice(f"Cloned {branch.name} to {self._latest.name}")
+                    gha_utils.debug(f"Cloned {branch.name} to {self._latest.name}")
                     break
 
         gha_utils.end_group()
@@ -84,7 +84,7 @@ class VariantCollection:
             # (but only do this for highest non-prerelease version)
             if len(self.stable_versions) > 0:
                 self._stable = self.stable_versions[0].clone("stable")
-                gha_utils.notice(f"Cloned {self.stable_versions[0].name} to {self._stable.name}")
+                gha_utils.debug(f"Cloned {self.stable_versions[0].name} to {self._stable.name}")
             else:
                 self._stable = None
 
@@ -102,7 +102,7 @@ class VariantCollection:
 
         names = [variant.name for variant in self.html_dir.glob("*")]
 
-        gha_utils.notice(f"{type(self.repo.refs)} = {self.repo.refs}")
+        gha_utils.debug(f"self.repo.refs = {self.repo.refs}")
 
         self._branches = []
         self._versions = []
@@ -113,10 +113,10 @@ class VariantCollection:
                 # Retain the string literal for the tag or branch,
                 # but use the Version for sorting.
                 variant = Version(repo=self.repo, name=name)
-                gha_utils.notice(f"Version({variant.name})")
+                gha_utils.debug(f"Version({variant.name})")
             except InvalidVersion:
                 variant = Variant(repo=self.repo, name=name)
-                gha_utils.notice(f"Variant({variant.name})")
+                gha_utils.debug(f"Variant({variant.name})")
 
             if variant.name in ["latest", "stable"]:
                 continue
@@ -125,13 +125,13 @@ class VariantCollection:
                 and variant.name not in self.repo.origin.refs):
                 # This variant has been removed from the repository,
                 # so remove the corresponding docs
-                gha_utils.notice(f"Deleting")
+                gha_utils.debug(f"Deleting")
                 variant.rmdir()
             elif isinstance(variant, Version):
-                gha_utils.notice(f"Appending version")
+                gha_utils.debug(f"Appending version")
                 self._versions.append(variant)
             else:
-                gha_utils.notice(f"Appending branch")
+                gha_utils.debug(f"Appending branch")
                 self._branches.append(variant)
             gha_utils.end_group()
         self._branches.sort()
