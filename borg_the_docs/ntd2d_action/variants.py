@@ -122,7 +122,7 @@ class VariantCollection:
                 continue
 
             if (variant.name not in self.repo.refs
-                and variant.name not in self.repo.origin.refs):
+                and variant.name not in self.repo.remotes.origin.refs):
                 # This variant has been removed from the repository,
                 # so remove the corresponding docs
                 gha_utils.notice(f"Deleting")
