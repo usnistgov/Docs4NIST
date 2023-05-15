@@ -22,6 +22,10 @@ class Repository:
     def refs(self):
         return self.repo.refs
 
+    @property
+    def origin(self):
+        return self.repo.remotes.origin
+
     def add(self, *args, **kwargs):
         self.repo.index.add(*args, **kwargs)
 
