@@ -1,8 +1,8 @@
 #!/bin/bash
 
+echo "::error::`env`"
 echo "::warning::INPUT_ACTION=${INPUT_ACTION}"
 echo "::warning::GITHUB_SHA=${GITHUB_SHA}"
-echo "::warning::INPUT_ACTION=${INPUT_ACTION}"
 echo "::warning::INPUT_DOCS-FOLDER=${INPUT_DOCS-FOLDER}"
 echo "::warning::INPUT_DEFAULT-BRANCH=${INPUT_DEFAULT-BRANCH}"
 echo "::warning::INPUT_PAGES-BRANCH=${INPUT_PAGES-BRANCH}"
