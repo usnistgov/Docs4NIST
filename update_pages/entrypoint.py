@@ -10,11 +10,11 @@ def main():
     action = os.environ['INPUT_ACTION']
     docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
 
-    # Install any requirements for documentation.
-    # Adapted from ammaraskar/sphinx-action
-    requirements = os.path.join(docs.docs_dir, "requirements.txt")
-    if os.path.exists(requirements):
-        subprocess.check_call(["pip", "install", "-r", requirements])
+#     # Install any requirements for documentation.
+#     # Adapted from ammaraskar/sphinx-action
+#     requirements = os.path.join(docs.docs_dir, "requirements.txt")
+#     if os.path.exists(requirements):
+#         subprocess.check_call(["pip", "install", "-r", requirements])
 
     if action == 'update_pages':
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
