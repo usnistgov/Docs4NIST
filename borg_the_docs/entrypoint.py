@@ -12,7 +12,7 @@ def main():
 
     # Install any requirements for documentation.
     # Adapted from ammaraskar/sphinx-action
-    requirements = os.path.join(docs, "requirements.txt")
+    requirements = os.path.join(docs.docs_dir, "requirements.txt")
     if os.path.exists(requirements):
         subprocess.check_call(["pip", "install", "-r", requirements])
 
