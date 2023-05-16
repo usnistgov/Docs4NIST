@@ -1,10 +1,12 @@
 #!/bin/bash
 
 echo "::warning::INPUT_ACTION=${INPUT_ACTION}"
-echo "::error::GITHUB_SHA=${GITHUB_SHA}"
+echo "::warning::GITHUB_SHA=${GITHUB_SHA}"
+echo "::warning::GITHUB_SHA=INPUT_DOCS-FOLDER=${INPUT_DOCS-FOLDER}"
+
 requirements="${INPUT_DOCS-FOLDER}/requirements.txt"
 
-echo "::notice::requirements=${requirements}"
+echo "::error::requirements=${requirements}"
 if [ -f $requirements ]; 
 then
     echo "::notice::installing"
