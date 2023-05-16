@@ -21,9 +21,9 @@ RUN which git \
 RUN pip install GitPython
 RUN pip install packaging
 RUN pip install github-action-utils
-RUN pip install -r documentation/requirements.txt
 
 ADD entrypoint.py /entrypoint.py
+ADD entrypoint.sh /entrypoint.sh
 ADD ntd2d_action /ntd2d_action
 
-ENTRYPOINT ["/entrypoint.py"]
+ENTRYPOINT ["/entrypoint.sh"]
