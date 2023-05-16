@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "::warning::INPUT_ACTION=${INPUT_ACTION}"
+echo "::error::GITHUB_SHA=${GITHUB_SHA}"
 requirements="${INPUT_DOCS-FOLDER}/requirements.txt"
 
 echo "::notice::requirements=${requirements}"
