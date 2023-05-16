@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "::error::`env`"
 echo "::warning::INPUT_ACTION=${INPUT_ACTION}"
