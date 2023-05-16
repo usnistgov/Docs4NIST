@@ -7,7 +7,4 @@ then
     pip install -r $requirements
 fi
 
-echo "::notice::`pwd`"
-echo "::notice::`ls`"
-
-python entrypoint.py >> $GITHUB_OUTPUT
+python /entrypoint.py >> $GITHUB_OUTPUT
