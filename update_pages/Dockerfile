@@ -23,6 +23,7 @@ RUN pip install packaging
 RUN pip install github-action-utils
 
 ADD entrypoint.py /entrypoint.py
+ADD entrypoint.sh /entrypoint.sh
 ADD ntd2d_action /ntd2d_action
 
-ENTRYPOINT ["/entrypoint.py"]
+ENTRYPOINT ["/entrypoint.sh"]
