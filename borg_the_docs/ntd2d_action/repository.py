@@ -64,8 +64,6 @@ class Repository:
 
         variant.copy_dir(src=self.docs.html_dir)
 
-        gha_utils.debug(f"post")
-
         VariantCollection(repo=self).write_files(pages_url=self.pages_url)
 
         self.commit(message=f"Update documentation for {branch}@{sha[:7]}")
