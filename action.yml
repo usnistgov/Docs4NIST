@@ -5,16 +5,16 @@ description: Deploys Sphinx-built documentation to https://pages.nist.gov
 author: Jonathan Guyer
 
 inputs:
-  docs-folder:
+  docs_folder:
     description:
       The folder containing your sphinx docs.
     required: true
     default: "docs/"
-  pages-branch:
+  pages_branch:
     description: 
       The branch linked to your documentation server.
     default: 'nist-pages'
-  pages-url:
+  pages_url:
     description:
       URL of web server for served documentation.
     default: 'https://pages.nist.gov'
@@ -33,28 +33,28 @@ runs:
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
         action: borg_the_docs
-        docs-folder: ${{ inputs.docs-folder }}
+        docs_folder: ${{ inputs.docs_folder }}
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
-        docs-folder: ${{ inputs.docs-folder }}
+        docs_folder: ${{ inputs.docs_folder }}
 #       - uses: usnistgov/sphinx-action@master
 #         name: Build ePUB
 #         with:
-#           docs-folder: ${{ inputs.docs-folder }}
+#           docs_folder: ${{ inputs.docs_folder }}
 #           build-command: make epub
 #       - uses: usnistgov/sphinx-action@latexpdf
 #         name: Build PDF
 #         with:
-#           docs-folder: ${{ inputs.docs-folder }}
+#           docs_folder: ${{ inputs.docs_folder }}
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
         action: update_pages
-        docs-folder: ${{ inputs.docs-folder }}
+        docs_folder: ${{ inputs.docs_folder }}
         default-branch: ${{ github.event.repository.default_branch }}
-        pages-branch: ${{ inputs.pages-branch }}
-        pages-url: ${{ inputs.pages-url }}
+        pages_branch: ${{ inputs.pages_branch }}
+        pages_url: ${{ inputs.pages_url }}
     - name: Change ownership
       shell: bash
       run: |
@@ -62,7 +62,7 @@ runs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        branch: ${{ inputs.pages-branch }}
+        branch: ${{ inputs.pages_branch }}
         directory: __nist-pages
         github_token: ${{ github.token }}
     - uses: actions/upload-artifact@v3
