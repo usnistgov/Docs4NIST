@@ -37,16 +37,16 @@ runs:
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
-        docs_folder: ${{ inputs.docs_folder }}
+        docs-folder: ${{ inputs.docs_folder }}
 #       - uses: usnistgov/sphinx-action@master
 #         name: Build ePUB
 #         with:
-#           docs_folder: ${{ inputs.docs_folder }}
+#           docs-folder: ${{ inputs.docs_folder }}
 #           build-command: make epub
 #       - uses: usnistgov/sphinx-action@latexpdf
 #         name: Build PDF
 #         with:
-#           docs_folder: ${{ inputs.docs_folder }}
+#           docs-folder: ${{ inputs.docs_folder }}
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
