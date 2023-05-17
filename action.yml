@@ -29,12 +29,7 @@ runs:
       run: |
         refname=${{ github.ref_name }}
         echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
-    - name: Install requirements for Sphinx
-      uses: usnistgov/NISTtheDocs2Death@workhorse
-      with:
-        action: pip_requirements
-        docs-folder: ${{ inputs.docs-folder }}
-    - name: Modify Sphinx theme
+    - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
         action: borg_the_docs
