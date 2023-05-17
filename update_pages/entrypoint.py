@@ -10,12 +10,6 @@ def main():
     action = os.environ['INPUT_ACTION']
     docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
 
-#     # Install any requirements for documentation.
-#     # Adapted from ammaraskar/sphinx-action
-#     requirements = os.path.join(docs.docs_dir, "requirements.txt")
-#     if os.path.exists(requirements):
-#         subprocess.check_call(["pip", "install", "-r", requirements])
-
     if action == 'update_pages':
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                           repository=os.environ['GITHUB_REPOSITORY'],
@@ -28,6 +22,13 @@ def main():
                           sha=os.environ['GITHUB_SHA'])
     elif action == 'borg_the_docs':
         docs.assimilate_theme()
+    elif action == 'pip_requirements':
+        # Install any requirements for documentation.
+        # Adapted from ammaraskar/sphinx-action
+        requirements = docs.docs_dir / "requirements.txt"
+        if os.path.exists(requirements):
+            subprocess.check_call(["pip", "install", "-r", requirements.as_posix()])
+
 
 if __name__ == "__main__":
     main()
