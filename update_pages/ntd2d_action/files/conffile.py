@@ -5,6 +5,9 @@ import pathlib
 from .file import File
 from .template import FileTemplate
 
+# By [Lukas](https://stackoverflow.com/users/911441/lukas)
+# [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+# https://stackoverflow.com/a/42441759/2019542
 @contextlib.contextmanager
 def working_directory(path):
     """Changes working directory and returns to previous on exit."""
