@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "::error::`env`"
+echo "::warning::`env`"
 echo "::warning::INPUT_ACTION=${INPUT_ACTION}"
 echo "::warning::GITHUB_SHA=${GITHUB_SHA}"
 echo "::warning::INPUT_DOCS_FOLDER=${INPUT_DOCS_FOLDER}"
@@ -10,7 +10,7 @@ echo "::warning::INPUT_PAGES_URL=${INPUT_PAGES_URL}"
 
 requirements="${INPUT_DOCS_FOLDER}/requirements.txt"
 
-echo "::error::requirements=${requirements}"
+echo "::warning::requirements=${requirements}"
 if [ -f $requirements ]; 
 then
     echo "::notice::installing"
