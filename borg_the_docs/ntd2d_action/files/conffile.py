@@ -1,8 +1,19 @@
+import contextlib
+import os
 import pathlib
 
 from .file import File
 from .template import FileTemplate
 
+@contextlib.contextmanager
+def working_directory(path):
+    """Changes working directory and returns to previous on exit."""
+    prev_cwd = pathlib.Path.cwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(prev_cwd)
 
 class ConfFile(File):
     def __init__(self, docs_dir):
@@ -21,7 +32,9 @@ class ConfFile(File):
 
         with self.path.open(mode='rb') as f:
             code = compile(f.read(), self.path, 'exec')
-            exec(code, namespace)  # NoQA: S102
+
+            with working_directory(self.docs_dir):
+                exec(code, namespace)  # NoQA: S102
 
         return namespace
 
