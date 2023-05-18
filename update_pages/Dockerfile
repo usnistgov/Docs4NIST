@@ -24,6 +24,8 @@ RUN pip install github-action-utils
 
 ENV REQUIREMENTS="${DOCS_FOLDER}/requirements.txt"
 
+RUN env
+
 RUN pip install -r ${REQUIREMENTS}
 
 ADD entrypoint.py /entrypoint.py
