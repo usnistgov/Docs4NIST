@@ -12,7 +12,7 @@
 input_docs_var="INPUT_DOCS-FOLDER"
 input_docs_folder=`bash -c "printenv \
   | grep ${input_docs_var} \
-  | sed "s/${input_docs_var}=//"
+  | sed "s/${input_docs_var}=//"`
 
 requirements="${input_docs_folder}/requirements.txt"
 
