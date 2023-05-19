@@ -16,6 +16,8 @@ input_docs_folder=printenv | \
 
 requirements="${input_docs_folder}/requirements.txt"
 
+echo "::warning::input_docs_folder=${input_docs_folder}"
+
 if [ -f $requirements ]; 
 then
     pip install -r $requirements
