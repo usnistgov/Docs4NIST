@@ -22,11 +22,9 @@ RUN pip install GitPython
 RUN pip install packaging
 RUN pip install github-action-utils
 
-ENV REQUIREMENTS="${DOCS_FOLDER}/requirements.txt"
-
 RUN env
 
-RUN pip install -r ${REQUIREMENTS}
+RUN pip install -r "${DOCS_FOLDER}/requirements.txt"
 
 ADD entrypoint.py /entrypoint.py
 ADD entrypoint.sh /entrypoint.sh
