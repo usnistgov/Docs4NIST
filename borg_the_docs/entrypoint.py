@@ -13,10 +13,10 @@ def main():
     if action == 'update_pages':
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                           repository=os.environ['GITHUB_REPOSITORY'],
-                          branch=os.environ['INPUT_PAGES_BRANCH'],
-                          default_branch=os.environ['INPUT_DEFAULT_BRANCH'],
+                          branch=os.environ['INPUT_PAGES-BRANCH'],
+                          default_branch=os.environ['INPUT_DEFAULT-BRANCH'],
                           docs=docs,
-                          pages_url=os.environ['INPUT_PAGES_URL'])
+                          pages_url=os.environ['INPUT_PAGES-URL'])
 
         repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
                           sha=os.environ['GITHUB_SHA'])
