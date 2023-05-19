@@ -22,8 +22,6 @@ RUN pip install GitPython
 RUN pip install packaging
 RUN pip install github-action-utils
 
-ENV DOCS_FOLDER=${DOCS_FOLDER}
-
 ADD entrypoint.py /entrypoint.py
 ADD entrypoint.sh /entrypoint.sh
 ADD ntd2d_action /ntd2d_action
