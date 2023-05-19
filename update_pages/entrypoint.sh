@@ -10,9 +10,9 @@
 # This has been [reported](actions/toolkit#629) and the following is
 # the only offered "solution".
 input_docs_var="INPUT_DOCS-FOLDER"
-input_docs_folder=printenv | \
-    grep ${input_docs_var} | \
-    sed "s/${input_docs_var}=//"
+input_docs_folder=$(printenv |
+    grep ${input_docs_var} |
+    sed "s/${input_docs_var}=//")
 
 requirements="${input_docs_folder}/requirements.txt"
 
