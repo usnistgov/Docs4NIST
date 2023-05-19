@@ -8,7 +8,7 @@ from ntd2d_action.sphinxdocs import SphinxDocs
 
 def main():
     action = os.environ['INPUT_ACTION']
-    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS_FOLDER'])
+    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
 
     if action == 'update_pages':
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
