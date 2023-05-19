@@ -10,13 +10,18 @@
 # This has been [reported](actions/toolkit#629) and the following is
 # the only offered "solution".
 input_docs_var="INPUT_DOCS-FOLDER"
-input_docs_folder=$(printenv |
+input_docs_folder=$(
+    printenv |
     grep ${input_docs_var} |
-    sed "s/${input_docs_var}=//")
+    sed "s/${input_docs_var}=//"
+)
+
+echo "::group::env"
+echo "::warning::`printenv`"
+echo "::endgroup::"
+echo "::warning::input_docs_folder=${input_docs_folder}"
 
 requirements="${input_docs_folder}/requirements.txt"
-
-echo "::warning::input_docs_folder=${input_docs_folder}"
 
 if [ -f $requirements ]; 
 then
