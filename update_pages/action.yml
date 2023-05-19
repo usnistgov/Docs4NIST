@@ -29,5 +29,3 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  env:
-    DOCS_FOLDER: ${{ inputs.docs_folder }}
