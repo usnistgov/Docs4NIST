@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import gha_utils
+import github_action_utils as gha_utils
 import os
 import pathlib
 import subprocess
