@@ -28,9 +28,9 @@ def main():
         # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
         docs_dir = pathlib.Path(os.environ['INPUT_DOCS-FOLDER'])
         docs_requirements = docs_dir / "requirements.txt"
-        gha_utils.comment(f"docs_requirements={docs_requirements}")
+        gha_utils.warning(f"docs_requirements={docs_requirements}")
         if docs_requirements.is_file():
-            gha_utils.comment(f"pip installing")
+            gha_utils.warning(f"pip installing")
             subprocess.check_call(["pip", "install", "-r", docs_requirements.as_posix()])
 
         # Modify the Sphinx theme
