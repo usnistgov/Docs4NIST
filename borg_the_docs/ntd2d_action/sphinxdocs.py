@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pathlib
 
 from .files import ConfFile, TemplateHierarchy
