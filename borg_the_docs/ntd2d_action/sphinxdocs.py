@@ -23,3 +23,11 @@ class SphinxDocs:
         templates.write()
 
         conf.write()
+
+def main():
+    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+
+    docs.assimilate_theme()
+
+if __name__ == "__main__":
+    main()
