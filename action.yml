@@ -33,7 +33,7 @@ runs:
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
         action: borg_the_docs
-        docs_folder: ${{ inputs.docs-folder }}
+        docs-folder: ${{ inputs.docs-folder }}
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
