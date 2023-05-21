@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import github_action_utils as gha_utils
 import pathlib
 
 from .files import ConfFile, TemplateHierarchy
@@ -31,4 +32,8 @@ def main():
     docs.assimilate_theme()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        gha_utils.error(e.__traceback__)
+        raise
