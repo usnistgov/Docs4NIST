@@ -35,7 +35,7 @@ def main():
 
         # Modify the Sphinx theme
         # This needs to be a subprocess so that it sees packages installed above
-        subprocess.check_call(["/ntd2d_action/sphinxdocs.py"])
+        subprocess.check_call(["/borg_the_docs.py"])
 
 if __name__ == "__main__":
     main()
