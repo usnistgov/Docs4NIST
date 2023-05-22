@@ -53,9 +53,9 @@ class ConfFile(File):
         inherited_theme = configuration.get("html_theme", "default")
         self.html_theme_path = configuration.get("html_theme_path", [])
 
-        relative_theme_path = self.theme_path.relative_to(self.docs_dir)
-        if relative_theme_path not in self.html_theme_path:
-            self.html_theme_path.append(relative_theme_path)
+        relative_path = self.theme_path.relative_to(self.docs_dir).as_posix()
+        if relative_path not in self.html_theme_path:
+            self.html_theme_path.append(relative_path)
 
         self.theme = TemplateHierarchy(name=name,
                                        destination_dir=self.theme_path,
