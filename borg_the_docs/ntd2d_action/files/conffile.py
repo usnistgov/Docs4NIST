@@ -66,7 +66,7 @@ class ConfFile(File):
         with self.path.open(mode='r') as f:
             original_contents = f.read()
 
-        conf_template = FileTemplate(name="conf.py")
+        conf_template = FileTemplate(name="conf.py").read()
 
         return conf_template.format(original_contents=original_contents,
                                     html_theme=self.theme.name,
