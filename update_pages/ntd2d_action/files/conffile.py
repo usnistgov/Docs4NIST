@@ -4,7 +4,7 @@ import pathlib
 
 from .file import File
 from .template import FileTemplate
-from .templatehierarchy import TemplateHiearchy
+from .templatehierarchy import TemplateHierarchy
 
 # By [Lukas](https://stackoverflow.com/users/911441/lukas)
 # [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
@@ -57,9 +57,9 @@ class ConfFile(File):
         if relative_theme_path not in self.html_theme_path:
             self.html_theme_path.append(relative_theme_path)
 
-        self.theme = TemplateHiearchy(name=name,
-                                      destination_dir=self.theme_path,
-                                      inherited_theme=inherited_theme)
+        self.theme = TemplateHierarchy(name=name,
+                                       destination_dir=self.theme_path,
+                                       inherited_theme=inherited_theme)
         self.theme.write()
 
     def get_contents(self):
