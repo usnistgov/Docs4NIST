@@ -4,6 +4,7 @@ import pathlib
 
 from .file import File
 from .template import FileTemplate
+from .templatehierarchy import TemplateHiearchy
 
 # By [Lukas](https://stackoverflow.com/users/911441/lukas)
 # [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
@@ -21,10 +22,15 @@ def working_directory(path):
 class ConfFile(File):
     def __init__(self, docs_dir):
         self.docs_dir = pathlib.Path(docs_dir)
+        self.theme = None
 
     @property
     def path(self):
         return self.docs_dir / "conf.py"
+
+    @property
+    def theme_path(self):
+        return self.docs_dir / "_themes"
 
     def read(self):
         # The Sphinx docs says that it
@@ -41,8 +47,27 @@ class ConfFile(File):
 
         return namespace
 
-    def write(self):
-        suffix = FileTemplate(name="conf_suffix.py")
+    def assimilate_theme(self, name):
+        configuration = self.read()
 
-        with self.path.open(mode='a') as f:
-            f.write(suffix.read())
+        inherited_theme = configuration.get("html_theme", "default")
+        self.html_theme_path = configuration.get("html_theme_path", [])
+
+        relative_theme_path = self.theme_path.relative_to(self.docs_dir)
+        if relative_theme_path not in self.html_theme_path:
+            self.html_theme_path.append(relative_theme_path)
+
+        self.theme = TemplateHiearchy(name=name,
+                                      destination_dir=self.theme_path,
+                                      inherited_theme=inherited_theme)
+        self.theme.write()
+
+    def get_contents(self):
+        with self.path.open(mode='r') as f:
+            original_contents = f.read()
+
+        conf_template = FileTemplate(name="conf.py")
+
+        return conf_template.format(original_contents=original_contents,
+                                    html_theme=self.theme.name,
+                                    html_theme_path=self.html_theme_path)
