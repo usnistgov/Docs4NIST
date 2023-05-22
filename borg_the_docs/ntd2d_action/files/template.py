@@ -12,6 +12,7 @@ class Template:
 
 class FileTemplate(Template):
     def __init__(self, name):
+        self.name = name
         # look in templates/ directory adjacent to this file
         self.template_dir = pathlib.Path(__file__).parent / "templates"
         super().__init__(template_path=self.template_dir / name)
