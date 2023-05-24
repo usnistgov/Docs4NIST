@@ -33,6 +33,8 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Set env
       shell: bash
       # In a PR, github.ref_name can be, e.g., `12/merge`,
