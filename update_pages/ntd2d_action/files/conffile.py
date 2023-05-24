@@ -37,7 +37,7 @@ class ConfFile(File):
     @property
     def original_contents(self):
         if self._code is None:
-            with self.path.open(mode='rb') as f:
+            with self.path.open(mode='r') as f:
                 self._code = f.read()
 
         return self._code
