@@ -74,9 +74,6 @@ class ConfFile(File):
     def get_contents(self):
         conf_template = FileTemplate(name="conf.py").read()
 
-        contents = conf_template.format(original_contents=self.original_contents,
+        return conf_template.format(original_contents=self.original_contents,
                                     html_theme=self.theme.name,
                                     html_theme_path=self.html_theme_path)
-
-        gha_utils.error(contents)
-        return contents
