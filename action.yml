@@ -18,6 +18,17 @@ inputs:
     description:
       URL of web server for served documentation.
     default: 'https://pages.nist.gov'
+  build-command:
+    description:
+      The command used to build your documentation.
+    required: false
+    default: make html
+  pre-build-command:
+    description:
+      Run before the build command, you can use this to install system level
+      dependencies, for example with
+      "apt-get update -y && apt-get install -y perl"
+    required: false
 runs:
   using: "composite"
   steps:
@@ -38,6 +49,8 @@ runs:
       name: Build HTML
       with:
         docs-folder: ${{ inputs.docs-folder }}
+        build-command: ${{ inputs.build-command }}
+        pre-build-command:  ${{ inputs.pre-build-command }}
 #       - uses: usnistgov/sphinx-action@master
 #         name: Build ePUB
 #         with:
