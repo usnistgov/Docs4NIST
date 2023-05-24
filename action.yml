@@ -39,8 +39,6 @@ runs:
       shell: bash
       run: |
         echo "::error::version - `python -c 'import versioneer; print(versioneer.get_version())'`"
-        echo "::error::git tag - `git tag`"
-        echo "::error::git log - `git log`"
     - name: Set env
       shell: bash
       # In a PR, github.ref_name can be, e.g., `12/merge`,
