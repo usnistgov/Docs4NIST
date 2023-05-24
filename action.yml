@@ -40,11 +40,11 @@ runs:
       run: |
         refname=${{ github.ref_name }}
         echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
-    - name: Add cruft to theme
-      uses: usnistgov/NISTtheDocs2Death@workhorse
-      with:
-        action: borg_the_docs
-        docs-folder: ${{ inputs.docs-folder }}
+#     - name: Add cruft to theme
+#       uses: usnistgov/NISTtheDocs2Death@workhorse
+#       with:
+#         action: borg_the_docs
+#         docs-folder: ${{ inputs.docs-folder }}
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
