@@ -73,5 +73,5 @@ class ConfFile(File):
                                     html_theme=self.theme.name,
                                     html_theme_path=self.html_theme_path)
 
-        gha_conf.error(contents)
+        gha_utils.error(contents)
         return contents
