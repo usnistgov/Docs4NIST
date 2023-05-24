@@ -67,6 +67,8 @@ class ConfFile(File):
         with self.path.open(mode='r') as f:
             original_contents = f.read()
 
+        gha_utils.error("original_contents:\n" + original_contents)
+
         conf_template = FileTemplate(name="conf.py").read()
 
         contents = conf_template.format(original_contents=original_contents,
