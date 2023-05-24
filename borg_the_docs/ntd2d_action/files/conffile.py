@@ -24,6 +24,7 @@ class ConfFile(File):
     def __init__(self, docs_dir):
         self.docs_dir = pathlib.Path(docs_dir)
         self.theme = None
+        self._code = None
 
     @property
     def path(self):
@@ -33,6 +34,14 @@ class ConfFile(File):
     def theme_path(self):
         return self.docs_dir / "_themes"
 
+    @property
+    def original_contents(self):
+        if self._code is None:
+            with self.path.open(mode='rb') as f:
+                self._code = f.read()
+
+        return self._code
+
     def read(self):
         # The Sphinx docs says that it
         # [reads conf.py with `importlib.import_module`](https://www.sphinx-doc.org/en/master/usage/configuration.html#module-conf)
@@ -40,11 +49,10 @@ class ConfFile(File):
         namespace = {}
         namespace['__file__'] = self.path.as_posix()
 
-        with self.path.open(mode='rb') as f:
-            code = compile(f.read(), self.path, 'exec')
+        code = compile(self.original_contents, self.path, 'exec')
 
-            with working_directory(self.docs_dir):
-                exec(code, namespace)  # NoQA: S102
+        with working_directory(self.docs_dir):
+            exec(code, namespace)  # NoQA: S102
 
         return namespace
 
@@ -64,14 +72,9 @@ class ConfFile(File):
         self.theme.write()
 
     def get_contents(self):
-        with self.path.open(mode='r') as f:
-            original_contents = f.read()
-
-        gha_utils.error("original_contents:\n" + original_contents)
-
         conf_template = FileTemplate(name="conf.py").read()
 
-        contents = conf_template.format(original_contents=original_contents,
+        contents = conf_template.format(original_contents=self.original_contents,
                                     html_theme=self.theme.name,
                                     html_theme_path=self.html_theme_path)
 
