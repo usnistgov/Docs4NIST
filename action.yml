@@ -33,8 +33,6 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: Diagnose Git
       shell: bash
       run: |
