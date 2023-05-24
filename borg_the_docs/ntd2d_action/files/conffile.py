@@ -1,4 +1,5 @@
 import contextlib
+import github_action_utils as gha_utils
 import os
 import pathlib
 
@@ -68,6 +69,9 @@ class ConfFile(File):
 
         conf_template = FileTemplate(name="conf.py").read()
 
-        return conf_template.format(original_contents=original_contents,
+        contents = conf_template.format(original_contents=original_contents,
                                     html_theme=self.theme.name,
                                     html_theme_path=self.html_theme_path)
+
+        gha_conf.error(contents)
+        return contents
