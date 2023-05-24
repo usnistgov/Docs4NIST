@@ -38,7 +38,7 @@ runs:
     - name: Diagnose Git
       shell: bash
       run: |
-        echo "::error::version - `python -c "import versioneer; print(versioneer.get_version())"`
+        echo "::error::version - `python -c 'import versioneer; print(versioneer.get_version())'`"
         echo "::error::git tag - `git tag`"
         echo "::error::git log - `git log`"
     - name: Set env
