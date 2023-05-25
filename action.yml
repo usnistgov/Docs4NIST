@@ -65,6 +65,10 @@ runs:
       with:
         action: borg_the_docs
         docs-folder: ${{ inputs.docs-folder }}
+    - name: What's output?
+      shell: bash
+      run: |
+        echo "::warning::GITHUB_OUTPUT=${GITHUB_OUTPUT}"
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
