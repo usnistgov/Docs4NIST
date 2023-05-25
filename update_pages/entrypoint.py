@@ -25,7 +25,7 @@ def main():
     elif action == 'borg_the_docs':
         completed = subprocess.run(["pwd"], capture_output=True, text=True)
         gha_utils.error("borging pwd: " + completed.stdout)
-        completed = subprocess.run(["ls", "-l"], capture_output=True, text=True)
+        completed = subprocess.run(["ls", "-la"], capture_output=True, text=True)
         gha_utils.error("borging ls: " + completed.stdout)
         completed = subprocess.run(["python", "setup.py", "version"], capture_output=True, text=True)
         gha_utils.error("borging version: " + completed.stdout)
