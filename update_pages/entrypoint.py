@@ -12,9 +12,7 @@ def main():
     action = os.environ['INPUT_ACTION']
 
     if action == 'update_pages':
-        borged_folder = pathlib.Path(os.environ['INPUT_DOCS-FOLDER']).as_posix()
-        borged_folder += "-BORGED"
-        docs = SphinxDocs(docs_dir=borged_folder)
+        docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                           repository=os.environ['GITHUB_REPOSITORY'],
                           branch=os.environ['INPUT_PAGES-BRANCH'],
@@ -24,6 +22,8 @@ def main():
 
         repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
                           sha=os.environ['GITHUB_SHA'])
+
+        gha_utils.set_output("borged-docs-folder", os.environ['INPUT_DOCS-FOLDER'])
     elif action == 'borg_the_docs':
         completed = subprocess.run(["pwd"], capture_output=True, text=True)
         gha_utils.error("borging pwd: " + completed.stdout)
@@ -34,9 +34,9 @@ def main():
         gha_utils.error(completed.stdout)
         gha_utils.error("-"*80)
         gha_utils.error(completed.stderr)
+
         completed = subprocess.run(["python", "setup.py", "version"], capture_output=True, text=True)
         gha_utils.error("borging version: " + completed.stdout)
-
         # Install any packages needed for Sphinx
         # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
         # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
