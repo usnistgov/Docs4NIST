@@ -32,13 +32,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Where are we?
-      shell: bash
-      run: |
-        echo "::error::pwd - `pwd`"
-        echo "::error::ls - `ls -la`"
-        echo "::error::github.workspace = ${{ github.workspace }}"
-        echo "::error::GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -47,11 +40,6 @@ runs:
 #       shell: bash
 #       run: |
 #         git config --global --add safe.directory "$GITHUB_WORKSPACE"
-    - name: Diagnose Git
-      shell: bash
-      run: |
-        python setup.py egg_info
-        echo "::error::version - `python setup.py version`"
     - name: Set env
       shell: bash
       # In a PR, github.ref_name can be, e.g., `12/merge`,
@@ -65,10 +53,6 @@ runs:
       with:
         action: borg_the_docs
         docs-folder: ${{ inputs.docs-folder }}
-    - name: What's output?
-      shell: bash
-      run: |
-        echo "::warning::GITHUB_OUTPUT=`cat ${GITHUB_OUTPUT}`"
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
