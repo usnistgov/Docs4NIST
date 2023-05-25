@@ -18,12 +18,7 @@ def main():
     conf.assimilate_theme(name="ntd2d")
     conf.write()
 
-    gha_utils.warning(f"borged-docs-folder={borged_folder}")
     gha_utils.set_output("borged-docs-folder", borged_folder)
-    gha_utils.warning("post-set_output")
-
-    completed = subprocess.run(["cat", os.environ['GITHUB_OUTPUT']], capture_output=True, text=True)
-    gha_utils.warning("output=" + completed.stdout)
 
 if __name__ == "__main__":
     try:
