@@ -4,3 +4,4 @@
 
 html_theme = "{html_theme}"
 html_theme_path = {html_theme_path}
+exclude_patterns = {exclude_patterns}
