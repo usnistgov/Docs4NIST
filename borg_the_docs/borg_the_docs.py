@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import github_action_utils as gha_utils
 import os
+import shutil
 
 from ntd2d_action.sphinxdocs import SphinxDocs
 from ntd2d_action.files import ConfFile
