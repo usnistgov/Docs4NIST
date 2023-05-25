@@ -42,6 +42,7 @@ runs:
         fetch-depth: 0
 #         set-safe-workspace: $GITHUB_WORKSPACE
     - name: Work around https://github.com/actions/checkout/issues/766
+      shell: bash
       run: |
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
     - name: Diagnose Git
