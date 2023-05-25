@@ -25,24 +25,25 @@ def main():
 
         gha_utils.set_output("borged-docs-folder", os.environ['INPUT_DOCS-FOLDER'])
     elif action == 'borg_the_docs':
-        completed = subprocess.run(["pwd"], capture_output=True, text=True)
-        gha_utils.error("borging pwd: " + completed.stdout)
-        completed = subprocess.run(["ls", "-la"], capture_output=True, text=True)
-        gha_utils.error("borging ls: " + completed.stdout)
-        completed = subprocess.run(["git", "rev-parse", "--git-dir"], capture_output=True, text=True)
-        gha_utils.error("borging git rev-parse: " + completed.stdout + "-"*80)
-        gha_utils.error(completed.stdout)
-        gha_utils.error("-"*80)
-        gha_utils.error(completed.stderr)
+#         completed = subprocess.run(["pwd"], capture_output=True, text=True)
+#         gha_utils.error("borging pwd: " + completed.stdout)
+#         completed = subprocess.run(["ls", "-la"], capture_output=True, text=True)
+#         gha_utils.error("borging ls: " + completed.stdout)
+#         completed = subprocess.run(["git", "rev-parse", "--git-dir"], capture_output=True, text=True)
+#         gha_utils.error("borging git rev-parse: " + completed.stdout + "-"*80)
+#         gha_utils.error(completed.stdout)
+#         gha_utils.error("-"*80)
+#         gha_utils.error(completed.stderr)
+# 
+#         completed = subprocess.run(["python", "setup.py", "version"], capture_output=True, text=True)
+#         gha_utils.error("borging version: " + completed.stdout)
 
-        completed = subprocess.run(["python", "setup.py", "version"], capture_output=True, text=True)
-        gha_utils.error("borging version: " + completed.stdout)
         # Install any packages needed for Sphinx
         # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
         # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
         docs_dir = pathlib.Path(os.environ['INPUT_DOCS-FOLDER'])
         docs_requirements = docs_dir / "requirements.txt"
-        gha_utils.error(f"docs_requirements={docs_requirements}")
+        gha_utils.warning(f"docs_requirements={docs_requirements}")
         if docs_requirements.is_file():
             gha_utils.debug(f"pip installing")
             subprocess.check_call(["pip", "install", "-r", docs_requirements.as_posix()])
@@ -50,6 +51,8 @@ def main():
         # Modify the Sphinx theme
         # This needs to be a subprocess so that it sees packages installed above
         subprocess.check_call(["/borg_the_docs.py"])
+
+        gha_utils.warning(f"AFTER THE FACT")
 
 if __name__ == "__main__":
     main()
