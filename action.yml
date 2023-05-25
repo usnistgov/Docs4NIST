@@ -37,6 +37,8 @@ runs:
       run: |
         echo "::error::pwd - `pwd`"
         echo "::error::ls - `ls -la`"
+        echo "::error::github.workspace = ${{ github.workspace }}"
+        echo "::error::GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
