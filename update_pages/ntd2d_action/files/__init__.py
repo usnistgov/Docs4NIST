@@ -1,4 +1,4 @@
-from .conffile import ConfFile
+from .conffile import ConfFile, ClonedConfFile
 from .indexfile import IndexFile
 from .menufile import MenuFile
 from .nojekyllfile import NoJekyllFile
