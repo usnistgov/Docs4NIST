@@ -68,7 +68,7 @@ runs:
     - name: What's output?
       shell: bash
       run: |
-        echo "::warning::GITHUB_OUTPUT=${GITHUB_OUTPUT}"
+        echo "::warning::GITHUB_OUTPUT=`cat ${GITHUB_OUTPUT}`"
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
