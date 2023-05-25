@@ -20,6 +20,7 @@ def main():
     gha_utils.warning(f"borged-docs-folder={borged_folder}")
     gha_utils.set_output("borged-docs-folder", borged_folder)
     gha_utils.warning("post-set_output")
+    gha_utils.warning(f"output={os.environ['GITHUB_OUTPUT']"}
 
 if __name__ == "__main__":
     try:
