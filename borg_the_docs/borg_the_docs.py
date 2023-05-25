@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import github_action_utils as gha_utils
 import os
+import pathlib
 import shutil
 
 from ntd2d_action.sphinxdocs import SphinxDocs
@@ -8,10 +9,11 @@ from ntd2d_action.files import ConfFile
 
 
 def main():
-    docs_folder_borged = f"{os.environ['INPUT_DOCS-FOLDER']}-BORGED"
-    shutil.copytree(os.environ['INPUT_DOCS-FOLDER'], docs_folder_borged)
+    borged_folder = pathlib.Path(os.environ['INPUT_DOCS-FOLDER']).as_posix()
+    borged_folder += "-BORGED"
+    shutil.copytree(os.environ['INPUT_DOCS-FOLDER'], borged_folder)
 
-    conf = ConfFile(docs_dir=docs_folder_borged)
+    conf = ConfFile(docs_dir=borged_folder)
     conf.assimilate_theme(name="ntd2d")
     conf.write()
 
