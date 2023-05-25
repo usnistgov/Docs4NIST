@@ -12,7 +12,9 @@ def main():
     action = os.environ['INPUT_ACTION']
 
     if action == 'update_pages':
-        docs = SphinxDocs(docs_dir=f"{os.environ['INPUT_DOCS-FOLDER']}-BORGED")
+        borged_folder = pathlib.Path(os.environ['INPUT_DOCS-FOLDER']).as_posix()
+        borged_folder += "-BORGED"
+        docs = SphinxDocs(docs_dir=borged_folder)
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                           repository=os.environ['GITHUB_REPOSITORY'],
                           branch=os.environ['INPUT_PAGES-BRANCH'],
