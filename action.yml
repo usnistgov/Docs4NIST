@@ -48,6 +48,7 @@ runs:
     - name: Diagnose Git
       shell: bash
       run: |
+        python setup.py egg_info
         echo "::error::version - `python setup.py version`"
     - name: Set env
       shell: bash
