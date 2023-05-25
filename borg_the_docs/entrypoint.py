@@ -23,6 +23,8 @@ def main():
         repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
                           sha=os.environ['GITHUB_SHA'])
     elif action == 'borg_the_docs':
+        completed = subprocess.run(["pwd"], capture_output=True, text=True)
+        gha_utils.error("borging pwd: " + completed.stdout)
         completed = subprocess.run(["python", "setup.py", "version"], capture_output=True, text=True)
         gha_utils.error("borging version: " + completed.stdout)
         # Install any packages needed for Sphinx
