@@ -8,7 +8,7 @@ inputs:
     required: true
   docs-folder:
     description:
-      The folder containing your sphinx docs.
+      The folder containing your Sphinx configuration.
     required: true
     default: "docs/"
   default-branch:
@@ -26,6 +26,9 @@ inputs:
       URL of web server for served documentation.
     required: false
     default: 'https://pages.nist.gov'
+outputs:
+  borged-docs-folder:
+    description: 'The folder containing modified Sphinx configuration'
 runs:
   using: "docker"
   image: "Dockerfile"
