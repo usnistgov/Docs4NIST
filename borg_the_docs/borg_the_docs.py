@@ -3,6 +3,7 @@ import github_action_utils as gha_utils
 import os
 import pathlib
 import shutil
+import subprocess
 
 from ntd2d_action.sphinxdocs import SphinxDocs
 from ntd2d_action.files import ConfFile
@@ -20,7 +21,9 @@ def main():
     gha_utils.warning(f"borged-docs-folder={borged_folder}")
     gha_utils.set_output("borged-docs-folder", borged_folder)
     gha_utils.warning("post-set_output")
-    gha_utils.warning(f"output={os.environ['GITHUB_OUTPUT']}")
+
+    completed = subprocess.run(["cat", os.environ['GITHUB_OUTPUT']], capture_output=True, text=True)
+    gha_utils.warning("output=" + completed.stdout)
 
 if __name__ == "__main__":
     try:
