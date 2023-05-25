@@ -27,6 +27,11 @@ def main():
         gha_utils.error("borging pwd: " + completed.stdout)
         completed = subprocess.run(["ls", "-la"], capture_output=True, text=True)
         gha_utils.error("borging ls: " + completed.stdout)
+        completed = subprocess.run(["git", "rev-parse", "--git-dir"], capture_output=True, text=True)
+        gha_utils.error("borging git rev-parse: " + completed.stdout + "-"*80)
+        gha_utils.error(completed.stdout)
+        gha_utils.error("-"*80)
+        gha_utils.error(completed.stderr)
         completed = subprocess.run(["python", "setup.py", "version"], capture_output=True, text=True)
         gha_utils.error("borging version: " + completed.stdout)
         # Install any packages needed for Sphinx
