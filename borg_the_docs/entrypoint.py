@@ -23,6 +23,8 @@ def main():
         repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
                           sha=os.environ['GITHUB_SHA'])
     elif action == 'borg_the_docs':
+        output = subprocess.run(["python", "setup.py", "version"], capture_output=True)
+        gha_utils.error("borging version: " + output)
         # Install any packages needed for Sphinx
         # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
         # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
