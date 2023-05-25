@@ -2,6 +2,7 @@ import contextlib
 import github_action_utils as gha_utils
 import os
 import pathlib
+import shutil
 
 from .file import File
 from .template import FileTemplate
@@ -25,6 +26,25 @@ class ConfFile(File):
         self.docs_dir = pathlib.Path(docs_dir)
         self.theme = None
         self._code = None
+        self._configuration = None
+
+    @property
+    def configuration(self):
+        if self._configuration is None:
+            self._configuration = self.read()
+        return self._configuration
+
+    @property
+    def inherited_theme(self):
+        return self.configuration.get("html_theme", "default")
+
+    @property
+    def html_theme_path(self):
+        return self.configuration.get("html_theme_path", [])
+
+    @property
+    def exclude_patterns(self):
+        return configuration.get("exclude_patterns", [])
 
     @property
     def path(self):
@@ -59,16 +79,13 @@ class ConfFile(File):
     def assimilate_theme(self, name):
         configuration = self.read()
 
-        inherited_theme = configuration.get("html_theme", "default")
-        self.html_theme_path = configuration.get("html_theme_path", [])
-
         relative_path = self.theme_path.relative_to(self.docs_dir).as_posix()
         if relative_path not in self.html_theme_path:
             self.html_theme_path.append(relative_path)
 
         self.theme = TemplateHierarchy(name=name,
                                        destination_dir=self.theme_path,
-                                       inherited_theme=inherited_theme)
+                                       inherited_theme=self.inherited_theme)
         self.theme.write()
 
     def get_contents(self):
@@ -76,4 +93,18 @@ class ConfFile(File):
 
         return conf_template.format(original_contents=self.original_contents,
                                     html_theme=self.theme.name,
-                                    html_theme_path=self.html_theme_path)
+                                    html_theme_path=self.html_theme_path,
+                                    exclude_patterns=self.exclude_patterns)
+
+class ClonedConfFile(ConfFile):
+    def __init__(self, docs_dir):
+        self.original_docs_dir = pathlib.Path(docs_dir)
+        borged_docs_dir = self.original_docs_dir.as_posix() + "-BORGED"
+        shutil.copytree(self.original_docs_dir, borged_docs_dir)
+        super().__init__(docs_dir=borged_docs_dir)
+
+    @property
+    def exclude_patterns(self):
+        exclude_patterns = super().exclude_patterns
+
+        return exclude_patterns + [self.original_docs_dir]
