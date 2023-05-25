@@ -44,7 +44,7 @@ class ConfFile(File):
 
     @property
     def exclude_patterns(self):
-        return configuration.get("exclude_patterns", [])
+        return self.configuration.get("exclude_patterns", [])
 
     @property
     def path(self):
