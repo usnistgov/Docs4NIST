@@ -32,6 +32,11 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Where are we?
+      shell: bash
+      run: |
+        echo "::error::pwd - `pwd`"
+        echo "::error::ls - `ls -la`"
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
