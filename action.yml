@@ -60,6 +60,7 @@ runs:
         refname=${{ github.ref_name }}
         echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
     - name: Add cruft to theme
+      id: borg-the-docs
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
         action: borg_the_docs
@@ -67,23 +68,23 @@ runs:
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
-        docs-folder: ${{ inputs.docs-folder }}
+        docs-folder: ${{ steps.borg-the-docs.borged-docs-folder }}
         build-command: ${{ inputs.build-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
 #       - uses: usnistgov/sphinx-action@master
 #         name: Build ePUB
 #         with:
-#           docs-folder: ${{ inputs.docs-folder }}
+#           docs-folder: ${{ steps.borg-the-docs.borged-docs-folder }}
 #           build-command: make epub
 #       - uses: usnistgov/sphinx-action@latexpdf
 #         name: Build PDF
 #         with:
-#           docs-folder: ${{ inputs.docs-folder }}
+#           docs-folder: ${{ steps.borg-the-docs.borged-docs-folder }}
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@workhorse
       with:
         action: update_pages
-        docs-folder: ${{ inputs.docs-folder }}
+        docs-folder: ${{ steps.borg-the-docs.borged-docs-folder }}
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
         pages-url: ${{ inputs.pages-url }}
@@ -102,9 +103,9 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ inputs.docs-folder }}/_build/html
-#             ${{ inputs.docs-folder }}/_build/epub/*.epub
-#             ${{ inputs.docs-folder }}/_build/latex/${{ github.event.repository.name }}.pdf
+          ${{ steps.borg-the-docs.borged-docs-folder }}/_build/html
+#             ${{ steps.borg-the-docs.borged-docs-folder }}/_build/epub/*.epub
+#             ${{ steps.borg-the-docs.borged-docs-folder }}/_build/latex/${{ github.event.repository.name }}.pdf
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ always() }}
