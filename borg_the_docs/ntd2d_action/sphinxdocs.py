@@ -11,8 +11,3 @@ class SphinxDocs:
     @property
     def html_dir(self):
         return self.docs_dir / "_build" / "html"
-
-    def assimilate_theme(self):
-        conf = ConfFile(docs_dir=self.docs_dir)
-        conf.assimilate_theme(name="ntd2d")
-        conf.write()
