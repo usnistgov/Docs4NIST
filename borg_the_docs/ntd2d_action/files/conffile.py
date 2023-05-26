@@ -107,4 +107,4 @@ class ClonedConfFile(ConfFile):
     def exclude_patterns(self):
         exclude_patterns = super().exclude_patterns
 
-        return exclude_patterns + [self.original_docs_dir]
+        return exclude_patterns + [self.original_docs_dir.as_posix()]
