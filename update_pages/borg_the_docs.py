@@ -11,6 +11,8 @@ def main():
     conf.assimilate_theme(name="ntd2d")
     conf.write()
 
+    gha_utils.warning(str(conf.theme_path.rglob("*")))
+
     gha_utils.set_output("borged-docs-folder", conf.docs_dir.as_posix())
 
 if __name__ == "__main__":
