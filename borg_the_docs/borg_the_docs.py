@@ -7,7 +7,11 @@ from ntd2d_action.files import ClonedConfFile
 
 
 def main():
-    conf = ClonedConfFile(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+    if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
+        conf = ClonedConfFile(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
+                              source_rel="source")
+    else:
+        conf = ClonedConfFile(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
     conf.assimilate_theme(name="ntd2d")
     conf.write()
 
