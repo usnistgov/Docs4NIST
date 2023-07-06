@@ -11,7 +11,7 @@ def main():
     # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
     source_dir = pathlib.Path(os.environ['INPUT_DOCS-FOLDER'])
     if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
-        source_dir = source_dir / "source"
+        source_dir = docs_dir / "source"
     docs_requirements = source_dir / "requirements.txt"
     if docs_requirements.is_file():
         gha_utils.debug(f"pip installing")
