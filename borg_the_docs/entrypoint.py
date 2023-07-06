@@ -9,8 +9,10 @@ def main():
     # Install any packages needed for Sphinx
     # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
     # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
-    docs_dir = pathlib.Path(os.environ['INPUT_DOCS-FOLDER'])
-    docs_requirements = docs_dir / "requirements.txt"
+    source_dir = pathlib.Path(os.environ['INPUT_DOCS-FOLDER'])
+    if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
+        source_dir = docs_dir / "source"
+    docs_requirements = source_dir / "requirements.txt"
     if docs_requirements.is_file():
         gha_utils.debug(f"pip installing")
         subprocess.check_call(["pip", "install", "-r", docs_requirements.as_posix()])
