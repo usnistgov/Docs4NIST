@@ -60,7 +60,7 @@ runs:
         fi
     - name: Add cruft to theme
       id: borg-the-docs
-      uses: usnistgov/NISTtheDocs2Death@borg-the-docs
+      uses: usnistgov/NISTtheDocs2Death@borg_the_docs
       with:
         docs-folder: ${{ inputs.docs-folder }}
         separated-layout: ${{ inputs.separated-layout }}
