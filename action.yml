@@ -60,9 +60,8 @@ runs:
         fi
     - name: Add cruft to theme
       id: borg-the-docs
-      uses: usnistgov/NISTtheDocs2Death@workhorse
+      uses: usnistgov/NISTtheDocs2Death@borg-the-docs
       with:
-        action: borg_the_docs
         docs-folder: ${{ inputs.docs-folder }}
         separated-layout: ${{ inputs.separated-layout }}
     - uses: usnistgov/sphinx-action@master
@@ -81,9 +80,8 @@ runs:
 #         with:
 #           docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
     - name: Commit documentation changes
-      uses: usnistgov/NISTtheDocs2Death@workhorse
+      uses: usnistgov/NISTtheDocs2Death@update_pages
       with:
-        action: update_pages
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         separated-layout: ${{ inputs.separated-layout }}
         default-branch: ${{ github.event.repository.default_branch }}
