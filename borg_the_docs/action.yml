@@ -11,6 +11,11 @@ inputs:
       The folder containing your Sphinx configuration.
     required: true
     default: "docs/"
+  separated-layout:
+    description:
+      Whether sphinx docs have separate source and build directories.
+    required: true
+    default: false
   default-branch:
     description:
       The default branch configured in GitHub.

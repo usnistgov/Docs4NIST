@@ -23,6 +23,8 @@ def main():
         repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
                           sha=os.environ['GITHUB_SHA'])
 
+        gha_utils.warning(f"separated-layout = {os.environ['INPUT_SEPARATED-LAYOUT']}")
+
         gha_utils.set_output("borged-docs-folder", os.environ['INPUT_DOCS-FOLDER'])
     elif action == 'borg_the_docs':
         # Install any packages needed for Sphinx
@@ -33,6 +35,8 @@ def main():
         if docs_requirements.is_file():
             gha_utils.debug(f"pip installing")
             subprocess.check_call(["pip", "install", "-r", docs_requirements.as_posix()])
+
+        gha_utils.warning(f"separated-layout = {os.environ['INPUT_SEPARATED-LAYOUT']}")
 
         # Modify the Sphinx theme
         # This needs to be a subprocess so that it sees packages installed above
