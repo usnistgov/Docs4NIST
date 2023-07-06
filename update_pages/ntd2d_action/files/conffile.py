@@ -22,8 +22,9 @@ def working_directory(path):
         os.chdir(prev_cwd)
 
 class ConfFile(File):
-    def __init__(self, source_dir):
-        self.source_dir = pathlib.Path(source_dir)
+    def __init__(self, docs_dir, source_rel=""):
+        self.docs_dir = pathlib.Path(docs_dir)
+        self.source_dir = self.docs_dir / source_rel
         self.theme = None
         self._code = None
         self._configuration = None
@@ -104,7 +105,7 @@ class ClonedConfFile(ConfFile):
         borged_docs_dir = self.original_docs_dir.as_posix() + "-BORGED"
         borged_docs_dir = pathlib.Path(borged_docs_dir)
         shutil.copytree(self.original_docs_dir, borged_docs_dir)
-        super().__init__(source_dir=borged_docs_dir / source_rel)
+        super().__init__(docs_dir=borged_docs_dir, source_rel=source_rel)
 
     @property
     def exclude_patterns(self):
