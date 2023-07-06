@@ -2,7 +2,6 @@
 import github_action_utils as gha_utils
 import os
 
-from ntd2d_action.sphinxdocs import SphinxDocs
 from ntd2d_action.files import ClonedConfFile
 
 
