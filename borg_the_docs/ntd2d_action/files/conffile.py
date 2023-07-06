@@ -40,7 +40,13 @@ class ConfFile(File):
 
     @property
     def html_theme_path(self):
-        return self.configuration.get("html_theme_path", [])
+        html_theme_path = self.configuration.get("html_theme_path", [])
+
+        relative_path = self.theme_path.relative_to(self.docs_dir).as_posix()
+        if relative_path not in self.html_theme_path:
+            html_theme_path.append(relative_path)
+
+        return html_theme_path
 
     @property
     def exclude_patterns(self):
@@ -78,10 +84,6 @@ class ConfFile(File):
 
     def assimilate_theme(self, name):
         configuration = self.read()
-
-        relative_path = self.theme_path.relative_to(self.docs_dir).as_posix()
-        if relative_path not in self.html_theme_path:
-            self.html_theme_path.append(relative_path)
 
         self.theme = TemplateHierarchy(name=name,
                                        destination_dir=self.theme_path,
