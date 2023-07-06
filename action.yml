@@ -52,6 +52,11 @@ runs:
       run: |
         refname=${{ github.ref_name }}
         echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
+        if ${{ inputs.separated-layout }}
+            echo "BUILD_DIR=build" >> $GITHUB_ENV
+        else:
+            echo "BUILD_DIR=_build" >> $GITHUB_ENV
+        fi
     - name: Add cruft to theme
       id: borg-the-docs
       uses: usnistgov/NISTtheDocs2Death@workhorse
@@ -98,20 +103,9 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/_build/html
-#             ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/_build/epub/*.epub
-#             ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/_build/latex/${{ github.event.repository.name }}.pdf
+          ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/html
+#             ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/epub/*.epub
+#             ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/latex/${{ github.event.repository.name }}.pdf
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
-      if: ${{ always() && !inputs.separated-layout }}
-    - uses: actions/upload-artifact@v3
-      name: Upload Documentation Artifacts
-      with:
-        name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
-        path: |
-          ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/build/html
-#             ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/build/epub/*.epub
-#             ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/build/latex/${{ github.event.repository.name }}.pdf
-      # Use always() to always run this step to publish documentation
-      # artifacts even when there are failures
-      if: ${{ always() && inputs.separated-layout }}
+      if: ${{ always() }}
