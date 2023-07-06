@@ -1,9 +1,9 @@
-# NISTtheDocs2Death Action
+# `NISTtheDocs2Death`: `update_pages` Action
 
 This is a ***branch*** of a GitHub action that uses sphinx to build documentation and then
 host on <https://pages.nist.gov> as an approximation of
 [ReadTheDocs](https://readthedocs.org). This branch is invoked by the `main` 
-branch when it calls the following steps within its composite action:
+branch when it calls the following step within its composite action:
 
 ```yaml
 runs:
@@ -11,18 +11,11 @@ runs:
   steps:
     :
     :
-    - name: Modify documentation
-      uses: usnistgov/NISTtheDocs2Death@workhorse
-      with:
-        action: borg_the_docs
-        docs-folder: ${{ inputs.docs-folder }}
-    :
-    :
     - name: Commit documentation changes
-      uses: usnistgov/NISTtheDocs2Death@workhorse
+      uses: usnistgov/NISTtheDocs2Death@update_pages
       with:
-        action: update_pages
         docs-folder: ${{ inputs.docs-folder }}
+        separated-layout: ${{ inputs.separated-layout }}
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
         pages-url: ${{ inputs.pages-url }}
@@ -30,20 +23,8 @@ runs:
     :
 ```
 
-## Sub-actions
-
-This workflow takes an `action` parameter:
-
-- `borg_the_docs`
-
-    Modifies the [Sphinx configuration file]() with an [inherited theme]().
-    This theme adds a version pop-up menu and a NIST header and footer to
-    every page.
-  
-- `update_pages`
-
-    Adds built documentation for the specified branch to the `nist-pages` 
-    branch.
+This action adds built documentation for the specified branch to the `nist-pages`
+branch.
 
 ## Design
 
