@@ -43,7 +43,7 @@ class ConfFile(File):
         html_theme_path = self.configuration.get("html_theme_path", [])
 
         relative_path = self.theme_path.relative_to(self.docs_dir).as_posix()
-        if relative_path not in self.html_theme_path:
+        if relative_path not in html_theme_path:
             html_theme_path.append(relative_path)
 
         return html_theme_path
