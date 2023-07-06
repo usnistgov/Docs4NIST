@@ -53,8 +53,9 @@ runs:
         refname=${{ github.ref_name }}
         echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
         if ${{ inputs.separated-layout }}
+        then
             echo "BUILD_DIR=build" >> $GITHUB_ENV
-        else:
+        else
             echo "BUILD_DIR=_build" >> $GITHUB_ENV
         fi
     - name: Add cruft to theme
