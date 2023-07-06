@@ -12,7 +12,12 @@ def main():
     action = os.environ['INPUT_ACTION']
 
     if action == 'update_pages':
-        docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+        if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
+            docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
+                              build_rel="build")
+        else:
+            docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
+                              build_rel="_build")
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                           repository=os.environ['GITHUB_REPOSITORY'],
                           branch=os.environ['INPUT_PAGES-BRANCH'],

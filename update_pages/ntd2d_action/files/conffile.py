@@ -22,8 +22,8 @@ def working_directory(path):
         os.chdir(prev_cwd)
 
 class ConfFile(File):
-    def __init__(self, docs_dir):
-        self.docs_dir = pathlib.Path(docs_dir)
+    def __init__(self, source_dir):
+        self.source_dir = pathlib.Path(source_dir)
         self.theme = None
         self._code = None
         self._configuration = None
@@ -42,7 +42,7 @@ class ConfFile(File):
     def html_theme_path(self):
         html_theme_path = self.configuration.get("html_theme_path", [])
 
-        relative_path = self.theme_path.relative_to(self.docs_dir).as_posix()
+        relative_path = self.theme_path.relative_to(self.source_dir).as_posix()
         if relative_path not in html_theme_path:
             html_theme_path.append(relative_path)
 
@@ -54,11 +54,11 @@ class ConfFile(File):
 
     @property
     def path(self):
-        return self.docs_dir / "conf.py"
+        return self.source_dir / "conf.py"
 
     @property
     def theme_path(self):
-        return self.docs_dir / "_themes"
+        return self.source_dir / "_themes"
 
     @property
     def original_contents(self):
@@ -77,7 +77,7 @@ class ConfFile(File):
 
         code = compile(self.original_contents, self.path, 'exec')
 
-        with working_directory(self.docs_dir):
+        with working_directory(self.source_dir):
             exec(code, namespace)  # NoQA: S102
 
         return namespace
@@ -99,11 +99,12 @@ class ConfFile(File):
                                     exclude_patterns=self.exclude_patterns)
 
 class ClonedConfFile(ConfFile):
-    def __init__(self, docs_dir):
+    def __init__(self, docs_dir, source_rel=""):
         self.original_docs_dir = pathlib.Path(docs_dir)
         borged_docs_dir = self.original_docs_dir.as_posix() + "-BORGED"
+        borged_docs_dir = pathlib.Path(borged_docs_dir)
         shutil.copytree(self.original_docs_dir, borged_docs_dir)
-        super().__init__(docs_dir=borged_docs_dir)
+        super().__init__(source_dir=borged_docs_dir / source_rel)
 
     @property
     def exclude_patterns(self):
