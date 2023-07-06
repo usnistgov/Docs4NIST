@@ -14,9 +14,6 @@ def main():
     for path in conf.theme_path.rglob("*"):
         gha_utils.warning(path)
 
-    with open(conf.theme_path / "ntd2d" / "theme.conf", mode='r') as theme:
-        gha_utils.warning(theme.read())
-
     gha_utils.set_output("borged-docs-folder", conf.docs_dir.as_posix())
 
 if __name__ == "__main__":
