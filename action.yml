@@ -94,8 +94,9 @@ runs:
     - name: DEBUG
       shell: bash
       run: |
-        echo "::warning::github.event.pull_request.head.repo.full_name=${{ github.event.pull_request.head.repo.full_name }}
-        echo "::warning::github.repository=${{ github.repository }}
+        echo "::warning::github.event_name=${{ github.event_name }}"
+        echo "::warning::github.event.pull_request.head.repo.full_name=${{ github.event.pull_request.head.repo.full_name }}"
+        echo "::warning::github.repository=${{ github.repository }}"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
@@ -104,7 +105,11 @@ runs:
         github_token: ${{ github.token }}
       # Pull requests from forked repos don't have permissions
       # to push back to pages-branch
-      if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+      if: >-
+        (
+          github.event_name != 'pull_request'
+          || github.event.pull_request.head.repo.full_name == github.repository
+        )
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
