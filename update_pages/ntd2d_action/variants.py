@@ -50,8 +50,9 @@ class Version(Variant):
             return super().__lt__(other)
 
 class VariantCollection:
-    def __init__(self, repo):
+    def __init__(self, repo, current_variant):
         self.repo = repo
+        self.current_variant = current_variant
 
         self.html_dir = repo.working_dir / "html"
 
@@ -132,7 +133,8 @@ class VariantCollection:
             if variant.name in ["latest", "stable"]:
                 continue
 
-            if (variant.name not in sanitize(self.repo.refs)
+            if (variant != self.current_variant
+                and variant.name not in sanitize(self.repo.refs)
                 and variant.name not in sanitize(self.repo.origin.refs)):
                 # This variant has been removed from the repository,
                 # so remove the corresponding docs

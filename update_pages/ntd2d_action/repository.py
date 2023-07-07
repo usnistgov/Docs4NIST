@@ -64,7 +64,7 @@ class Repository:
 
         variant.copy_dir(src=self.docs.html_dir)
 
-        VariantCollection(repo=self).write_files(pages_url=self.pages_url)
+        VariantCollection(repo=self, current_variant=variant).write_files(pages_url=self.pages_url)
 
         self.commit(message=f"Update documentation for {branch}@{sha[:7]}")
 
