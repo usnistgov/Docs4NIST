@@ -39,7 +39,7 @@ runs:
   steps:
     - name: permissions
       shell: bash
-      run: echo "::warning file=blah,line=1,col=999,endColumn=1234::token permissions = ${{ github.token.permissions }}"
+      run: echo "::warning::token permissions = ${{ github.token }}"
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
