@@ -133,7 +133,7 @@ class VariantCollection:
             if variant.name in ["latest", "stable"]:
                 continue
 
-            if (variant != self.current_variant
+            if (variant.name != self.current_variant.name
                 and variant.name not in sanitize(self.repo.refs)
                 and variant.name not in sanitize(self.repo.origin.refs)):
                 # This variant has been removed from the repository,
