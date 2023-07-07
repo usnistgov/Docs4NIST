@@ -91,6 +91,11 @@ runs:
       shell: bash
       run: |
         sudo chown -R runner:docker __nist-pages
+    - name: DEBUG
+      shell: bash
+      run: |
+        echo "::warning::github.event.pull_request.head.repo.full_name=${{ github.event.pull_request.head.repo.full_name }}
+        echo "::warning::github.repository=${{ github.repository }}
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
