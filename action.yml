@@ -37,9 +37,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: permissions
-      shell: bash
-      run: echo "::warning::token permissions = ${{ github.token }}"
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -100,6 +97,9 @@ runs:
         branch: ${{ inputs.pages-branch }}
         directory: __nist-pages
         github_token: ${{ github.token }}
+      # Pull requests from forked repos don't have permissions
+      # to push back to pages-branch
+      if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
