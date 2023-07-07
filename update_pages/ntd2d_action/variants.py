@@ -104,7 +104,10 @@ class VariantCollection:
             In a PR, refs can be, e.g., `12/merge`,
             which causes downstream grief.
             """
-            return [ref.name.replace("/", "_") for ref in refs]
+            sanitized = [ref.name.replace("/", "_") for ref in refs]
+            for name in sanitized:
+                gha_utils.warning(name)
+            return sanitized
 
         gha_utils.start_group("VariantCollection._calc_branches_and_versions")
 
@@ -133,7 +136,7 @@ class VariantCollection:
                 and variant.name not in sanitize(self.repo.origin.refs)):
                 # This variant has been removed from the repository,
                 # so remove the corresponding docs
-                gha_utils.debug(f"Deleting")
+                gha_utils.warning(f"Deleting {variant.name}")
                 variant.rmdir()
             elif isinstance(variant, Version):
                 gha_utils.debug(f"Appending version")
