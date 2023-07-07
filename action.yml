@@ -41,10 +41,6 @@ runs:
       with:
         fetch-depth: 0
         set-safe-directory: /github/workspace
-#     - name: Work around https://github.com/actions/checkout/issues/766
-#       shell: bash
-#       run: |
-#         git config --global --add safe.directory "$GITHUB_WORKSPACE"
     - name: Set env
       shell: bash
       # In a PR, github.ref_name can be, e.g., `12/merge`,
@@ -91,12 +87,6 @@ runs:
       shell: bash
       run: |
         sudo chown -R runner:docker __nist-pages
-    - name: DEBUG
-      shell: bash
-      run: |
-        echo "::warning::github.event_name=${{ github.event_name }}"
-        echo "::warning::github.event.pull_request.head.repo.full_name=${{ github.event.pull_request.head.repo.full_name }}"
-        echo "::warning::github.repository=${{ github.repository }}"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
