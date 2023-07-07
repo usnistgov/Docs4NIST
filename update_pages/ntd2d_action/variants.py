@@ -104,7 +104,7 @@ class VariantCollection:
             In a PR, refs can be, e.g., `12/merge`,
             which causes downstream grief.
             """
-            return [ref.replace("/", "_") for ref in refs]
+            return [ref.name.replace("/", "_") for ref in refs]
 
         gha_utils.start_group("VariantCollection._calc_branches_and_versions")
 
