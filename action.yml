@@ -91,20 +91,20 @@ runs:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-html-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ inputs.build-html }}
+      if: ${{ inputs.build-html == 'true'  }}
     - uses: usnistgov/sphinx-action@master
       name: Build ePUB
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-epub-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ inputs.build-epub }}
+      if: ${{ inputs.build-epub == 'true' }}
     - uses: usnistgov/sphinx-action@latexpdf
       name: Build PDF
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ inputs.build-pdf }}
+      if: ${{ inputs.build-pdf == 'true' }}
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@update_pages
       with:
@@ -125,6 +125,7 @@ runs:
         github_token: ${{ github.token }}
       # Pull requests from forked repos don't have permissions
       # to push back to pages-branch
+      # https://github.com/orgs/community/discussions/26829
       if: >-
         (
           github.event_name != 'pull_request'
