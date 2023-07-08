@@ -103,6 +103,7 @@ runs:
       name: Build PDF
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
+        build-command: ${{ inputs.build-pdf-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
       if: ${{ inputs.build-pdf == 'true' }}
     - name: Commit documentation changes
