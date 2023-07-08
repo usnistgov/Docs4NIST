@@ -23,11 +23,36 @@ inputs:
     description:
       URL of web server for served documentation.
     default: 'https://pages.nist.gov'
-  build-command:
+  build-html:
     description:
-      The command used to build your documentation.
+      Whether to build html docs
+    required: true
+    default: true
+  build-html-command:
+    description:
+      The command used to build your html documentation.
     required: false
     default: make html
+  build-epub:
+    description:
+      Whether to build ePUB docs
+    required: true
+    default: false
+  build-epub-command:
+    description:
+      The command used to build your ePUB documentation.
+    required: false
+    default: make epub
+  build-pdf:
+    description:
+      Whether to build PDF docs
+    required: true
+    default: false
+  build-pdf-command:
+    description:
+      The command used to build your PDF documentation.
+    required: false
+    default: make latexpdf
   pre-build-command:
     description:
       Run before the build command, you can use this to install system level
@@ -64,17 +89,22 @@ runs:
       name: Build HTML
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
-        build-command: ${{ inputs.build-command }}
+        build-command: ${{ inputs.build-html-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-#       - uses: usnistgov/sphinx-action@master
-#         name: Build ePUB
-#         with:
-#           docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
-#           build-command: make epub
-#       - uses: usnistgov/sphinx-action@latexpdf
-#         name: Build PDF
-#         with:
-#           docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
+      if: ${{ inputs.build-html }}
+    - uses: usnistgov/sphinx-action@master
+      name: Build ePUB
+      with:
+        docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
+        build-command: ${{ inputs.build-epub-command }}
+        pre-build-command:  ${{ inputs.pre-build-command }}
+      if: ${{ inputs.build-epub }}
+    - uses: usnistgov/sphinx-action@latexpdf
+      name: Build PDF
+      with:
+        docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
+        pre-build-command:  ${{ inputs.pre-build-command }}
+      if: ${{ inputs.build-pdf }}
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@update_pages
       with:
