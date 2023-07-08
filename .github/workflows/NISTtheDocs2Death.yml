@@ -11,3 +11,4 @@ jobs:
           docs-folder: docs/
           build-html: true
           build-epub: true
+          build-pdf: true
