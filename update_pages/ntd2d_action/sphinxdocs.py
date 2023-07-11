@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import pathlib
 
-from .conffile import ConfFile
+from .files import ConfFile
 
 
 class SphinxDocs:
