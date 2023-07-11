@@ -112,17 +112,6 @@ class VariantCollection:
                 if not version.version.is_prerelease]
 
     def _calc_branches_and_versions(self):
-        def sanitize(refs):
-            """Replace slashes in ref names
-
-            In a PR, refs can be, e.g., `12/merge`,
-            which causes downstream grief.
-            """
-            sanitized = [ref.name.replace("/", "_") for ref in refs]
-            for old, new in zip(refs, sanitized):
-                gha_utils.debug(f"sanitized: {old} -> {new}")
-            return sanitized
-
         gha_utils.start_group("VariantCollection._calc_branches_and_versions")
 
         names = [variant.name for variant in self.html_dir.glob("*")]
@@ -148,10 +137,16 @@ class VariantCollection:
 
             gha_utils.debug(f"variant.name = {variant.name}")
             gha_utils.debug(f"self.current_variant.name = {self.current_variant.name}")
+            gha_utils.debug(f"self.repo.refs")
+            for ref in self.repo.refs:
+                gha_utils.debug(f"...{ref}")
+            gha_utils.debug(f"sself.repo.origin.refs")
+            for ref in self.repo.origin.refs:
+                gha_utils.debug(f"...{ref}")
 
             if (variant.name != self.current_variant.name
-                and variant.name not in sanitize(self.repo.refs)
-                and variant.name not in sanitize(self.repo.origin.refs)):
+                and variant.name not in self.repo.refs
+                and variant.name not in self.repo.origin.refs):
                 # This variant has been removed from the repository,
                 # so remove the corresponding docs
                 gha_utils.debug(f"Deleting {variant.name}")
