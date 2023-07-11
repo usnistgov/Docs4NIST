@@ -16,15 +16,28 @@ class Variant:
         self.repo.remove(self.dir.as_posix(), working_tree=True,
                          r=True, ignore_unmatch=True)
 
-    def copy_dir(self, src):
+    def copy_dir(self, src, dst):
         # remove any previous directory of that name
         self.rmdir()
-        shutil.copytree(src, self.dir)
-        self.repo.add(self.dir.as_posix())
+        shutil.copytree(src, dst)
+        self.repo.add(dst.as_posix())
+
+    def copy_html(self, src):
+        self.copy_dir(src=src, dst=self.dir)
+
+    def copy_file(self, src, dst):
+        # ensure dst exists
+        # copy src into dst
+        # self.repo.add(file in dst.as_posix())
+        pass
+
+    def copy_static_file(self, src):
+        self.copy_file(src=src, dst=self.dir / "_static")
 
     def clone(self, name):
         clone = Variant(repo=self.repo, name=name)
-        clone.copy_dir(src=self.dir)
+        # this will clone any files in _static, too
+        clone.copy_html(src=self.dir)
 
         return clone
 

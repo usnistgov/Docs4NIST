@@ -10,3 +10,11 @@ class SphinxDocs:
     @property
     def html_dir(self):
         return self.build_dir / "html"
+
+    @property
+    def epub_file(self):
+        return self.build_dir / "epub" / ???.epub
+
+    @property
+    def pdf_file(self):
+        return self.build_dir / "latex" / ???.pdf
