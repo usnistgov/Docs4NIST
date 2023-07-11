@@ -7,11 +7,13 @@ from ntd2d_action.sphinxdocs import SphinxDocs
 
 def main():
     if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
-        docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
-                          build_rel="build")
+        build_rel = "build"
     else:
-        docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
-                          build_rel="_build")
+        build_rel = "_build"
+
+    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
+                      build_rel=build_rel)
+
     repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                       repository=os.environ['GITHUB_REPOSITORY'],
                       branch=os.environ['INPUT_PAGES-BRANCH'],
