@@ -118,7 +118,10 @@ class VariantCollection:
             In a PR, refs can be, e.g., `12/merge`,
             which causes downstream grief.
             """
-            return [ref.name.replace("/", "_") for ref in refs]
+            sanitized = [ref.name.replace("/", "_") for ref in refs]
+            for old, new in zip(refs, sanitized):
+                gha_utils.debug(f"sanitized: {old} -> {new}")
+            return sanitized
 
         gha_utils.start_group("VariantCollection._calc_branches_and_versions")
 
@@ -142,6 +145,9 @@ class VariantCollection:
 
             if variant.name in ["latest", "stable"]:
                 continue
+
+            gha_utils.debug(f"variant.name = {variant.name}")
+            gha_utils.debug(f"self.current_variant.name = {self.current_variant.name}")
 
             if (variant.name != self.current_variant.name
                 and variant.name not in sanitize(self.repo.refs)
