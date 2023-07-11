@@ -52,6 +52,10 @@ class ConfFile(File):
         return self.source_dir / "conf.py"
 
     @property
+    def project(self):
+        return self.configuration.project
+
+    @property
     def theme_path(self):
         return self.source_dir / "_themes"
 
