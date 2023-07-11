@@ -1,1 +1,1 @@
-from .conffile import ClonedConfFile
+from .borgedconffile import BorgedConfFile

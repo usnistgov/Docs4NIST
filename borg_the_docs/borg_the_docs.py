@@ -2,15 +2,17 @@
 import github_action_utils as gha_utils
 import os
 
-from ntd2d_action.files import ClonedConfFile
+from ntd2d_action.files import BorgedConfFile
 
 
 def main():
     if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
-        conf = ClonedConfFile(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
-                              source_rel="source")
+        source_rel = "source"
     else:
-        conf = ClonedConfFile(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+        source_rel = ""
+
+    conf = BorgedConfFile(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
+                          source_rel=source_rel)
     conf.assimilate_theme(name="ntd2d")
     conf.write()
 
