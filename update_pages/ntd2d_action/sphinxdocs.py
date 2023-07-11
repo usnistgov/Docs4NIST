@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import pathlib
 
+from .conffile import ConfFile
+
 
 class SphinxDocs:
     def __init__(self, docs_dir):
