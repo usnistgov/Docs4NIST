@@ -26,10 +26,9 @@ class Variant:
         self.copy_dir(src=src, dst=self.dir)
 
     def copy_file(self, src, dst):
-        # ensure dst exists
-        # copy src into dst
-        # self.repo.add(file in dst.as_posix())
-        pass
+        os.makedirs(dst, exist_ok=True)
+        shutil.copy2(src, dst)
+        self.repo.add((dst / src.name).as_posix())
 
     def copy_static_file(self, src):
         self.copy_file(src=src, dst=self.dir / "_static")

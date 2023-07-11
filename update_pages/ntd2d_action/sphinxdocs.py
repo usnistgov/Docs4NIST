@@ -19,7 +19,7 @@ class SphinxDocs:
 
     @property
     def pdf_file(self):
-        return self.build_dir / "latex" / f"{self.conf.project.tolower()}.pdf"
+        return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
 
 class SeparatedSphinxDocs(SphinxDocs):
     build_rel = "build"
