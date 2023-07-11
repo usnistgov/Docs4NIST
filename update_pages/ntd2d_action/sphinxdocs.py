@@ -3,9 +3,9 @@ import pathlib
 
 
 class SphinxDocs:
-    def __init__(self, docs_dir, build_rel):
+    def __init__(self, docs_dir):
         self.docs_dir = pathlib.Path(docs_dir)
-        self.build_dir = self.docs_dir / build_rel
+        self.build_dir = self.docs_dir / self.build_rel
 
     @property
     def html_dir(self):
@@ -18,3 +18,11 @@ class SphinxDocs:
     @property
     def pdf_file(self):
         return self.build_dir / "latex" / ???.pdf
+
+class SeparatedSphinxDocs(SphinxDocs):
+    build_rel = "build"
+    source_rel = "source"
+
+class UnifiedSphinxDocs(SphinxDocs):
+    build_rel = "_build"
+    source_rel = ""

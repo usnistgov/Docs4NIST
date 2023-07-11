@@ -2,17 +2,14 @@
 import os
 
 from ntd2d_action.repository import Repository
-from ntd2d_action.sphinxdocs import SphinxDocs
+from ntd2d_action.sphinxdocs import SeparatedSphinxDocs, UnifiedSphinxDocs
 
 
 def main():
     if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
-        build_rel = "build"
+        docs = SeparatedSphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
     else:
-        build_rel = "_build"
-
-    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
-                      build_rel=build_rel)
+        docs = UnifiedSphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
 
     repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                       repository=os.environ['GITHUB_REPOSITORY'],
