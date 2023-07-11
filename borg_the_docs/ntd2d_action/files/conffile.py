@@ -48,6 +48,14 @@ class ConfFile(File):
         return self.configuration.get("exclude_patterns", [])
 
     @property
+    def original_contents(self):
+        if self._code is None:
+            with self.path.open(mode='r') as f:
+                self._code = f.read()
+
+        return self._code
+
+    @property
     def path(self):
         return self.source_dir / "conf.py"
 
@@ -74,8 +82,4 @@ class ConfFile(File):
         return namespace
 
     def get_contents(self):
-        if self._code is None:
-            with self.path.open(mode='r') as f:
-                self._code = f.read()
-
-        return self._code
+        return self.original_contents
