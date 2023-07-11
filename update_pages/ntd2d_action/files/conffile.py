@@ -61,7 +61,7 @@ class ConfFile(File):
 
     @property
     def project(self):
-        return self.configuration.project
+        return self.configuration["project"]
 
     @property
     def theme_path(self):
