@@ -9,7 +9,7 @@ jobs:
       - uses: usnistgov/NISTtheDocs2Death@main
         with:
           docs-folder: docs/
-          build-html: true
-          build-epub: true
-          build-pdf: true
-
+          formats: |-
+            html
+            epub
+            pdf

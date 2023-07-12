@@ -21,4 +21,14 @@ host on <https://pages.nist.gov> as an approximation of
           - uses: usnistgov/NISTtheDocs2Death@main
             with:
               docs-folder: docs/
+              formats: |-
+                html
+                epub
+                pdf
     ```
+
+**Note:**
+[GitHub Actions' YAML implementation does not support list or array](https://github.com/actions/toolkit/issues/184)
+elements, so
+[use a multiline string](https://stackoverflow.com/questions/75420197/how-to-use-array-input-for-a-custom-github-actions)
+to declare formats.

@@ -27,31 +27,21 @@ inputs:
     description:
       URL of web server for served documentation.
     default: 'https://pages.nist.gov'
-  build-html:
+  formats:
     description:
-      Whether to build html docs
+      Type(s) of output desired ('html', 'pdf', and/or 'epub')
     required: true
-    default: true
+    default: html
   build-html-command:
     description:
       The command used to build your html documentation.
     required: false
     default: make html
-  build-epub:
-    description:
-      Whether to build ePUB docs
-    required: true
-    default: false
   build-epub-command:
     description:
       The command used to build your ePUB documentation.
     required: false
     default: make epub
-  build-pdf:
-    description:
-      Whether to build PDF docs
-    required: true
-    default: false
   build-pdf-command:
     description:
       The command used to build your PDF documentation.
@@ -95,21 +85,21 @@ runs:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-html-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ inputs.build-html == 'true'  }}
+      if: ${{ contains(inputs.formats, 'html' }}
     - uses: usnistgov/sphinx-action@master
       name: Build ePUB
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-epub-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ inputs.build-epub == 'true' }}
+      if: ${{ contains(inputs.formats, 'epub' }}
     - uses: usnistgov/sphinx-action@latexpdf
       name: Build PDF
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-pdf-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ inputs.build-pdf == 'true' }}
+      if: ${{ contains(inputs.formats, 'pdf' }}
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@update_pages
       with:
@@ -144,7 +134,7 @@ runs:
           ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/html
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
-      if: ${{ inputs.build-html == 'true' && always() }}
+      if: ${{ contains(inputs.formats, 'html') && always() }}
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
@@ -153,7 +143,7 @@ runs:
           ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/epub/*.epub
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
-      if: ${{ inputs.build-epub == 'true' && always() }}
+      if: ${{ contains(inputs.formats, 'epub') && always() }}
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
@@ -162,4 +152,4 @@ runs:
           ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/latex/${{ github.event.repository.name }}.pdf
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
-      if: ${{ inputs.build-pdf == 'true' && always() }}
+      if: ${{ contains(inputs.formats, 'pdf') && always() }}
