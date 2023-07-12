@@ -4,6 +4,10 @@ name: NISTtheDocs2Death
 description: Deploys Sphinx-built documentation to https://pages.nist.gov
 author: Jonathan Guyer
 
+branding:
+  icon: book
+  color: blue
+
 inputs:
   docs-folder:
     description:
