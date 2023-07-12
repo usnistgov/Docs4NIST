@@ -85,21 +85,21 @@ runs:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-html-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ contains(inputs.formats, 'html' }}
+      if: ${{ contains(inputs.formats, 'html') }}
     - uses: usnistgov/sphinx-action@master
       name: Build ePUB
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-epub-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ contains(inputs.formats, 'epub' }}
+      if: ${{ contains(inputs.formats, 'epub') }}
     - uses: usnistgov/sphinx-action@latexpdf
       name: Build PDF
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-pdf-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ contains(inputs.formats, 'pdf' }}
+      if: ${{ contains(inputs.formats, 'pdf') }}
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death@update_pages
       with:
