@@ -44,7 +44,7 @@ class Variant:
     def get_downloads_html(self):
         link_dir = pathlib.PurePath("/") / self.repo.repository
         downloads = []
-        for kind, download in self.downloads:
+        for kind, download in self.downloads.items():
             href = link_dir / download.relative_to(self.repo.working_dir)
             downloads.append(f'<a href="{href}">{kind}</a>')
 
