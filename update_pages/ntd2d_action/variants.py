@@ -10,6 +10,7 @@ class Variant:
     def __init__(self, repo, name):
         self.repo = repo
         self.name = name
+        self.downloads = {}
 
         self.dir = repo.working_dir / "html" / name
 
@@ -33,6 +34,20 @@ class Variant:
 
     def copy_static_file(self, src):
         self.copy_file(src=src, dst=self.dir / "_static")
+
+    def copy_download_file(self, src, kind):
+        dst = self.dir / "_downloads"
+        self.copy_file(src=src, dst=dst)
+        self.downloads[kind](dst / src.name)
+
+    def get_downloads_html(self):
+        link_dir = pathlib.PurePath("/") / self.repo.repository
+        downloads = []
+        for kind, download in self.downloads:
+            href = link_dir / download.relative_to(self.repo.working_dir)
+            variants.append(f'<a href="{href}">{kind}</a>')
+
+        return variants
 
     def clone(self, name):
         clone = Variant(repo=self.repo, name=name)

@@ -65,7 +65,7 @@ class Repository:
         variant.copy_html(src=self.docs.html_dir)
         for file in [self.docs.pdf_file, self.docs.epub_file]:
             if file.exists():
-                variant.copy_static_file(src=file)
+                variant.copy_download_file(src=file)
 
         VariantCollection(repo=self, current_variant=variant).write_files(pages_url=self.pages_url)
 

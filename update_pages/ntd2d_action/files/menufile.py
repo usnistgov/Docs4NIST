@@ -18,7 +18,15 @@ class MenuFile(PagesFile):
     def get_contents(self):
         versions = self.format_iframe(src=self.variants_url)
 
+        if len(self.variant.downloads) > 0:
+            tmpl = PagesTemplate(working_dir=self.repo.working_dir,
+                                 name="downloads.html").read()
+            downloads = tmpl.format(downloads=self.variant.get_downloads_html())
+        else:
+            downloads = ""
+
         menu_template = PagesTemplate(working_dir=self.repo.working_dir,
                                       name="menu.html").read()
         return menu_template.format(versions=textwrap.indent(versions, "    "),
-                                    branch=self.variant.name)
+                                    branch=self.variant.name,
+                                    downloads=textwrap.indent(downloads, "    "))
