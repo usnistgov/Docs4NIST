@@ -75,7 +75,7 @@ runs:
         fi
     - name: Add cruft to theme
       id: borg-the-docs
-      uses: usnistgov/NISTtheDocs2Death/borg_the_docs
+      uses: usnistgov/NISTtheDocs2Death/borg_the_docs@main
       with:
         docs-folder: ${{ inputs.docs-folder }}
         separated-layout: ${{ inputs.separated-layout }}
@@ -101,7 +101,7 @@ runs:
         pre-build-command:  ${{ inputs.pre-build-command }}
       if: ${{ contains(inputs.formats, 'pdf') }}
     - name: Commit documentation changes
-      uses: usnistgov/NISTtheDocs2Death/update_pages
+      uses: usnistgov/NISTtheDocs2Death/update_pages@main
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         separated-layout: ${{ inputs.separated-layout }}
