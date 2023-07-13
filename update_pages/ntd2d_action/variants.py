@@ -46,9 +46,9 @@ class Variant:
         downloads = []
         for kind, download in self.downloads:
             href = link_dir / download.relative_to(self.repo.working_dir)
-            variants.append(f'<a href="{href}">{kind}</a>')
+            downloads.append(f'<a href="{href}">{kind}</a>')
 
-        return variants
+        return "\n".join(downloads)
 
     def clone(self, name):
         clone = Variant(repo=self.repo, name=name)
