@@ -216,7 +216,7 @@ class VariantCollection:
             href = link_dir / variant.name / "index.html"
             variants.append(f'<a href="{href}">{variant.name}</a>')
 
-        return variants
+        return "\n".join(variants)
 
     def write_files(self, pages_url):
         variants_file = VariantsFile(repo=self.repo,
