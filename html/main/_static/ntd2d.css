@@ -5,7 +5,6 @@
   position: fixed;
   right: 20px;
   bottom: 20px;
-  z-index: 400;
 }
 
 .dropdown {
@@ -17,6 +16,7 @@
   bottom: 20px;
   top: auto;
   height: auto;
+  z-index: 400;
 }
 
 .dropdown-content {
@@ -28,6 +28,7 @@
   z-index: 1;
   right: 0px;
   left: auto;
+  bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
   font-family: Helvetica;
@@ -40,6 +41,10 @@
   text-decoration: none;
   display: block;
   border-bottom: 0px;
+}
+
+.dropdown-content p {
+  color: #707070;
 }
 
 .dropdown-content hr {
