@@ -28,6 +28,7 @@
   z-index: 1;
   right: 0px;
   left: auto;
+  bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
   font-family: Helvetica;
@@ -40,6 +41,10 @@
   text-decoration: none;
   display: block;
   border-bottom: 0px;
+}
+
+.dropdown-content p {
+  color: #e0e0e0;
 }
 
 .dropdown-content hr {
