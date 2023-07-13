@@ -1,0 +1,32 @@
+name: "NISTtheDocs2Death workhorse"
+description: "Python Container to do actual work"
+author: "Jonathan Guyer"
+inputs:
+  docs-folder:
+    description:
+      The folder containing your Sphinx configuration.
+    required: true
+    default: "docs/"
+  separated-layout:
+    description:
+      Whether sphinx docs have separate source and build directories.
+    required: true
+    default: false
+  default-branch:
+    description:
+      The default branch configured in GitHub.
+    required: false
+    default: "main"
+  pages-branch:
+    description: 
+      The branch linked to your documentation server.
+    required: false
+    default: 'nist-pages'
+  pages-url:
+    description:
+      URL of web server for served documentation.
+    required: false
+    default: 'https://pages.nist.gov'
+runs:
+  using: "docker"
+  image: "Dockerfile"
