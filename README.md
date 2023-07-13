@@ -22,7 +22,6 @@ host on <https://pages.nist.gov> as an approximation of
             with:
               docs-folder: docs/
               formats: |-
-                html
                 epub
                 pdf
     ```
