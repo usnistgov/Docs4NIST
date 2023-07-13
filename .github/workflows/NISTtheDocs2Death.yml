@@ -10,6 +10,5 @@ jobs:
         with:
           docs-folder: docs/
           formats: |-
-            html
             epub
             pdf

@@ -29,9 +29,9 @@ inputs:
     default: 'https://pages.nist.gov'
   formats:
     description:
-      Type(s) of output desired ('html', 'pdf', and/or 'epub')
-    required: true
-    default: html
+      Type(s) of output desired in addition to html ('pdf', and/or 'epub')
+    required: false
+    default: ''
   build-html-command:
     description:
       The command used to build your html documentation.
@@ -85,7 +85,7 @@ runs:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-html-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ contains(inputs.formats, 'html') }}
+      # always build html
     - uses: usnistgov/sphinx-action@master
       name: Build ePUB
       with:
@@ -134,7 +134,7 @@ runs:
           ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/html
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
-      if: ${{ contains(inputs.formats, 'html') && always() }}
+      if: ${{ always() }}
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
