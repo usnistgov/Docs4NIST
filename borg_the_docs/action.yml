@@ -1,0 +1,20 @@
+name: "NISTtheDocs2Death workhorse"
+description: "Python Container to do actual work"
+author: "Jonathan Guyer"
+inputs:
+  docs-folder:
+    description:
+      The folder containing your Sphinx configuration.
+    required: true
+    default: "docs/"
+  separated-layout:
+    description:
+      Whether sphinx docs have separate source and build directories.
+    required: true
+    default: false
+outputs:
+  borged-docs-folder:
+    description: 'The folder containing modified Sphinx configuration'
+runs:
+  using: "docker"
+  image: "Dockerfile"
