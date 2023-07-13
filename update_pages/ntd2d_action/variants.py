@@ -226,10 +226,11 @@ class VariantCollection:
 
         url = variants_file.get_url()
 
-        # Need an absolute url because this gets included from
-        # many different levels
-        MenuFile(variant=self.current_variant,
-                 variants_url=url.geturl()).write()
+        for variant in self.variants:
+            # Need an absolute url because this gets included from
+            # many different levels
+            MenuFile(variant=variant,
+                     variants_url=url.geturl()).write()
 
         # This can be a relative url, because all variants should
         # be on the same server
