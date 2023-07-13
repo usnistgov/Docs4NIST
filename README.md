@@ -30,4 +30,4 @@ host on <https://pages.nist.gov> as an approximation of
 [GitHub Actions' YAML implementation does not support list or array](https://github.com/actions/toolkit/issues/184)
 elements, so
 [use a multiline string](https://stackoverflow.com/questions/75420197/how-to-use-array-input-for-a-custom-github-actions)
-to declare formats.
+to declare formats, as illustrated above.

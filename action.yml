@@ -83,7 +83,7 @@ runs:
       id: borg-the-docs
       # from https://github.com/orgs/community/discussions/41927#discussioncomment-4605881
       # @mbrancato
-      # because usnistgov/NISTtheDocs2Death/borg_the_docs@@${{ github.action_ref }}
+      # because usnistgov/NISTtheDocs2Death/borg_the_docs@${{ github.action_ref }}
       # doesn't work
       uses: ./../../_actions/current/borg_the_docs
       with:
@@ -113,7 +113,7 @@ runs:
     - name: Commit documentation changes
       # from https://github.com/orgs/community/discussions/41927#discussioncomment-4605881
       # @mbrancato
-      # because usnistgov/NISTtheDocs2Death/update_pages@@${{ github.action_ref }}
+      # because usnistgov/NISTtheDocs2Death/update_pages@${{ github.action_ref }}
       # doesn't work
       uses: ./../../_actions/current/update_pages
       with:
