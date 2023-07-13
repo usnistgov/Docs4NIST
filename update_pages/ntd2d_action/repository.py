@@ -63,9 +63,8 @@ class Repository:
         gha_utils.debug(f"Variant {variant.name}")
 
         variant.copy_html(src=self.docs.html_dir)
-        for file in [self.docs.pdf_file, self.docs.epub_file]:
-            if file.exists():
-                variant.copy_download_file(src=file)
+        variant.copy_download_file(src=self.docs.epub_file, kind="ePUB")
+        variant.copy_download_file(src=self.docs.pdf_file, kind="PDF")
 
         VariantCollection(repo=self, current_variant=variant).write_files(pages_url=self.pages_url)
 

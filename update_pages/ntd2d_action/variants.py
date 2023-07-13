@@ -37,8 +37,9 @@ class Variant:
 
     def copy_download_file(self, src, kind):
         dst = self.dir / "_downloads"
-        self.copy_file(src=src, dst=dst)
-        self.downloads[kind](dst / src.name)
+        if src.exists():
+            self.copy_file(src=src, dst=dst)
+            self.downloads[kind](dst / src.name)
 
     def get_downloads_html(self):
         link_dir = pathlib.PurePath("/") / self.repo.repository
