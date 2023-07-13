@@ -10,7 +10,3 @@ jobs:
         with:
           docs-folder: docs/
           separated-layout: true
-          build-html: true
-          build-epub: true
-          build-pdf: true
-
