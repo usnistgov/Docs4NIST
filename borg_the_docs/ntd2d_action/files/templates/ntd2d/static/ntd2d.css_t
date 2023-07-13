@@ -44,7 +44,7 @@
 }}
 
 .dropdown-content p {{
-  color: #e0e0e0;
+  color: #707070;
 }}
 
 .dropdown-content hr {{
