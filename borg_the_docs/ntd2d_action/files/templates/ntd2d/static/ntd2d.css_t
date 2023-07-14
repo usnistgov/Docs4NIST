@@ -28,9 +28,11 @@
   z-index: 1;
   right: 0px;
   left: auto;
-  bottom: 10px;
+  bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   font-family: Helvetica;
   font-size: smaller;
 }}
@@ -68,7 +70,7 @@
   margin-right: -10px;
 }}
 
-.dropdown-content a:hover {{font-weight: bold;}}
+.dropdown-content a:hover {{text-decoration: underline;}}
 
 .dropdown:hover .dropdown-content {{display: block;}}
 
