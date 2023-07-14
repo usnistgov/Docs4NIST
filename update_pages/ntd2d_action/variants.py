@@ -52,8 +52,11 @@ class Variant:
 
     def clone(self, name):
         clone = Variant(repo=self.repo, name=name)
-        # this will clone any files in _static, too
+        # this will clone any files in _static and _downloads, too
         clone.copy_html(src=self.dir)
+        dst = self.dir / "_downloads"
+        for kind, download in self.dowloads.items():
+            clone.downloads[kind] = download.name
 
         return clone
 
