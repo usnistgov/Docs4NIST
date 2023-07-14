@@ -4,7 +4,7 @@ from packaging.version import parse, InvalidVersion
 import pathlib
 import shutil
 
-from .files import VariantsFile, MenuFile, IndexFile
+from .files import VariantsFile, MenuFile, IndexFile, CSSFile
 
 class Variant:
     def __init__(self, repo, name):
@@ -263,6 +263,8 @@ class VariantCollection(object):
             if variant is not None:
                 MenuFile(variant=variant,
                          variants_url=url.geturl()).write()
+                CSSFile(variant=variant).write()
+
 
         # This can be a relative url, because all variants should
         # be on the same server

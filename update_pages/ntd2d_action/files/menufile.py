@@ -17,8 +17,6 @@ class MenuFile(PagesFile):
                 / "_static" / "ntd2d_menu.html")
 
     def get_contents(self):
-        CSSFile(variant=self.variant, variants_url=self.variants_url).write()
-
         versions = self.format_iframe(src=self.variants_url)
 
         if len(self.variant.downloads) > 0:

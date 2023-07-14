@@ -4,9 +4,8 @@ import textwrap
 from .pagesfile import PagesFile
 
 class CSSFile(PagesFile):
-    def __init__(self, variant, variants_url):
+    def __init__(self, variant):
         self.variant = variant
-        self.variants_url = variants_url
         super().__init__(repo=variant.repo)
 
     @property
@@ -29,5 +28,6 @@ class CSSFile(PagesFile):
         return contents
 
     def write(self):
+        gha_utils.debug(f"CSSFile.write()")
         with self.path.open(mode='a') as file:
             file.write(self.get_contents())
