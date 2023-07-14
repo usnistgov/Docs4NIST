@@ -17,7 +17,7 @@ class CSSFile(PagesFile):
     def get_contents(self):
         gha_utils.debug(f"CSSFile.get_contents()")
 
-        contents += textwrap.dedent(f"""
+        contents = textwrap.dedent(f"""
         
         .ntd2d_{self.variant.name} li a {{
           font-style: bold
