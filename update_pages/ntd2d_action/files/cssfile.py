@@ -17,11 +17,11 @@ class CSSFile(PagesFile):
         with self.path.open(mode='r') as file:
             contents = file.read()
 
-        contents += f"""
+        contents += textwrap.dedent(f"""
         
         .ntd2d_{self.variant} li a {{
           font-style: bold
         }}
-        """
+        """)
 
         return contents
