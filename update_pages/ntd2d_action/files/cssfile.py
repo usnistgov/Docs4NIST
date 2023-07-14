@@ -16,11 +16,6 @@ class CSSFile(PagesFile):
 
     def get_contents(self):
         gha_utils.debug(f"CSSFile.get_contents()")
-        gha_utils.debug(f"self.path = {self.path}")
-        with self.path.open(mode='r') as file:
-            contents = file.read()
-
-        gha_utils.debug(f"contents = {contents}")
 
         contents += textwrap.dedent(f"""
         
@@ -32,3 +27,7 @@ class CSSFile(PagesFile):
         gha_utils.debug(f"contents = {contents}")
 
         return contents
+
+    def write(self):
+        with self.path.open(mode='a') as file:
+            file.write(self.get_contents())
