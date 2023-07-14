@@ -222,6 +222,7 @@ class VariantCollection:
         variants_file = VariantsFile(repo=self.repo,
                                      variants=self,
                                      pages_url=pages_url)
+        variants_file.write()
 
         url = variants_file.get_url()
 
@@ -229,10 +230,6 @@ class VariantCollection:
         # many different levels
         MenuFile(variant=self.current_variant,
                  variants_url=url.geturl()).write()
-
-        # Write variants_file after MenuFile so that latest and stable
-        # clone the menu file, too
-        variants_file.write()
 
         # This can be a relative url, because all variants should
         # be on the same server
