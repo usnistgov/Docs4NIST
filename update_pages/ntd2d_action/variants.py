@@ -56,9 +56,9 @@ class Variant:
 
         return "\n".join(downloads)
 
-    def clone(self, name, cls=Variant):
+    def clone(self, name):
         gha_utils.debug(f"{self.name}.clone({name})")
-        clone = cls(repo=self.repo, name=name)
+        clone = self.__class__(repo=self.repo, name=name)
         # this will clone any files in _static and _downloads, too
         clone.copy_html(src=self.dir)
         dst = clone.dir / "_downloads"
@@ -93,9 +93,6 @@ class Version(Variant):
             return self.version < other.version
         else:
             return super().__lt__(other)
-
-    def clone(self, name, cls=Version):
-        return super().clone(name=name, cls=cls)
 
 class VariantCollection:
     # singleton
