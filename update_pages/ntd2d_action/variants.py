@@ -46,7 +46,7 @@ class Variant:
         downloads = []
         for kind, download in self.downloads.items():
             href = link_dir / download.relative_to(self.repo.working_dir)
-            downloads.append(f'<a href="{href}">{kind}</a>')
+            downloads.append(f'<li><a href="{href}">{kind}</a></li>')
 
         return "\n".join(downloads)
 
@@ -214,7 +214,7 @@ class VariantCollection:
         variants = []
         for variant in self.variants:
             href = link_dir / variant.name / "index.html"
-            variants.append(f'<a href="{href}">{variant.name}</a>')
+            variants.append(f'<li><a href="{href}">{variant.name}</a></li>')
 
         return "\n".join(variants)
 
