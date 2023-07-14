@@ -16,6 +16,7 @@ class CSSFile(PagesFile):
 
     def get_contents(self):
         gha_utils.debug(f"CSSFile.get_contents()")
+        gha_utils.debug(f"self.path = {self.path}")
         with self.path.open(mode='r') as file:
             contents = file.read()
 
