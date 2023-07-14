@@ -1,3 +1,4 @@
+import github_action_utils as gha_utils
 import textwrap
 
 from .pagesfile import PagesFile
@@ -14,14 +15,19 @@ class CSSFile(PagesFile):
                 / "_static" / "ntd2d.css")
 
     def get_contents(self):
+        gha_utils.debug(f"CSSFile.get_contents()")
         with self.path.open(mode='r') as file:
             contents = file.read()
 
+        gha_utils.debug(f"contents = {contents}")
+
         contents += textwrap.dedent(f"""
         
-        .ntd2d_{self.variant} li a {{
+        .ntd2d_{self.variant.name} li a {{
           font-style: bold
         }}
         """)
+
+        gha_utils.debug(f"contents = {contents}")
 
         return contents
