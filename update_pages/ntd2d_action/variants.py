@@ -15,19 +15,23 @@ class Variant:
         self.dir = repo.working_dir / "html" / name
 
     def rmdir(self):
+        gha_utils.debug(f"{self.name}.rmdir()")
         self.repo.remove(self.dir.as_posix(), working_tree=True,
                          r=True, ignore_unmatch=True)
 
     def copy_dir(self, src, dst):
+        gha_utils.debug(f"{self.name}.copy_dir(src={src}, dst={dst})")
         # remove any previous directory of that name
         self.rmdir()
         shutil.copytree(src, dst)
         self.repo.add(dst.as_posix())
 
     def copy_html(self, src):
+        gha_utils.debug(f"{self.name}.copy_html(src={src})")
         self.copy_dir(src=src, dst=self.dir)
 
     def copy_file(self, src, dst):
+        gha_utils.debug(f"{self.name}.copy_file(src={src}, dst={dst})")
         os.makedirs(dst, exist_ok=True)
         shutil.copy2(src, dst)
         self.repo.add((dst / src.name).as_posix())
@@ -36,10 +40,12 @@ class Variant:
         self.copy_file(src=src, dst=self.dir / "_static")
 
     def copy_download_file(self, src, kind):
+        gha_utils.debug(f"{self.name}.copy_download_file(src={src}, kind={kind})")
         dst = self.dir / "_downloads"
         if src.exists():
             self.copy_file(src=src, dst=dst)
             self.downloads[kind] = dst / src.name
+            gha_utils.debug(f"{self.name}.downloads[{kind}] = {self.downloads[kind]}")
 
     def get_downloads_html(self):
         link_dir = pathlib.PurePath("/") / self.repo.repository
@@ -55,7 +61,7 @@ class Variant:
         clone = Variant(repo=self.repo, name=name)
         # this will clone any files in _static and _downloads, too
         clone.copy_html(src=self.dir)
-        dst = self.dir / "_downloads"
+        dst = clone.dir / "_downloads"
         for kind, download in self.downloads.items():
             clone.downloads[kind] = dst / download.name
             gha_utils.debug(f"{name}.downloads[{kind}] = {clone.downloads[kind]}")
@@ -219,11 +225,12 @@ class VariantCollection:
         variants = []
         for variant in self.variants:
             href = link_dir / variant.name / "index.html"
-            variants.append(f'<li id={variant.name}><a href="{href}">{variant.name}</a></li>')
+            variants.append(f'<li class="{variant.name}"><a href="{href}">{variant.name}</a></li>')
 
         return "\n".join(variants)
 
     def write_files(self, pages_url):
+        gha_utils.debug(f"VariantCollection.write_files(pages_url={pages_url})")
         variants_file = VariantsFile(repo=self.repo,
                                      variants=self,
                                      pages_url=pages_url)
