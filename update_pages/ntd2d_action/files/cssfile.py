@@ -31,3 +31,4 @@ class CSSFile(PagesFile):
         gha_utils.debug(f"CSSFile.write()")
         with self.path.open(mode='a') as file:
             file.write(self.get_contents())
+        self.repo.add(self.path)
