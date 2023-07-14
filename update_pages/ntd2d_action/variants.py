@@ -200,11 +200,11 @@ class VariantCollection:
         # variants = ["v1.0.0", "stables", "1.2.3", "latest", "4b1",
         #             "0.2", "neat_idea", "doesn't_work", "experiment"]
 
-        variants = ([self.latest, self.stable]
-                    + self.versions + self.branches)
-        variants = [variant
-                    for variant in variants
-                    if variant is not None]
+        variants = []
+        for variant in [self.latest, self.stable]:
+            if variant is not None:
+                variants.append(variant)
+        variants = variants + self.versions + self.branches
 
         return variants
 
