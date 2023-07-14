@@ -56,9 +56,9 @@ class Variant:
 
         return "\n".join(downloads)
 
-    def clone(self, name):
+    def clone(self, name, cls=Variant):
         gha_utils.debug(f"{self.name}.clone({name})")
-        clone = Variant(repo=self.repo, name=name)
+        clone = cls(repo=self.repo, name=name)
         # this will clone any files in _static and _downloads, too
         clone.copy_html(src=self.dir)
         dst = clone.dir / "_downloads"
@@ -67,6 +67,11 @@ class Variant:
             gha_utils.debug(f"{name}.downloads[{kind}] = {clone.downloads[kind]}")
 
         return clone
+
+    @classmethod
+    def from_variant(cls, variant):
+        new_variant = cls(variant.repo, variant.name)
+        new_variant.downloads = variant.downloads.copy()
 
     def __lt__(self, other):
         return self.name < other.name
@@ -89,7 +94,18 @@ class Version(Variant):
         else:
             return super().__lt__(other)
 
+    def clone(self, name, cls=Version):
+        return super().clone(name=name, cls=cls)
+
 class VariantCollection:
+    # singleton
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(VariantCollection, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self, repo, current_variant):
         self.repo = repo
         self.current_variant = current_variant
@@ -149,15 +165,27 @@ class VariantCollection:
         self._versions = []
         for name in names:
             gha_utils.start_group(f"{name}")
-            try:
-                # Check if it's a PEP 440 version.
-                # Retain the string literal for the tag or branch,
-                # but use the Version for sorting.
-                variant = Version(repo=self.repo, name=name)
-                gha_utils.debug(f"Version({variant.name})")
-            except InvalidVersion:
-                variant = Variant(repo=self.repo, name=name)
-                gha_utils.debug(f"Variant({variant.name})")
+            if name == self.current_variant.name:
+                # re-use existing variant
+                try:
+                    # Cast to a Version if it's a PEP 440 version.
+                    # Retain the string literal for the tag or branch,
+                    # but use the Version for sorting.
+                    variant = Version.from_variant(variant=self.current_variant)
+                    gha_utils.debug(f"Version({variant.name})")
+                except InvalidVersion:
+                    variant = self.current_variant
+                    gha_utils.debug(f"Variant({variant.name})")
+            else:
+                try:
+                    # Check if it's a PEP 440 version.
+                    # Retain the string literal for the tag or branch,
+                    # but use the Version for sorting.
+                    variant = Version(repo=self.repo, name=name)
+                    gha_utils.debug(f"Version({variant.name})")
+                except InvalidVersion:
+                    variant = Variant(repo=self.repo, name=name)
+                    gha_utils.debug(f"Variant({variant.name})")
 
             if variant.name in ["latest", "stable"]:
                 continue
@@ -175,7 +203,9 @@ class VariantCollection:
                 and variant.name not in self.repo.refs
                 and variant.name not in self.repo.origin.refs):
                 # This variant has been removed from the repository,
-                # so remove the corresponding docs
+                # so remove the corresponding docs.
+                # current_variant may correspond to a PR, which
+                # won't be listed in the refs.
                 gha_utils.debug(f"Deleting {variant.name}")
                 variant.rmdir()
             elif isinstance(variant, Version):
