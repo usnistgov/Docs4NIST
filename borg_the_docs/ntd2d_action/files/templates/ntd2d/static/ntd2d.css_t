@@ -45,7 +45,6 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333333;
 }}
 
 .dropdown-content li {{
@@ -59,7 +58,8 @@
   display: block;
   border-bottom: 0px;
   text-align: center;
-  padding: 6px;
+  padding-left: 6px;
+  padding-right: 6px;
 }}
 
 .dropdown-content hr {{
@@ -68,7 +68,7 @@
   margin-right: -10px;
 }}
 
-.dropdown-content a:hover {{background-color: #e0e0e0;}}
+.dropdown-content a:hover {{font-weight: bold;}}
 
 .dropdown:hover .dropdown-content {{display: block;}}
 
