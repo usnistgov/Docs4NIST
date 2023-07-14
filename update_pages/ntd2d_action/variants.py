@@ -55,7 +55,7 @@ class Variant:
         # this will clone any files in _static and _downloads, too
         clone.copy_html(src=self.dir)
         dst = self.dir / "_downloads"
-        for kind, download in self.dowloads.items():
+        for kind, download in self.downloads.items():
             clone.downloads[kind] = download.name
 
         return clone
