@@ -76,6 +76,10 @@
 
 .dropdown:hover .dropbtn {background-color: 'ButtonBorder';}
 
-.ntd2d_latest li a {
-  font-style: bold
+li.ntd2d_latest li a {
+  font-style: bold;
+}
+
+li.ntd2d_latest li a:hover {
+  text-decoration: none;
 }
