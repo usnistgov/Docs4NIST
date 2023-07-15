@@ -238,15 +238,23 @@ class VariantCollection(object):
 
         return variants
 
-    def get_html(self):
+    def get_html(self, items=None):
+        if items is None:
+            items = self.variants
         link_dir = (pathlib.PurePath("/") / self.repo.repository
                     / self.html_dir.relative_to(self.repo.working_dir))
         variants = []
-        for variant in self.variants:
+        for variant in items:
             href = link_dir / variant.name / "index.html"
             variants.append(f'<li class="ntd2d_{variant.name}"><a href="{href}">{variant.name}</a></li>')
 
         return "\n".join(variants)
+
+    def get_versions_html(self):
+        return self.get_html(items=self.versions)
+
+    def get_branches_html(self):
+        return self.get_html(items=self.branches)
 
     def write_files(self, pages_url):
         gha_utils.debug(f"VariantCollection.write_files(pages_url={pages_url})")
