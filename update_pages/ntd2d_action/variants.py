@@ -244,7 +244,7 @@ class VariantCollection(object):
         variants = []
         for variant in self.variants:
             href = link_dir / variant.name / "index.html"
-            variants.append(f'<li class="ntdtd_{variant.name}"><a href="{href}">{variant.name}</a></li>')
+            variants.append(f'<li class="ntd2d_{variant.name}"><a href="{href}">{variant.name}</a></li>')
 
         return "\n".join(variants)
 
