@@ -1,6 +1,5 @@
 import textwrap
 
-from .cssfile import CSSFile
 from .pagesfile import PagesFile
 from .template import PagesTemplate
 
