@@ -73,6 +73,8 @@ class Variant:
         new_variant = cls(variant.repo, variant.name)
         new_variant.downloads = variant.downloads.copy()
 
+        return new_variant
+
     def __lt__(self, other):
         return self.name < other.name
 
