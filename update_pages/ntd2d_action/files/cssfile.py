@@ -18,12 +18,14 @@ class CSSFile(PagesFile):
 
         contents = textwrap.dedent(f"""
         
-        .ntd2d_{self.variant.name} li a {{
-          font-style: bold
+        li.ntd2d_{self.variant.name} li a {{
+          font-style: bold;
+        }}
+
+        li.ntd2d_{self.variant.name} li a:hover {{
+          text-decoration: none;
         }}
         """)
-
-        gha_utils.debug(f"contents = {contents}")
 
         return contents
 
