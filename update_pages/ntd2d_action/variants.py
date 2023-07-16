@@ -83,7 +83,7 @@ class Variant:
 
     @property
     def css_name(self):
-        """Escape ref name to satisfy css class naming quirements
+        """Escape ref name to satisfy css class naming requirements
 
         Used to escape characters that are
         - allowed by `man git-check-ref-format`
