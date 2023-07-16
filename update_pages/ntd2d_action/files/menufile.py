@@ -25,9 +25,11 @@ class MenuFile(PagesFile):
         else:
             downloads = ""
 
+        tree_url = f"{self.repo.tree_url}/{self.variant.true_name}"
+
         menu_template = PagesTemplate(working_dir=self.repo.working_dir,
                                       name="menu.html").read()
         return menu_template.format(variants=textwrap.indent(variants, "    "),
                                     branch=self.variant.name,
                                     downloads=textwrap.indent(downloads, "    "),
-                                    tree_url=self.repo.tree_url)
+                                    tree_url=tree_url)

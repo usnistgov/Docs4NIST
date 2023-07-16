@@ -8,9 +8,13 @@ import shutil
 from .files import VariantsFile, MenuFile, IndexFile, CSSFile
 
 class Variant:
-    def __init__(self, repo, name):
+    def __init__(self, repo, name, true_name=None):
         self.repo = repo
         self.name = name
+        if true_name is None:
+            self.true_name = name
+        else:
+            self.true_name = true_name
         self.downloads = {}
 
         self.dir = repo.working_dir / "html" / name
@@ -61,7 +65,7 @@ class Variant:
         gha_utils.debug(f"{self.name}.clone({name})")
         if cls is None:
             cls = self.__class__
-        clone = cls(repo=self.repo, name=name)
+        clone = cls(repo=self.repo, name=name, true_name=self.true_name)
         # this will clone any files in _static and _downloads, too
         clone.copy_html(src=self.dir)
         dst = clone.dir / "_downloads"
