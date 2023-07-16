@@ -2,6 +2,7 @@ import github_action_utils as gha_utils
 import os
 from packaging.version import parse, InvalidVersion
 import pathlib
+import re
 import shutil
 
 from .files import VariantsFile, MenuFile, IndexFile, CSSFile
@@ -79,6 +80,18 @@ class Variant:
 
     def __lt__(self, other):
         return self.name < other.name
+
+    @property
+    def css_name(self):
+        """Escape ref name to satisfy css class naming quirements
+
+        Used to escape characters that are
+        - allowed by `man git-check-ref-format`
+        - disallowed by https://www.w3.org/International/questions/qa-escapes#cssescapes
+        """
+
+        esc = re.escape("!\"#$%&'()+,-./;<=>@]`{|}")
+        return re.sub(f"([{esc}])", r"\\\1", self.name)
 
 class Version(Variant):
     """A Variant that satisfies the PEP 440 version specification
@@ -250,7 +263,7 @@ class VariantCollection(object):
         variants = []
         for variant in items:
             href = link_dir / variant.name / "index.html"
-            variants.append(f'<li class="ntd2d_{variant.name}"><a href="{href}">{variant.name}</a></li>')
+            variants.append(f'<li class="ntd2d_{variant.css_name}"><a href="{href}">{variant.name}</a></li>')
 
         return "\n".join(variants)
 

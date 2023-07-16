@@ -18,11 +18,11 @@ class CSSFile(PagesFile):
 
         contents = textwrap.dedent(f"""
         
-        li.ntd2d_{self.variant.name} {{
+        li.ntd2d_{self.variant.css_name} {{
           font-weight: bold;
         }}
 
-        li.ntd2d_{self.variant.name} a:hover {{
+        li.ntd2d_{self.variant.css_name} a:hover {{
           text-decoration: none;
         }}
         """)
