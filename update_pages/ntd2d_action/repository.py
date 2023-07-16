@@ -10,7 +10,7 @@ class Repository:
         self.server_url = server_url
         self.url = f"{server_url}/{repository}.git"
         self.owner, self.repository = repository.split('/')
-        self.tree_url = f"{server_url}/{owner}/{self.repository}/tree/{branch}"
+        self.tree_url = f"{server_url}/{self.owner}/{self.repository}/tree/{branch}"
         self.branch = branch
         self.default_branch = default_branch
         self.docs = docs
