@@ -1,0 +1,11 @@
+{css}
+
+/* add menu styling for active variant */
+
+li.ntd2d_{variant} {{
+  font-weight: bold;
+}}
+
+li.ntd2d_{variant} a:hover {{
+  text-decoration: none;
+}}
