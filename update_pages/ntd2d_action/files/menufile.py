@@ -16,7 +16,7 @@ class MenuFile(PagesFile):
                 / "_static" / "ntd2d_menu.html")
 
     def get_contents(self):
-        versions = self.format_iframe(src=self.variants_url)
+        variants = self.format_iframe(src=self.variants_url)
 
         if len(self.variant.downloads) > 0:
             tmpl = PagesTemplate(working_dir=self.repo.working_dir,
@@ -27,6 +27,6 @@ class MenuFile(PagesFile):
 
         menu_template = PagesTemplate(working_dir=self.repo.working_dir,
                                       name="menu.html").read()
-        return menu_template.format(versions=textwrap.indent(versions, "    "),
+        return menu_template.format(variants=textwrap.indent(variants, "    "),
                                     branch=self.variant.name,
                                     downloads=textwrap.indent(downloads, "    "))

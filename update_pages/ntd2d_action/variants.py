@@ -265,6 +265,13 @@ class VariantCollection(object):
     def get_versions_html(self):
         return self.get_html(items=self.versions)
 
+    def get_all_versions_html(self):
+        latest_and_stable = []
+        for variant in [self.latest, self.stable]:
+            if variant is not None:
+                latest_and_stable.append(variant)
+        return self.get_html(items=latest_and_stable + self.versions)
+
     def get_branches_html(self):
         return self.get_html(items=self.branches)
 
