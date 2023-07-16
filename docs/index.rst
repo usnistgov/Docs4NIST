@@ -29,6 +29,14 @@ https://pages.nist.gov as an approximation of `ReadTheDocs
                epub
                pdf
 
+.. note::
+
+   `GitHub Actions' YAML implementation does not support list or array elements
+   <https://github.com/actions/toolkit/issues/184>`_, so
+   `use a multiline string
+   <https://stackoverflow.com/questions/75420197/how-to-use-array-input-for-a-custom-github-actions>`_
+   to declare formats, as illustrated above.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
