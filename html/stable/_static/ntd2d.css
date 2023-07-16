@@ -78,6 +78,17 @@
 
 /* add menu styling for active variant */
 
+li.ntd2d_v1\.3\.5\.7 {
+  font-weight: bold;
+}
+
+li.ntd2d_v1\.3\.5\.7 a:hover {
+  text-decoration: none;
+}
+
+
+/* add menu styling for active variant */
+
 li.ntd2d_stable {
   font-weight: bold;
 }
