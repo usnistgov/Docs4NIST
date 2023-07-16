@@ -93,6 +93,12 @@ class Variant:
         esc = re.escape("!\"#$%&'()+,-./;<=>@]`{|}")
         return re.sub(f"([{esc}])", r"\\\1", self.name)
 
+    def get_html(self):
+        link_dir = (pathlib.PurePath("/") / self.repo.repository
+                    / self.dir.relative_to(self.repo.working_dir))
+        href = link_dir / "index.html"
+        return f'<li class="ntd2d_{self.css_name}"><a href="{href}">{self.name}</a></li>'
+
 class Version(Variant):
     """A Variant that satisfies the PEP 440 version specification
 
@@ -257,8 +263,7 @@ class VariantCollection(object):
                     / self.html_dir.relative_to(self.repo.working_dir))
         variants = []
         for variant in items:
-            href = link_dir / variant.name / "index.html"
-            variants.append(f'<li class="ntd2d_{variant.css_name}"><a href="{href}">{variant.name}</a></li>')
+            variants.append(variant.get_html())
 
         return "\n".join(variants)
 
@@ -274,6 +279,18 @@ class VariantCollection(object):
 
     def get_branches_html(self):
         return self.get_html(items=self.branches)
+
+    def get_latest_html(self):
+        if self.latest is not None:
+            return self.latest.get_html()
+        else:
+            return ""
+
+    def get_stable_html(self):
+        if self.stable is not None:
+            return self.stable.get_html()
+        else:
+            return ""
 
     def write_files(self, pages_url):
         gha_utils.debug(f"VariantCollection.write_files(pages_url={pages_url})")

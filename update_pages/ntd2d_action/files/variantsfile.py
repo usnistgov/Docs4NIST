@@ -27,14 +27,19 @@ class VariantsFile(PagesFile):
         return urlparse(full_url)
 
     def get_contents(self):
-        variants = textwrap.indent(self.variants.get_html(), "    ")
-        versions = textwrap.indent(self.variants.get_versions_html(), "    ")
-        all_versions = textwrap.indent(self.variants.get_all_versions_html(), "    ")
-        branches = textwrap.indent(self.variants.get_branches_html(), "    ")
+        def _indent(text):
+            return textwrap.indent(text, "    ")
+
+        variants = _indent(self.variants.get_html())
+        versions = _indent(self.variants.get_versions_html())
+        branches = _indent(self.variants.get_branches_html())
+        latest = _indent(self.variants.get_latest_html())
+        stable = _indent(self.variants.get_stable_html())
 
         variants_template = PagesTemplate(working_dir=self.repo.working_dir,
                                           name="variants.html").read()
         return variants_template.format(variants=variants,
                                         versions=versions,
-                                        all_versions=versions,
-                                        branches=branches)
+                                        branches=branches,
+                                        latest=latest,
+                                        stable=stable)
