@@ -47,7 +47,7 @@ class Repository:
         self.repo.index.remove(*args, **kwargs)
 
     def update_pages(self, branch, sha):
-        gha_utils.start_group("Repository.update_pages")
+        gha_utils.debug("Repository.update_pages")
 
         self.clone(to_path="__nist-pages")
 
@@ -71,5 +71,3 @@ class Repository:
         self.commit(message=f"Update documentation for {branch}@{sha[:7]}")
 
         self.repo.remotes.origin.pull()
-
-        gha_utils.end_group()

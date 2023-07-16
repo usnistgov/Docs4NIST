@@ -125,7 +125,7 @@ class VariantCollection(object):
 
     @property
     def latest(self):
-        gha_utils.start_group("VariantCollection.latest")
+        gha_utils.debug("VariantCollection.latest")
         if self._latest is None:
             for branch in self.branches:
                 gha_utils.debug(f"{branch.name} =?= {self.repo.default_branch}")
@@ -136,12 +136,11 @@ class VariantCollection(object):
                     gha_utils.debug(f"Cloned {branch.name} to {self._latest.name}")
                     break
 
-        gha_utils.end_group()
         return self._latest
 
     @property
     def stable(self):
-        gha_utils.start_group("VariantCollection.stable")
+        gha_utils.debug("VariantCollection.stable")
         if self._stable is None:
             # replace any built documents in stable/
             # (but only do this for highest non-prerelease version)
@@ -151,7 +150,6 @@ class VariantCollection(object):
             else:
                 self._stable = None
 
-        gha_utils.end_group()
         return self._stable
 
     @property
@@ -161,7 +159,7 @@ class VariantCollection(object):
                 if not version.version.is_prerelease]
 
     def _calc_branches_and_versions(self):
-        gha_utils.start_group("VariantCollection._calc_branches_and_versions")
+        gha_utils.debug("VariantCollection._calc_branches_and_versions")
 
         names = [variant.name for variant in self.html_dir.glob("*")]
 
@@ -170,7 +168,7 @@ class VariantCollection(object):
         self._branches = []
         self._versions = []
         for name in names:
-            gha_utils.start_group(f"{name}")
+            gha_utils.debug(f"{name}")
             if name == self.current_variant.name:
                 # re-use existing variant
                 try:
@@ -220,11 +218,8 @@ class VariantCollection(object):
             else:
                 gha_utils.debug(f"Appending branch {variant.name}")
                 self._branches.append(variant)
-            gha_utils.end_group()
         self._branches.sort()
         self._versions.sort(reverse=True)
-
-        gha_utils.end_group()
 
     @property
     def branches(self):
