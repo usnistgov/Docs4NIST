@@ -56,9 +56,11 @@ class Variant:
 
         return "\n".join(downloads)
 
-    def clone(self, name):
+    def clone(self, name, cls=None):
         gha_utils.debug(f"{self.name}.clone({name})")
-        clone = self.__class__(repo=self.repo, name=name)
+        if cls is None:
+            cls = self.__class__
+        clone = cls(repo=self.repo, name=name)
         # this will clone any files in _static and _downloads, too
         clone.copy_html(src=self.dir)
         dst = clone.dir / "_downloads"
@@ -131,7 +133,7 @@ class VariantCollection(object):
             # replace any built documents in stable/
             # (but only do this for highest non-prerelease version)
             if len(self.stable_versions) > 0:
-                self._stable = self.stable_versions[0].clone("stable")
+                self._stable = self.stable_versions[0].clone("stable", cls=Variant)
                 gha_utils.debug(f"Cloned {self.stable_versions[0].name} to {self._stable.name}")
             else:
                 self._stable = None
