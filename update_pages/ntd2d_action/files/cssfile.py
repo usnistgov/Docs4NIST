@@ -1,6 +1,7 @@
 import github_action_utils as gha_utils
 import textwrap
 
+from .template import Template, PagesTemplate
 from .pagesfile import PagesFile
 
 class CSSFile(PagesFile):
@@ -16,21 +17,9 @@ class CSSFile(PagesFile):
     def get_contents(self):
         gha_utils.debug(f"CSSFile.get_contents()")
 
-        contents = textwrap.dedent(f"""
-        
-        li.ntd2d_{self.variant.css_name} {{
-          font-weight: bold;
-        }}
+        css = Template(template_path=self.path).read()
 
-        li.ntd2d_{self.variant.css_name} a:hover {{
-          text-decoration: none;
-        }}
-        """)
-
-        return contents
-
-    def write(self):
-        gha_utils.debug(f"CSSFile.write()")
-        with self.path.open(mode='a') as file:
-            file.write(self.get_contents())
-        self.repo.add(self.path)
+        annex = PagesTemplate(working_dir=self.repo.working_dir,
+                             name="ntd2d_annex.css").read()
+        return annex.format(css=css,
+                            variant=self.variant.css_name)
