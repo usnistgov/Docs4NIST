@@ -30,4 +30,4 @@ class MenuFile(PagesFile):
         return menu_template.format(variants=textwrap.indent(variants, "    "),
                                     branch=self.variant.name,
                                     downloads=textwrap.indent(downloads, "    "),
-                                    repo_url=self.repo.tree_url)
+                                    tree_url=self.repo.tree_url)
