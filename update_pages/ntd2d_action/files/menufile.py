@@ -29,4 +29,5 @@ class MenuFile(PagesFile):
                                       name="menu.html").read()
         return menu_template.format(variants=textwrap.indent(variants, "    "),
                                     branch=self.variant.name,
-                                    downloads=textwrap.indent(downloads, "    "))
+                                    downloads=textwrap.indent(downloads, "    "),
+                                    repo_url=self.repo.tree_url)

@@ -7,8 +7,10 @@ from .variants import Variant, VariantCollection
 
 class Repository:
     def __init__(self, server_url, repository, branch, default_branch, docs, pages_url):
+        self.server_url = server_url
         self.url = f"{server_url}/{repository}.git"
         self.owner, self.repository = repository.split('/')
+        self.tree_url = f"{server_url}/{owner}/{self.repository}/tree/{branch}"
         self.branch = branch
         self.default_branch = default_branch
         self.docs = docs
