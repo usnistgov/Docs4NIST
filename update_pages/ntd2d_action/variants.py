@@ -179,27 +179,23 @@ class VariantCollection(object):
         self._versions = []
         for name in names:
             gha_utils.debug(f"{name}")
-            if name == self.current_variant.name:
-                # re-use existing variant
-                try:
-                    # Cast to a Version if it's a PEP 440 version.
-                    # Retain the string literal for the tag or branch,
-                    # but use the Version for sorting.
+            try:
+                # Check if it's a PEP 440 version.
+                # Retain the string literal for the tag or branch,
+                # but use the Version for sorting.
+                if name == self.current_variant.name:
+                    # re-use existing variant
                     variant = Version.from_variant(variant=self.current_variant)
-                    gha_utils.debug(f"Version({variant.name})")
-                except InvalidVersion:
-                    variant = self.current_variant
-                    gha_utils.debug(f"Variant({variant.name})")
-            else:
-                try:
-                    # Check if it's a PEP 440 version.
-                    # Retain the string literal for the tag or branch,
-                    # but use the Version for sorting.
+                else:
                     variant = Version(repo=self.repo, name=name)
-                    gha_utils.debug(f"Version({variant.name})")
-                except InvalidVersion:
+                gha_utils.debug(f"Version({variant.name})")
+            except InvalidVersion:
+                if name == self.current_variant.name:
+                    # re-use existing variant
+                    variant = self.current_variant
+                else:
                     variant = Variant(repo=self.repo, name=name)
-                    gha_utils.debug(f"Variant({variant.name})")
+                gha_utils.debug(f"Variant({variant.name})")
 
             if variant.name in ["latest", "stable"]:
                 continue
