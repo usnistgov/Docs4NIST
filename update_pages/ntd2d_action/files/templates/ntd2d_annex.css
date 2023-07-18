@@ -2,10 +2,12 @@
 
 /* add menu styling for active variant */
 
-li.ntd2d_{variant} {{
+/* note: li.ntd2d_{variant} doesn't reliably worked with dotted names */
+
+li[class~="ntd2d_{variant}"] {{
   font-weight: bold;
 }}
 
-li.ntd2d_{variant} a:hover {{
+li[class~="ntd2d_{variant}"] a:hover {{
   text-decoration: none;
 }}

@@ -23,4 +23,4 @@ class CSSFile(PagesFile):
                               name="ntd2d_annex.css").read()
 
         return annex.format(css=self.css,
-                            variant=self.variant.css_name)
+                            variant=self.variant.name)

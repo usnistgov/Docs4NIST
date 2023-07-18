@@ -108,7 +108,7 @@ class Variant:
         link_dir = (pathlib.PurePath("/") / self.repo.repository
                     / self.dir.relative_to(self.repo.working_dir))
         href = link_dir / "index.html"
-        return f'<li class="ntd2d_{self.css_name}"><a href="{href}">{self.name}</a></li>'
+        return f'<li class="ntd2d_{self.name}"><a href="{href}">{self.name}</a></li>'
 
 class Version(Variant):
     """A Variant that satisfies the PEP 440 version specification
