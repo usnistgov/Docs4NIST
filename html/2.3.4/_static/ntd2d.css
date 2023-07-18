@@ -79,12 +79,12 @@
 
 /* add menu styling for active variant */
 
-/* note: li.ntd2d_stable doesn't reliably worked with dotted names */
+/* note: li.ntd2d_2.3.4 doesn't reliably worked with dotted names */
 
-li[class~="ntd2d_stable"] {
+li[class~="ntd2d_2.3.4"] {
   font-weight: bold;
 }
 
-li[class~="ntd2d_stable"] a:hover {
+li[class~="ntd2d_2.3.4"] a:hover {
   text-decoration: none;
 }
