@@ -79,54 +79,10 @@
 
 /* add menu styling for active variant */
 
-li.ntd2d_main {
+li.ntd2d_v1\.16\.256 {
   font-weight: bold;
 }
 
-li.ntd2d_main a:hover {
-  text-decoration: none;
-}
-
-
-/* add menu styling for active variant */
-
-li.ntd2d_latest {
-  font-weight: bold;
-}
-
-li.ntd2d_latest a:hover {
-  text-decoration: none;
-}
-
-
-/* add menu styling for active variant */
-
-li.ntd2d_latest {
-  font-weight: bold;
-}
-
-li.ntd2d_latest a:hover {
-  text-decoration: none;
-}
-
-
-/* add menu styling for active variant */
-
-li.ntd2d_latest {
-  font-weight: bold;
-}
-
-li.ntd2d_latest a:hover {
-  text-decoration: none;
-}
-
-
-/* add menu styling for active variant */
-
-li.ntd2d_latest {
-  font-weight: bold;
-}
-
-li.ntd2d_latest a:hover {
+li.ntd2d_v1\.16\.256 a:hover {
   text-decoration: none;
 }
