@@ -136,30 +136,11 @@ class VariantCollection(object):
     @property
     def latest(self):
         gha_utils.debug("VariantCollection.latest")
-        if self._latest is None:
-            for branch in self.branches:
-                gha_utils.debug(f"{branch.name} =?= {self.repo.default_branch}")
-                if branch.name == self.repo.default_branch:
-                    # replace any built documents in latest/
-                    # (but only do this for default branch of repo)
-                    self._latest = branch.clone("latest")
-                    gha_utils.debug(f"Cloned {branch.name} to {self._latest.name}")
-                    break
-
         return self._latest
 
     @property
     def stable(self):
         gha_utils.debug("VariantCollection.stable")
-        if self._stable is None:
-            # replace any built documents in stable/
-            # (but only do this for highest non-prerelease version)
-            if len(self.stable_versions) > 0:
-                self._stable = self.stable_versions[0].clone("stable", cls=Variant)
-                gha_utils.debug(f"Cloned {self.stable_versions[0].name} to {self._stable.name}")
-            else:
-                self._stable = None
-
         return self._stable
 
     @property
@@ -175,6 +156,8 @@ class VariantCollection(object):
 
         gha_utils.debug(f"self.repo.refs = {self.repo.refs}")
 
+        self._latest = None
+        self._stable = None
         self._branches = []
         self._versions = []
         for name in names:
@@ -197,8 +180,13 @@ class VariantCollection(object):
                     variant = Variant(repo=self.repo, name=name)
                 gha_utils.debug(f"Variant({variant.name})")
 
-            if variant.name in ["latest", "stable"]:
+            if variant.name == "latest":
+                self._latest = variant
                 continue
+            elif variant.name == "stable":
+                self._stable = variant
+                continue
+
 
             gha_utils.debug(f"variant.name = {variant.name}")
             gha_utils.debug(f"self.current_variant.name = {self.current_variant.name}")
@@ -224,8 +212,22 @@ class VariantCollection(object):
             else:
                 gha_utils.debug(f"Appending branch {variant.name}")
                 self._branches.append(variant)
+
         self._branches.sort()
+        if self.current_variant.name == self.repo.default_branch:
+            if branch.name == self.repo.default_branch:
+                # replace any built documents in latest/
+                # (but only do this if just rebuilt default branch of repo)
+                self._latest = branch.clone("latest")
+                gha_utils.debug(f"Cloned {branch.name} to {self._latest.name}")
+
         self._versions.sort(reverse=True)
+        if len(self.stable_versions) > 0:
+            if self.current_variant.name == self.stable_versions[0]:
+                # replace any built documents in stable/
+                # (but only do this if just rebuilt highest non-prerelease version)
+                self._stable = self.stable_versions[0].clone("stable", cls=Variant)
+                gha_utils.debug(f"Cloned {self.stable_versions[0].name} to {self._stable.name}")
 
     @property
     def branches(self):
