@@ -60,7 +60,7 @@ class Repository:
         gha_utils.debug(f".nojekyll")
 
         # replace any built documents in directory named for current branch
-        variant = Variant(repo=self, name=branch)
+        variant = Variant(repo=self, name=branch, rebuild_menu=True)
 
         gha_utils.debug(f"Variant {variant.name}")
 

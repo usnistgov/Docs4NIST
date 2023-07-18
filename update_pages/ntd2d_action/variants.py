@@ -9,9 +9,10 @@ import shutil
 from .files import VariantsFile, MenuFile, IndexFile, CSSFile
 
 class Variant:
-    def __init__(self, repo, name, true_name=None):
+    def __init__(self, repo, name, rebuild_menu=False, true_name=None):
         self.repo = repo
         self.name = name
+        self.rebuild_menu = rebuild_menu
         if true_name is None:
             self.true_name = name
         else:
@@ -66,7 +67,10 @@ class Variant:
         gha_utils.debug(f"{self.name}.clone({name})")
         if cls is None:
             cls = self.__class__
-        clone = cls(repo=self.repo, name=name, true_name=self.true_name)
+        clone = cls(repo=self.repo,
+                    name=name,
+                    rebuild_menu=True,
+                    true_name=self.true_name)
         # this will clone any files in _static and _downloads, too
         clone.copy_html(src=self.dir)
         dst = clone.dir / "_downloads"
@@ -78,7 +82,9 @@ class Variant:
 
     @classmethod
     def from_variant(cls, variant):
-        new_variant = cls(variant.repo, variant.name)
+        new_variant = cls(repo=variant.repo,
+                          name=variant.name,
+                          rebuild_menu=variant.rebuild_menu)
         new_variant.downloads = variant.downloads.copy()
 
         return new_variant
@@ -112,8 +118,8 @@ class Version(Variant):
     InvalidVersion
         If the name is not parsable by packaging.version
     """
-    def __init__(self, repo, name):
-        super().__init__(repo=repo, name=name)
+    def __init__(self, repo, name, rebuild_menu=False):
+        super().__init__(repo=repo, name=name, rebuild_menu=rebuild_menu)
         self.version = parse(name)
 
     def __lt__(self, other):
@@ -237,9 +243,10 @@ class VariantCollector(object):
         # Need an absolute url because this gets included from
         # many different levels
         for variant in self.latest + self.stable + [self.current_variant]:
-            MenuFile(variant=variant,
-                     variants_url=url.geturl()).write()
-            CSSFile(variant=variant).write()
+            if variant.rebuild_menu:
+                MenuFile(variant=variant,
+                         variants_url=url.geturl()).write()
+                CSSFile(variant=variant).write()
 
 
         # This can be a relative url, because all variants should
