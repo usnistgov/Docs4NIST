@@ -214,7 +214,7 @@ class VariantCollector(object):
             # (but only do this if just rebuilt default branch of repo)
             self.latest[:] = [self.current_variant.clone("latest")]
 
-            gha_utils.debug(f"Cloned {branch.name} to {self.latest[0].name}")
+            gha_utils.debug(f"Cloned {self.current_variant.name} to {self.latest[0].name}")
 
         self.versions.sort(reverse=True)
         if len(self.stable_versions) > 0:
