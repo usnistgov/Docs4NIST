@@ -216,7 +216,7 @@ class VariantCollector(object):
 
             gha_utils.debug(f"Cloned {branch.name} to {self.latest[0].name}")
 
-        self.versions.sort(reverse=True))
+        self.versions.sort(reverse=True)
         if len(self.stable_versions) > 0:
             if self.current_variant.name == self.stable_versions[0]:
                 # replace any built documents in stable/
