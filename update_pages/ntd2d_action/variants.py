@@ -215,11 +215,10 @@ class VariantCollection(object):
 
         self._branches.sort()
         if self.current_variant.name == self.repo.default_branch:
-            if branch.name == self.repo.default_branch:
-                # replace any built documents in latest/
-                # (but only do this if just rebuilt default branch of repo)
-                self._latest = branch.clone("latest")
-                gha_utils.debug(f"Cloned {branch.name} to {self._latest.name}")
+            # replace any built documents in latest/
+            # (but only do this if just rebuilt default branch of repo)
+            self._latest = branch.clone("latest")
+            gha_utils.debug(f"Cloned {branch.name} to {self._latest.name}")
 
         self._versions.sort(reverse=True)
         if len(self.stable_versions) > 0:
