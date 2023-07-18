@@ -97,3 +97,14 @@ li.ntd2d_latest {
 li.ntd2d_latest a:hover {
   text-decoration: none;
 }
+
+
+/* add menu styling for active variant */
+
+li.ntd2d_latest {
+  font-weight: bold;
+}
+
+li.ntd2d_latest a:hover {
+  text-decoration: none;
+}

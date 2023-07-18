@@ -79,21 +79,10 @@
 
 /* add menu styling for active variant */
 
-li.ntd2d_stable {
+li.ntd2d_v1\.10\.100\.1000 {
   font-weight: bold;
 }
 
-li.ntd2d_stable a:hover {
-  text-decoration: none;
-}
-
-
-/* add menu styling for active variant */
-
-li.ntd2d_stable {
-  font-weight: bold;
-}
-
-li.ntd2d_stable a:hover {
+li.ntd2d_v1\.10\.100\.1000 a:hover {
   text-decoration: none;
 }
