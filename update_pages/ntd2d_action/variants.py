@@ -224,7 +224,7 @@ class VariantCollector(object):
 
         self.versions.sort(reverse=True)
         if len(self.stable_versions) > 0:
-            if self.current_variant.name == self.stable_versions[0]:
+            if self.current_variant.name == self.stable_versions[0].name:
                 # replace any built documents in stable/
                 # (but only do this if just rebuilt highest non-prerelease version)
                 self.stable[:] = [self.stable_versions[0].clone("stable",
