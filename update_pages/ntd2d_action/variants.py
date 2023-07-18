@@ -1,4 +1,5 @@
 import github_action_utils as gha_utils
+from collections import UserList
 import os
 from packaging.version import parse, InvalidVersion
 import pathlib
@@ -121,45 +122,39 @@ class Version(Variant):
         else:
             return super().__lt__(other)
 
-class VariantCollection(object):
+
+class VariantCollection(UserList):
+    def get_html(self):
+        return "\n".join(variant.get_html() for variant in self)
+
+
+class VariantCollector(object):
     def __init__(self, repo, current_variant):
         self.repo = repo
         self.current_variant = current_variant
 
         self.html_dir = repo.working_dir / "html"
 
-        self._latest = None
-        self._stable = None
-        self._branches = None
-        self._versions = None
+        self.latest = VariantCollection()
+        self.stable = VariantCollection()
+        self.branches = VariantCollection()
+        self.versions = VariantCollection()
 
-    @property
-    def latest(self):
-        gha_utils.debug("VariantCollection.latest")
-        return self._latest
-
-    @property
-    def stable(self):
-        gha_utils.debug("VariantCollection.stable")
-        return self._stable
+        self._calc_branches_and_versions()
 
     @property
     def stable_versions(self):
-        return [version
-                for version in self.versions
-                if not version.version.is_prerelease]
+        return VariantCollection([version
+                                  for version in self.versions
+                                  if not version.version.is_prerelease])
 
     def _calc_branches_and_versions(self):
-        gha_utils.debug("VariantCollection._calc_branches_and_versions")
+        gha_utils.debug("VariantCollector._calc_branches_and_versions")
 
         names = [variant.name for variant in self.html_dir.glob("*")]
 
         gha_utils.debug(f"self.repo.refs = {self.repo.refs}")
 
-        self._latest = None
-        self._stable = None
-        self._branches = []
-        self._versions = []
         for name in names:
             gha_utils.debug(f"{name}")
             try:
@@ -181,10 +176,10 @@ class VariantCollection(object):
                 gha_utils.debug(f"Variant({variant.name})")
 
             if variant.name == "latest":
-                self._latest = variant
+                self.latest[:] = [variant]
                 continue
             elif variant.name == "stable":
-                self._stable = variant
+                self.stable[:] = [variant]
                 continue
 
 
@@ -208,93 +203,30 @@ class VariantCollection(object):
                 variant.rmdir()
             elif isinstance(variant, Version):
                 gha_utils.debug(f"Appending version {variant.name}")
-                self._versions.append(variant)
+                self.versions.append(variant)
             else:
                 gha_utils.debug(f"Appending branch {variant.name}")
-                self._branches.append(variant)
+                self.branches.append(variant)
 
-        self._branches.sort()
+        self.branches.sort()
         if self.current_variant.name == self.repo.default_branch:
             # replace any built documents in latest/
             # (but only do this if just rebuilt default branch of repo)
-            self._latest = branch.clone("latest")
-            gha_utils.debug(f"Cloned {branch.name} to {self._latest.name}")
+            self.latest[:] = [self.current_variant.clone("latest")]
 
-        self._versions.sort(reverse=True)
+            gha_utils.debug(f"Cloned {branch.name} to {self.latest[0].name}")
+
+        self.versions.sort(reverse=True))
         if len(self.stable_versions) > 0:
             if self.current_variant.name == self.stable_versions[0]:
                 # replace any built documents in stable/
                 # (but only do this if just rebuilt highest non-prerelease version)
-                self._stable = self.stable_versions[0].clone("stable", cls=Variant)
-                gha_utils.debug(f"Cloned {self.stable_versions[0].name} to {self._stable.name}")
-
-    @property
-    def branches(self):
-        if self._branches is None:
-            self._calc_branches_and_versions()
-
-        return self._branches
-
-    @property
-    def versions(self):
-        if self._versions is None:
-            self._calc_branches_and_versions()
-
-        return self._versions
-
-    @property
-    def variants(self):
-        """Collect tags and versions with documentation
-        """
-        # variants = ["v1.0.0", "stables", "1.2.3", "latest", "4b1",
-        #             "0.2", "neat_idea", "doesn't_work", "experiment"]
-
-        variants = []
-        for variant in [self.latest, self.stable]:
-            if variant is not None:
-                variants.append(variant)
-        variants = variants + self.versions + self.branches
-
-        return variants
-
-    def get_html(self, items=None):
-        if items is None:
-            items = self.variants
-        link_dir = (pathlib.PurePath("/") / self.repo.repository
-                    / self.html_dir.relative_to(self.repo.working_dir))
-        variants = []
-        for variant in items:
-            variants.append(variant.get_html())
-
-        return "\n".join(variants)
-
-    def get_versions_html(self):
-        return self.get_html(items=self.versions)
-
-    def get_all_versions_html(self):
-        latest_and_stable = []
-        for variant in [self.latest, self.stable]:
-            if variant is not None:
-                latest_and_stable.append(variant)
-        return self.get_html(items=latest_and_stable + self.versions)
-
-    def get_branches_html(self):
-        return self.get_html(items=self.branches)
-
-    def get_latest_html(self):
-        if self.latest is not None:
-            return self.latest.get_html()
-        else:
-            return ""
-
-    def get_stable_html(self):
-        if self.stable is not None:
-            return self.stable.get_html()
-        else:
-            return ""
+                self.stable[:] = [self.stable_versions[0].clone("stable",
+                                                                cls=Variant)]
+                gha_utils.debug(f"Cloned {self.stable_versions[0].name} to {self.stable[0].name}")
 
     def write_files(self, pages_url):
-        gha_utils.debug(f"VariantCollection.write_files(pages_url={pages_url})")
+        gha_utils.debug(f"VariantCollector.write_files(pages_url={pages_url})")
         variants_file = VariantsFile(repo=self.repo,
                                      variants=self,
                                      pages_url=pages_url)
@@ -304,11 +236,10 @@ class VariantCollection(object):
 
         # Need an absolute url because this gets included from
         # many different levels
-        for variant in [self.latest, self.stable, self.current_variant]:
-            if variant is not None:
-                MenuFile(variant=variant,
-                         variants_url=url.geturl()).write()
-                CSSFile(variant=variant).write()
+        for variant in self.latest + self.stable + [self.current_variant]:
+            MenuFile(variant=variant,
+                     variants_url=url.geturl()).write()
+            CSSFile(variant=variant).write()
 
 
         # This can be a relative url, because all variants should

@@ -30,16 +30,16 @@ class VariantsFile(PagesFile):
         def _indent(text):
             return textwrap.indent(text, "    ")
 
-        variants = _indent(self.variants.get_html())
-        versions = _indent(self.variants.get_versions_html())
-        branches = _indent(self.variants.get_branches_html())
-        latest = _indent(self.variants.get_latest_html())
-        stable = _indent(self.variants.get_stable_html())
+        versions = _indent(self.variants.versions.get_html())
+        stable_versions = _indent(self.variants.stable_versions.get_html())
+        branches = _indent(self.variants.branches.get_html())
+        latest = _indent(self.variants.latest.get_html())
+        stable = _indent(self.variants.stable.get_html())
 
         variants_template = PagesTemplate(working_dir=self.repo.working_dir,
                                           name="variants.html").read()
-        return variants_template.format(variants=variants,
-                                        versions=versions,
+        return variants_template.format(versions=versions,
+                                        stable_versions=stable_versions,
                                         branches=branches,
                                         latest=latest,
                                         stable=stable)

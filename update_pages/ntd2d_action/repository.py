@@ -3,7 +3,7 @@ import github_action_utils as gha_utils
 import pathlib
 
 from .files import NoJekyllFile
-from .variants import Variant, VariantCollection
+from .variants import Variant, VariantCollector
 
 class Repository:
     def __init__(self, server_url, repository, branch, default_branch, docs, pages_url):
@@ -68,7 +68,7 @@ class Repository:
         variant.copy_download_file(src=self.docs.epub_file, kind="ePUB")
         variant.copy_download_file(src=self.docs.pdf_file, kind="PDF")
 
-        VariantCollection(repo=self, current_variant=variant).write_files(pages_url=self.pages_url)
+        VariantCollector(repo=self, current_variant=variant).write_files(pages_url=self.pages_url)
 
         self.commit(message=f"Update documentation for {branch}@{sha[:7]}")
 
