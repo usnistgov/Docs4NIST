@@ -67,12 +67,24 @@ not getting fancy, here).
 ~~~~~~~~~~~~~~~~~
 
 A section inserted into :ref:`MENU_HTML` if a documentation variant has
-any downloadable output (e.g., PDF or ePUB).
+any downloadable output, e.g., PDF or ePUB.
 
 Available subsitution keywords are:
 
-- ``downloads``: A pre-formatted string with HTML ``<li>`` list items
-  corresponding to each downloadable output.
+- ``downloads``: A pre-formatted string with each downloadable output
+  formatted by :ref:`DOWNLOAD_ITEM_HTML`.
+
+.. _DOWNLOAD_ITEM_HTML:
+
+|download_item.html|_
+~~~~~~~~~~~~~~~~~~~~~
+
+Formats a link to a single downloadable output.
+
+Available subsitution keywords are:
+
+- ``href``: URL of the downloadable output.
+- ``kind``: Type of downloadale output, e.g., PDF or ePUB.
 
 .. _INDEX_HTML:
 
@@ -128,24 +140,38 @@ documentation with this Action.
 
 Available subsitution keywords are:
 
-- ``branches``: A pre-formatted string with HTML ``<li>`` list items
-  corresponding to each git branch.
-- ``latest``: A pre-formatted string with an HTML ``<li>`` list item
-  corresponding to the ``HEAD`` of the `default GitHub branch
-  <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches#about-the-default-branch>`_.
-- ``stable``: A pre-formatted string with an HTML ``<li>`` list item
-  corresponding to the the ``stable_version`` with the highest
-  version identifier.
-- ``stable_versions``: A pre-formatted string with HTML ``<li>`` list items
-  corresponding to the tags or branches that satisfy the :pep:`440`
-  version specification and aren't
-  `pre-releases <https://peps.python.org/pep-0440/#pre-releases>`_.
-- ``versions``: A pre-formatted string with HTML ``<li>`` list items
-  corresponding to the tags or branches that satisfy the :pep:`440`
-  version specification.
+- ``branches``: A pre-formatted string with each git branch formatted by
+  :ref:`VARIANT_ITEM_HTML`.
+- ``latest``: A pre-formatted string with the ``HEAD`` of the `default GitHub branch
+  <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches#about-the-default-branch>`_
+  formatted by :ref:`VARIANT_ITEM_HTML`.
+- ``stable``: A pre-formatted string with the ``stable_version`` with the
+  highest version identifier formatted by :ref:`VARIANT_ITEM_HTML`.
+- ``stable_versions``: A pre-formatted string with the tags or branches
+  that satisfy the :pep:`440` version specification and aren't
+  `pre-releases <https://peps.python.org/pep-0440/#pre-releases>`_
+  formatted by :ref:`VARIANT_ITEM_HTML`.
+- ``versions``: A pre-formatted string with the tags or branches that
+  satisfy the :pep:`440` version specification formatted by
+  :ref:`VARIANT_ITEM_HTML`.
+
+.. _VARIANT_ITEM_HTML:
+
+|variant_item.html|_
+~~~~~~~~~~~~~~~~~~~~~
+
+Formats a link to a single tag or branch.
+
+Available subsitution keywords are:
+
+- ``href``: URL of the downloadable output.
+- ``kind``: Type of downloadale output, e.g., PDF or ePUB.
+
 
 .. |downloads.html|   replace:: :file:`downloads.html`
 .. _downloads.html:   https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/ntd2d_action/files/templates/downloads.html
+.. |download_item.html| replace:: :file:`download_item.html`
+.. _download_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/ntd2d_action/files/templates/download_item.html
 .. |index.html|       replace:: :file:`index.html`
 .. _index.html:       https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/ntd2d_action/files/templates/index.html
 .. |menu.html|        replace:: :file:`menu.html`
@@ -154,3 +180,6 @@ Available subsitution keywords are:
 .. _ntd2d_active.css: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/ntd2d_action/files/templates/ntd2d_active.css
 .. |variants.html|    replace:: :file:`variants.html`
 .. _variants.html:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/ntd2d_action/files/templates/variants.html
+.. |variant_item.html| replace:: :file:`variant_item.html`
+.. _variant_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/ntd2d_action/files/templates/variant_item.html
+
