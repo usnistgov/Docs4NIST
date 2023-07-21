@@ -2,7 +2,7 @@
 
 /* add menu styling for active variant */
 
-/* note: li.ntd2d_{variant} doesn't reliably worked with dotted names */
+/* note: li.ntd2d_{variant} doesn't reliably work with dotted names */
 
 li[class~="ntd2d_{variant}"] {{
   font-weight: bold;
