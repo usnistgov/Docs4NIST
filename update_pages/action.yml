@@ -1,4 +1,4 @@
-name: "NISTtheDocs2Death workhorse"
+name: "Update Pages"
 description: "Python Container to do actual work"
 author: "Jonathan Guyer"
 inputs:
