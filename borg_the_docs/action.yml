@@ -1,4 +1,4 @@
-name: "NISTtheDocs2Death workhorse"
+name: "Borg the docs"
 description: "Python Container to do actual work"
 author: "Jonathan Guyer"
 inputs:
