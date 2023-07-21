@@ -30,6 +30,6 @@ class MenuFile(PagesFile):
         menu_template = PagesTemplate(working_dir=self.repo.working_dir,
                                       name="menu.html").read()
         return menu_template.format(variants=textwrap.indent(variants, "    "),
-                                    branch=self.variant.name,
+                                    variant=self.variant.name,
                                     downloads=textwrap.indent(downloads, "    "),
                                     tree_url=tree_url)
