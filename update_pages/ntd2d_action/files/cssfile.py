@@ -9,7 +9,7 @@ class CSSFile(PagesFile):
         self.variant = variant
         super().__init__(repo=variant.repo)
 
-        self.css = Template(template_path=self.path).read()
+        self.original_css = Template(template_path=self.path).read()
 
     @property
     def path(self):
@@ -22,5 +22,5 @@ class CSSFile(PagesFile):
         active = PagesTemplate(working_dir=self.repo.working_dir,
                               name="ntd2d_active.css").read()
 
-        return active.format(css=self.css,
+        return active.format(original_contents=self.original_css,
                              variant=self.variant.name)
