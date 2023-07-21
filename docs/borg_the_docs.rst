@@ -3,9 +3,9 @@
 ``borg_the_docs`` Sub-Action
 ============================
 
-This `GitHub action <https://docs.github.com/en/actions>`_ implements a
-`Docker workflow <>`_ that is invoked by the main :ref:`NISTTHEDOCS2DEATH`
-to modify the Sphinx configuration before building the documentation.
+This `GitHub action <https://docs.github.com/en/actions>`_ is invoked by
+the main :ref:`NISTTHEDOCS2DEATH` to modify the Sphinx configuration before
+building the documentation.
 
 Usage
 -----
@@ -20,12 +20,12 @@ yourself.
       id: borg-the-docs
       uses: ./../../_actions/current/borg_the_docs
       with:
-        docs-folder: ${{ inputs.docs-folder }}
-        separated-layout: ${{ inputs.separated-layout }}
+        docs-folder: 'docs/'
+        separated-layout: false
 
 .. note::
 
-   This action must by synchronized with the invoked version of the
+   This action must be synchronized with the invoked version of the
    :ref:`NISTTHEDOCS2DEATH`, but
    "``usnistgov/NISTtheDocs2Death/borg_the_docs@${{ github.action_ref }}``"
    `doesn't work
@@ -38,13 +38,13 @@ Inputs
 ``docs-folder``
 ~~~~~~~~~~~~~~~
 
-The folder containing your Sphinx configuration (default: "``docs/``").
+The folder containing your Sphinx configuration.
 
 ``separated-layout``
 ~~~~~~~~~~~~~~~~~~~~
 
 Whether Sphinx is configued to have separate :file:`source/` and
-:file:`build/` directories.  (default: false).
+:file:`build/` directories.
 
 Outputs
 -------
@@ -54,3 +54,9 @@ Outputs
 
 The folder containing modified Sphinx configuration modified by this 
 Action.
+
+
+Implementation
+--------------
+
+This action implements a `Docker workflow <>`_ that ???

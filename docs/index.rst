@@ -1,12 +1,12 @@
-.. _NISTTHEDOCS2DEATH:
+.. _NISTTHEDOCS2DEATH_INTRO:
 
-``NISTtheDocs2Death`` Action
-============================
+``NISTtheDocs2Death``
+=====================
 
-This `GitHub action <https://docs.github.com/en/actions>`_ [#]_ implements a
-`composite  workflow <>`_ that uses the `Sphinx <https://www.sphinx-doc.org/>`_
-tool to build documentation in https://github.com/usnistgov projects and
-then host on https://pages.nist.gov as an approximation of `ReadTheDocs
+This `GitHub action <https://docs.github.com/en/actions>`_ [#]_ uses the
+`Sphinx <https://www.sphinx-doc.org/>`_ tool to build documentation in
+https://github.com/usnistgov projects and then host that documentation on
+https://pages.nist.gov, as an approximation of `ReadTheDocs
 <https://readthedocs.org>`_.
 
 .. _USAGE:
@@ -38,78 +38,21 @@ Usage
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
+   :caption: Actions:
 
+   nistthedocs2death
    borg_the_docs
    update_pages
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   api
+   design
    customization
    QandA
-
-Inputs
-------
-
-``docs-folder``
-~~~~~~~~~~~~~~~
-
-The folder containing your Sphinx configuration (default: "``docs/``").
-
-``separated-layout``
-~~~~~~~~~~~~~~~~~~~~
-
-Whether Sphinx is configured to have separate :file:`source/` and
-:file:`build/` directories or if the source files and the :file:`_build/`
-directory is inside the configuration directory.  (default: false).
-
-``pages-branch``
-~~~~~~~~~~~~~~~~
-
-The branch linked to your documentation server (default: "``nist-pages``").
-
-``pages-url``
-~~~~~~~~~~~~~
-
-URL of the web server for served documentation. (default: 
-"https://pages.nist.gov").
-
-``formats``
-~~~~~~~~~~~
-
-Type(s) of output desired in addition to html (``pdf``, and/or ``epub``) 
-(default: "").
-
-.. note::
-
-   `GitHub Actions' YAML implementation does not support list or array elements
-   <https://github.com/actions/toolkit/issues/184>`_, so
-   `use a multiline string
-   <https://stackoverflow.com/questions/75420197/how-to-use-array-input-for-a-custom-github-actions>`_
-   to declare formats, as illustrated above.
-
-``build-html-command``
-~~~~~~~~~~~~~~~~~~~~~~
-
-The command used by |sphinxaction|_ to build your html documentation
-(default: "``make html``").
-
-``build-epub-command``
-~~~~~~~~~~~~~~~~~~~~~~
-
-The command used by |sphinxaction|_ to build your ePUB documentation
-(default: "``make epub``).
-
-``build-pdf-command``
-~~~~~~~~~~~~~~~~~~~~~
-
-The command used by |sphinxaction|_ to build your PDF documentation 
-(default: "``make latexpdf``").
-
-pre-build-command
-~~~~~~~~~~~~~~~~~
-
-Run by |sphinxaction|_ before the build command.  You can use this to install
-system level dependencies, for example, with "``apt-get update -y && apt-get
-install -y perl``" (default: "").
-
 
 
 Indices and tables
@@ -128,8 +71,3 @@ Indices and tables
     Standards and Technology <https://www.nist.gov>`_, nor is it intended
     to imply that related products are necessarily the best available for
     the purpose.
-
-
-
-.. |sphinxaction|   replace::   ``usnistgov/sphinx-action``
-.. _sphinxaction:   https://github.com/usnistgov/sphinx-action
