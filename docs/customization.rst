@@ -8,6 +8,7 @@ of the hosted documentation.
 ---------------------------
 
 The first set of templates is used by the :ref:`BORGTHEDOCS` to modify the
+Sphinx configuration.
 
 These templates can be customized by forking this repository.
 
@@ -50,7 +51,9 @@ This template file controls the appearance of the dropdown menu.
 ``update_pages`` templates
 --------------------------
 
-The second set of tempaltes is used by the :ref:`UPDATEPAGES` sub-action to modify the
+The second set of tempaltes is used by the :ref:`UPDATEPAGES` sub-action to
+create the pages on the hosting site that enable switching between
+different documentation variants.
 
 You can customize any of these templates copying them to a
 :file:`_templates/` directory at the root of your `nist-pages` branch and
@@ -84,7 +87,7 @@ Formats a link to a single downloadable output.
 Available subsitution keywords are:
 
 - ``href``: URL of the downloadable output.
-- ``kind``: Type of downloadale output, e.g., PDF or ePUB.
+- ``kind``: Type of downloadable output, e.g., PDF or ePUB.
 
 .. _INDEX_HTML:
 
@@ -142,17 +145,18 @@ Available subsitution keywords are:
 
 - ``branches``: A pre-formatted string with each git branch formatted by
   :ref:`VARIANT_ITEM_HTML`.
-- ``latest``: A pre-formatted string with the ``HEAD`` of the `default GitHub branch
+- ``latest``: A pre-formatted string with the ``HEAD`` of the
+  `default GitHub branch
   <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches#about-the-default-branch>`_
   formatted by :ref:`VARIANT_ITEM_HTML`.
-- ``stable``: A pre-formatted string with the ``stable_version`` with the
-  highest version identifier formatted by :ref:`VARIANT_ITEM_HTML`.
+- ``stable``: A pre-formatted string with the ``stable_version`` that has the
+  highest version identifier, as formatted by :ref:`VARIANT_ITEM_HTML`.
 - ``stable_versions``: A pre-formatted string with the tags or branches
   that satisfy the :pep:`440` version specification and aren't
-  `pre-releases <https://peps.python.org/pep-0440/#pre-releases>`_
-  formatted by :ref:`VARIANT_ITEM_HTML`.
+  `pre-releases <https://peps.python.org/pep-0440/#pre-releases>`_,
+  each formatted by :ref:`VARIANT_ITEM_HTML`.
 - ``versions``: A pre-formatted string with the tags or branches that
-  satisfy the :pep:`440` version specification formatted by
+  satisfy the :pep:`440` version specification, each formatted by
   :ref:`VARIANT_ITEM_HTML`.
 
 .. _VARIANT_ITEM_HTML:
