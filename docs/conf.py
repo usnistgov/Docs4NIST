@@ -13,7 +13,8 @@ author = 'Jonathan E. Guyer'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.autosummary']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
@@ -22,7 +23,12 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # add these directories to sys.path here.
 import pathlib
 import sys
-sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
+
+_action_root = pathlib.Path(__file__).parents[1].resolve()
+sys.path.insert(0, (_action_root / "borg_the_docs").as_posix())
+sys.path.insert(0, (_action_root / "update_pages").as_posix())
+
+print(sys.path)
 
 autoclass_content = "both"
 

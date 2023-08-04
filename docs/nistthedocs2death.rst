@@ -107,8 +107,9 @@ install -y perl``".
 Implementation
 --------------
 
-This action implements a `composite workflow <>`_ with the following major
-steps:
+This action implements a `composite workflow
+<https://docs.github.com/en/actions/creating-actions/creating-a-composite-action>`_
+with the following major steps:
 
 1. |checkout|_
 2. :ref:`BORGTHEDOCS`

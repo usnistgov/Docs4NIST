@@ -55,7 +55,7 @@ The second set of tempaltes is used by the :ref:`UPDATEPAGES` sub-action to
 create the pages on the hosting site that enable switching between
 different documentation variants.
 
-You can customize any of these templates copying them to a
+You can customize any of these templates by copying them to a
 :file:`_templates/` directory at the root of your `nist-pages` branch and
 editing them to suit.
 
@@ -117,8 +117,8 @@ documentation.
 Available subsitution keywords are:
 
 - ``downloads``: The result of filling the :ref:`DOWNLOADS_HTML` template.
-- ``tree_url``: The GitHub URL corresponding to this branch or tag.
-- ``variant``: The branch or tag name of the active documentation.
+- ``tree_url``: The GitHub URL corresponding to the active tag or branch.
+- ``variant``: The name of the active tag or branch.
 - ``variants``: The result of filling the :ref:`VARIANTS_HTML` template.
 
 .. _NTD2D_ACTIVE_CSS:
@@ -131,7 +131,7 @@ dropdown menu.
 
 Available subsitution keywords are:
 
-- ``variant``: The branch or tag name of the active documentation.
+- ``variant``: The name of the active tag or branch.
 
 .. _VARIANTS_HTML:
 

@@ -52,11 +52,28 @@ Outputs
 ``borged-docs-folder``
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The folder containing modified Sphinx configuration modified by this 
-Action.
+The folder containing the Sphinx configuration modified by this Action.
 
 
 Implementation
 --------------
 
-This action implements a `Docker workflow <>`_ that ???
+This action implements a `Docker workflow step
+<https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action>`_.
+The Docker ``ENTRYPOINT`` installs any :file:`requirements.txt` in the
+`Sphinx configuration directory
+<https://www.sphinx-doc.org/en/master/usage/configuration.html>`_, wraps
+the :file:`conf.py` file with a
+:class:`~borg_the_docs_action.files.borgedconffile.BorgedConfFile` object,
+and invokes
+:meth:`~borg_the_docs_action.files.borgedconffile.BorgedConfFile.assimilate_theme`.
+
+
+API
+~~~
+
+.. autosummary::
+   :toctree: generated
+   :recursive:
+
+   borg_the_docs_action

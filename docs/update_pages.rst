@@ -4,8 +4,8 @@
 ===========================
 
 This `GitHub action <https://docs.github.com/en/actions>`_ is invoked by
-the main :ref:`NISTTHEDOCS2DEATH` to modify the Sphinx configuration before
-building the documentation.
+the main :ref:`NISTTHEDOCS2DEATH` to move built documentation into your
+designated :ref:`PAGES_BRANCH`.
 
 Usage
 -----
@@ -45,7 +45,7 @@ The folder containing your Sphinx configuration.
 ``separated-layout``
 ~~~~~~~~~~~~~~~~~~~~
 
-Whether Sphinx is configued to have separate :file:`source/` and
+Whether Sphinx is configured to have separate :file:`source/` and
 :file:`build/` directories.
 
 ``default-branch``
@@ -54,6 +54,8 @@ Whether Sphinx is configued to have separate :file:`source/` and
 The `default branch 
 <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches#about-the-default-branch>`_,
 as configured on GitHub.
+
+.. _PAGES_BRANCH:
 
 ``pages-branch``
 ~~~~~~~~~~~~~~~~
@@ -69,4 +71,20 @@ URL of the web server for served documentation.
 Implementation
 --------------
 
-This action implements a `Docker workflow <>`_ that ???
+This action implements a `Docker workflow step
+<https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action>`_.
+The Docker ``ENTRYPOINT`` wraps the `Sphinx configuration directory
+<https://www.sphinx-doc.org/en/master/usage/configuration.html>`_ in a
+:class:`~update_pages_action.sphinxdocs.SphinxDocs` object, wraps the
+:envvar:`GITHUB_REPOSITORY` in a
+:class:`~update_pages_action.repository.Repository` object, and invokes
+:meth:`~update_pages_action.repository.Repository.update_pages`.
+
+API
+~~~
+
+.. autosummary::
+   :toctree: generated
+   :recursive:
+
+   update_pages_action
