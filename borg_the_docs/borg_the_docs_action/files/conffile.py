@@ -20,6 +20,8 @@ def working_directory(path):
         os.chdir(prev_cwd)
 
 class ConfFile(File):
+    """Sphinx configuration file."""
+
     def __init__(self, docs_dir, source_rel=""):
         self.docs_dir = pathlib.Path(docs_dir)
         self.source_dir = self.docs_dir / source_rel
@@ -29,6 +31,8 @@ class ConfFile(File):
 
     @property
     def configuration(self):
+        """Text of configuration file."""
+
         if self._configuration is None:
             self._configuration = self.read()
         return self._configuration

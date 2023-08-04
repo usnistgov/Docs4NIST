@@ -6,6 +6,8 @@ from .files import NoJekyllFile
 from .variants import Variant, VariantCollector
 
 class Repository:
+    """Interface to a git/GitHub repository."""
+
     def __init__(self, server_url, repository, branch, default_branch, docs, pages_url):
         self.server_url = server_url
         self.url = f"{server_url}/{repository}.git"
@@ -49,6 +51,8 @@ class Repository:
         self.repo.index.remove(*args, **kwargs)
 
     def update_pages(self, branch, sha):
+        """Commit built documentation to pages branch."""
+
         gha_utils.debug("Repository.update_pages")
 
         self.clone(to_path="__nist-pages")

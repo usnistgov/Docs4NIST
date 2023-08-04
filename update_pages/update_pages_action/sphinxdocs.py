@@ -5,6 +5,8 @@ from .files import ConfFile
 
 
 class SphinxDocs:
+    """Sphinx configuration directory."""
+
     def __init__(self, docs_dir):
         self.docs_dir = pathlib.Path(docs_dir)
         self.build_dir = self.docs_dir / self.build_rel
@@ -24,9 +26,13 @@ class SphinxDocs:
         return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
 
 class SeparatedSphinxDocs(SphinxDocs):
+    """Sphinx configuration directory with :file:`source/` and :file:`build/` directories."""
+
     build_rel = "build"
     source_rel = "source"
 
 class UnifiedSphinxDocs(SphinxDocs):
+    """Sphinx configuration directory containing a :file:`_build/` directory."""
+
     build_rel = "_build"
     source_rel = ""
