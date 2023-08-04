@@ -2,6 +2,9 @@
 import github_action_utils as gha_utils
 import os
 
+import sys
+gha_utils.debug(f"sys.path = {sys.path}")
+
 from borg_the_docs_action.files import BorgedConfFile
 
 
