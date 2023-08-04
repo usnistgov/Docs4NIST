@@ -17,7 +17,7 @@ class IndexFile(PagesFile):
         """build index.html with available documentation variants
         """
         variants = self.format_iframe(src=self.variants_url)
-        variants = textwrap.indent(versions, "    ")
+        variants = textwrap.indent(variants, "    ")
 
         index_template = PagesTemplate(working_dir=self.repo.working_dir,
                                        name="index.html").read()
