@@ -31,3 +31,6 @@ host on <https://pages.nist.gov> as an approximation of
 elements, so
 [use a multiline string](https://stackoverflow.com/questions/75420197/how-to-use-array-input-for-a-custom-github-actions)
 to declare formats, as illustrated above.
+
+The self-generated documentation for this action is available at
+<https://pages.nist.gov/NISTtheDocs2Death>.

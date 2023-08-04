@@ -1,4 +1,6 @@
 class File:
+    """Base file class
+    """
     def __init__(self):
         pass
 

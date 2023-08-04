@@ -56,10 +56,13 @@ class Variant:
 
     def get_downloads_html(self):
         link_dir = pathlib.PurePath("/") / self.repo.repository
+        template = PagesTemplate(working_dir=self.repo.working_dir,
+                                 name="download_item.html").read()
         downloads = []
         for kind, download in self.downloads.items():
             href = link_dir / download.relative_to(self.repo.working_dir)
-            downloads.append(f'<li><a href="{href}">{kind}</a></li>')
+            downloads.append(template.format(href=href,
+                                             kind=kind))
 
         return "\n".join(downloads)
 
@@ -108,7 +111,10 @@ class Variant:
         link_dir = (pathlib.PurePath("/") / self.repo.repository
                     / self.dir.relative_to(self.repo.working_dir))
         href = link_dir / "index.html"
-        return f'<li class="ntd2d_{self.name}"><a href="{href}">{self.name}</a></li>'
+        template = PagesTemplate(working_dir=self.repo.working_dir,
+                                 name="variant_item.html").read()
+        return template.format(href=href,
+                               variant=self.name)
 
 class Version(Variant):
     """A Variant that satisfies the PEP 440 version specification

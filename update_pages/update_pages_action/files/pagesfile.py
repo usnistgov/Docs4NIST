@@ -1,5 +1,5 @@
 from .file import File
-from .template import IFrame
+from .template import FileTemplate
 
 
 class PagesFile(File):
@@ -8,7 +8,7 @@ class PagesFile(File):
         super().__init__()
 
     def format_iframe(self, src):
-        iframe_template = IFrame(working_dir=self.repo.working_dir).read()
+        iframe_template = FileTemplate(name="iframe.html").read()
         return iframe_template.format(src=src)
 
     def write(self):

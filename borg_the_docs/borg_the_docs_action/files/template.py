@@ -23,7 +23,3 @@ class PagesTemplate(FileTemplate):
         self.template_path = working_dir / "_templates" / name
         if not self.template_path.exists():
             super().__init__(name=name)
-
-class IFrame(PagesTemplate):
-    def __init__(self, working_dir):
-        super().__init__(working_dir=working_dir, name="iframe.html")

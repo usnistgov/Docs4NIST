@@ -9,6 +9,8 @@ from .templatehierarchy import TemplateHierarchy
 
 
 class BorgedConfFile(ConfFile):
+    """Sphinx configuration file that overlays the html theme."""
+
     def __init__(self, docs_dir, source_rel=""):
         self.original_docs_dir = pathlib.Path(docs_dir)
         borged_docs_dir = self.original_docs_dir.as_posix() + "-BORGED"
@@ -27,7 +29,7 @@ class BorgedConfFile(ConfFile):
         return self.configuration.get("html_theme", "default")
 
     def assimilate_theme(self, name):
-        configuration = self.read()
+        """Replace configuration directory with customized html theme."""
 
         self.theme = TemplateHierarchy(name=name,
                                        destination_dir=self.theme_path,

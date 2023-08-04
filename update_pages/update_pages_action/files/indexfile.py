@@ -14,12 +14,13 @@ class IndexFile(PagesFile):
         return self.repo.working_dir / "index.html"
 
     def get_contents(self):
-        """build index.html with available documentation versions
+        """build index.html with available documentation variants
         """
-        versions = self.format_iframe(src=self.variants_url)
-        versions = textwrap.indent(versions, "    ")
+        variants = self.format_iframe(src=self.variants_url)
+        variants = textwrap.indent(versions, "    ")
 
         index_template = PagesTemplate(working_dir=self.repo.working_dir,
                                        name="index.html").read()
-        return index_template.format(versions=versions,
+        return index_template.format(variants=variants,
+                                     owner=self.repo.owner,
                                      repository=self.repo.repository)

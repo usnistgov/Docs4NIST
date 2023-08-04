@@ -9,7 +9,7 @@ class CSSFile(PagesFile):
         self.variant = variant
         super().__init__(repo=variant.repo)
 
-        self.css = Template(template_path=self.path).read()
+        self.original_css = Template(template_path=self.path).read()
 
     @property
     def path(self):
@@ -19,8 +19,8 @@ class CSSFile(PagesFile):
     def get_contents(self):
         gha_utils.debug(f"CSSFile.get_contents()")
 
-        annex = PagesTemplate(working_dir=self.repo.working_dir,
-                              name="ntd2d_annex.css").read()
+        active = PagesTemplate(working_dir=self.repo.working_dir,
+                              name="ntd2d_active.css").read()
 
-        return annex.format(css=self.css,
-                            variant=self.variant.name)
+        return active.format(original_contents=self.original_css,
+                             variant=self.variant.name)

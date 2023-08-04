@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import os
 
-from ntd2d_action.repository import Repository
-from ntd2d_action.sphinxdocs import SeparatedSphinxDocs, UnifiedSphinxDocs
+from update_pages_action.repository import Repository
+from update_pages_action.sphinxdocs import SeparatedSphinxDocs, UnifiedSphinxDocs
 
 
 def main():

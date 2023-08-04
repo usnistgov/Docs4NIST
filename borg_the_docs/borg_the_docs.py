@@ -2,7 +2,7 @@
 import github_action_utils as gha_utils
 import os
 
-from ntd2d_action.files import BorgedConfFile
+from borg_the_docs_action.files import BorgedConfFile
 
 
 def main():
