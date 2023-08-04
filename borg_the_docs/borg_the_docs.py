@@ -4,6 +4,7 @@ import os
 
 import sys
 gha_utils.debug(f"sys.path = {sys.path}")
+gha_utils.debug(f"ls = {os.listdir('/')}")
 
 from borg_the_docs_action.files import BorgedConfFile
 
