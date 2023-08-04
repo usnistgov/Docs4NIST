@@ -6,7 +6,7 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: usnistgov/NISTtheDocs2Death@main
+      - uses: usnistgov/NISTtheDocs2Death@fix_Docker
         with:
           docs-folder: docs/
           formats: |-
