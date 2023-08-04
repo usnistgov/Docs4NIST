@@ -7,6 +7,7 @@ import re
 import shutil
 
 from .files import VariantsFile, MenuFile, IndexFile, CSSFile
+from .files.template import PagesTemplate
 
 class Variant:
     def __init__(self, repo, name, rebuild_menu=False, true_name=None):
