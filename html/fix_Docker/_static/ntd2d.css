@@ -79,12 +79,12 @@
 
 /* add menu styling for active variant */
 
-/* note: li.ntd2d_1_merge doesn't reliably worked with dotted names */
+/* note: li.ntd2d_fix_Docker doesn't reliably work with dotted names */
 
-li[class~="ntd2d_1_merge"] {
+li[class~="ntd2d_fix_Docker"] {
   font-weight: bold;
 }
 
-li[class~="ntd2d_1_merge"] a:hover {
+li[class~="ntd2d_fix_Docker"] a:hover {
   text-decoration: none;
 }
