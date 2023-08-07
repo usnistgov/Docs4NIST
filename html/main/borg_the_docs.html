@@ -56,7 +56,6 @@ yourself.</p>
 <span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./../../_actions/current/borg_the_docs</span><span class="w"></span>
 <span class="w">  </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">docs-folder</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;docs/&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">separated-layout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -74,17 +73,16 @@ hence the clumsy <code class="docutils literal notranslate"><span class="pre">us
 <h3><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code><a class="headerlink" href="#docs-folder" title="Permalink to this heading">¶</a></h3>
 <p>The folder containing your Sphinx configuration.</p>
 </section>
-<section id="separated-layout">
-<h3><code class="docutils literal notranslate"><span class="pre">separated-layout</span></code><a class="headerlink" href="#separated-layout" title="Permalink to this heading">¶</a></h3>
-<p>Whether Sphinx is configued to have separate <code class="file docutils literal notranslate"><span class="pre">source/</span></code> and
-<code class="file docutils literal notranslate"><span class="pre">build/</span></code> directories.</p>
-</section>
 </section>
 <section id="outputs">
 <h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">¶</a></h2>
 <section id="borged-docs-folder">
 <h3><code class="docutils literal notranslate"><span class="pre">borged-docs-folder</span></code><a class="headerlink" href="#borged-docs-folder" title="Permalink to this heading">¶</a></h3>
 <p>The folder containing the Sphinx configuration modified by this Action.</p>
+</section>
+<section id="borged-build-folder">
+<h3><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code><a class="headerlink" href="#borged-build-folder" title="Permalink to this heading">¶</a></h3>
+<p>The folder containing the Sphinx build outputs.</p>
 </section>
 </section>
 <section id="implementation">
@@ -123,11 +121,11 @@ and invokes
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#inputs">Inputs</a><ul>
 <li><a class="reference internal" href="#docs-folder"><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code></a></li>
-<li><a class="reference internal" href="#separated-layout"><code class="docutils literal notranslate"><span class="pre">separated-layout</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#outputs">Outputs</a><ul>
 <li><a class="reference internal" href="#borged-docs-folder"><code class="docutils literal notranslate"><span class="pre">borged-docs-folder</span></code></a></li>
+<li><a class="reference internal" href="#borged-build-folder"><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#implementation">Implementation</a><ul>

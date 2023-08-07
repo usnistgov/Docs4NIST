@@ -27,5 +27,7 @@
    :toctree:
    :recursive:
 
+   borg_the_docs_action.borgedsphinxdocs
    borg_the_docs_action.files
+   borg_the_docs_action.sphinxdocs
 
