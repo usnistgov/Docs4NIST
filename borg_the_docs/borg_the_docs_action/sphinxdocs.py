@@ -11,7 +11,7 @@ class SphinxDocs:
 
     def __init__(self, docs_dir):
         self.docs_dir = pathlib.Path(docs_dir)
-
+        
         if (self.docs_dir / "source" / "conf.py").is_file():
             self.source_dir = self.docs_dir / "source"
             self.build_dir = self.docs_dir / "build"
@@ -29,6 +29,7 @@ class SphinxDocs:
         return self.build_dir / "html"
 
     @property
+    
     def epub_file(self):
         return self.build_dir / "epub" / f"{self.conf.project}.epub"
 

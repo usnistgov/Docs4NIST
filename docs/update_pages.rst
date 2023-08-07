@@ -20,7 +20,6 @@ yourself.
       uses: ./../../_actions/current/update_pages
       with:
         docs-folder: 'docs/'
-        separated-layout: false
         default-branch: 'main'
         pages-branch: 'nist-pages'
         pages-url: 'https://pages.nist.gov'
@@ -41,12 +40,6 @@ Inputs
 ~~~~~~~~~~~~~~~
 
 The folder containing your Sphinx configuration.
-
-``separated-layout``
-~~~~~~~~~~~~~~~~~~~~
-
-Whether Sphinx is configured to have separate :file:`source/` and
-:file:`build/` directories.
 
 ``default-branch``
 ~~~~~~~~~~~~~~~~~~

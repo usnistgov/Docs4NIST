@@ -1,25 +1,18 @@
 #!/usr/bin/env python3
+import github_action_utils as gha_utils
 import os
+import subprocess
 
-from update_pages_action.repository import Repository
-from update_pages_action.sphinxdocs import SeparatedSphinxDocs, UnifiedSphinxDocs
+from update_pages_action.sphinxdocs import SphinxDocs
 
 
 def main():
-    if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
-        docs = SeparatedSphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
-    else:
-        docs = UnifiedSphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+    docs.install_requirements()
 
-    repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
-                      repository=os.environ['GITHUB_REPOSITORY'],
-                      branch=os.environ['INPUT_PAGES-BRANCH'],
-                      default_branch=os.environ['INPUT_DEFAULT-BRANCH'],
-                      docs=docs,
-                      pages_url=os.environ['INPUT_PAGES-URL'])
-
-    repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
-                      sha=os.environ['GITHUB_SHA'])
+    # Modify the Sphinx theme
+    # This needs to be a subprocess so that it sees packages installed above
+    subprocess.check_call(["/update_pages.py"])
 
 if __name__ == "__main__":
     main()

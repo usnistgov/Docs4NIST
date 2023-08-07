@@ -10,7 +10,7 @@ from .file import File
 # [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
 # https://stackoverflow.com/a/42441759/2019542
 @contextlib.contextmanager
-def working_directory(path):
+def _working_directory(path):
     """Changes working directory and returns to previous on exit."""
     prev_cwd = pathlib.Path.cwd()
     os.chdir(path)
@@ -20,32 +20,33 @@ def working_directory(path):
         os.chdir(prev_cwd)
 
 class ConfFile(File):
-    def __init__(self, docs_dir, source_rel=""):
-        self.docs_dir = pathlib.Path(docs_dir)
-        self.source_dir = self.docs_dir / source_rel
+    """Sphinx configuration file."""
+
+    def __init__(self, source_dir):
+        self.source_dir = pathlib.Path(source_dir)
         self.theme = None
         self._code = None
         self._configuration = None
 
     @property
     def configuration(self):
+        """Text of configuration file."""
+
         if self._configuration is None:
             self._configuration = self.read()
         return self._configuration
 
     @property
-    def html_theme_path(self):
-        html_theme_path = self.configuration.get("html_theme_path", [])
-
-        relative_path = self.theme_path.relative_to(self.source_dir).as_posix()
-        if relative_path not in html_theme_path:
-            html_theme_path.append(relative_path)
-
-        return html_theme_path
-
-    @property
     def exclude_patterns(self):
         return self.configuration.get("exclude_patterns", [])
+
+    @property
+    def html_theme(self):
+        return self.configuration.get("html_theme", "default")
+
+    @property
+    def html_theme_path(self):
+        return self.configuration.get("html_theme_path", [])
 
     @property
     def original_contents(self):
@@ -76,7 +77,7 @@ class ConfFile(File):
 
         code = compile(self.original_contents, self.path, 'exec')
 
-        with working_directory(self.source_dir):
+        with _working_directory(self.source_dir):
             exec(code, namespace)  # NoQA: S102
 
         return namespace
