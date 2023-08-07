@@ -34,7 +34,6 @@ class ConfFile(File):
 
         if self._configuration is None:
             self._configuration = self.read()
-            gha_utils.debug(f"configuration: {self._configuration}")
         return self._configuration
 
     @property
