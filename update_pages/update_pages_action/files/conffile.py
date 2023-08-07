@@ -23,7 +23,7 @@ class ConfFile(File):
     """Sphinx configuration file."""
 
     def __init__(self, source_dir):
-        self.source_dir = pathlib.Path(self.source_dir)
+        self.source_dir = pathlib.Path(source_dir)
         self.theme = None
         self._code = None
         self._configuration = None
