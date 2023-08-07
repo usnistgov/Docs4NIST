@@ -29,4 +29,5 @@ class BorgedSphinxDocs(SphinxDocs):
                                        inherited_theme=self.inherited_theme)
         self.theme.write()
         
+        self.conf.set_html_theme(name=name)
         self.conf.write()
