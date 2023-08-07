@@ -25,7 +25,7 @@ class BorgedSphinxDocs(SphinxDocs):
         """Replace configuration directory with customized html theme."""
 
         self.theme = TemplateHierarchy(name=name,
-                                       destination_dir=self.theme_path,
+                                       destination_dir=self.conf.theme_path,
                                        inherited_theme=self.inherited_theme)
         self.theme.write()
         
