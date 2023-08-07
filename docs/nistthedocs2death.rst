@@ -28,7 +28,6 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
          - uses: usnistgov/NISTtheDocs2Death@0.1
            with:
              docs-folder: docs/
-             separated-layout: false
              pages-branch: 'nist-pages'
              pages-url: 'https://pages.nist.gov'
              formats: ''
@@ -44,13 +43,6 @@ Inputs
 ~~~~~~~~~~~~~~~
 
 The folder containing your Sphinx configuration.
-
-``separated-layout``
-~~~~~~~~~~~~~~~~~~~~
-
-Whether Sphinx is configured to have separate :file:`source/` and
-:file:`build/` directories or if the source files and the :file:`_build/`
-directory is inside the configuration directory.
 
 ``pages-branch``
 ~~~~~~~~~~~~~~~~

@@ -22,7 +22,6 @@ runs:
       uses: ./../../_actions/current/borg_the_docs
       with:
         docs-folder: ${{ inputs.docs-folder }}
-        separated-layout: ${{ inputs.separated-layout }}
     :
     :
 ```
@@ -56,7 +55,6 @@ runs:
       uses: usnistgov/NISTtheDocs2Death/borg_the_docs@${{ github.action_ref }}
       with:
         docs-folder: ${{ inputs.docs-folder }}
-        separated-layout: ${{ inputs.separated-layout }}
     :
     :
 ```

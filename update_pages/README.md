@@ -23,7 +23,6 @@ runs:
       uses: ./../../_actions/current/update_pages
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
-        separated-layout: ${{ inputs.separated-layout }}
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
         pages-url: ${{ inputs.pages-url }}

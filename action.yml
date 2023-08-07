@@ -14,11 +14,6 @@ inputs:
       The folder containing your sphinx docs.
     required: true
     default: "docs/"
-  separated-layout:
-    description:
-      Whether sphinx docs have separate source and build directories.
-    required: true
-    default: false
   pages-branch:
     description: 
       The branch linked to your documentation server.
@@ -67,12 +62,6 @@ runs:
       run: |
         refname=${{ github.ref_name }}
         echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
-        if ${{ inputs.separated-layout }}
-        then
-            echo "BUILD_DIR=build" >> $GITHUB_ENV
-        else
-            echo "BUILD_DIR=_build" >> $GITHUB_ENV
-        fi
     - name: Symlink current Actions repo
       # from https://github.com/orgs/community/discussions/41927#discussioncomment-4655948
       # @mbrancato
@@ -88,7 +77,6 @@ runs:
       uses: ./../../_actions/current/borg_the_docs
       with:
         docs-folder: ${{ inputs.docs-folder }}
-        separated-layout: ${{ inputs.separated-layout }}
     - uses: usnistgov/sphinx-action@master
       name: Build HTML
       with:
@@ -118,7 +106,6 @@ runs:
       uses: ./../../_actions/current/update_pages
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
-        separated-layout: ${{ inputs.separated-layout }}
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
         pages-url: ${{ inputs.pages-url }}
@@ -145,7 +132,7 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/html
+          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/html
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ always() }}
@@ -154,7 +141,7 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/epub/*.epub
+          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/epub/*.epub
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ contains(inputs.formats, 'epub') && always() }}
@@ -163,7 +150,7 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-docs-folder }}/${{ env.BUILD_DIR }}/latex/${{ github.event.repository.name }}.pdf
+          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.pdf
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ contains(inputs.formats, 'pdf') && always() }}

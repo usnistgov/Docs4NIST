@@ -21,7 +21,6 @@ yourself.
       uses: ./../../_actions/current/borg_the_docs
       with:
         docs-folder: 'docs/'
-        separated-layout: false
 
 .. note::
 
@@ -40,12 +39,6 @@ Inputs
 
 The folder containing your Sphinx configuration.
 
-``separated-layout``
-~~~~~~~~~~~~~~~~~~~~
-
-Whether Sphinx is configued to have separate :file:`source/` and
-:file:`build/` directories.
-
 Outputs
 -------
 
@@ -53,6 +46,11 @@ Outputs
 ~~~~~~~~~~~~~~~~~~~~~~
 
 The folder containing the Sphinx configuration modified by this Action.
+
+``borged-build-folder``
+~~~~~~~~~~~~~~~~~~~~~~
+
+The folder containing the Sphinx build outputs.
 
 
 Implementation
