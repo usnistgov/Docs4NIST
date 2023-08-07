@@ -29,7 +29,7 @@ Usage
      docs:
        runs-on: ubuntu-latest
        steps:
-         - uses: usnistgov/NISTtheDocs2Death@main
+         - uses: usnistgov/NISTtheDocs2Death@0.2
            with:
              docs-folder: docs/
              formats: |-
