@@ -37,9 +37,10 @@ class BorgedConfFile(ConfFile):
         self._html_theme = name
 
     def get_contents(self):
-        conf_template = FileTemplate(name="conf.py").read()
+        original_contents = self.original_docs.conf.get_contents()
 
-        return conf_template.format(original_contents=super().get_contents(),
+        conf_template = FileTemplate(name="conf.py").read()
+        return conf_template.format(original_contents=original_contents,
                                     html_theme=self.html_theme,
                                     html_theme_path=self.html_theme_path,
                                     exclude_patterns=self.exclude_patterns)
