@@ -1,40 +1,29 @@
-import contextlib
-import github_action_utils as gha_utils
-import pathlib
-import shutil
-
 from .conffile import ConfFile
 from .template import FileTemplate
-from .templatehierarchy import TemplateHierarchy
 
 
 class BorgedConfFile(ConfFile):
     """Sphinx configuration file that overlays the html theme."""
 
-    def __init__(self, docs_dir, source_rel=""):
-        self.original_docs_dir = pathlib.Path(docs_dir)
-        borged_docs_dir = self.original_docs_dir.as_posix() + "-BORGED"
-        borged_docs_dir = pathlib.Path(borged_docs_dir)
-        shutil.copytree(self.original_docs_dir, borged_docs_dir)
-        super().__init__(docs_dir=borged_docs_dir, source_rel=source_rel)
+    def __init__(self, source_dir, original_docs):
+        self.original_docs = original_docs
+        super().__init__(source_dir=source_dir)
 
     @property
     def exclude_patterns(self):
         exclude_patterns = super().exclude_patterns
 
-        return exclude_patterns + [self.original_docs_dir.as_posix()]
+        return exclude_patterns + [self.original_docs.docs_dir.as_posix()]
 
     @property
-    def inherited_theme(self):
-        return self.configuration.get("html_theme", "default")
+    def html_theme_path(self):
+        html_theme_path = self.original_docs.conf.html_theme_path.copy()
 
-    def assimilate_theme(self, name):
-        """Replace configuration directory with customized html theme."""
+        relative_path = self.theme_path.relative_to(self.source_dir).as_posix()
+        if relative_path not in html_theme_path:
+            html_theme_path.append(relative_path)
 
-        self.theme = TemplateHierarchy(name=name,
-                                       destination_dir=self.theme_path,
-                                       inherited_theme=self.inherited_theme)
-        self.theme.write()
+        return html_theme_path
 
     def get_contents(self):
         conf_template = FileTemplate(name="conf.py").read()

@@ -1,21 +1,14 @@
 #!/usr/bin/env python3
 import github_action_utils as gha_utils
 import os
-import pathlib
 import subprocess
+
+from update_pages_action.sphinxdocs import SphinxDocs
 
 
 def main():
-    # Install any packages needed for Sphinx
-    # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
-    # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
-    docs_dir = pathlib.Path(os.environ['INPUT_DOCS-FOLDER'])
-    docs_requirements = docs_dir / "requirements.txt"
-    if docs_requirements.is_file():
-        gha_utils.debug(f"pip installing")
-        subprocess.check_call(["pip", "install", "-r", docs_requirements.as_posix()])
-
-    gha_utils.warning(f"separated-layout = {os.environ['INPUT_SEPARATED-LAYOUT']}")
+    docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+    docs.install_requirements()
 
     # Modify the Sphinx theme
     # This needs to be a subprocess so that it sees packages installed above

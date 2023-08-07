@@ -22,9 +22,8 @@ def working_directory(path):
 class ConfFile(File):
     """Sphinx configuration file."""
 
-    def __init__(self, docs_dir, source_rel=""):
-        self.docs_dir = pathlib.Path(docs_dir)
-        self.source_dir = self.docs_dir / source_rel
+    def __init__(self, source_dir):
+        self.source_dir = pathlib.Path(self.source_dir)
         self.theme = None
         self._code = None
         self._configuration = None
@@ -38,18 +37,16 @@ class ConfFile(File):
         return self._configuration
 
     @property
-    def html_theme_path(self):
-        html_theme_path = self.configuration.get("html_theme_path", [])
-
-        relative_path = self.theme_path.relative_to(self.source_dir).as_posix()
-        if relative_path not in html_theme_path:
-            html_theme_path.append(relative_path)
-
-        return html_theme_path
-
-    @property
     def exclude_patterns(self):
         return self.configuration.get("exclude_patterns", [])
+
+    @property
+    def html_theme(self):
+        return self.configuration.get("html_theme", "default")
+
+    @property
+    def html_theme_path(self):
+        return self.configuration.get("html_theme_path", [])
 
     @property
     def original_contents(self):

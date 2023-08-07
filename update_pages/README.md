@@ -54,11 +54,6 @@ runs:
     - name: Commit documentation changes
       uses: usnistgov/NISTtheDocs2Death/update_pages@${{ github.action_ref }}
       with:
-        docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
-        separated-layout: ${{ inputs.separated-layout }}
-        default-branch: ${{ github.event.repository.default_branch }}
-        pages-branch: ${{ inputs.pages-branch }}
-        pages-url: ${{ inputs.pages-url }}
     :
     :
 ```

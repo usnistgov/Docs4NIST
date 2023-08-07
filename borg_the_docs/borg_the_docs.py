@@ -2,21 +2,17 @@
 import github_action_utils as gha_utils
 import os
 
-from borg_the_docs_action.files import BorgedConfFile
+from borg_the_docs_action.sphinxdocs import SphinxDocs
+from borg_the_docs_action.borgedsphinxdocs import BorgedSphinxDocs
 
 
 def main():
-    if os.environ['INPUT_SEPARATED-LAYOUT'] == 'true':
-        source_rel = "source"
-    else:
-        source_rel = ""
+    original_docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+    docs = BorgedSphinxDocs(original_docs=original_docs)
+    docs.assimilate_theme(name="ntd2d")
 
-    conf = BorgedConfFile(docs_dir=os.environ['INPUT_DOCS-FOLDER'],
-                          source_rel=source_rel)
-    conf.assimilate_theme(name="ntd2d")
-    conf.write()
-
-    gha_utils.set_output("borged-docs-folder", conf.docs_dir.as_posix())
+    gha_utils.set_output("borged-docs-folder", docs.docs_dir.as_posix())
+    gha_utils.set_output("borged-build-folder", docs.build_dir.as_posix())
 
 if __name__ == "__main__":
     try:
