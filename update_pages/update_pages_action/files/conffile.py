@@ -10,7 +10,7 @@ from .file import File
 # [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
 # https://stackoverflow.com/a/42441759/2019542
 @contextlib.contextmanager
-def working_directory(path):
+def _working_directory(path):
     """Changes working directory and returns to previous on exit."""
     prev_cwd = pathlib.Path.cwd()
     os.chdir(path)
@@ -77,7 +77,7 @@ class ConfFile(File):
 
         code = compile(self.original_contents, self.path, 'exec')
 
-        with working_directory(self.source_dir):
+        with _working_directory(self.source_dir):
             exec(code, namespace)  # NoQA: S102
 
         return namespace
