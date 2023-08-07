@@ -18,7 +18,7 @@ host on <https://pages.nist.gov> as an approximation of
       docs:
         runs-on: ubuntu-latest
         steps:
-          - uses: usnistgov/NISTtheDocs2Death@0.1
+          - uses: usnistgov/NISTtheDocs2Death@0.2
             with:
               docs-folder: docs/
               formats: |-
