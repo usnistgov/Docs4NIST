@@ -3,7 +3,7 @@ import github_action_utils as gha_utils
 import os
 import subprocess
 
-from update_pages_action.sphinxdocs import SphinxDocs
+from borg_the_docs_action.sphinxdocs import SphinxDocs
 
 
 def main():
