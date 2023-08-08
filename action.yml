@@ -151,6 +151,7 @@ runs:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
           ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.pdf
+          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.log
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ contains(inputs.formats, 'pdf') && always() }}
