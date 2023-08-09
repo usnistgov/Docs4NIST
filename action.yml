@@ -114,7 +114,7 @@ runs:
       shell: bash
       run: |
         sudo chown -R runner:docker __nist-pages
-      if: ${{ steps.build-html.conclusion == 'success' }}
+      if: ${{ success() || steps.build-html.conclusion == 'success' }}
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
@@ -128,7 +128,7 @@ runs:
         (
           github.event_name != 'pull_request'
           || github.event.pull_request.head.repo.full_name == github.repository
-        ) && (steps.build-html.conclusion == 'success')
+        ) && (success() || steps.build-html.conclusion == 'success')
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
