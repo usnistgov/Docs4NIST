@@ -12,8 +12,7 @@ class MenuFile(PagesFile):
 
     @property
     def path(self):
-        return (self.repo.working_dir / "html" / self.variant.name
-                / "_static" / "ntd2d_menu.html")
+        return self.variant.dir / "_static" / "ntd2d_menu.html"
 
     def get_contents(self):
         variants = self.format_iframe(src=self.variants_url)
