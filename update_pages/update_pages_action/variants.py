@@ -20,7 +20,7 @@ class Variant:
             self.true_name = true_name
         self.downloads = {}
 
-        self.dir = repo.working_dir / "html" / name
+        self.dir = repo.working_dir / repo.docs.conf.language / name
 
     def rmdir(self):
         gha_utils.debug(f"{self.name}.rmdir()")
@@ -146,7 +146,7 @@ class VariantCollector(object):
         self.repo = repo
         self.current_variant = current_variant
 
-        self.html_dir = repo.working_dir / "html"
+        self.html_dir = repo.working_dir / repo.docs.conf.language
 
         self.latest = VariantCollection()
         self.stable = VariantCollection()

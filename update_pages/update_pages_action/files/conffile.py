@@ -49,6 +49,11 @@ class ConfFile(File):
         return self.configuration.get("html_theme_path", [])
 
     @property
+    def language(self):
+        """Access `language <https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language>`_"""
+        return self.configuration.get("language", "en")
+
+    @property
     def original_contents(self):
         if self._code is None:
             with self.path.open(mode='r') as f:
