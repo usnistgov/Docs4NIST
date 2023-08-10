@@ -13,8 +13,7 @@ class CSSFile(PagesFile):
 
     @property
     def path(self):
-        return (self.repo.working_dir / "html" / self.variant.name
-                / "_static" / "ntd2d.css")
+        return self.variant.dir / "_static" / "ntd2d.css"
 
     def get_contents(self):
         gha_utils.debug(f"CSSFile.get_contents()")
