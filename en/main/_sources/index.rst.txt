@@ -16,6 +16,10 @@ Usage
 
 - `Configure your repo for publishing on pages.nist.gov
   <https://github.com/usnistgov/pages-root/wiki/Configuring-your-repo-for-publishing-on-pages.nist.gov>`_.
+- `Enable GitHub Actions for your repo
+  <https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository>`_
+  and select "Allow all actions and reusable workflows" (you may need to
+  submit a request to devops@nist.gov to enable this for you).
 - For each branch of your repository where you want to host documentation, 
   add a workflow, such as :file:`.github/workflows/NISTtheDocs2Death.yml`:
 
