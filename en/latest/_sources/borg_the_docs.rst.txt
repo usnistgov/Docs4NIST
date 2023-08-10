@@ -48,7 +48,7 @@ Outputs
 The folder containing the Sphinx configuration modified by this Action.
 
 ``borged-build-folder``
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The folder containing the Sphinx build outputs.
 
