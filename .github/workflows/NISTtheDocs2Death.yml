@@ -9,6 +9,8 @@ jobs:
       - uses: usnistgov/NISTtheDocs2Death@main
         with:
           docs-folder: docs/
+          pre-build-command: >
+            conda install --channel conda-forge doxygen
           formats: |-
             epub
             pdf
