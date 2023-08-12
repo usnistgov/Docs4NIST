@@ -1,0 +1,34 @@
+﻿update\_pages\_action
+=====================
+
+.. automodule:: update_pages_action
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   update_pages_action.files
+   update_pages_action.repository
+   update_pages_action.sphinxdocs
+   update_pages_action.variants
+
