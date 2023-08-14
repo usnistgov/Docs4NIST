@@ -92,7 +92,7 @@ runs:
         build-command: ${{ inputs.build-epub-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
       if: ${{ contains(inputs.formats, 'epub') }}
-    - uses: usnistgov/sphinx-action@conda
+    - uses: usnistgov/sphinx-action@latexpdfconda
       name: Build PDF
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
