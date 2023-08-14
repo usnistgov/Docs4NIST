@@ -23,6 +23,8 @@ yourself.
         default-branch: 'main'
         pages-branch: 'nist-pages'
         pages-url: 'https://pages.nist.gov'
+        pip-requirements: ''
+        conda-environment: ''
 
 .. note::
 
@@ -59,6 +61,17 @@ The branch linked to your documentation server.
 ~~~~~~~~~~~~~
 
 URL of the web server for served documentation.
+
+``pip-requirements``
+~~~~~~~~~~~~~~~~~~~~
+
+The path to the pip requirements file, relative to the root of the project.
+
+``conda-environment``
+~~~~~~~~~~~~~~~~~~~~~
+
+The path to the Conda environment file, relative to the root of the
+project.
 
 
 Implementation

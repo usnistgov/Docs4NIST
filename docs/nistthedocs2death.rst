@@ -35,6 +35,8 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
              build-epub-command: make epub
              build-pdf-command: make epub
              pre-build-command: ''
+             pip-requirements: ''
+             conda-environment: ''
 
 Inputs
 ------
@@ -89,12 +91,24 @@ The command used by |sphinxaction|_ to build your ePUB documentation.
 
 The command used by |sphinxaction|_ to build your PDF documentation.
 
-pre-build-command
-~~~~~~~~~~~~~~~~~
+``pre-build-command``
+~~~~~~~~~~~~~~~~~~~~~
 
 Run by |sphinxaction|_ before the build command.  You can use this to install
 system level dependencies, for example, with "``apt-get update -y && apt-get
 install -y perl``".
+
+``pip-requirements``
+~~~~~~~~~~~~~~~~~~~~
+
+The path to the pip requirements file, relative to the root of the project.
+
+``conda-environment``
+~~~~~~~~~~~~~~~~~~~~~
+
+The path to the Conda environment file, relative to the root of the
+project.
+
 
 Implementation
 --------------
