@@ -9,8 +9,7 @@ jobs:
       - uses: usnistgov/NISTtheDocs2Death@conda
         with:
           docs-folder: docs/
-          pre-build-command: >
-            conda install --channel conda-forge doxygen
+          conda-environment: docs/environment.yml
           formats: |-
             epub
             pdf

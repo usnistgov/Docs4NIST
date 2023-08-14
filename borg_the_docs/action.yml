@@ -7,6 +7,16 @@ inputs:
       The folder containing your Sphinx configuration.
     required: true
     default: "docs/"
+  pip-requirements:
+    description:
+      The path to the pip requirements file, relative to the root of the
+      project.
+    required: false
+  conda-environment:
+    description:
+      The path to the Conda environment file, relative to the root of the
+      project.
+    required: false
 outputs:
   borged-docs-folder:
     description: 'The folder containing modified Sphinx configuration'

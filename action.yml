@@ -48,6 +48,16 @@ inputs:
       dependencies, for example with
       "apt-get update -y && apt-get install -y perl"
     required: false
+  pip-requirements:
+    description:
+      The path to the pip requirements file, relative to the root of the
+      project.
+    required: false
+  conda-environment:
+    description:
+      The path to the Conda environment file, relative to the root of the
+      project.
+    required: false
 runs:
   using: "composite"
   steps:
@@ -77,11 +87,15 @@ runs:
       uses: ./../../_actions/current/borg_the_docs
       with:
         docs-folder: ${{ inputs.docs-folder }}
+        pip-requirements: ${{ inputs.pip-requirements }}
+        conda-environment: ${{ inputs.conda-environment }}
     - uses: usnistgov/sphinx-action@conda
       id: build-html
       name: Build HTML
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
+        pip-requirements: ${{ inputs.pip-requirements }}
+        conda-environment: ${{ inputs.conda-environment }}
         build-command: ${{ inputs.build-html-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
       # always build html
@@ -89,6 +103,8 @@ runs:
       name: Build ePUB
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
+        pip-requirements: ${{ inputs.pip-requirements }}
+        conda-environment: ${{ inputs.conda-environment }}
         build-command: ${{ inputs.build-epub-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
       if: ${{ contains(inputs.formats, 'epub') }}
@@ -96,6 +112,8 @@ runs:
       name: Build PDF
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
+        pip-requirements: ${{ inputs.pip-requirements }}
+        conda-environment: ${{ inputs.conda-environment }}
         build-command: ${{ inputs.build-pdf-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
       if: ${{ contains(inputs.formats, 'pdf') }}
@@ -110,6 +128,8 @@ runs:
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
         pages-url: ${{ inputs.pages-url }}
+        pip-requirements: ${{ inputs.pip-requirements }}
+        conda-environment: ${{ inputs.conda-environment }}
       if: ${{ success() || steps.build-html.conclusion == 'success' }}
     - name: Change ownership
       shell: bash

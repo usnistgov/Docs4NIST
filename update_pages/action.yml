@@ -22,6 +22,16 @@ inputs:
       URL of web server for served documentation.
     required: false
     default: 'https://pages.nist.gov'
+  pip-requirements:
+    description:
+      The path to the pip requirements file, relative to the root of the
+      project.
+    required: false
+  conda-environment:
+    description:
+      The path to the Conda environment file, relative to the root of the
+      project.
+    required: false
 runs:
   using: "docker"
   image: "Dockerfile"

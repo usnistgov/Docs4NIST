@@ -8,7 +8,8 @@ from update_pages_action.sphinxdocs import SphinxDocs
 
 def main():
     docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
-    docs.install_requirements()
+    docs.install_requirements(requirements=os.environ['INPUT_PIP-REQUIREMENTS'])
+    docs.install_environment(environment=os.environ['INPUT_CONDA-ENVIRONMENT'])
 
     # Modify the Sphinx theme
     # This needs to be a subprocess so that it sees packages installed above
