@@ -1,4 +1,4 @@
-FROM python:3-slim
+FROM continuumio:miniconda3
 
 LABEL maintainer="Jonathan Guyer <guyer@nist.gov>"
 
@@ -18,9 +18,10 @@ RUN which git \
     ) \
   )
 
-RUN pip install GitPython
-RUN pip install packaging
-RUN pip install github-action-utils
+ADD environment.yml /environment.yml
+
+RUN conda env update --name base --file /environment.yml
+
 RUN git config --global --add safe.directory /github/workspace
 
 ADD entrypoint.py /entrypoint.py

@@ -77,7 +77,7 @@ runs:
       uses: ./../../_actions/current/borg_the_docs
       with:
         docs-folder: ${{ inputs.docs-folder }}
-    - uses: usnistgov/sphinx-action@master
+    - uses: usnistgov/sphinx-action@conda
       id: build-html
       name: Build HTML
       with:
@@ -85,14 +85,14 @@ runs:
         build-command: ${{ inputs.build-html-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
       # always build html
-    - uses: usnistgov/sphinx-action@master
+    - uses: usnistgov/sphinx-action@conda
       name: Build ePUB
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         build-command: ${{ inputs.build-epub-command }}
         pre-build-command:  ${{ inputs.pre-build-command }}
       if: ${{ contains(inputs.formats, 'epub') }}
-    - uses: usnistgov/sphinx-action@latexpdf
+    - uses: usnistgov/sphinx-action@conda
       name: Build PDF
       with:
         docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
