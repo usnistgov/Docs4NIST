@@ -25,7 +25,7 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
      docs:
        runs-on: ubuntu-latest
        steps:
-         - uses: usnistgov/NISTtheDocs2Death@0.1
+         - uses: usnistgov/NISTtheDocs2Death@0.3
            with:
              docs-folder: docs/
              pages-branch: 'nist-pages'
@@ -33,7 +33,7 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
              formats: ''
              build-html-command: make html
              build-epub-command: make epub
-             build-pdf-command: make epub
+             build-pdf-command: make latexpdf
              pre-build-command: ''
              apt-packages: ''
              pip-requirements: ''
