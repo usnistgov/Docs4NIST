@@ -54,6 +54,8 @@ yourself.</p>
 <span class="w">    </span><span class="nt">default-branch</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;main&#39;</span>
 <span class="w">    </span><span class="nt">pages-branch</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;nist-pages&#39;</span>
 <span class="w">    </span><span class="nt">pages-url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://pages.nist.gov&#39;</span>
+<span class="w">    </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -83,6 +85,15 @@ as configured on GitHub.</p>
 <section id="pages-url">
 <h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Permalink to this heading">¶</a></h3>
 <p>URL of the web server for served documentation.</p>
+</section>
+<section id="pip-requirements">
+<h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
+<p>The path to the pip requirements file, relative to the root of the project.</p>
+</section>
+<section id="conda-environment">
+<h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading">¶</a></h3>
+<p>The path to the Conda environment file, relative to the root of the
+project.</p>
 </section>
 </section>
 <section id="implementation">
@@ -123,6 +134,8 @@ The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOI
 <li><a class="reference internal" href="#default-branch"><code class="docutils literal notranslate"><span class="pre">default-branch</span></code></a></li>
 <li><a class="reference internal" href="#pages-branch"><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code></a></li>
 <li><a class="reference internal" href="#pages-url"><code class="docutils literal notranslate"><span class="pre">pages-url</span></code></a></li>
+<li><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
+<li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#implementation">Implementation</a><ul>

@@ -21,6 +21,8 @@ yourself.
       uses: ./../../_actions/current/borg_the_docs
       with:
         docs-folder: 'docs/'
+        pip-requirements: ''
+        conda-environment: ''
 
 .. note::
 
@@ -38,6 +40,17 @@ Inputs
 ~~~~~~~~~~~~~~~
 
 The folder containing your Sphinx configuration.
+
+``pip-requirements``
+~~~~~~~~~~~~~~~~~~~~
+
+The path to the pip requirements file, relative to the root of the project.
+
+``conda-environment``
+~~~~~~~~~~~~~~~~~~~~~
+
+The path to the Conda environment file, relative to the root of the
+project.
 
 Outputs
 -------

@@ -52,6 +52,8 @@ yourself.</p>
 <span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./../../_actions/current/borg_the_docs</span>
 <span class="w">  </span><span class="nt">with</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">docs-folder</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;docs/&#39;</span>
+<span class="w">    </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -68,6 +70,15 @@ hence the clumsy <code class="docutils literal notranslate"><span class="pre">us
 <section id="docs-folder">
 <h3><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code><a class="headerlink" href="#docs-folder" title="Permalink to this heading">¶</a></h3>
 <p>The folder containing your Sphinx configuration.</p>
+</section>
+<section id="pip-requirements">
+<h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
+<p>The path to the pip requirements file, relative to the root of the project.</p>
+</section>
+<section id="conda-environment">
+<h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading">¶</a></h3>
+<p>The path to the Conda environment file, relative to the root of the
+project.</p>
 </section>
 </section>
 <section id="outputs">
@@ -117,6 +128,8 @@ and invokes
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#inputs">Inputs</a><ul>
 <li><a class="reference internal" href="#docs-folder"><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code></a></li>
+<li><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
+<li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#outputs">Outputs</a><ul>
