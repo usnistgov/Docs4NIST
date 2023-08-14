@@ -4,6 +4,8 @@ LABEL maintainer="Jonathan Guyer <guyer@nist.gov>"
 
 ADD environment.yml /environment.yml
 
+RUN conda config --set solver libmamba
+RUN conda update -n base -c defaults conda
 RUN conda env update --name base --file /environment.yml
 
 ADD borg_the_docs.py /borg_the_docs.py
