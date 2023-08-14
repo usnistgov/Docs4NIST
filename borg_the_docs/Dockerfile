@@ -1,4 +1,4 @@
-FROM continuumio:miniconda3
+FROM continuumio/miniconda3
 
 LABEL maintainer="Jonathan Guyer <guyer@nist.gov>"
 
