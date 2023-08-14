@@ -54,7 +54,10 @@ class SphinxDocs:
         [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
         """
         docs_environment = self.docs_dir / environment
-        if environment!= "" and docs_environment.is_file():
+        gha_utils.debug(f"environment = {environment}")
+        gha_utils.debug(f"docs_environment = {docs_environment.as_posix()}")
+        gha_utils.debug(f"docs_environment.is_file() = {docs_environment.is_file()}")
+        if environment != "" and docs_environment.is_file():
             gha_utils.debug(f"conda installing")
             subprocess.check_call(["conda", "env", "update",
                                    "--name", "base",
