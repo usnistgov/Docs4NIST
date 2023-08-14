@@ -42,7 +42,7 @@ class SphinxDocs:
         Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
         [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
         """
-        docs_requirements = self.docs_dir / requirements
+        docs_requirements = pathlib.Path(requirements)
         if requirements != "" and docs_requirements.is_file():
             gha_utils.debug(f"pip installing")
             subprocess.check_call(["pip", "install", "-r", docs_requirements.as_posix()])
@@ -53,7 +53,7 @@ class SphinxDocs:
         Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
         [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
         """
-        docs_environment = self.docs_dir / environment
+        docs_environment = pathlib.Path(environment)
         gha_utils.debug(f"environment = {environment}")
         gha_utils.debug(f"docs_environment = {docs_environment.as_posix()}")
         gha_utils.debug(f"docs_environment.is_file() = {docs_environment.is_file()}")
