@@ -61,10 +61,10 @@ class ConfFile(File):
 
     def read(self):
         # The Sphinx docs says that it
-        # [reads conf.py with `importlib.import_module`](https://www.sphinx-doc.org/en/master/usage/configuration.html#module-conf)
+        # [reads conf.py with `importlib.import_module`](https://www.sphinx-doc.org/en/master/usage/configuration.html#module-conf).
         # [It doesn't](https://github.com/sphinx-doc/sphinx/blob/2c83af0aab7080e0b78d4a16981eed878b2cac4c/sphinx/config.py#L353).
         namespace = {}
-        namespace['__file__'] = self.path.as_posix()
+        namespace['__file__'] = self.path.resolve().as_posix()
 
         code = compile(self.original_contents, self.path, 'exec')
 
