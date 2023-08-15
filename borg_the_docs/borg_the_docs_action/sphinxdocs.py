@@ -60,6 +60,6 @@ class SphinxDocs:
         gha_utils.debug(f"docs_environment.is_file() = {docs_environment.is_file()}")
         if environment != "" and docs_environment.is_file():
             gha_utils.debug(f"conda installing")
-            subprocess.check_call(["conda", "env", "update",
+            subprocess.check_call(["conda", "env", "update", "--quiet",
                                    "--name", "base",
                                    "--file", docs_environment.as_posix()])
