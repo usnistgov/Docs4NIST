@@ -1,9 +1,23 @@
+import contextlib
 import github_action_utils as gha_utils
 import os
 import pathlib
 
 from .file import File
 
+
+# By [Lukas](https://stackoverflow.com/users/911441/lukas)
+# [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+# https://stackoverflow.com/a/42441759/2019542
+@contextlib.contextmanager
+def _working_directory(path):
+    """Changes working directory and returns to previous on exit."""
+    prev_cwd = pathlib.Path.cwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(prev_cwd)
 
 class ConfFile(File):
     """Sphinx configuration file."""
@@ -68,7 +82,7 @@ class ConfFile(File):
 
         code = compile(self.original_contents, self.path, 'exec')
 
-        with self.working_directory(self.source_dir):
+        with _working_directory(self.source_dir):
             exec(code, namespace)  # NoQA: S102
 
         return namespace
