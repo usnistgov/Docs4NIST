@@ -40,21 +40,25 @@ Usage
                epub
                pdf
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Actions:
-
-   nistthedocs2death
-   ntd2d
-
+See :ref:`NISTTHEDOCS2DEATH` for more information about configuration of
+this workflow.
 
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
+   :hidden:
 
    customization
    QandA
    API
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Actions:
+   :hidden:
+
+   nistthedocs2death
+   ntd2d
 
 
 Indices and tables
