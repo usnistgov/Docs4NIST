@@ -1,4 +1,4 @@
-name: "Update Pages"
+name: "NTD2D"
 description: "Python Container to do actual work"
 author: "Jonathan Guyer"
 inputs:
@@ -32,6 +32,9 @@ inputs:
       The path to the Conda environment file, relative to the root of the
       project.
     required: false
+outputs:
+  borged-docs-folder:
+    description: 'The folder containing modified Sphinx configuration'
 runs:
   using: "docker"
   image: "Dockerfile"

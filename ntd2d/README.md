@@ -1,4 +1,4 @@
-# `NISTtheDocs2Death`: `update_pages` Action
+# `NISTtheDocs2Death`: `ntd2d` Action
 
 This action is not intended to be called by users.  It is invoked by a
 GitHub action that uses sphinx to build documentation and then host on
@@ -17,12 +17,11 @@ runs:
       working-directory: ${{ github.action_path }}
       shell: bash
       run: ln -fs $(realpath ./)  /home/runner/work/_actions/current
-    :
-    :
-    - name: Commit documentation changes
-      uses: ./../../_actions/current/update_pages
+    - name: Build documentation
+      id: ntd2d
+      uses: ./../../_actions/current/ntd2d
       with:
-        docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
+        docs-folder: ${{ inputs.docs-folder }}
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
         pages-url: ${{ inputs.pages-url }}
@@ -30,8 +29,16 @@ runs:
     :
 ```
 
-This action adds built documentation for the specified branch to the `nist-pages`
-branch.
+This action:
+- modifies the [Sphinx configurationfile]
+  (https://www.sphinx-doc.org/en/master/usage/configuration.html) with an
+  [inherited theme]
+  (https://www.sphinx-doc.org/en/master/development/theming.html).
+  This theme adds a version pop-up menu and a NIST header and footer to
+  every page.
+- builds the documentation.
+- adds built documentation for the specified branch to the `nist-pages`
+  branch.
 
 ## Design
 
@@ -50,8 +57,8 @@ runs:
   steps:
     :
     :
-    - name: Commit documentation changes
-      uses: usnistgov/NISTtheDocs2Death/update_pages@${{ github.action_ref }}
+    - name: Build documentation
+      uses: usnistgov/NISTtheDocs2Death/ntd2d@${{ github.action_ref }}
       with:
     :
     :

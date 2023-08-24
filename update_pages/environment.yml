@@ -1,8 +1,0 @@
-name: sphinx-action
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - GitPython
-  - packaging
-  - github-action-utils
