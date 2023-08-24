@@ -35,30 +35,3 @@ class SphinxDocs:
     @property
     def pdf_file(self):
         return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
-
-    def install_requirements(self, requirements=""):
-        """Install any pip packages needed for Sphinx.
-
-        Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
-        [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
-        """
-        docs_requirements = pathlib.Path(requirements)
-        if requirements != "" and docs_requirements.is_file():
-            gha_utils.debug(f"pip installing")
-            subprocess.check_call(["pip", "install", "-r", docs_requirements.as_posix()])
-
-    def install_environment(self, environment=""):
-        """Install any Conda packages needed for Sphinx.
-
-        Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
-        [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
-        """
-        docs_environment = pathlib.Path(environment)
-        gha_utils.debug(f"environment = {environment}")
-        gha_utils.debug(f"docs_environment = {docs_environment.as_posix()}")
-        gha_utils.debug(f"docs_environment.is_file() = {docs_environment.is_file()}")
-        if environment != "" and docs_environment.is_file():
-            gha_utils.debug(f"conda installing")
-            subprocess.check_call(["conda", "env", "update", "--quiet",
-                                   "--name", "base",
-                                   "--file", docs_environment.as_posix()])
