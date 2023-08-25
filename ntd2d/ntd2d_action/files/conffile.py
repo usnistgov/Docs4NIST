@@ -59,6 +59,7 @@ class ConfFile(File):
             with self.path.open(mode='r') as f:
                 self._code = f.read()
 
+        gha_utils.debug(f"original_contents = {self._code}")
         return self._code
 
     @property
@@ -67,7 +68,7 @@ class ConfFile(File):
 
     @property
     def project(self):
-        gha_utils.debug(f"configuration = {self.configuration.keys()}")
+        gha_utils.debug(f"self.get_contents() = {self.get_contents()}")
         return self.configuration["project"]
 
     @property
