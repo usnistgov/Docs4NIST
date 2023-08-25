@@ -32,9 +32,6 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        gha_utils.error("TOGETHER")
-        gha_utils.error(''.join(traceback.format_exception(e)))
-        gha_utils.error("APART")
         for line in traceback.format_exception(e):
             for subline in line.rstrip().split('\n'):
                 gha_utils.error(subline)
