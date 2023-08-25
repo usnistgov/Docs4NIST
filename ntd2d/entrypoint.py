@@ -6,7 +6,7 @@ import subprocess
 
 
 def main():
-    with gha_utils.group("Install Prerequisites"):
+    with gha_utils.group("Install Prerequisites", use_subprocess=True):
         # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
         # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
 
@@ -15,7 +15,7 @@ def main():
         if requirements != "":
             requirements = pathlib.Path(requirements)
             if requirements.is_file():
-                gha_utils.debug(f"pip installing")
+                gha_utils.debug(f"pip installing", use_subprocess=True)
                 subprocess.check_call(["pip", "install", "-r", requirements.as_posix()])
 
         # Install any Conda packages needed for Sphinx.
@@ -23,7 +23,7 @@ def main():
         if environment != "":
             environment = pathlib.Path(environment)
             if environment.is_file():
-                gha_utils.debug(f"conda installing")
+                gha_utils.debug(f"conda installing", use_subprocess=True)
                 subprocess.check_call(["conda", "env", "update", "--quiet",
                                        "--name", "base",
                                        "--file", environment.as_posix()])

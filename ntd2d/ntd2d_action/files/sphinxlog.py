@@ -43,7 +43,7 @@ class SphinxLog(File):
             file_name = m["FILE"]
             warning_message = m["MESSAGE"]
 
-            gha_utils.warning(warning_message, file=file_name, line=line_number)
+            gha_utils.warning(warning_message, file=file_name, line=line_number, use_subprocess=True)
 
             # If this isn't the last line and the next line isn't a warning,
             # treat it as part of this warning message.
@@ -51,5 +51,4 @@ class SphinxLog(File):
                 if "WARNING" in subsequent:
                     break
                 else:
-                    gha_utils.warning(subsequent.strip(), file=file_name, line=line_number)
-        
+                    gha_utils.warning(subsequent.strip(), file=file_name, line=line_number, use_subprocess=True)
