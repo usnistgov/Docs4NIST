@@ -67,7 +67,7 @@ class ConfFile(File):
 
     @property
     def project(self):
-        gha_utils.debug("configuration = {self.configuration.keys()}")
+        gha_utils.debug(f"configuration = {self.configuration.keys()}")
         return self.configuration["project"]
 
     @property
