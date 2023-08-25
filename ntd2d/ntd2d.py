@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import github_action_utils as gha_utils
 import os
+import sys
+import traceback
 
 from ntd2d_action.sphinxdocs import SphinxDocs
 from ntd2d_action.borgedsphinxdocs import BorgedSphinxDocs
@@ -30,5 +32,6 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        gha_utils.error(e.__traceback__)
-        raise
+        for line in traceback.format_exception(e.):
+            gha_utils.error(line)
+        sys.exit(1)
