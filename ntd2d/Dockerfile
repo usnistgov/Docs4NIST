@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3
+FROM ghcr.io/usnistgov/nistthedocs2death:docker
 
 LABEL maintainer="Jonathan Guyer <guyer@nist.gov>"
 
