@@ -38,7 +38,7 @@ class SphinxDocs:
     def pdf_file(self):
         return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
 
-    def build_docs(build_command):
+    def build_docs(self, build_command):
         """Build Sphinx Documentation
 
         Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py
