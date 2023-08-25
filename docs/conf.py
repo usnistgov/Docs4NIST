@@ -27,8 +27,6 @@ import sys
 _action_root = pathlib.Path(__file__).parents[1].resolve()
 sys.path.insert(0, (_action_root / "ntd2d").as_posix())
 
-print(sys.path)
-
 autoclass_content = "both"
 
 
