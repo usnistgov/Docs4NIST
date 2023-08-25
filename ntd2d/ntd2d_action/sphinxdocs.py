@@ -3,6 +3,7 @@ import github_action_utils as gha_utils
 import pathlib
 import shlex
 import subprocess
+import tempfile
 
 from .files import ConfFile
 from .files import SphinxLog
