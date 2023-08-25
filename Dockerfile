@@ -29,6 +29,8 @@ RUN apt-get update \
       texlive-science \
       texlive-extra-utils \
       librsvg2-bin \
+      \
+      git
  && apt-get autoremove \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
