@@ -58,7 +58,7 @@ class SphinxDocs:
             # environment variable, otherwise pass them straight into the command.
             build_command = shlex.split(build_command)
 
-            gha_utils.debug(f'cwd = {os.cwd()}')
+            gha_utils.debug(f'cwd = {os.getcwd()}')
             gha_utils.debug(f'self.docs_dir = {self.docs_dir}')
 
             if build_command[0] == "make":
