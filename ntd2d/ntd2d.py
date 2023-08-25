@@ -17,6 +17,19 @@ def main():
     
         gha_utils.set_output("borged-build-folder", docs.build_dir.as_posix())
 
+    with gha_utils.group("Build HTML"):
+        docs.build_docs(build_command=os.environ['INPUT_BUILD-HTML-COMMAND']
+
+    formats in os.environ['INPUT_FORMATS'].lower().split()
+
+    if "pdf" in formats:
+        with gha_utils.group("Build PDF"):
+            docs.build_docs(build_command=os.environ['INPUT_BUILD-PDF-COMMAND']
+
+    if "epub" in formats:
+        with gha_utils.group("Build ePub"):
+            docs.build_docs(build_command=os.environ['INPUT_BUILD-EPUB-COMMAND']
+
     with gha_utils.group("Update Pages"):
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                           repository=os.environ['GITHUB_REPOSITORY'],
