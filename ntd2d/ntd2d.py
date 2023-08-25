@@ -20,7 +20,7 @@ def main():
     with gha_utils.group("Build HTML", use_subprocess=True):
         docs.build_docs(build_command=os.environ['INPUT_BUILD-HTML-COMMAND'])
 
-    formats in os.environ['INPUT_FORMATS'].lower().split()
+    formats = os.environ['INPUT_FORMATS'].lower().split()
 
     if "pdf" in formats:
         with gha_utils.group("Build PDF", use_subprocess=True):
