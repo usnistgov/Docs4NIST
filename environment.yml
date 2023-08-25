@@ -1,0 +1,8 @@
+name: sphinx
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - Sphinx=7.1.2
+  - Pillow
+  - pip
