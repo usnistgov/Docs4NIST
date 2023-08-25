@@ -1,3 +1,4 @@
+import pathlib
 import re
 
 from .file import File
@@ -5,7 +6,11 @@ from .file import File
 
 class SphinxLog(File):
     def __init__(self, path):
-        self.path = path
+        self._path = pathlib.Path(path)
+
+    @property
+    def path(self):
+        return self._path
 
     def parse_sphinx_warnings():
         """Parses a sphinx file containing warnings and errors into a list of
