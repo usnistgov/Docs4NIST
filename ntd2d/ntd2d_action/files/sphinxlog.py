@@ -12,7 +12,7 @@ class SphinxLog(File):
     def path(self):
         return self._path
 
-    def parse_sphinx_warnings():
+    def parse_sphinx_warnings(self):
         """Parses a sphinx file containing warnings and errors into a list of
         status_check.CheckAnnotation objects.
 
