@@ -57,6 +57,10 @@ class SphinxDocs:
             # If we're using make, pass the options as part of the SPHINXOPTS
             # environment variable, otherwise pass them straight into the command.
             build_command = shlex.split(build_command)
+
+            gha_utils.debug(f'cwd = {os.cwd()}')
+            gha_utils.debug(f'self.docs_dir = {self.docs_dir}')
+
             if build_command[0] == "make":
                 # Pass the -e option into `make`, this is specified to be
                 #   Cause environment variables, including those with null values, to override macro assignments within makefiles.
@@ -67,13 +71,13 @@ class SphinxDocs:
                 return_code = subprocess.call(
                     build_command,
                     env=dict(os.environ, SPHINXOPTS=sphinx_options),
-                    cwd=self.docs_dir,
+                    cwd=self.docs_dir.as_posix(),
                 )
             else:
                 build_command += shlex.split(sphinx_options)
                 print(f"[sphinx-action] Running: {build_command}")
 
-                return_code = subprocess.call(build_command, cwd=self.docs_dir)
+                return_code = subprocess.call(build_command, cwd=self.docs_dir.as_posix())
 
             if log_file.exists():
                 log = SphinxLog(file=log_file)
