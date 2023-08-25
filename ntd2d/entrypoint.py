@@ -22,7 +22,7 @@ def main():
         environment = os.environ['INPUT_CONDA-ENVIRONMENT']
         if environment != "":
             environment = pathlib.Path(environment)
-            if docs_environment.is_file():
+            if environment.is_file():
                 gha_utils.debug(f"conda installing")
                 subprocess.check_call(["conda", "env", "update", "--quiet",
                                        "--name", "base",
