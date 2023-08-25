@@ -25,8 +25,7 @@ import pathlib
 import sys
 
 _action_root = pathlib.Path(__file__).parents[1].resolve()
-sys.path.insert(0, (_action_root / "borg_the_docs").as_posix())
-sys.path.insert(0, (_action_root / "update_pages").as_posix())
+sys.path.insert(0, (_action_root / "ntd2d").as_posix())
 
 print(sys.path)
 

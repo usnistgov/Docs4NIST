@@ -40,13 +40,13 @@ menu that allows selecting different versions of your documentation.
 This template file controls the appearance of the dropdown menu.
 
 .. |conf.py|  replace:: :file:`conf.py`
-.. _conf.py:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/borg_the_docs/borg_the_docs_action/files/templates/conf.py
+.. _conf.py:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/conf.py
 .. |ntd2d|    replace:: :file:`ntd2d/`
-.. _ntd2d:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/borg_the_docs/borg_the_docs_action/files/templates/ntd2d/
+.. _ntd2d:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/
 .. |layout.html|  replace:: :file:`ntd2d/layout.html`
-.. _layout.html:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/borg_the_docs/borg_the_docs_action/files/templates/ntd2d/layout.html
+.. _layout.html:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/layout.html
 .. |static/ntd2d.css_t|  replace:: :file:`ntd2d/static/ntd2d.css_t`
-.. _static/ntd2d.css_t:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/borg_the_docs/borg_the_docs_action/files/templates/ntd2d/static/ntd2d.css_t
+.. _static/ntd2d.css_t:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/static/ntd2d.css_t
 
 ``update_pages`` templates
 --------------------------
@@ -173,17 +173,17 @@ Available subsitution keywords are:
 
 
 .. |downloads.html|   replace:: :file:`downloads.html`
-.. _downloads.html:   https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/downloads.html
+.. _downloads.html:   https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/downloads.html
 .. |download_item.html| replace:: :file:`download_item.html`
-.. _download_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/download_item.html
+.. _download_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/download_item.html
 .. |index.html|       replace:: :file:`index.html`
-.. _index.html:       https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/index.html
+.. _index.html:       https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/index.html
 .. |menu.html|        replace:: :file:`menu.html`
-.. _menu.html:        https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/menu.html
+.. _menu.html:        https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/menu.html
 .. |ntd2d_active.css| replace:: :file:`ntd2d_active.css`
-.. _ntd2d_active.css: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/ntd2d_active.css
+.. _ntd2d_active.css: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d_active.css
 .. |variants.html|    replace:: :file:`variants.html`
-.. _variants.html:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/variants.html
+.. _variants.html:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/variants.html
 .. |variant_item.html| replace:: :file:`variant_item.html`
-.. _variant_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/variant_item.html
+.. _variant_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/variant_item.html
 

@@ -45,8 +45,7 @@ Usage
    :caption: Actions:
 
    nistthedocs2death
-   borg_the_docs
-   update_pages
+   ntd2d
 
 
 .. toctree::

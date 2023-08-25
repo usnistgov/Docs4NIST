@@ -82,7 +82,7 @@ runs:
       id: ntd2d
       # from https://github.com/orgs/community/discussions/41927#discussioncomment-4605881
       # @mbrancato
-      # because usnistgov/NISTtheDocs2Death/borg_the_docs@${{ github.action_ref }}
+      # because usnistgov/NISTtheDocs2Death/ntd2d@${{ github.action_ref }}
       # doesn't work
       uses: ./../../_actions/current/ntd2d
       with:

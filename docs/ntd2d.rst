@@ -131,6 +131,10 @@ The Docker ``ENTRYPOINT``
 - wraps the `Sphinx configuration directory
   <https://www.sphinx-doc.org/en/master/usage/configuration.html>`_ in a
   :class:`~ntd2d_action.sphinxdocs.SphinxDocs` object,
+- wraps the :file:`conf.py` file with a
+  :class:`~ntd2d_action.files.borgedconffile.BorgedConfFile` object,
+- invokes
+  :meth:`~ntd2d_action.files.borgedconffile.BorgedConfFile.assimilate_theme`
 - wraps the
   :envvar:`GITHUB_REPOSITORY` in a
   :class:`~ntd2d_action.repository.Repository` object, 

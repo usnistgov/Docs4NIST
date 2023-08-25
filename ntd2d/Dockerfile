@@ -27,7 +27,7 @@ RUN conda env update --name base --file /environment.yml
 RUN git config --global --add safe.directory /github/workspace
 
 ADD entrypoint.py /entrypoint.py
-ADD update_pages.py /update_pages.py
-ADD update_pages_action /update_pages_action
+ADD ntd2d.py /ntd2d.py
+ADD ntd2d_action /ntd2d_action
 
 ENTRYPOINT ["/entrypoint.py"]
