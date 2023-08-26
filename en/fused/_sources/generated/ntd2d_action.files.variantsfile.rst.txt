@@ -1,0 +1,29 @@
+ntd2d\_action.files.variantsfile
+================================
+
+.. automodule:: ntd2d_action.files.variantsfile
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      VariantsFile
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,32 @@
+ntd2d\_action.variants
+======================
+
+.. automodule:: ntd2d_action.variants
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Variant
+      VariantCollection
+      VariantCollector
+      Version
+   
+   
+
+   
+   
+   
+
+
+

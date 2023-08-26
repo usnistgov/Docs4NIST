@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ntd2d Sub-Action &#8212; NISTtheDocs2Death  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=88d0a8bc" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ntd2d_action" href="generated/ntd2d_action.html" />
+    <link rel="prev" title="NISTtheDocs2Death Action" href="nistthedocs2death.html" />
+  
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+
+  <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ntd2d-sub-action">
+<span id="ntd2d"></span><h1><code class="docutils literal notranslate"><span class="pre">ntd2d</span></code> Sub-Action<a class="headerlink" href="#ntd2d-sub-action" title="Permalink to this heading">¶</a></h1>
+<p>This <a class="reference external" href="https://docs.github.com/en/actions">GitHub action</a> is invoked by
+the main <a class="reference internal" href="nistthedocs2death.html#nistthedocs2death"><span class="std std-ref">NISTtheDocs2Death Action</span></a> to move built documentation into your
+designated <span class="xref std std-ref">PAGES_BRANCH</span>.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<p>This action is invoked as a step of the composite workflow of the
+<a class="reference internal" href="nistthedocs2death.html#nistthedocs2death"><span class="std std-ref">NISTtheDocs2Death Action</span></a>.  There is no reason to invoke this action
+yourself.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Commit documentation changes</span>
+<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./../../_actions/current/ntd2d</span>
+<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">docs-folder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/</span>
+<span class="w">    </span><span class="nt">pages-branch</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;nist-pages&#39;</span>
+<span class="w">    </span><span class="nt">pages-url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://pages.nist.gov&#39;</span>
+<span class="w">    </span><span class="nt">formats</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">build-html-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make html</span>
+<span class="w">    </span><span class="nt">build-epub-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span>
+<span class="w">    </span><span class="nt">build-pdf-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span>
+<span class="w">    </span><span class="nt">pre-build-command</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This action must be synchronized with the invoked version of the
+<a class="reference internal" href="nistthedocs2death.html#nistthedocs2death"><span class="std std-ref">NISTtheDocs2Death Action</span></a>, but
+“<code class="docutils literal notranslate"><span class="pre">usnistgov/NISTtheDocs2Death/borg_the_docs&#64;${{</span> <span class="pre">github.action_ref</span> <span class="pre">}}</span></code>”
+<a class="reference external" href="https://github.com/orgs/community/discussions/41927#discussioncomment-4605881">doesn’t work</a>,
+hence the clumsy <code class="docutils literal notranslate"><span class="pre">uses:</span></code> statement.</p>
+</div>
+</section>
+<section id="inputs">
+<h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading">¶</a></h2>
+<section id="docs-folder">
+<h3><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code><a class="headerlink" href="#docs-folder" title="Permalink to this heading">¶</a></h3>
+<p>The folder containing your Sphinx configuration.</p>
+</section>
+<section id="pages-branch">
+<h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Permalink to this heading">¶</a></h3>
+<p>The branch linked to your documentation server.</p>
+</section>
+<section id="pages-url">
+<h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Permalink to this heading">¶</a></h3>
+<p>URL of the web server for served documentation.</p>
+</section>
+<section id="formats">
+<h3><code class="docutils literal notranslate"><span class="pre">formats</span></code><a class="headerlink" href="#formats" title="Permalink to this heading">¶</a></h3>
+<p>Type(s) of output desired in addition to html (<code class="docutils literal notranslate"><span class="pre">pdf</span></code>, and/or <code class="docutils literal notranslate"><span class="pre">epub</span></code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://github.com/actions/toolkit/issues/184">GitHub Actions’ YAML implementation does not support list or array elements</a>, so
+<a class="reference external" href="https://stackoverflow.com/questions/75420197/how-to-use-array-input-for-a-custom-github-actions">use a multiline string</a>
+to declare formats, e.g.,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">formats</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<span class="w">  </span><span class="no">epub</span>
+<span class="w">  </span><span class="no">pdf</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="build-html-command">
+<h3><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code><a class="headerlink" href="#build-html-command" title="Permalink to this heading">¶</a></h3>
+<p>The command used by <a href="#id9"><span class="problematic" id="id10">|sphinxaction|_</span></a> to build your html documentation.</p>
+</section>
+<section id="build-epub-command">
+<h3><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code><a class="headerlink" href="#build-epub-command" title="Permalink to this heading">¶</a></h3>
+<p>The command used by <a href="#id11"><span class="problematic" id="id12">|sphinxaction|_</span></a> to build your ePUB documentation.</p>
+</section>
+<section id="build-pdf-command">
+<h3><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code><a class="headerlink" href="#build-pdf-command" title="Permalink to this heading">¶</a></h3>
+<p>The command used by <a href="#id13"><span class="problematic" id="id14">|sphinxaction|_</span></a> to build your PDF documentation.</p>
+</section>
+<section id="pre-build-command">
+<h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
+<p>Run by <a href="#id15"><span class="problematic" id="id16">|sphinxaction|_</span></a> before the build command.  You can use this to install
+system level dependencies, for example, with “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">-y</span> <span class="pre">&amp;&amp;</span> <span class="pre">apt-get</span>
+<span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”.</p>
+</section>
+<section id="pip-requirements">
+<h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
+<p>The path to the pip requirements file, relative to the root of the project.</p>
+</section>
+<section id="conda-environment">
+<h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading">¶</a></h3>
+<p>The path to the Conda environment file, relative to the root of the
+project.</p>
+</section>
+</section>
+<section id="outputs">
+<h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">¶</a></h2>
+<section id="borged-build-folder">
+<h3><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code><a class="headerlink" href="#borged-build-folder" title="Permalink to this heading">¶</a></h3>
+<p>The folder containing the Sphinx build outputs.</p>
+</section>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
+<p>This action implements a <a class="reference external" href="https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action">Docker workflow step</a>.
+The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
+- installs any specified <span class="xref std std-ref">CONDAENVIRONMENT</span> and</p>
+<blockquote>
+<div><p><span class="xref std std-ref">PIPREQUIREMENTS</span>,</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>wraps the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/configuration.html">Sphinx configuration directory</a> in a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">SphinxDocs</span></code> object,</p></li>
+<li><p>wraps the <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code> file with a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BorgedConfFile</span></code> object,</p></li>
+<li><p>invokes
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">assimilate_theme()</span></code></p></li>
+<li><p>wraps the
+<span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_REPOSITORY</span></code> in a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Repository</span></code> object,</p></li>
+<li><p>invokes
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">update_pages()</span></code>.</p></li>
+</ul>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/ntd2d_action.html#module-ntd2d_action" title="ntd2d_action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ntd2d_action</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ntd2d</span></code> Sub-Action</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#inputs">Inputs</a><ul>
+<li><a class="reference internal" href="#docs-folder"><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code></a></li>
+<li><a class="reference internal" href="#pages-branch"><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code></a></li>
+<li><a class="reference internal" href="#pages-url"><code class="docutils literal notranslate"><span class="pre">pages-url</span></code></a></li>
+<li><a class="reference internal" href="#formats"><code class="docutils literal notranslate"><span class="pre">formats</span></code></a></li>
+<li><a class="reference internal" href="#build-html-command"><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code></a></li>
+<li><a class="reference internal" href="#build-epub-command"><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code></a></li>
+<li><a class="reference internal" href="#build-pdf-command"><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code></a></li>
+<li><a class="reference internal" href="#pre-build-command"><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code></a></li>
+<li><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
+<li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#outputs">Outputs</a><ul>
+<li><a class="reference internal" href="#borged-build-folder"><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation">Implementation</a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="nistthedocs2death.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">NISTtheDocs2Death</span></code> Action</a></li>
+      <li>Next: <a href="generated/ntd2d_action.html" title="next chapter">ntd2d_action</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ntd2d.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+  
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/ntd2d.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+
+  <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
+  <iframe src="_static/ntd2d_menu.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
+  </body>
+</html>

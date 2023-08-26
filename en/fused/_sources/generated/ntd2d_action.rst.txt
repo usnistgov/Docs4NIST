@@ -1,0 +1,35 @@
+﻿ntd2d\_action
+=============
+
+.. automodule:: ntd2d_action
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   ntd2d_action.borgedsphinxdocs
+   ntd2d_action.files
+   ntd2d_action.repository
+   ntd2d_action.sphinxdocs
+   ntd2d_action.variants
+

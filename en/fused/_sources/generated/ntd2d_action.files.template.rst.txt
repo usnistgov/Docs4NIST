@@ -1,0 +1,31 @@
+ntd2d\_action.files.template
+============================
+
+.. automodule:: ntd2d_action.files.template
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FileTemplate
+      PagesTemplate
+      Template
+   
+   
+
+   
+   
+   
+
+
+

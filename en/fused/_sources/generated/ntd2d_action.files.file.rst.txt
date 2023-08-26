@@ -1,0 +1,29 @@
+ntd2d\_action.files.file
+========================
+
+.. automodule:: ntd2d_action.files.file
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      File
+   
+   
+
+   
+   
+   
+
+
+

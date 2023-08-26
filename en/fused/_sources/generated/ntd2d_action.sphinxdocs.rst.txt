@@ -1,0 +1,29 @@
+ntd2d\_action.sphinxdocs
+========================
+
+.. automodule:: ntd2d_action.sphinxdocs
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      SphinxDocs
+   
+   
+
+   
+   
+   
+
+
+

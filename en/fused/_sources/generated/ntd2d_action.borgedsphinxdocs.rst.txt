@@ -1,0 +1,29 @@
+ntd2d\_action.borgedsphinxdocs
+==============================
+
+.. automodule:: ntd2d_action.borgedsphinxdocs
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      BorgedSphinxDocs
+   
+   
+
+   
+   
+   
+
+
+
