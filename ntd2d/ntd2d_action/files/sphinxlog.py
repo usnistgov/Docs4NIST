@@ -50,7 +50,7 @@ class SphinxLog(File):
             message = m["MESSAGE"]
 
             for old, new in replacements:
-                message = message.replace(old, new)
+                file_name = file_name.replace(old, new)
 
             if m["TYPE"] == "WARNING":
                 msg_fn = gha_utils.warning
