@@ -31,7 +31,7 @@ class SphinxLog(File):
         prog_nolineno = re.compile("(?P<FILE>.*): (?P<TYPE>WARNING|ERROR): (?P<MESSAGE>.*)")
         
         replacements = []
-        if has_attr(self.docs, "original_docs"):
+        if hasattr(self.docs, "original_docs"):
             replacements.append([self.docs.docs_dir.as_posix(),
                                  self.original_docs.docs_dir.as_posix()])
 
