@@ -77,7 +77,7 @@ class SphinxDocs:
                 return_code = subprocess.call(build_command, cwd=self.docs_dir.as_posix())
 
             if log_file.exists():
-                log = SphinxLog(path=log_file)
+                log = SphinxLog(docs=self, path=log_file)
                 log.parse_sphinx_warnings()
 
         return return_code

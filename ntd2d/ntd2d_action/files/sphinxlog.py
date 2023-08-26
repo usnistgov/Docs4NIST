@@ -6,7 +6,8 @@ from .file import File
 
 
 class SphinxLog(File):
-    def __init__(self, path):
+    def __init__(self, docs, path):
+        self.docs = docs
         self._path = pathlib.Path(path)
 
     @property
@@ -14,8 +15,7 @@ class SphinxLog(File):
         return self._path
 
     def parse_sphinx_warnings(self):
-        """Parses a sphinx file containing warnings and errors into a list of
-        status_check.CheckAnnotation objects.
+        """Parse and emit a sphinx file containing warnings and errors.
 
         Inputs look like this:
             /media/sf_shared/workspace/sphinx-action/tests/test_projects/warnings_and_errors/index.rst:19: WARNING: Error in "code-block" directive:
@@ -30,6 +30,11 @@ class SphinxLog(File):
         prog_lineno = re.compile("(?P<FILE>.*)(?::(?P<LINE>[0-9]+))+?: (?P<TYPE>WARNING|ERROR): (?P<MESSAGE>.*)")
         prog_nolineno = re.compile("(?P<FILE>.*): (?P<TYPE>WARNING|ERROR): (?P<MESSAGE>.*)")
         
+        replacements = []
+        if has_attr(self.docs, "original_docs"):
+            replacements.append([self.docs.docs_dir.as_posix(),
+                                 self.original_docs.docs_dir.as_posix()])
+
         for i, line in enumerate(logs):
             m = prog_lineno.match(line)
             if m is None:
@@ -43,6 +48,9 @@ class SphinxLog(File):
 
             file_name = m["FILE"]
             message = m["MESSAGE"]
+
+            for old, new in replacements:
+                message = message.replace(old, new)
 
             if m["TYPE"] == "WARNING":
                 msg_fn = gha_utils.warning
