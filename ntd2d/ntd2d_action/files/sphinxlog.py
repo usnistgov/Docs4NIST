@@ -33,7 +33,7 @@ class SphinxLog(File):
         replacements = []
         if hasattr(self.docs, "original_docs"):
             replacements.append([self.docs.docs_dir.as_posix(),
-                                 self.original_docs.docs_dir.as_posix()])
+                                 self.docs.original_docs.docs_dir.as_posix()])
 
         for i, line in enumerate(logs):
             m = prog_lineno.match(line)
