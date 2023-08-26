@@ -25,6 +25,7 @@ class ConfFile(File):
     def __init__(self, source_dir):
         self.source_dir = pathlib.Path(source_dir)
         self.theme = None
+        self._code = None
         self._configuration = None
 
     @property
@@ -54,10 +55,11 @@ class ConfFile(File):
 
     @property
     def original_contents(self):
-        with self.path.open(mode='r') as f:
-            contents = f.read()
+        if self._code is None:
+            with self.path.open(mode='r') as f:
+                self._code = f.read()
 
-        return contents
+        return self._code
 
     @property
     def path(self):
