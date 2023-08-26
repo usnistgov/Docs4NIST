@@ -67,7 +67,6 @@ class ConfFile(File):
 
     @property
     def project(self):
-        gha_utils.debug(f"configuration = {self.configuration}", use_subprocess=True)
         return self.configuration["project"]
 
     @property
@@ -81,7 +80,6 @@ class ConfFile(File):
         namespace = {}
         namespace['__file__'] = self.path.resolve().as_posix()
 
-        gha_utils.debug(f"{type(self)} {self} {self.path.as_posix()} code = {self.original_contents}", use_subprocess=True)
         code = compile(self.original_contents, self.path, 'exec')
 
         with _working_directory(self.source_dir):
