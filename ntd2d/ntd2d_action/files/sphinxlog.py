@@ -27,8 +27,8 @@ class SphinxLog(File):
         with self.path.open(mode='r') as f:
             logs = f.readlines()
             
-        prog_lineno = re.compile("(?P<FILE>.*)(?::(?P<LINE>[0-9]+))+?: WARNING: (?P<MESSAGE>.*)")
-        prog_nolineno = re.compile("(?P<FILE>.*): WARNING: (?P<MESSAGE>.*)")
+        prog_lineno = re.compile("(?P<FILE>.*)(?::(?P<LINE>[0-9]+))+?: (?P<TYPE>WARNING|ERROR): (?P<MESSAGE>.*)")
+        prog_nolineno = re.compile("(?P<FILE>.*): (?P<TYPE>WARNING|ERROR): (?P<MESSAGE>.*)")
         
         for i, line in enumerate(logs):
             m = prog_lineno.match(line)
@@ -42,14 +42,19 @@ class SphinxLog(File):
                 line_number = m["LINE"]
 
             file_name = m["FILE"]
-            warning_message = m["MESSAGE"]
+            message = m["MESSAGE"]
 
-            gha_utils.warning(warning_message, file=file_name, line=line_number, use_subprocess=True)
+            if m["TYPE"] == "WARNING":
+                msg_fn = gha_utils.warning
+            if m["TYPE"] == "ERROR":
+                msg_fn = gha_utils.error
+
+            msg_fn(message, file=file_name, line=line_number, use_subprocess=True)
 
             # If this isn't the last line and the next line isn't a warning,
             # treat it as part of this warning message.
             for subsequent in logs[i:]:
-                if "WARNING" in subsequent:
+                if prog_nolineno.match(subsequent):
                     break
                 else:
-                    gha_utils.warning(subsequent.strip(), file=file_name, line=line_number, use_subprocess=True)
+                    msg_fn(subsequent.strip(), file=file_name, line=line_number, use_subprocess=True)
