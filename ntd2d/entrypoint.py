@@ -26,8 +26,8 @@ def main():
                 else:
                     path.unlink()
 
-        # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
-        # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
+    # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
+    # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
 
     # Install any pip packages requested
     requirements = os.environ['INPUT_PIP-REQUIREMENTS']
