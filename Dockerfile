@@ -3,7 +3,6 @@ FROM continuumio/miniconda3
 LABEL maintainer="Jonathan Guyer <guyer@nist.gov>"
 
 RUN apt-get update \
- && apt-get install --no-install-recommends -y \
  && apt-get install --no-install-recommends --yes \
       graphviz \
       imagemagick \
