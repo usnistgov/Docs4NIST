@@ -127,7 +127,7 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/html
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/html
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ always() }}
@@ -136,7 +136,7 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/epub/*.epub
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/epub/*.epub
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ contains(inputs.formats, 'epub') && always() }}
@@ -145,9 +145,9 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.pdf
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.log
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.tex
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.pdf
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.log
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.tex
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ contains(inputs.formats, 'pdf') && always() }}
