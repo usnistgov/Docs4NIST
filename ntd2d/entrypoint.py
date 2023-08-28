@@ -10,10 +10,10 @@ import traceback
 
 
 def main():
-    with gha_utils.group("Install APT packages", use_subprocess=True):
-        # Install any APT packages
-        apt_packages = os.environ['INPUT_APT-PACKAGES']
-        if apt_packages != "":
+    # Install any APT packages
+    apt_packages = os.environ['INPUT_APT-PACKAGES']
+    if apt_packages != "":
+        with gha_utils.group("Install APT packages", use_subprocess=True):
             subprocess.check_call(["apt-get", "update"])
             subprocess.check_call(["apt-get", "install",
                                    "--no-install-recommends", "--yes"]
@@ -29,19 +29,19 @@ def main():
         # Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py#LL102C1-L105C1
         # [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
 
-    with gha_utils.group("Install PIP packages", use_subprocess=True):
-        # Install any pip packages requested
-        requirements = os.environ['INPUT_PIP-REQUIREMENTS']
-        if requirements != "":
+    # Install any pip packages requested
+    requirements = os.environ['INPUT_PIP-REQUIREMENTS']
+    if requirements != "":
+        with gha_utils.group("Install PIP packages", use_subprocess=True):
             requirements = pathlib.Path(requirements)
             if requirements.is_file():
                 gha_utils.debug(f"pip installing", use_subprocess=True)
                 subprocess.check_call(["pip", "install", "-r", requirements.as_posix()])
 
-    with gha_utils.group("Install Conda packages", use_subprocess=True):
-        # Install any Conda packages requested
-        environment = os.environ['INPUT_CONDA-ENVIRONMENT']
-        if environment != "":
+    # Install any Conda packages requested
+    environment = os.environ['INPUT_CONDA-ENVIRONMENT']
+    if environment != "":
+        with gha_utils.group("Install Conda packages", use_subprocess=True):
             environment = pathlib.Path(environment)
             if environment.is_file():
                 gha_utils.debug(f"conda installing", use_subprocess=True)
