@@ -25,8 +25,7 @@ def main():
             try:
                 subprocess.check_output(pre_build_command, shell=True, stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError as e:
-                for line in e.stdout.decode('utf-8').rstrip().split('\n'):
-                    gha_utils.error(line, use_subprocess=True)
+                gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
                 raise
 
     with gha_utils.group("Build HTML", use_subprocess=True):
@@ -57,7 +56,5 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        for line in traceback.format_exception(e):
-            for subline in line.rstrip().split('\n'):
-                gha_utils.error(subline, use_subprocess=True)
+        gha_utils.error(traceback.format_exception(e), use_subprocess=True)
         sys.exit(1)

@@ -57,7 +57,5 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        for line in traceback.format_exception(e):
-            for subline in line.rstrip().split('\n'):
-                gha_utils.error(subline, use_subprocess=True)
+        gha_utils.error(traceback.format_exception(e), use_subprocess=True)
         sys.exit(1)
