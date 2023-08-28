@@ -60,32 +60,28 @@ class SphinxDocs:
             # environment variable, otherwise pass them straight into the command.
             build_command = shlex.split(build_command)
 
-            try:
-                if build_command[0] == "make":
-                    # Pass the -e option into `make`, this is specified to be
-                    #   Cause environment variables, including those with null values, to override macro assignments within makefiles.
-                    # which is exactly what we want.
-                    build_command += ["-e"]
-                    print(f"[sphinx-action] Running: {build_command}")
+            if build_command[0] == "make":
+                # Pass the -e option into `make`, this is specified to be
+                #   Cause environment variables, including those with null values, to override macro assignments within makefiles.
+                # which is exactly what we want.
+                build_command += ["-e"]
+                print(f"[sphinx-action] Running: {build_command}")
 
-                    subprocess.check_output(
-                        build_command,
-                        env=dict(os.environ, SPHINXOPTS=sphinx_options),
-                        cwd=self.docs_dir.as_posix(),
-                        stderr=subprocess.STDOUT
-                    )
-                else:
-                    build_command += shlex.split(sphinx_options)
-                    print(f"[sphinx-action] Running: {build_command}")
+                subprocess.check_output(
+                    build_command,
+                    env=dict(os.environ, SPHINXOPTS=sphinx_options),
+                    cwd=self.docs_dir.as_posix(),
+                    stderr=subprocess.STDOUT
+                )
+            else:
+                build_command += shlex.split(sphinx_options)
+                print(f"[sphinx-action] Running: {build_command}")
 
-                    subprocess.check_output(
-                        build_command,
-                        cwd=self.docs_dir.as_posix(),
-                        stderr=subprocess.STDOUT
-                    )
-            except subprocess.CalledProcessError as e:
-                gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
-                return_code = e.returncode
+                subprocess.check_output(
+                    build_command,
+                    cwd=self.docs_dir.as_posix(),
+                    stderr=subprocess.STDOUT
+                )
 
             if log_file.exists():
                 log = SphinxLog(docs=self, path=log_file)
