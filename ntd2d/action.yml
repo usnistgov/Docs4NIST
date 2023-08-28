@@ -48,6 +48,11 @@ inputs:
       dependencies, for example with
       "apt-get update -y && apt-get install -y perl"
     required: false
+  apt-packages:
+    description:
+      List of APT packages to install.
+    required: false
+    default: ''
   pip-requirements:
     description:
       The path to the pip requirements file, relative to the root of the

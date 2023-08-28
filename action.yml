@@ -100,6 +100,7 @@ runs:
         build-epub-command: ${{ inputs.build-epub-command }}
         build-pdf-command: ${{ inputs.build-pdf-command }}
         pre-build-command: ${{ inputs.pre-build-command }}
+        apt-packages: ${{ inputs.apt-packages }}
         pip-requirements: ${{ inputs.pip-requirements }}
         conda-environment: ${{ inputs.conda-environment }}
     - name: Change ownership
