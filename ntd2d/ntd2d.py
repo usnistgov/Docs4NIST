@@ -28,18 +28,23 @@ def main():
                 gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
                 raise
 
+    return_codes = []
+
     with gha_utils.group("Build HTML", use_subprocess=True):
-        docs.build_docs(build_command=os.environ['INPUT_BUILD-HTML-COMMAND'])
+        build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
+        return_codes.append(docs.build_docs(build_command=build_command))
 
     formats = os.environ['INPUT_FORMATS'].lower().split()
 
     if "pdf" in formats:
         with gha_utils.group("Build PDF", use_subprocess=True):
-            docs.build_docs(build_command=os.environ['INPUT_BUILD-PDF-COMMAND'])
+            build_command = os.environ['INPUT_BUILD-PDF-COMMAND']
+            return_codes.append(docs.build_docs(build_command=build_command))
 
     if "epub" in formats:
         with gha_utils.group("Build ePub", use_subprocess=True):
-            docs.build_docs(build_command=os.environ['INPUT_BUILD-EPUB-COMMAND'])
+            build_command = os.environ['INPUT_BUILD-EPUB-COMMAND']
+            return_codes.append(docs.build_docs(build_command=build_command))
 
     with gha_utils.group("Update Pages", use_subprocess=True):
         repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
@@ -51,6 +56,10 @@ def main():
 
         repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
                           sha=os.environ['GITHUB_SHA'])
+
+    for code in return_codes:
+        if code != 0:
+            raise RuntimeError("Sphinx failed")
 
 if __name__ == "__main__":
     try:
