@@ -22,11 +22,7 @@ def main():
     if pre_build_command != "":
         with gha_utils.group("Executing pre-build-command", use_subprocess=True):
             gha_utils.debug(f"pre-build-command: {pre_build_command}", use_subprocess=True)
-            try:
-                subprocess.check_output(pre_build_command, shell=True, stderr=subprocess.STDOUT)
-            except subprocess.CalledProcessError as e:
-                gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
-                raise
+            subprocess.check_output(pre_build_command, shell=True, stderr=subprocess.STDOUT)
 
     return_codes = []
 
@@ -63,7 +59,11 @@ def main():
 
 if __name__ == "__main__":
     try:
-        main()
+        try:
+            main()
+        except subprocess.CalledProcessError as e:
+            gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
+            raise
     except Exception as e:
         gha_utils.error("".join(traceback.format_exception(e)), use_subprocess=True)
         sys.exit(1)
