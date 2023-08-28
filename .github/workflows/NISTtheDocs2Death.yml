@@ -11,5 +11,5 @@ jobs:
           docs-folder: docs/
           pre-build-command: |-
             echo "doc/source/_static"
-            && ls docs/
-            && echo `pwd`
+            ls docs/
+            echo `pwd`
