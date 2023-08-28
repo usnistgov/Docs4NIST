@@ -3,6 +3,7 @@ import github_action_utils as gha_utils
 import os
 import pathlib
 import subprocess
+import sys
 
 
 def main():
@@ -33,4 +34,10 @@ def main():
     subprocess.check_call(["/ntd2d.py"])
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        for line in traceback.format_exception(e):
+            for subline in line.rstrip().split('\n'):
+                gha_utils.error(subline, use_subprocess=True)
+        sys.exit(1)
