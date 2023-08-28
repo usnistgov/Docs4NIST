@@ -17,6 +17,11 @@ def main():
     
         gha_utils.set_output("borged-build-folder", docs.build_dir.as_posix())
 
+    pre_build_command = os.environ['INPUT_PRE-BUILD-COMMAND']
+    if pre_build_command != "":
+        with gha_utils.group("Executing pre-build-command", use_subprocess=True):
+            subprocess.call(pre_build_command, shell=True)
+
     with gha_utils.group("Build HTML", use_subprocess=True):
         docs.build_docs(build_command=os.environ['INPUT_BUILD-HTML-COMMAND'])
 
