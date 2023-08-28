@@ -25,7 +25,7 @@ def main():
             try:
                 subprocess.check_output(pre_build_command, shell=True, stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError as e:
-                for line in e.stdout.rstrip().split('\n'):
+                for line in e.stdout.decode('utf-8').rstrip().split('\n'):
                     gha_utils.error(line, use_subprocess=True)
                 raise
 
