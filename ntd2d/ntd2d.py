@@ -22,7 +22,12 @@ def main():
     if pre_build_command != "":
         with gha_utils.group("Executing pre-build-command", use_subprocess=True):
             gha_utils.debug(f"pre-build-command: {pre_build_command}", use_subprocess=True)
-            subprocess.check_call(pre_build_command, shell=True)
+            try:
+                subprocess.check_output(pre_build_command, shell=True, stderr=subprocess.STDOUT)
+            except subprocess.CalledProcessError as e:
+                for line in e.stdout.rstrip().split('\n'):
+                    gha_utils.error(line, use_subprocess=True)
+                raise
 
     with gha_utils.group("Build HTML", use_subprocess=True):
         docs.build_docs(build_command=os.environ['INPUT_BUILD-HTML-COMMAND'])
