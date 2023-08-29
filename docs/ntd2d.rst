@@ -81,22 +81,22 @@ Type(s) of output desired in addition to html (``pdf``, and/or ``epub``).
 ``build-html-command``
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The command used by |sphinxaction|_ to build your html documentation.
+The command used to build your html documentation.
 
 ``build-epub-command``
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The command used by |sphinxaction|_ to build your ePUB documentation.
+The command used to build your ePUB documentation.
 
 ``build-pdf-command``
 ~~~~~~~~~~~~~~~~~~~~~
 
-The command used by |sphinxaction|_ to build your PDF documentation.
+The command used to build your PDF documentation.
 
 ``pre-build-command``
 ~~~~~~~~~~~~~~~~~~~~~
 
-Run by |sphinxaction|_ before the build command.  You can use this to install
+Run before the build command.  You can use this to install
 system level dependencies, for example, with "``apt-get update -y && apt-get
 install -y perl``", although those are better installed with
 :ref:`APTPACKAGES`.
@@ -134,8 +134,8 @@ Implementation
 This action implements a `Docker workflow step
 <https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action>`_.
 The Docker ``ENTRYPOINT``
-- installs any specified :ref:`APTPACKAGES`, :ref:`CONDAENVIRONMENT` and
-  :ref:`PIPREQUIREMENTS`,
+- installs any specified :ref:`APTPACKAGES`, :ref:`PIPREQUIREMENTS`,
+  and :ref:`CONDAENVIRONMENT`.
 - wraps the `Sphinx configuration directory
   <https://www.sphinx-doc.org/en/master/usage/configuration.html>`_ in a
   :class:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs` object,

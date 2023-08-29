@@ -47,6 +47,8 @@ Inputs
 
 The folder containing your Sphinx configuration.
 
+.. _PAGES_BRANCH:
+
 ``pages-branch``
 ~~~~~~~~~~~~~~~~
 
@@ -108,10 +110,14 @@ install -y perl``", although those are better installed with
 List of any `APT <https://en.wikipedia.org/wiki/APT_(software)>`_ packages
 that should be installed.
 
+.. _PIPREQUIREMENTS:
+
 ``pip-requirements``
 ~~~~~~~~~~~~~~~~~~~~
 
 The path to the pip requirements file, relative to the root of the project.
+
+.. _CONDAENVIRONMENT:
 
 ``conda-environment``
 ~~~~~~~~~~~~~~~~~~~~~
