@@ -20,6 +20,7 @@ yourself.
       uses: ./../../_actions/current/ntd2d
       with:
         docs-folder: docs/
+        default-branch: 'main'
         pages-branch: 'nist-pages'
         pages-url: 'https://pages.nist.gov'
         formats: ''
@@ -48,10 +49,22 @@ Inputs
 
 The folder containing your Sphinx configuration.
 
+.. _NTD2D_DEFAULT-BRANCH:
+
+``default-branch``
+~~~~~~~~~~~~~~~~~~
+
+The default branch `configured in GitHub
+<https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch>`_.
+
+.. _NTD2D_PAGES-BRANCH:
+
 ``pages-branch``
 ~~~~~~~~~~~~~~~~
 
 The branch linked to your documentation server.
+
+.. _NTD2D_PAGES-URL:
 
 ``pages-url``
 ~~~~~~~~~~~~~
