@@ -44,7 +44,7 @@ class SphinxDocs:
         """Build Sphinx Documentation
 
         Adapted from https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py
-        [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
+        (`Apache-2.0 <https://spdx.org/licenses/Apache-2.0.html>`_).
         """
         if not build_command:
             raise ValueError("Build command may not be empty")
