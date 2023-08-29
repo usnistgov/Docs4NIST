@@ -25,7 +25,7 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
      docs:
        runs-on: ubuntu-latest
        steps:
-         - uses: usnistgov/NISTtheDocs2Death@0.1
+         - uses: usnistgov/NISTtheDocs2Death@0.3
            with:
              docs-folder: docs/
              pages-branch: 'nist-pages'
@@ -33,8 +33,11 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
              formats: ''
              build-html-command: make html
              build-epub-command: make epub
-             build-pdf-command: make epub
+             build-pdf-command: make latexpdf
              pre-build-command: ''
+             apt-packages: ''
+             pip-requirements: ''
+             conda-environment: ''
 
 Inputs
 ------
@@ -43,6 +46,8 @@ Inputs
 ~~~~~~~~~~~~~~~
 
 The folder containing your Sphinx configuration.
+
+.. _PAGES_BRANCH:
 
 ``pages-branch``
 ~~~~~~~~~~~~~~~~
@@ -89,12 +94,37 @@ The command used by |sphinxaction|_ to build your ePUB documentation.
 
 The command used by |sphinxaction|_ to build your PDF documentation.
 
-pre-build-command
-~~~~~~~~~~~~~~~~~
+``pre-build-command``
+~~~~~~~~~~~~~~~~~~~~~
 
 Run by |sphinxaction|_ before the build command.  You can use this to install
 system level dependencies, for example, with "``apt-get update -y && apt-get
-install -y perl``".
+install -y perl``", although those are better installed with
+:ref:`APTPACKAGES`.
+
+.. _APTPACKAGES:
+
+``apt-packages``
+~~~~~~~~~~~~~~~~~~~~
+
+List of any `APT <https://en.wikipedia.org/wiki/APT_(software)>`_ packages
+that should be installed.
+
+.. _PIPREQUIREMENTS:
+
+``pip-requirements``
+~~~~~~~~~~~~~~~~~~~~
+
+The path to the pip requirements file, relative to the root of the project.
+
+.. _CONDAENVIRONMENT:
+
+``conda-environment``
+~~~~~~~~~~~~~~~~~~~~~
+
+The path to the Conda environment file, relative to the root of the
+project.
+
 
 Implementation
 --------------
@@ -104,11 +134,9 @@ This action implements a `composite workflow
 with the following major steps:
 
 1. |checkout|_
-2. :ref:`BORGTHEDOCS`
-3. |sphinxaction|_
-4. :ref:`UPDATEPAGES`
-5. |github-push-action|_
-6. |upload-artifact|_
+2. :ref:`NTD2D`
+3. |github-push-action|_
+4. |upload-artifact|_
 
 
 .. |checkout|       replace:: ``actions/checkout``

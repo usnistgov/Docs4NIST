@@ -4,11 +4,12 @@ Customization
 NISTtheDocs2Death uses two sets of templates that determine the appearance 
 of the hosted documentation.
 
-``borg_the_docs`` templates
----------------------------
+Assimilation templates
+----------------------
 
-The first set of templates is used by the :ref:`BORGTHEDOCS` to modify the
-Sphinx configuration.
+The first set of templates is used by
+:meth:`~ntd2d_action.sphinxdocs.BorgedSphinxDocs.assimilate_theme` to
+modify the Sphinx configuration.
 
 These templates can be customized by forking this repository.
 
@@ -40,20 +41,21 @@ menu that allows selecting different versions of your documentation.
 This template file controls the appearance of the dropdown menu.
 
 .. |conf.py|  replace:: :file:`conf.py`
-.. _conf.py:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/borg_the_docs/borg_the_docs_action/files/templates/conf.py
+.. _conf.py:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/conf.py
 .. |ntd2d|    replace:: :file:`ntd2d/`
-.. _ntd2d:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/borg_the_docs/borg_the_docs_action/files/templates/ntd2d/
+.. _ntd2d:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/
 .. |layout.html|  replace:: :file:`ntd2d/layout.html`
-.. _layout.html:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/borg_the_docs/borg_the_docs_action/files/templates/ntd2d/layout.html
+.. _layout.html:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/layout.html
 .. |static/ntd2d.css_t|  replace:: :file:`ntd2d/static/ntd2d.css_t`
-.. _static/ntd2d.css_t:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/borg_the_docs/borg_the_docs_action/files/templates/ntd2d/static/ntd2d.css_t
+.. _static/ntd2d.css_t:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/static/ntd2d.css_t
 
-``update_pages`` templates
+Pages templates
 --------------------------
 
-The second set of tempaltes is used by the :ref:`UPDATEPAGES` sub-action to
-create the pages on the hosting site that enable switching between
-different documentation variants.
+The second set of tempaltes is used by
+:meth:`~ntd2d_action.repository.Repository.update_pages` to create the
+pages on the hosting site that enable switching between different
+documentation variants.
 
 You can customize any of these templates by copying them to a
 :file:`_templates/` directory at the root of your `nist-pages` branch and
@@ -173,17 +175,17 @@ Available subsitution keywords are:
 
 
 .. |downloads.html|   replace:: :file:`downloads.html`
-.. _downloads.html:   https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/downloads.html
+.. _downloads.html:   https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/downloads.html
 .. |download_item.html| replace:: :file:`download_item.html`
-.. _download_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/download_item.html
+.. _download_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/download_item.html
 .. |index.html|       replace:: :file:`index.html`
-.. _index.html:       https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/index.html
+.. _index.html:       https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/index.html
 .. |menu.html|        replace:: :file:`menu.html`
-.. _menu.html:        https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/menu.html
+.. _menu.html:        https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/menu.html
 .. |ntd2d_active.css| replace:: :file:`ntd2d_active.css`
-.. _ntd2d_active.css: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/ntd2d_active.css
+.. _ntd2d_active.css: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d_active.css
 .. |variants.html|    replace:: :file:`variants.html`
-.. _variants.html:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/variants.html
+.. _variants.html:    https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/variants.html
 .. |variant_item.html| replace:: :file:`variant_item.html`
-.. _variant_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/update_pages/update_pages_action/files/templates/variant_item.html
+.. _variant_item.html: https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/variant_item.html
 

@@ -1,24 +1,20 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>NISTtheDocs2Death Action &#8212; NISTtheDocs2Death  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/ntd2d.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=88d0a8bc" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="borg_the_docs Sub-Action" href="borg_the_docs.html" />
-    <link rel="prev" title="NISTtheDocs2Death" href="index.html" />
+    <link rel="next" title="ntd2d Sub-Action" href="ntd2d.html" />
+    <link rel="prev" title="ntd2d_action.variants" href="generated/ntd2d_action.variants.html" />
   
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -50,24 +46,27 @@
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
 <p>This action is invoked by adding a workflow file to your repository, such
 as <code class="file docutils literal notranslate"><span class="pre">.github/workflows/NISTtheDocs2Death.yml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Build</span><span class="nv"> </span><span class="s">Documentation&quot;</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Build</span><span class="nv"> </span><span class="s">Documentation&quot;</span>
 
-<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">delete</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">delete</span><span class="p p-Indicator">]</span>
 
-<span class="nt">jobs</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">docs</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">usnistgov/NISTtheDocs2Death@0.1</span><span class="w"></span>
-<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">docs-folder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/</span><span class="w"></span>
-<span class="w">          </span><span class="nt">pages-branch</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;nist-pages&#39;</span><span class="w"></span>
-<span class="w">          </span><span class="nt">pages-url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://pages.nist.gov&#39;</span><span class="w"></span>
-<span class="w">          </span><span class="nt">formats</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="w"></span>
-<span class="w">          </span><span class="nt">build-html-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make html</span><span class="w"></span>
-<span class="w">          </span><span class="nt">build-epub-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span><span class="w"></span>
-<span class="w">          </span><span class="nt">build-pdf-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span><span class="w"></span>
-<span class="w">          </span><span class="nt">pre-build-command</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="w"></span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">docs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">usnistgov/NISTtheDocs2Death@0.3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">docs-folder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/</span>
+<span class="w">          </span><span class="nt">pages-branch</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;nist-pages&#39;</span>
+<span class="w">          </span><span class="nt">pages-url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://pages.nist.gov&#39;</span>
+<span class="w">          </span><span class="nt">formats</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">          </span><span class="nt">build-html-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make html</span>
+<span class="w">          </span><span class="nt">build-epub-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span>
+<span class="w">          </span><span class="nt">build-pdf-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make latexpdf</span>
+<span class="w">          </span><span class="nt">pre-build-command</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">          </span><span class="nt">apt-packages</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">          </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">          </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 </pre></div>
 </div>
 </section>
@@ -78,7 +77,7 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 <p>The folder containing your Sphinx configuration.</p>
 </section>
 <section id="pages-branch">
-<h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Permalink to this heading">¶</a></h3>
+<span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Permalink to this heading">¶</a></h3>
 <p>The branch linked to your documentation server.</p>
 </section>
 <section id="pages-url">
@@ -93,9 +92,9 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 <p><a class="reference external" href="https://github.com/actions/toolkit/issues/184">GitHub Actions’ YAML implementation does not support list or array elements</a>, so
 <a class="reference external" href="https://stackoverflow.com/questions/75420197/how-to-use-array-input-for-a-custom-github-actions">use a multiline string</a>
 to declare formats, e.g.,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">formats</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span><span class="w"></span>
-<span class="w">  </span><span class="no">epub</span><span class="w"></span>
-<span class="w">  </span><span class="no">pdf</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">formats</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<span class="w">  </span><span class="no">epub</span>
+<span class="w">  </span><span class="no">pdf</span>
 </pre></div>
 </div>
 </div>
@@ -113,10 +112,25 @@ to declare formats, e.g.,</p>
 <p>The command used by <a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a> to build your PDF documentation.</p>
 </section>
 <section id="pre-build-command">
-<h3>pre-build-command<a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
 <p>Run by <a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a> before the build command.  You can use this to install
 system level dependencies, for example, with “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">-y</span> <span class="pre">&amp;&amp;</span> <span class="pre">apt-get</span>
-<span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”.</p>
+<span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”, although those are better installed with
+<a class="reference internal" href="#aptpackages"><span class="std std-ref">apt-packages</span></a>.</p>
+</section>
+<section id="apt-packages">
+<span id="aptpackages"></span><h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Permalink to this heading">¶</a></h3>
+<p>List of any <a class="reference external" href="https://en.wikipedia.org/wiki/APT_(software)">APT</a> packages
+that should be installed.</p>
+</section>
+<section id="pip-requirements">
+<span id="piprequirements"></span><h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
+<p>The path to the pip requirements file, relative to the root of the project.</p>
+</section>
+<section id="conda-environment">
+<span id="condaenvironment"></span><h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading">¶</a></h3>
+<p>The path to the Conda environment file, relative to the root of the
+project.</p>
 </section>
 </section>
 <section id="implementation">
@@ -125,9 +139,7 @@ system level dependencies, for example, with “<code class="docutils literal no
 with the following major steps:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://github.com/actions/checkout"><code class="docutils literal notranslate"><span class="pre">actions/checkout</span></code></a></p></li>
-<li><p><a class="reference internal" href="borg_the_docs.html#borgthedocs"><span class="std std-ref">borg_the_docs Sub-Action</span></a></p></li>
-<li><p><a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a></p></li>
-<li><p><a class="reference internal" href="update_pages.html#updatepages"><span class="std std-ref">update_pages Sub-Action</span></a></p></li>
+<li><p><a class="reference internal" href="ntd2d.html#ntd2d"><span class="std std-ref">ntd2d Sub-Action</span></a></p></li>
 <li><p><a class="reference external" href="https://github.com/ad-m/github-push-action"><code class="docutils literal notranslate"><span class="pre">ad-m/github-push-action</span></code></a></p></li>
 <li><p><a class="reference external" href="https://github.com/actions/upload-artifact"><code class="docutils literal notranslate"><span class="pre">actions/upload-artifact</span></code></a></p></li>
 </ol>
@@ -154,7 +166,10 @@ with the following major steps:</p>
 <li><a class="reference internal" href="#build-html-command"><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code></a></li>
 <li><a class="reference internal" href="#build-epub-command"><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code></a></li>
 <li><a class="reference internal" href="#build-pdf-command"><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code></a></li>
-<li><a class="reference internal" href="#pre-build-command">pre-build-command</a></li>
+<li><a class="reference internal" href="#pre-build-command"><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code></a></li>
+<li><a class="reference internal" href="#apt-packages"><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code></a></li>
+<li><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
+<li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#implementation">Implementation</a></li>
@@ -166,8 +181,8 @@ with the following major steps:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">NISTtheDocs2Death</span></code></a></li>
-      <li>Next: <a href="borg_the_docs.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">borg_the_docs</span></code> Sub-Action</a></li>
+      <li>Previous: <a href="generated/ntd2d_action.variants.html" title="previous chapter">ntd2d_action.variants</a></li>
+      <li>Next: <a href="ntd2d.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">ntd2d</span></code> Sub-Action</a></li>
   </ul></li>
 </ul>
 </div>
@@ -198,8 +213,8 @@ with the following major steps:</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/nistthedocs2death.rst.txt"
