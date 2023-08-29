@@ -15,9 +15,15 @@ ntd2d\_action.repository
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      Repository
+   .. autoclass:: Repository
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

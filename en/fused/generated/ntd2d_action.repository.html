@@ -41,13 +41,40 @@
 <span id="ntd2d-action-repository"></span><h1>ntd2d_action.repository<a class="headerlink" href="#module-ntd2d_action.repository" title="Permalink to this heading">¶</a></h1>
 <p>Interface to a git/GitHub repositories.</p>
 <p class="rubric">Classes</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Repository</span></code>(server_url, repository, branch, ...)</p></td>
-<td><p>Interface to a git/GitHub repository.</p></td>
-</tr>
-</tbody>
-</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="ntd2d_action.repository.Repository">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ntd2d_action.repository.</span></span><span class="sig-name descname"><span class="pre">Repository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_branch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">docs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pages_url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.repository.Repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interface to a git/GitHub repository.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>server_url</strong> (<em>url</em>) – The URL of the GitHub server (<span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_SERVER_URL</span></code>).</p></li>
+<li><p><strong>repository</strong> (<em>str</em>) – The owner and repository name (<span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_REPOSITORY</span></code>).</p></li>
+<li><p><strong>branch</strong> (<em>str</em>) – The branch linked to your documentation server (<a class="reference internal" href="../ntd2d.html#ntd2d-pages-branch"><span class="std std-ref">pages-branch</span></a>).</p></li>
+<li><p><strong>default-branch</strong> (<em>str</em>) – The default branch configured in GitHub (<a class="reference internal" href="../ntd2d.html#ntd2d-default-branch"><span class="std std-ref">default-branch</span></a>).</p></li>
+<li><p><strong>docs</strong> (<a class="reference internal" href="ntd2d_action.sphinxdocs.html#ntd2d_action.sphinxdocs.SphinxDocs" title="ntd2d_action.sphinxdocs.SphinxDocs"><em>SphinxDocs</em></a>) – The documentation being built.</p></li>
+<li><p><strong>pages_url</strong> (<em>url</em>) – URL of the web server for served documentation (<a class="reference internal" href="../ntd2d.html#ntd2d-pages-url"><span class="std std-ref">pages-url</span></a>).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ntd2d_action.repository.Repository.update_pages">
+<span class="sig-name descname"><span class="pre">update_pages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.repository.Repository.update_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commit built documentation to <a class="reference internal" href="../ntd2d.html#ntd2d-pages-branch"><span class="std std-ref">pages-branch</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>branch</strong> (<em>str</em>) – The sanitized (‘/’ removed) short ref name of the branch or tag
+that triggered the workflow (<span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_REF_NAME</span></code>).</p></li>
+<li><p><strong>sha</strong> (<em>str</em>) – The commit SHA that triggered the workflow (<span class="target" id="index-3"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_SHA</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -56,7 +83,20 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ntd2d_action.repository</a><ul>
+<li><a class="reference internal" href="#ntd2d_action.repository.Repository"><code class="docutils literal notranslate"><span class="pre">Repository</span></code></a><ul>
+<li><a class="reference internal" href="#ntd2d_action.repository.Repository.update_pages"><code class="docutils literal notranslate"><span class="pre">Repository.update_pages()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>

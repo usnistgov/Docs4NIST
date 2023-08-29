@@ -15,11 +15,35 @@ ntd2d\_action.files.template
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      FileTemplate
-      PagesTemplate
-      Template
+   .. autoclass:: FileTemplate
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+   ----
+   
+
+   
+   .. autoclass:: PagesTemplate
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+   ----
+   
+
+   
+   .. autoclass:: Template
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

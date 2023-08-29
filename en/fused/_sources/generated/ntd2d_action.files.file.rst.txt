@@ -15,9 +15,15 @@ ntd2d\_action.files.file
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      File
+   .. autoclass:: File
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

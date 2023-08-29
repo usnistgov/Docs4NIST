@@ -15,9 +15,15 @@ ntd2d\_action.files.cssfile
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      CSSFile
+   .. autoclass:: CSSFile
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

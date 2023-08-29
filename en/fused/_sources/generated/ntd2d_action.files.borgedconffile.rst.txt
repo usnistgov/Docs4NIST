@@ -15,9 +15,15 @@ ntd2d\_action.files.borgedconffile
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      BorgedConfFile
+   .. autoclass:: BorgedConfFile
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

@@ -15,10 +15,25 @@ ntd2d\_action.sphinxdocs
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      BorgedSphinxDocs
-      SphinxDocs
+   .. autoclass:: BorgedSphinxDocs
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+   ----
+   
+
+   
+   .. autoclass:: SphinxDocs
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

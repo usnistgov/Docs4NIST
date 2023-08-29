@@ -15,9 +15,15 @@ ntd2d\_action.files.templatehierarchy
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      TemplateHierarchy
+   .. autoclass:: TemplateHierarchy
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

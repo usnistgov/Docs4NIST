@@ -15,9 +15,15 @@ ntd2d\_action.files.sphinxlog
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      SphinxLog
+   .. autoclass:: SphinxLog
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

@@ -15,9 +15,15 @@ ntd2d\_action.files.nojekyllfile
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      NoJekyllFile
+   .. autoclass:: NoJekyllFile
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

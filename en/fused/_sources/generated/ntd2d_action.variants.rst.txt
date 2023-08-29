@@ -15,12 +15,45 @@ ntd2d\_action.variants
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      Variant
-      VariantCollection
-      VariantCollector
-      Version
+   .. autoclass:: Variant
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+   ----
+   
+
+   
+   .. autoclass:: VariantCollection
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+   ----
+   
+
+   
+   .. autoclass:: VariantCollector
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+   ----
+   
+
+   
+   .. autoclass:: Version
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

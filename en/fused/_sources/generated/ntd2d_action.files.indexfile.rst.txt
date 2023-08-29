@@ -15,9 +15,15 @@ ntd2d\_action.files.indexfile
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      IndexFile
+   .. autoclass:: IndexFile
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

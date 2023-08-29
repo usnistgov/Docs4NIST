@@ -41,16 +41,49 @@
 <span id="ntd2d-action-sphinxdocs"></span><h1>ntd2d_action.sphinxdocs<a class="headerlink" href="#module-ntd2d_action.sphinxdocs" title="Permalink to this heading">¶</a></h1>
 <p>Sphinx configuration directory.</p>
 <p class="rubric">Classes</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">BorgedSphinxDocs</span></code>(original_docs)</p></td>
-<td><p>Sphinx configuration directory modified by NISTtheDocs2Death.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphinxDocs</span></code>(docs_dir)</p></td>
-<td><p>Sphinx configuration directory.</p></td>
-</tr>
-</tbody>
-</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="ntd2d_action.sphinxdocs.BorgedSphinxDocs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ntd2d_action.sphinxdocs.</span></span><span class="sig-name descname"><span class="pre">BorgedSphinxDocs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_docs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ntd2d_action.sphinxdocs.SphinxDocs" title="ntd2d_action.sphinxdocs.SphinxDocs"><code class="xref py py-class docutils literal notranslate"><span class="pre">SphinxDocs</span></code></a></p>
+<p>Sphinx configuration directory modified by NISTtheDocs2Death.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>original_docs</strong> (<a class="reference internal" href="#ntd2d_action.sphinxdocs.SphinxDocs" title="ntd2d_action.sphinxdocs.SphinxDocs"><em>SphinxDocs</em></a>) – The configuration directory stored in the
+<a class="reference internal" href="ntd2d_action.repository.html#ntd2d_action.repository.Repository" title="ntd2d_action.repository.Repository"><code class="xref py py-class docutils literal notranslate"><span class="pre">Repository</span></code></a>.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ntd2d_action.sphinxdocs.BorgedSphinxDocs.assimilate_theme">
+<span class="sig-name descname"><span class="pre">assimilate_theme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs.assimilate_theme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace configuration directory with customized html theme.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ntd2d_action.sphinxdocs.BorgedSphinxDocs.build_docs">
+<span class="sig-name descname"><span class="pre">build_docs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">build_command</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs.build_docs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build Sphinx Documentation</p>
+<p>Adapted from <a class="reference external" href="https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py">https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py</a>
+(<a class="reference external" href="https://spdx.org/licenses/Apache-2.0.html">Apache-2.0</a>).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="ntd2d_action.sphinxdocs.SphinxDocs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ntd2d_action.sphinxdocs.</span></span><span class="sig-name descname"><span class="pre">SphinxDocs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.sphinxdocs.SphinxDocs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Sphinx configuration directory.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ntd2d_action.sphinxdocs.SphinxDocs.build_docs">
+<span class="sig-name descname"><span class="pre">build_docs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">build_command</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.sphinxdocs.SphinxDocs.build_docs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build Sphinx Documentation</p>
+<p>Adapted from <a class="reference external" href="https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py">https://github.com/ammaraskar/sphinx-action/blob/master/sphinx_action/action.py</a>
+(<a class="reference external" href="https://spdx.org/licenses/Apache-2.0.html">Apache-2.0</a>).</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -59,7 +92,25 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ntd2d_action.sphinxdocs</a><ul>
+<li><a class="reference internal" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs"><code class="docutils literal notranslate"><span class="pre">BorgedSphinxDocs</span></code></a><ul>
+<li><a class="reference internal" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs.assimilate_theme"><code class="docutils literal notranslate"><span class="pre">BorgedSphinxDocs.assimilate_theme()</span></code></a></li>
+<li><a class="reference internal" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs.build_docs"><code class="docutils literal notranslate"><span class="pre">BorgedSphinxDocs.build_docs()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ntd2d_action.sphinxdocs.SphinxDocs"><code class="docutils literal notranslate"><span class="pre">SphinxDocs</span></code></a><ul>
+<li><a class="reference internal" href="#ntd2d_action.sphinxdocs.SphinxDocs.build_docs"><code class="docutils literal notranslate"><span class="pre">SphinxDocs.build_docs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>

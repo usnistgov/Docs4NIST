@@ -15,9 +15,15 @@ ntd2d\_action.files.variantsfile
    
    .. rubric:: Classes
 
-   .. autosummary::
    
-      VariantsFile
+   .. autoclass:: VariantsFile
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
    
    
 

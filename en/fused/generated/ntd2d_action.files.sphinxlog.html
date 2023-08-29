@@ -40,13 +40,25 @@
   <section id="module-ntd2d_action.files.sphinxlog">
 <span id="ntd2d-action-files-sphinxlog"></span><h1>ntd2d_action.files.sphinxlog<a class="headerlink" href="#module-ntd2d_action.files.sphinxlog" title="Permalink to this heading">¶</a></h1>
 <p class="rubric">Classes</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphinxLog</span></code>(docs, path)</p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="ntd2d_action.files.sphinxlog.SphinxLog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ntd2d_action.files.sphinxlog.</span></span><span class="sig-name descname"><span class="pre">SphinxLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.files.sphinxlog.SphinxLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="ntd2d_action.files.file.html#ntd2d_action.files.file.File" title="ntd2d_action.files.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ntd2d_action.files.sphinxlog.SphinxLog.parse_sphinx_warnings">
+<span class="sig-name descname"><span class="pre">parse_sphinx_warnings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ntd2d_action.files.sphinxlog.SphinxLog.parse_sphinx_warnings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse and emit a sphinx file containing warnings and errors.</p>
+<dl>
+<dt>Inputs look like this:</dt><dd><p>/media/sf_shared/workspace/sphinx-action/tests/test_projects/warnings_and_errors/index.rst:19: WARNING: Error in “code-block” directive:
+maximum 1 argument(s) allowed, 2 supplied.</p>
+<p>/cpython/Doc/distutils/_setuptools_disclaimer.rst: WARNING: document isn’t included in any toctree
+/cpython/Doc/contents.rst:5: WARNING: toctree contains reference to nonexisting document ‘ayylmao’</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -55,7 +67,20 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ntd2d_action.files.sphinxlog</a><ul>
+<li><a class="reference internal" href="#ntd2d_action.files.sphinxlog.SphinxLog"><code class="docutils literal notranslate"><span class="pre">SphinxLog</span></code></a><ul>
+<li><a class="reference internal" href="#ntd2d_action.files.sphinxlog.SphinxLog.parse_sphinx_warnings"><code class="docutils literal notranslate"><span class="pre">SphinxLog.parse_sphinx_warnings()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
