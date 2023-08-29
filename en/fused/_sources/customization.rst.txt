@@ -52,9 +52,10 @@ This template file controls the appearance of the dropdown menu.
 Pages templates
 --------------------------
 
-The second set of tempaltes is used by the :ref:`UPDATEPAGES` sub-action to
-create the pages on the hosting site that enable switching between
-different documentation variants.
+The second set of tempaltes is used by
+:meth:`~ntd2d_action.repository.Repository.update_pages` to create the
+pages on the hosting site that enable switching between different
+documentation variants.
 
 You can customize any of these templates by copying them to a
 :file:`_templates/` directory at the root of your `nist-pages` branch and

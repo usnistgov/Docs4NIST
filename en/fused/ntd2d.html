@@ -145,12 +145,10 @@ project.</p>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
 <p>This action implements a <a class="reference external" href="https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action">Docker workflow step</a>.
-The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
-- installs any specified <a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>, <a class="reference internal" href="nistthedocs2death.html#piprequirements"><span class="std std-ref">pip-requirements</span></a>,</p>
-<blockquote>
-<div><p>and <a class="reference internal" href="nistthedocs2death.html#condaenvironment"><span class="std std-ref">conda-environment</span></a>.</p>
-</div></blockquote>
+The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code></p>
 <ul class="simple">
+<li><p>installs any specified <a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>, <a class="reference internal" href="nistthedocs2death.html#piprequirements"><span class="std std-ref">pip-requirements</span></a>,
+and <a class="reference internal" href="nistthedocs2death.html#condaenvironment"><span class="std std-ref">conda-environment</span></a>,</p></li>
 <li><p>wraps the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/configuration.html">Sphinx configuration directory</a> in a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">BorgedSphinxDocs</span></code> object,</p></li>
 <li><p>invokes
