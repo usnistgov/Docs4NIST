@@ -35,6 +35,7 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
              build-epub-command: make epub
              build-pdf-command: make epub
              pre-build-command: ''
+             apt-packages: ''
              pip-requirements: ''
              conda-environment: ''
 
@@ -96,7 +97,16 @@ The command used by |sphinxaction|_ to build your PDF documentation.
 
 Run by |sphinxaction|_ before the build command.  You can use this to install
 system level dependencies, for example, with "``apt-get update -y && apt-get
-install -y perl``".
+install -y perl``", although those are better installed with
+:ref:`APTPACKAGES`.
+
+.. _APTPACKAGES:
+
+``apt-packages``
+~~~~~~~~~~~~~~~~~~~~
+
+List of any `APT <https://en.wikipedia.org/wiki/APT_(software)>`_ packages
+that should be installed.
 
 ``pip-requirements``
 ~~~~~~~~~~~~~~~~~~~~
@@ -118,9 +128,7 @@ This action implements a `composite workflow
 with the following major steps:
 
 1. |checkout|_
-2. :ref:`BORGTHEDOCS`
-3. |sphinxaction|_
-4. :ref:`UPDATEPAGES`
+2. :ref:`NTD2D`
 5. |github-push-action|_
 6. |upload-artifact|_
 

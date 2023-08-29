@@ -27,6 +27,7 @@ yourself.
         build-epub-command: make epub
         build-pdf-command: make epub
         pre-build-command: ''
+        apt-packages: ''
         pip-requirements: ''
         conda-environment: ''
 
@@ -97,7 +98,14 @@ The command used by |sphinxaction|_ to build your PDF documentation.
 
 Run by |sphinxaction|_ before the build command.  You can use this to install
 system level dependencies, for example, with "``apt-get update -y && apt-get
-install -y perl``".
+install -y perl``", although those are better installed with
+:ref:`APTPACKAGES`.
+
+``apt-packages``
+~~~~~~~~~~~~~~~~~~~~
+
+List of any `APT <https://en.wikipedia.org/wiki/APT_(software)>`_ packages
+that should be installed.
 
 ``pip-requirements``
 ~~~~~~~~~~~~~~~~~~~~
@@ -126,15 +134,17 @@ Implementation
 This action implements a `Docker workflow step
 <https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action>`_.
 The Docker ``ENTRYPOINT``
-- installs any specified :ref:`CONDAENVIRONMENT` and
+- installs any specified :ref:`APTPACKAGES`, :ref:`CONDAENVIRONMENT` and
   :ref:`PIPREQUIREMENTS`,
 - wraps the `Sphinx configuration directory
   <https://www.sphinx-doc.org/en/master/usage/configuration.html>`_ in a
-  :class:`~ntd2d_action.sphinxdocs.SphinxDocs` object,
-- wraps the :file:`conf.py` file with a
-  :class:`~ntd2d_action.files.borgedconffile.BorgedConfFile` object,
+  :class:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs` object,
 - invokes
-  :meth:`~ntd2d_action.files.borgedconffile.BorgedConfFile.assimilate_theme`
+  :meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.assimilate_theme`
+- executes any :envvar:`INPUT_PRE-BUILD-COMMAND`,
+- invokes
+  :meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.build_docs` for
+  html and any other formats specified in :envvar:`INPUT_FORMATS`,
 - wraps the
   :envvar:`GITHUB_REPOSITORY` in a
   :class:`~ntd2d_action.repository.Repository` object,
