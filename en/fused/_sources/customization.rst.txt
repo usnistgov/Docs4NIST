@@ -4,11 +4,12 @@ Customization
 NISTtheDocs2Death uses two sets of templates that determine the appearance 
 of the hosted documentation.
 
-``borg_the_docs`` templates
----------------------------
+Assimilation templates
+----------------------
 
-The first set of templates is used by the :ref:`BORGTHEDOCS` to modify the
-Sphinx configuration.
+The first set of templates is used by the
+:meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.assimilate_theme` to
+modify the Sphinx configuration.
 
 These templates can be customized by forking this repository.
 
@@ -48,7 +49,7 @@ This template file controls the appearance of the dropdown menu.
 .. |static/ntd2d.css_t|  replace:: :file:`ntd2d/static/ntd2d.css_t`
 .. _static/ntd2d.css_t:  https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/static/ntd2d.css_t
 
-``update_pages`` templates
+Pages templates
 --------------------------
 
 The second set of tempaltes is used by the :ref:`UPDATEPAGES` sub-action to

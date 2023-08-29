@@ -41,7 +41,7 @@
 <span id="ntd2d"></span><h1><code class="docutils literal notranslate"><span class="pre">ntd2d</span></code> Sub-Action<a class="headerlink" href="#ntd2d-sub-action" title="Permalink to this heading">¶</a></h1>
 <p>This <a class="reference external" href="https://docs.github.com/en/actions">GitHub action</a> is invoked by
 the main <a class="reference internal" href="nistthedocs2death.html#nistthedocs2death"><span class="std std-ref">NISTtheDocs2Death Action</span></a> to move built documentation into your
-designated <span class="xref std std-ref">PAGES_BRANCH</span>.</p>
+designated <a class="reference internal" href="nistthedocs2death.html#pages-branch"><span class="std std-ref">pages-branch</span></a>.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
 <p>This action is invoked as a step of the composite workflow of the
@@ -103,19 +103,19 @@ to declare formats, e.g.,</p>
 </section>
 <section id="build-html-command">
 <h3><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code><a class="headerlink" href="#build-html-command" title="Permalink to this heading">¶</a></h3>
-<p>The command used by <a href="#id9"><span class="problematic" id="id10">|sphinxaction|_</span></a> to build your html documentation.</p>
+<p>The command used to build your html documentation.</p>
 </section>
 <section id="build-epub-command">
 <h3><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code><a class="headerlink" href="#build-epub-command" title="Permalink to this heading">¶</a></h3>
-<p>The command used by <a href="#id11"><span class="problematic" id="id12">|sphinxaction|_</span></a> to build your ePUB documentation.</p>
+<p>The command used to build your ePUB documentation.</p>
 </section>
 <section id="build-pdf-command">
 <h3><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code><a class="headerlink" href="#build-pdf-command" title="Permalink to this heading">¶</a></h3>
-<p>The command used by <a href="#id13"><span class="problematic" id="id14">|sphinxaction|_</span></a> to build your PDF documentation.</p>
+<p>The command used to build your PDF documentation.</p>
 </section>
 <section id="pre-build-command">
 <h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
-<p>Run by <a href="#id15"><span class="problematic" id="id16">|sphinxaction|_</span></a> before the build command.  You can use this to install
+<p>Run before the build command.  You can use this to install
 system level dependencies, for example, with “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">-y</span> <span class="pre">&amp;&amp;</span> <span class="pre">apt-get</span>
 <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”, although those are better installed with
 <a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>.</p>
@@ -146,9 +146,9 @@ project.</p>
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
 <p>This action implements a <a class="reference external" href="https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action">Docker workflow step</a>.
 The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
-- installs any specified <a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>, <span class="xref std std-ref">CONDAENVIRONMENT</span> and</p>
+- installs any specified <a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>, <a class="reference internal" href="nistthedocs2death.html#piprequirements"><span class="std std-ref">pip-requirements</span></a>,</p>
 <blockquote>
-<div><p><span class="xref std std-ref">PIPREQUIREMENTS</span>,</p>
+<div><p>and <a class="reference internal" href="nistthedocs2death.html#condaenvironment"><span class="std std-ref">conda-environment</span></a>.</p>
 </div></blockquote>
 <ul class="simple">
 <li><p>wraps the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/configuration.html">Sphinx configuration directory</a> in a

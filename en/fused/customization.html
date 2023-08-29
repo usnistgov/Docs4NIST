@@ -41,10 +41,11 @@
 <h1>Customization<a class="headerlink" href="#customization" title="Permalink to this heading">¶</a></h1>
 <p>NISTtheDocs2Death uses two sets of templates that determine the appearance
 of the hosted documentation.</p>
-<section id="borg-the-docs-templates">
-<h2><code class="docutils literal notranslate"><span class="pre">borg_the_docs</span></code> templates<a class="headerlink" href="#borg-the-docs-templates" title="Permalink to this heading">¶</a></h2>
-<p>The first set of templates is used by the <span class="xref std std-ref">BORGTHEDOCS</span> to modify the
-Sphinx configuration.</p>
+<section id="assimilation-templates">
+<h2>Assimilation templates<a class="headerlink" href="#assimilation-templates" title="Permalink to this heading">¶</a></h2>
+<p>The first set of templates is used by the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">assimilate_theme()</span></code> to
+modify the Sphinx configuration.</p>
 <p>These templates can be customized by forking this repository.</p>
 <section id="conf-py">
 <h3><a class="reference external" href="https://github.com/usnistgov/NISTtheDocs2Death/blob/main/ntd2d/ntd2d_action/files/templates/conf.py"><code class="file docutils literal notranslate"><span class="pre">conf.py</span></code></a><a class="headerlink" href="#conf-py" title="Permalink to this heading">¶</a></h3>
@@ -66,8 +67,8 @@ menu that allows selecting different versions of your documentation.</p>
 </section>
 </section>
 </section>
-<section id="update-pages-templates">
-<h2><code class="docutils literal notranslate"><span class="pre">update_pages</span></code> templates<a class="headerlink" href="#update-pages-templates" title="Permalink to this heading">¶</a></h2>
+<section id="pages-templates">
+<h2>Pages templates<a class="headerlink" href="#pages-templates" title="Permalink to this heading">¶</a></h2>
 <p>The second set of tempaltes is used by the <span class="xref std std-ref">UPDATEPAGES</span> sub-action to
 create the pages on the hosting site that enable switching between
 different documentation variants.</p>
@@ -175,7 +176,7 @@ satisfy the <span class="target" id="index-1"></span><a class="pep reference ext
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Customization</a><ul>
-<li><a class="reference internal" href="#borg-the-docs-templates"><code class="docutils literal notranslate"><span class="pre">borg_the_docs</span></code> templates</a><ul>
+<li><a class="reference internal" href="#assimilation-templates">Assimilation templates</a><ul>
 <li><a class="reference internal" href="#conf-py"><code class="file docutils literal notranslate"><span class="pre">conf.py</span></code></a></li>
 <li><a class="reference internal" href="#ntd2d"><code class="file docutils literal notranslate"><span class="pre">ntd2d/</span></code></a><ul>
 <li><a class="reference internal" href="#layout-html"><code class="file docutils literal notranslate"><span class="pre">ntd2d/layout.html</span></code></a></li>
@@ -184,7 +185,7 @@ satisfy the <span class="target" id="index-1"></span><a class="pep reference ext
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#update-pages-templates"><code class="docutils literal notranslate"><span class="pre">update_pages</span></code> templates</a><ul>
+<li><a class="reference internal" href="#pages-templates">Pages templates</a><ul>
 <li><a class="reference internal" href="#downloads-html"><code class="file docutils literal notranslate"><span class="pre">downloads.html</span></code></a></li>
 <li><a class="reference internal" href="#download-item-html"><code class="file docutils literal notranslate"><span class="pre">download_item.html</span></code></a></li>
 <li><a class="reference internal" href="#index-html"><code class="file docutils literal notranslate"><span class="pre">index.html</span></code></a></li>
