@@ -52,7 +52,6 @@ Usage
    :maxdepth: 1
    :caption: Contents:
 
-   design
    customization
    QandA
    API
