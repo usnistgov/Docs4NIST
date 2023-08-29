@@ -1,3 +1,7 @@
+"""Representations of a branches and tags.
+"""
+__docformat__ = 'restructuredtext'
+
 import github_action_utils as gha_utils
 from collections import UserList
 import os
@@ -10,6 +14,20 @@ from .files import VariantsFile, MenuFile, IndexFile, CSSFile
 from .files.template import PagesTemplate
 
 class Variant:
+    """Representation of a branch or tag.
+
+    Parameters
+    ----------
+    repo : ~ntd2d_action.repository.Repository
+        Git repository containing this branch or tag.
+    name : str
+        Ref name of branch or tag.
+    rebuild_menu : bool
+        Whether to rebuild variant menu after updating variants (default: False).
+    true_name : str
+        Name of actual branch or tag associated with `stable` or `latest`
+        variants.
+    """
     def __init__(self, repo, name, rebuild_menu=False, true_name=None):
         self.repo = repo
         self.name = name
@@ -118,13 +136,14 @@ class Variant:
                                variant=self.name)
 
 class Version(Variant):
-    """A Variant that satisfies the PEP 440 version specification
+    """A :class:`~ntd2d_action.variants.Variant` that satisfies the :pep:`440` version specification
 
     Raises
     ------
-    InvalidVersion
-        If the name is not parsable by packaging.version
+    ~packaging.version.InvalidVersion
+        If the name is not parsable by :mod:`packaging.version`.
     """
+
     def __init__(self, repo, name, rebuild_menu=False):
         super().__init__(repo=repo, name=name, rebuild_menu=rebuild_menu)
         self.version = parse(name)
@@ -137,11 +156,23 @@ class Version(Variant):
 
 
 class VariantCollection(UserList):
+    """A collection of :class:`~ntd2d_action.variants.Variant` objects."""
+
     def get_html(self):
         return "\n".join(variant.get_html() for variant in self)
 
 
 class VariantCollector(object):
+    """Tool that aggregates branches and versions.
+
+    Parameters
+    ----------
+    repo : ~ntd2d_action.repository.Repository
+        Git repository to be scanned for branches and tags.
+    current_variant : ~ntd2d_action.variants.Variant
+        Branch or tag which triggered the workflow.
+    """
+
     def __init__(self, repo, current_variant):
         self.repo = repo
         self.current_variant = current_variant
