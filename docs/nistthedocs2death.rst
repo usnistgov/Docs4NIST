@@ -135,8 +135,8 @@ with the following major steps:
 
 1. |checkout|_
 2. :ref:`NTD2D`
-5. |github-push-action|_
-6. |upload-artifact|_
+3. |github-push-action|_
+4. |upload-artifact|_
 
 
 .. |checkout|       replace:: ``actions/checkout``

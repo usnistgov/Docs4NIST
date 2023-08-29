@@ -134,8 +134,9 @@ Implementation
 This action implements a `Docker workflow step
 <https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action>`_.
 The Docker ``ENTRYPOINT``
+
 - installs any specified :ref:`APTPACKAGES`, :ref:`PIPREQUIREMENTS`,
-  and :ref:`CONDAENVIRONMENT`.
+  and :ref:`CONDAENVIRONMENT`,
 - wraps the `Sphinx configuration directory
   <https://www.sphinx-doc.org/en/master/usage/configuration.html>`_ in a
   :class:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs` object,
