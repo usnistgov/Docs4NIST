@@ -5,8 +5,7 @@ import subprocess
 import sys
 import traceback
 
-from ntd2d_action.sphinxdocs import SphinxDocs
-from ntd2d_action.borgedsphinxdocs import BorgedSphinxDocs
+from ntd2d_action.sphinxdocs import SphinxDocs, BorgedSphinxDocs
 from ntd2d_action.repository import Repository
 
 

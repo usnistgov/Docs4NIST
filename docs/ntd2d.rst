@@ -162,12 +162,12 @@ The Docker ``ENTRYPOINT``
   and :ref:`NTD2D_CONDAENVIRONMENT`,
 - wraps the `Sphinx configuration directory
   <https://www.sphinx-doc.org/en/master/usage/configuration.html>`_ in a
-  :class:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs` object,
+  :class:`~ntd2d_action.sphinxdocs.BorgedSphinxDocs` object,
 - invokes
   :meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.assimilate_theme`
 - executes any :ref:`NTD2D_PREBUILDCOMMAND`,
 - invokes
-  :meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.build_docs` for
+  :meth:`~ntd2d_action.sphinxdocs.BorgedSphinxDocs.build_docs` for
   html and any other formats specified in :ref:`NTD2D_FORMATS`,
 - wraps the
   :envvar:`GITHUB_REPOSITORY` in a

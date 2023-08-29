@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
+"""Sphinx configuration directory.
+"""
+__docformat__ = 'restructuredtext'
+
 import github_action_utils as gha_utils
 import os
 import pathlib
 import shlex
+import shutil
 import subprocess
 import tempfile
 
 from .files import ConfFile
-from .files import SphinxLog
+from .files import SphinxLog, BorgedConfFile, TemplateHierarchy
 
 
 class SphinxDocs:
@@ -88,3 +93,40 @@ class SphinxDocs:
                 log.parse_sphinx_warnings()
 
         return return_code
+
+
+class BorgedSphinxDocs(SphinxDocs):
+    """Sphinx configuration directory modified by NISTtheDocs2Death.
+
+    Parameters
+    ----------
+    original_docs : ~ntd2d_action.sphinxdocs.SphinxDocs
+        The configuration directory stored in the
+        :class:`~ntd2d_action.repository.Repository`.
+    """
+
+    def __init__(self, original_docs):
+        self.original_docs = original_docs
+        borged_docs_dir = self.original_docs.docs_dir.as_posix() + "-BORGED"
+        borged_docs_dir = pathlib.Path(borged_docs_dir)
+        shutil.copytree(self.original_docs.docs_dir, borged_docs_dir)
+        super().__init__(docs_dir=borged_docs_dir)
+
+    def make_conf_file(self):
+        return BorgedConfFile(source_dir=self.source_dir,
+                              original_docs=self.original_docs)
+
+    @property
+    def inherited_theme(self):
+        return self.original_docs.conf.html_theme
+
+    def assimilate_theme(self, name):
+        """Replace configuration directory with customized html theme."""
+
+        self.theme = TemplateHierarchy(name=name,
+                                       destination_dir=self.conf.theme_path,
+                                       inherited_theme=self.inherited_theme)
+        self.theme.write()
+
+        self.conf.set_html_theme(name=name)
+        self.conf.write()
