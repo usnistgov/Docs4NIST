@@ -6,6 +6,15 @@ from .files import BorgedConfFile, TemplateHierarchy
 
 
 class BorgedSphinxDocs(SphinxDocs):
+    """Sphinx configuration directory modified by NISTtheDocs2Death.
+
+    Parameters
+    ----------
+    original_docs : ~ntd2d_action.sphinxdocs.SphinxDocs
+        The configuration directory stored in the
+        :class:`~ntd2d_action.repository.Repository`.
+    """
+
     def __init__(self, original_docs):
         self.original_docs = original_docs
         borged_docs_dir = self.original_docs.docs_dir.as_posix() + "-BORGED"
