@@ -58,7 +58,7 @@ The branch linked to your documentation server.
 
 URL of the web server for served documentation.
 
-.. _NTDTD_FORMATS:
+.. _NTD2D_FORMATS:
 
 ``formats``
 ~~~~~~~~~~~

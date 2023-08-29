@@ -7,7 +7,7 @@ of the hosted documentation.
 Assimilation templates
 ----------------------
 
-The first set of templates is used by the
+The first set of templates is used by
 :meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.assimilate_theme` to
 modify the Sphinx configuration.
 
