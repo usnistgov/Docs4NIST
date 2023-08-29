@@ -1,3 +1,7 @@
+"""Interface to a git/GitHub repositories.
+"""
+__docformat__ = 'restructuredtext'
+
 import git
 import github_action_utils as gha_utils
 import pathlib

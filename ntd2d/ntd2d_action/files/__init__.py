@@ -1,3 +1,7 @@
+"""Representations of file objects.
+"""
+__docformat__ = 'restructuredtext'
+
 from .borgedconffile import BorgedConfFile
 from .conffile import ConfFile
 from .cssfile import CSSFile
