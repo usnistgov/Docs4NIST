@@ -164,7 +164,7 @@ The Docker ``ENTRYPOINT``
   <https://www.sphinx-doc.org/en/master/usage/configuration.html>`_ in a
   :class:`~ntd2d_action.sphinxdocs.BorgedSphinxDocs` object,
 - invokes
-  :meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.assimilate_theme`
+  :meth:`~ntd2d_action.sphinxdocs.BorgedSphinxDocs.assimilate_theme`
 - executes any :ref:`NTD2D_PREBUILDCOMMAND`,
 - invokes
   :meth:`~ntd2d_action.sphinxdocs.BorgedSphinxDocs.build_docs` for
