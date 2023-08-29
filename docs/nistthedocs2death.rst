@@ -25,7 +25,7 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
      docs:
        runs-on: ubuntu-latest
        steps:
-         - uses: usnistgov/NISTtheDocs2Death@0.3
+         - uses: usnistgov/NISTtheDocs2Death@0.4
            with:
              docs-folder: docs/
              pages-branch: 'nist-pages'

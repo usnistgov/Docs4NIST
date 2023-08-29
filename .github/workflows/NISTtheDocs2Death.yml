@@ -6,6 +6,9 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: usnistgov/NISTtheDocs2Death@fused
+      - uses: usnistgov/NISTtheDocs2Death@0.4
         with:
           docs-folder: docs/
+          formats: |-
+           epub
+           pdf
