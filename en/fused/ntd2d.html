@@ -58,6 +58,7 @@ yourself.</p>
 <span class="w">    </span><span class="nt">build-epub-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span>
 <span class="w">    </span><span class="nt">build-pdf-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span>
 <span class="w">    </span><span class="nt">pre-build-command</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">apt-packages</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">    </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">    </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 </pre></div>
@@ -116,7 +117,13 @@ to declare formats, e.g.,</p>
 <h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
 <p>Run by <a href="#id15"><span class="problematic" id="id16">|sphinxaction|_</span></a> before the build command.  You can use this to install
 system level dependencies, for example, with “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">-y</span> <span class="pre">&amp;&amp;</span> <span class="pre">apt-get</span>
-<span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”.</p>
+<span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”, although those are better installed with
+<a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>.</p>
+</section>
+<section id="apt-packages">
+<h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Permalink to this heading">¶</a></h3>
+<p>List of any <a class="reference external" href="https://en.wikipedia.org/wiki/APT_(software)">APT</a> packages
+that should be installed.</p>
 </section>
 <section id="pip-requirements">
 <h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
@@ -139,19 +146,21 @@ project.</p>
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
 <p>This action implements a <a class="reference external" href="https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action">Docker workflow step</a>.
 The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code>
-- installs any specified <span class="xref std std-ref">CONDAENVIRONMENT</span> and</p>
+- installs any specified <a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>, <span class="xref std std-ref">CONDAENVIRONMENT</span> and</p>
 <blockquote>
 <div><p><span class="xref std std-ref">PIPREQUIREMENTS</span>,</p>
 </div></blockquote>
 <ul class="simple">
 <li><p>wraps the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/configuration.html">Sphinx configuration directory</a> in a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">SphinxDocs</span></code> object,</p></li>
-<li><p>wraps the <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code> file with a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">BorgedConfFile</span></code> object,</p></li>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BorgedSphinxDocs</span></code> object,</p></li>
 <li><p>invokes
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">assimilate_theme()</span></code></p></li>
+<li><p>executes any <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">INPUT_PRE-BUILD-COMMAND</span></code>,</p></li>
+<li><p>invokes
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">build_docs()</span></code> for
+html and any other formats specified in <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">INPUT_FORMATS</span></code>,</p></li>
 <li><p>wraps the
-<span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_REPOSITORY</span></code> in a
+<span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_REPOSITORY</span></code> in a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Repository</span></code> object,</p></li>
 <li><p>invokes
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">update_pages()</span></code>.</p></li>
@@ -190,6 +199,7 @@ The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOI
 <li><a class="reference internal" href="#build-epub-command"><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code></a></li>
 <li><a class="reference internal" href="#build-pdf-command"><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code></a></li>
 <li><a class="reference internal" href="#pre-build-command"><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code></a></li>
+<li><a class="reference internal" href="#apt-packages"><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code></a></li>
 <li><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
 <li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
 </ul>

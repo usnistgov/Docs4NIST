@@ -64,6 +64,7 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 <span class="w">          </span><span class="nt">build-epub-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span>
 <span class="w">          </span><span class="nt">build-pdf-command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make epub</span>
 <span class="w">          </span><span class="nt">pre-build-command</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">          </span><span class="nt">apt-packages</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">          </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">          </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 </pre></div>
@@ -114,7 +115,13 @@ to declare formats, e.g.,</p>
 <h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
 <p>Run by <a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a> before the build command.  You can use this to install
 system level dependencies, for example, with “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">-y</span> <span class="pre">&amp;&amp;</span> <span class="pre">apt-get</span>
-<span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”.</p>
+<span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”, although those are better installed with
+<a class="reference internal" href="#aptpackages"><span class="std std-ref">apt-packages</span></a>.</p>
+</section>
+<section id="apt-packages">
+<span id="aptpackages"></span><h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Permalink to this heading">¶</a></h3>
+<p>List of any <a class="reference external" href="https://en.wikipedia.org/wiki/APT_(software)">APT</a> packages
+that should be installed.</p>
 </section>
 <section id="pip-requirements">
 <h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
@@ -132,12 +139,10 @@ project.</p>
 with the following major steps:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://github.com/actions/checkout"><code class="docutils literal notranslate"><span class="pre">actions/checkout</span></code></a></p></li>
-<li><p><span class="xref std std-ref">BORGTHEDOCS</span></p></li>
-<li><p><a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a></p></li>
-<li><p><span class="xref std std-ref">UPDATEPAGES</span></p></li>
-<li><p><a class="reference external" href="https://github.com/ad-m/github-push-action"><code class="docutils literal notranslate"><span class="pre">ad-m/github-push-action</span></code></a></p></li>
-<li><p><a class="reference external" href="https://github.com/actions/upload-artifact"><code class="docutils literal notranslate"><span class="pre">actions/upload-artifact</span></code></a></p></li>
 </ol>
+<p>2. <a class="reference internal" href="ntd2d.html#ntd2d"><span class="std std-ref">ntd2d Sub-Action</span></a>
+5. <a class="reference external" href="https://github.com/ad-m/github-push-action"><code class="docutils literal notranslate"><span class="pre">ad-m/github-push-action</span></code></a>
+6. <a class="reference external" href="https://github.com/actions/upload-artifact"><code class="docutils literal notranslate"><span class="pre">actions/upload-artifact</span></code></a></p>
 </section>
 </section>
 
@@ -162,6 +167,7 @@ with the following major steps:</p>
 <li><a class="reference internal" href="#build-epub-command"><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code></a></li>
 <li><a class="reference internal" href="#build-pdf-command"><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code></a></li>
 <li><a class="reference internal" href="#pre-build-command"><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code></a></li>
+<li><a class="reference internal" href="#apt-packages"><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code></a></li>
 <li><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
 <li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
 </ul>
