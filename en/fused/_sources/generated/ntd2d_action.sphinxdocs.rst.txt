@@ -17,6 +17,7 @@ ntd2d\_action.sphinxdocs
 
    .. autosummary::
    
+      BorgedSphinxDocs
       SphinxDocs
    
    

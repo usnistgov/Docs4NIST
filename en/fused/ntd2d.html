@@ -13,7 +13,7 @@
     <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ntd2d_action" href="generated/ntd2d_action.html" />
+    <link rel="next" title="Customization" href="customization.html" />
     <link rel="prev" title="NISTtheDocs2Death Action" href="nistthedocs2death.html" />
   
    
@@ -51,6 +51,7 @@ yourself.</p>
 <span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./../../_actions/current/ntd2d</span>
 <span class="w">  </span><span class="nt">with</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">docs-folder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/</span>
+<span class="w">    </span><span class="nt">default-branch</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;main&#39;</span>
 <span class="w">    </span><span class="nt">pages-branch</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;nist-pages&#39;</span>
 <span class="w">    </span><span class="nt">pages-url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://pages.nist.gov&#39;</span>
 <span class="w">    </span><span class="nt">formats</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
@@ -78,16 +79,20 @@ hence the clumsy <code class="docutils literal notranslate"><span class="pre">us
 <h3><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code><a class="headerlink" href="#docs-folder" title="Permalink to this heading">¶</a></h3>
 <p>The folder containing your Sphinx configuration.</p>
 </section>
+<section id="default-branch">
+<span id="ntd2d-default-branch"></span><h3><code class="docutils literal notranslate"><span class="pre">default-branch</span></code><a class="headerlink" href="#default-branch" title="Permalink to this heading">¶</a></h3>
+<p>The default branch <a class="reference external" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch">configured in GitHub</a>.</p>
+</section>
 <section id="pages-branch">
-<h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Permalink to this heading">¶</a></h3>
+<span id="ntd2d-pages-branch"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Permalink to this heading">¶</a></h3>
 <p>The branch linked to your documentation server.</p>
 </section>
 <section id="pages-url">
-<h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Permalink to this heading">¶</a></h3>
+<span id="ntd2d-pages-url"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Permalink to this heading">¶</a></h3>
 <p>URL of the web server for served documentation.</p>
 </section>
 <section id="formats">
-<h3><code class="docutils literal notranslate"><span class="pre">formats</span></code><a class="headerlink" href="#formats" title="Permalink to this heading">¶</a></h3>
+<span id="ntd2d-formats"></span><h3><code class="docutils literal notranslate"><span class="pre">formats</span></code><a class="headerlink" href="#formats" title="Permalink to this heading">¶</a></h3>
 <p>Type(s) of output desired in addition to html (<code class="docutils literal notranslate"><span class="pre">pdf</span></code>, and/or <code class="docutils literal notranslate"><span class="pre">epub</span></code>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -114,23 +119,23 @@ to declare formats, e.g.,</p>
 <p>The command used to build your PDF documentation.</p>
 </section>
 <section id="pre-build-command">
-<h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
+<span id="ntd2d-prebuildcommand"></span><h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
 <p>Run before the build command.  You can use this to install
 system level dependencies, for example, with “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">-y</span> <span class="pre">&amp;&amp;</span> <span class="pre">apt-get</span>
 <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”, although those are better installed with
-<a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>.</p>
+<a class="reference internal" href="#ntd2d-aptpackages"><span class="std std-ref">apt-packages</span></a>.</p>
 </section>
 <section id="apt-packages">
-<h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Permalink to this heading">¶</a></h3>
+<span id="ntd2d-aptpackages"></span><h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Permalink to this heading">¶</a></h3>
 <p>List of any <a class="reference external" href="https://en.wikipedia.org/wiki/APT_(software)">APT</a> packages
 that should be installed.</p>
 </section>
 <section id="pip-requirements">
-<h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
+<span id="ntd2d-piprequirements"></span><h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
 <p>The path to the pip requirements file, relative to the root of the project.</p>
 </section>
 <section id="conda-environment">
-<h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading">¶</a></h3>
+<span id="ntd2d-condaenvironment"></span><h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading">¶</a></h3>
 <p>The path to the Conda environment file, relative to the root of the
 project.</p>
 </section>
@@ -147,32 +152,22 @@ project.</p>
 <p>This action implements a <a class="reference external" href="https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action">Docker workflow step</a>.
 The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code></p>
 <ul class="simple">
-<li><p>installs any specified <a class="reference internal" href="nistthedocs2death.html#aptpackages"><span class="std std-ref">apt-packages</span></a>, <a class="reference internal" href="nistthedocs2death.html#piprequirements"><span class="std std-ref">pip-requirements</span></a>,
-and <a class="reference internal" href="nistthedocs2death.html#condaenvironment"><span class="std std-ref">conda-environment</span></a>,</p></li>
+<li><p>installs any specified <a class="reference internal" href="#ntd2d-aptpackages"><span class="std std-ref">apt-packages</span></a>, <a class="reference internal" href="#ntd2d-piprequirements"><span class="std std-ref">pip-requirements</span></a>,
+and <a class="reference internal" href="#ntd2d-condaenvironment"><span class="std std-ref">conda-environment</span></a>,</p></li>
 <li><p>wraps the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/configuration.html">Sphinx configuration directory</a> in a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">BorgedSphinxDocs</span></code> object,</p></li>
 <li><p>invokes
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">assimilate_theme()</span></code></p></li>
-<li><p>executes any <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">INPUT_PRE-BUILD-COMMAND</span></code>,</p></li>
+<li><p>executes any <a class="reference internal" href="#ntd2d-prebuildcommand"><span class="std std-ref">pre-build-command</span></a>,</p></li>
 <li><p>invokes
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">build_docs()</span></code> for
-html and any other formats specified in <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">INPUT_FORMATS</span></code>,</p></li>
+html and any other formats specified in <a class="reference internal" href="#ntd2d-formats"><span class="std std-ref">formats</span></a>,</p></li>
 <li><p>wraps the
-<span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_REPOSITORY</span></code> in a
+<span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">GITHUB_REPOSITORY</span></code> in a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Repository</span></code> object,</p></li>
 <li><p>invokes
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">update_pages()</span></code>.</p></li>
 </ul>
-<section id="api">
-<h3>API<a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h3>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/ntd2d_action.html#module-ntd2d_action" title="ntd2d_action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ntd2d_action</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-</section>
 </section>
 </section>
 
@@ -190,6 +185,7 @@ html and any other formats specified in <span class="target" id="index-1"></span
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#inputs">Inputs</a><ul>
 <li><a class="reference internal" href="#docs-folder"><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code></a></li>
+<li><a class="reference internal" href="#default-branch"><code class="docutils literal notranslate"><span class="pre">default-branch</span></code></a></li>
 <li><a class="reference internal" href="#pages-branch"><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code></a></li>
 <li><a class="reference internal" href="#pages-url"><code class="docutils literal notranslate"><span class="pre">pages-url</span></code></a></li>
 <li><a class="reference internal" href="#formats"><code class="docutils literal notranslate"><span class="pre">formats</span></code></a></li>
@@ -206,10 +202,7 @@ html and any other formats specified in <span class="target" id="index-1"></span
 <li><a class="reference internal" href="#borged-build-folder"><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#implementation">Implementation</a><ul>
-<li><a class="reference internal" href="#api">API</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#implementation">Implementation</a></li>
 </ul>
 </li>
 </ul>
@@ -219,7 +212,7 @@ html and any other formats specified in <span class="target" id="index-1"></span
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="nistthedocs2death.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">NISTtheDocs2Death</span></code> Action</a></li>
-      <li>Next: <a href="generated/ntd2d_action.html" title="next chapter">ntd2d_action</a></li>
+      <li>Next: <a href="customization.html" title="next chapter">Customization</a></li>
   </ul></li>
 </ul>
 </div>

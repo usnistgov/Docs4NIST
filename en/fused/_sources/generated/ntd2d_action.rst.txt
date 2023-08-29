@@ -27,7 +27,6 @@
    :toctree:
    :recursive:
 
-   ntd2d_action.borgedsphinxdocs
    ntd2d_action.files
    ntd2d_action.repository
    ntd2d_action.sphinxdocs
