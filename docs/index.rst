@@ -55,6 +55,7 @@ Usage
    design
    customization
    QandA
+   API
 
 
 Indices and tables

@@ -174,12 +174,3 @@ The Docker ``ENTRYPOINT``
   :class:`~ntd2d_action.repository.Repository` object,
 - invokes
   :meth:`~ntd2d_action.repository.Repository.update_pages`.
-
-API
-~~~
-
-.. autosummary::
-   :toctree: generated
-   :recursive:
-
-   ntd2d_action
