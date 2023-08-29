@@ -137,7 +137,7 @@ The Docker ``ENTRYPOINT``
   :meth:`~ntd2d_action.files.borgedconffile.BorgedConfFile.assimilate_theme`
 - wraps the
   :envvar:`GITHUB_REPOSITORY` in a
-  :class:`~ntd2d_action.repository.Repository` object, 
+  :class:`~ntd2d_action.repository.Repository` object,
 - invokes
   :meth:`~ntd2d_action.repository.Repository.update_pages`.
 

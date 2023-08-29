@@ -13,7 +13,7 @@ inputs:
     required: false
     default: "main"
   pages-branch:
-    description: 
+    description:
       The branch linked to your documentation server.
     required: false
     default: 'nist-pages'

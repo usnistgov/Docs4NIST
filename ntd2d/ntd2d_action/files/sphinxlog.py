@@ -26,10 +26,10 @@ class SphinxLog(File):
         """
         with self.path.open(mode='r') as f:
             logs = f.readlines()
-            
+
         prog_lineno = re.compile("(?P<FILE>.*)(?::(?P<LINE>[0-9]+))+?: (?P<TYPE>WARNING|ERROR): (?P<MESSAGE>.*)")
         prog_nolineno = re.compile("(?P<FILE>.*): (?P<TYPE>WARNING|ERROR): (?P<MESSAGE>.*)")
-        
+
         replacements = [["/github/workspace/", ""]]
         if hasattr(self.docs, "original_docs"):
             replacements.append([self.docs.docs_dir.as_posix(),
