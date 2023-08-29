@@ -42,15 +42,26 @@ class ConfFile(File):
 
     @property
     def html_theme(self):
+        """html_theme_ Sphinx configuration value.
+
+        .. _html_theme: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_theme
+        """
         return self.configuration.get("html_theme", "default")
 
     @property
     def html_theme_path(self):
+        """html_theme_path_ Sphinx configuration value.
+
+        .. _html_theme_path: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_theme_path
+        """
         return self.configuration.get("html_theme_path", [])
 
     @property
     def language(self):
-        """Access `language <https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language>`_"""
+        """language_ Sphinx configuration value.
+
+        .. _language: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language
+        """
         return self.configuration.get("language", "en")
 
     @property
@@ -67,6 +78,10 @@ class ConfFile(File):
 
     @property
     def project(self):
+        """project_ Sphinx configuration value.
+
+        .. _project: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-project
+        """
         return self.configuration["project"]
 
     @property
@@ -74,11 +89,21 @@ class ConfFile(File):
         return self.source_dir / "_themes"
 
     def read(self):
-        # The Sphinx docs says that it
-        # [reads conf.py with `importlib.import_module`](https://www.sphinx-doc.org/en/master/usage/configuration.html#module-conf)
-        # [It doesn't](https://github.com/sphinx-doc/sphinx/blob/2c83af0aab7080e0b78d4a16981eed878b2cac4c/sphinx/config.py#L353).
+        """Evaluate Sphinx configuration values.
+
+        The Sphinx docs says that it |readconfdoc|_.
+        `It doesn't <https://github.com/sphinx-doc/sphinx/blob/2c83af0aab7080e0b78d4a16981eed878b2cac4c/sphinx/config.py#L353>`_.
+
+        .. |readconfdoc|     replace:: reads :file:`conf.py` with  :func:`importlib.import_module`
+        .. _readconfdoc:     https://www.sphinx-doc.org/en/master/usage/configuration.html#module-conf
+
+        Returns
+        -------
+        namespace : dict
+          Configuration values.
+        """
         namespace = {}
-        namespace['__file__'] = self.path.as_posix()
+        namespace['__file__'] = self.path.resolve().as_posix()
 
         code = compile(self.original_contents, self.path, 'exec')
 

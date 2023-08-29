@@ -48,6 +48,21 @@ inputs:
       dependencies, for example with
       "apt-get update -y && apt-get install -y perl"
     required: false
+  apt-packages:
+    description:
+      List of APT packages to install.
+    required: false
+    default: ''
+  pip-requirements:
+    description:
+      The path to the pip requirements file, relative to the root of the
+      project.
+    required: false
+  conda-environment:
+    description:
+      The path to the Conda environment file, relative to the root of the
+      project.
+    required: false
 runs:
   using: "composite"
   steps:
@@ -68,49 +83,26 @@ runs:
       working-directory: ${{ github.action_path }}
       shell: bash
       run: ln -fs $(realpath ./)  /home/runner/work/_actions/current
-    - name: Add cruft to theme
-      id: borg-the-docs
+    - name: Build the docs
+      id: ntd2d
       # from https://github.com/orgs/community/discussions/41927#discussioncomment-4605881
       # @mbrancato
-      # because usnistgov/NISTtheDocs2Death/borg_the_docs@${{ github.action_ref }}
+      # because usnistgov/NISTtheDocs2Death/ntd2d@${{ github.action_ref }}
       # doesn't work
-      uses: ./../../_actions/current/borg_the_docs
+      uses: ./../../_actions/current/ntd2d
       with:
         docs-folder: ${{ inputs.docs-folder }}
-    - uses: usnistgov/sphinx-action@master
-      id: build-html
-      name: Build HTML
-      with:
-        docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
-        build-command: ${{ inputs.build-html-command }}
-        pre-build-command:  ${{ inputs.pre-build-command }}
-      # always build html
-    - uses: usnistgov/sphinx-action@master
-      name: Build ePUB
-      with:
-        docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
-        build-command: ${{ inputs.build-epub-command }}
-        pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ contains(inputs.formats, 'epub') }}
-    - uses: usnistgov/sphinx-action@latexpdf
-      name: Build PDF
-      with:
-        docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
-        build-command: ${{ inputs.build-pdf-command }}
-        pre-build-command:  ${{ inputs.pre-build-command }}
-      if: ${{ contains(inputs.formats, 'pdf') }}
-    - name: Commit documentation changes
-      # from https://github.com/orgs/community/discussions/41927#discussioncomment-4605881
-      # @mbrancato
-      # because usnistgov/NISTtheDocs2Death/update_pages@${{ github.action_ref }}
-      # doesn't work
-      uses: ./../../_actions/current/update_pages
-      with:
-        docs-folder: ${{ steps.borg-the-docs.outputs.borged-docs-folder }}
         default-branch: ${{ github.event.repository.default_branch }}
         pages-branch: ${{ inputs.pages-branch }}
         pages-url: ${{ inputs.pages-url }}
-      if: ${{ success() || steps.build-html.conclusion == 'success' }}
+        formats: ${{ inputs.formats }}
+        build-html-command: ${{ inputs.build-html-command }}
+        build-epub-command: ${{ inputs.build-epub-command }}
+        build-pdf-command: ${{ inputs.build-pdf-command }}
+        pre-build-command: ${{ inputs.pre-build-command }}
+        apt-packages: ${{ inputs.apt-packages }}
+        pip-requirements: ${{ inputs.pip-requirements }}
+        conda-environment: ${{ inputs.conda-environment }}
     - name: Change ownership
       shell: bash
       run: |
@@ -135,7 +127,7 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/html
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/html
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ always() }}
@@ -144,7 +136,7 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/epub/*.epub
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/epub/*.epub
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ contains(inputs.formats, 'epub') && always() }}
@@ -153,9 +145,9 @@ runs:
       with:
         name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.pdf
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.log
-          ${{ steps.borg-the-docs.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.tex
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.pdf
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.log
+          ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.tex
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ contains(inputs.formats, 'pdf') && always() }}

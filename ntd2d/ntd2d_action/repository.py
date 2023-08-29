@@ -1,3 +1,7 @@
+"""Interface to a git/GitHub repositories.
+"""
+__docformat__ = 'restructuredtext'
+
 import git
 import github_action_utils as gha_utils
 import pathlib
@@ -6,7 +10,23 @@ from .files import NoJekyllFile
 from .variants import Variant, VariantCollector
 
 class Repository:
-    """Interface to a git/GitHub repository."""
+    """Interface to a git/GitHub repository.
+
+    Parameters
+    ----------
+    server_url : url
+      The URL of the GitHub server (:envvar:`GITHUB_SERVER_URL`).
+    repository : str
+      The owner and repository name (:envvar:`GITHUB_REPOSITORY`).
+    branch : str
+      The branch linked to your documentation server (:ref:`NTD2D_PAGES-BRANCH`).
+    default-branch : str
+      The default branch configured in GitHub (:ref:`NTD2D_DEFAULT-BRANCH`).
+    docs : ~ntd2d_action.sphinxdocs.SphinxDocs
+      The documentation being built.
+    pages_url : url
+      URL of the web server for served documentation (:ref:`NTD2D_PAGES-URL`).
+    """
 
     def __init__(self, server_url, repository, branch, default_branch, docs, pages_url):
         self.server_url = server_url
@@ -51,7 +71,16 @@ class Repository:
         self.repo.index.remove(*args, **kwargs)
 
     def update_pages(self, branch, sha):
-        """Commit built documentation to pages branch."""
+        """Commit built documentation to :ref:`NTD2D_PAGES-BRANCH`.
+
+        Parameters
+        ----------
+        branch : str
+          The sanitized ('/' removed) short ref name of the branch or tag
+          that triggered the workflow (:envvar:`GITHUB_REF_NAME`).
+        sha : str
+          The commit SHA that triggered the workflow (:envvar:`GITHUB_SHA`).
+        """
 
         gha_utils.debug("Repository.update_pages")
 

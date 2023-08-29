@@ -44,3 +44,8 @@ class BorgedConfFile(ConfFile):
                                     html_theme=self.html_theme,
                                     html_theme_path=self.html_theme_path,
                                     exclude_patterns=self.exclude_patterns)
+
+    def write(self):
+        super().write()
+        self._code = None
+        self._configuration = None

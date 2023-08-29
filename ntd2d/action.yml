@@ -1,0 +1,71 @@
+name: "NTD2D"
+description: "Python Container to do actual work"
+author: "Jonathan Guyer"
+inputs:
+  docs-folder:
+    description:
+      The folder containing your Sphinx configuration.
+    required: true
+    default: "docs/"
+  default-branch:
+    description:
+      The default branch configured in GitHub.
+    required: false
+    default: "main"
+  pages-branch:
+    description:
+      The branch linked to your documentation server.
+    required: false
+    default: 'nist-pages'
+  pages-url:
+    description:
+      URL of web server for served documentation.
+    required: false
+    default: 'https://pages.nist.gov'
+  formats:
+    description:
+      Type(s) of output desired in addition to html ('pdf', and/or 'epub')
+    required: false
+    default: ''
+  build-html-command:
+    description:
+      The command used to build your html documentation.
+    required: false
+    default: make html
+  build-epub-command:
+    description:
+      The command used to build your ePUB documentation.
+    required: false
+    default: make epub
+  build-pdf-command:
+    description:
+      The command used to build your PDF documentation.
+    required: false
+    default: make latexpdf
+  pre-build-command:
+    description:
+      Run before the build command, you can use this to install system level
+      dependencies, for example with
+      "apt-get update -y && apt-get install -y perl"
+    required: false
+  apt-packages:
+    description:
+      List of APT packages to install.
+    required: false
+    default: ''
+  pip-requirements:
+    description:
+      The path to the pip requirements file, relative to the root of the
+      project.
+    required: false
+  conda-environment:
+    description:
+      The path to the Conda environment file, relative to the root of the
+      project.
+    required: false
+outputs:
+  borged-docs-folder:
+    description: 'The folder containing modified Sphinx configuration'
+runs:
+  using: "docker"
+  image: "Dockerfile"
