@@ -58,6 +58,8 @@ The branch linked to your documentation server.
 
 URL of the web server for served documentation.
 
+.. _NTDTD_FORMATS:
+
 ``formats``
 ~~~~~~~~~~~
 
@@ -93,13 +95,17 @@ The command used to build your ePUB documentation.
 
 The command used to build your PDF documentation.
 
+.. _NTD2D_PREBUILDCOMMAND:
+
 ``pre-build-command``
 ~~~~~~~~~~~~~~~~~~~~~
 
 Run before the build command.  You can use this to install
 system level dependencies, for example, with "``apt-get update -y && apt-get
 install -y perl``", although those are better installed with
-:ref:`APTPACKAGES`.
+:ref:`NTD2D_APTPACKAGES`.
+
+.. _NTD2D_APTPACKAGES:
 
 ``apt-packages``
 ~~~~~~~~~~~~~~~~~~~~
@@ -107,10 +113,14 @@ install -y perl``", although those are better installed with
 List of any `APT <https://en.wikipedia.org/wiki/APT_(software)>`_ packages
 that should be installed.
 
+.. _NTD2D_PIPREQUIREMENTS:
+
 ``pip-requirements``
 ~~~~~~~~~~~~~~~~~~~~
 
 The path to the pip requirements file, relative to the root of the project.
+
+.. _NTD2D_CONDAENVIRONMENT:
 
 ``conda-environment``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -135,17 +145,17 @@ This action implements a `Docker workflow step
 <https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action>`_.
 The Docker ``ENTRYPOINT``
 
-- installs any specified :ref:`APTPACKAGES`, :ref:`PIPREQUIREMENTS`,
-  and :ref:`CONDAENVIRONMENT`,
+- installs any specified :ref:`NTD2D_APTPACKAGES`, :ref:`NTD2D_PIPREQUIREMENTS`,
+  and :ref:`NTD2D_CONDAENVIRONMENT`,
 - wraps the `Sphinx configuration directory
   <https://www.sphinx-doc.org/en/master/usage/configuration.html>`_ in a
   :class:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs` object,
 - invokes
   :meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.assimilate_theme`
-- executes any :envvar:`INPUT_PRE-BUILD-COMMAND`,
+- executes any :ref:`NTD2D_PREBUILDCOMMAND`,
 - invokes
   :meth:`~ntd2d_action.borgedsphinxdocs.BorgedSphinxDocs.build_docs` for
-  html and any other formats specified in :envvar:`INPUT_FORMATS`,
+  html and any other formats specified in :ref:`NTD2D_FORMATS`,
 - wraps the
   :envvar:`GITHUB_REPOSITORY` in a
   :class:`~ntd2d_action.repository.Repository` object,
