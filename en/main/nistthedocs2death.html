@@ -67,6 +67,7 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 <span class="w">          </span><span class="nt">apt-packages</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">          </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">          </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">          </span><span class="nt">push-pulls-pages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </pre></div>
 </div>
 </section>
@@ -81,7 +82,7 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 <p>The branch linked to your documentation server.</p>
 </section>
 <section id="pages-url">
-<h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Permalink to this heading">¶</a></h3>
+<span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Permalink to this heading">¶</a></h3>
 <p>URL of the web server for served documentation.</p>
 </section>
 <section id="formats">
@@ -132,6 +133,18 @@ that should be installed.</p>
 <p>The path to the Conda environment file, relative to the root of the
 project.</p>
 </section>
+<section id="push-pulls-pages">
+<h3><code class="docutils literal notranslate"><span class="pre">push-pulls-pages</span></code><a class="headerlink" href="#push-pulls-pages" title="Permalink to this heading">¶</a></h3>
+<p>Whether the results of pull requests should be pushed to
+<a class="reference internal" href="#pages-branch"><span class="std std-ref">pages-branch</span></a>.  For
+<cite>security &lt;https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows/&gt;</cite>
+<a class="reference external" href="https://securitylab.github.com/research/github-actions-preventing-pwn-requests/">reasons</a>,
+this is impossible for pull requests from repository forks, but it is
+generally undesirable in any case (they appear with cryptic names like
+<cite>merge_1234</cite> and are redundant to the branch the pull is from).  As long as
+this action is set to run <cite>on: push</cite>, then any build products from branches
+in the same repository will appear at <a class="reference internal" href="#pages-url"><span class="std std-ref">pages-url</span></a>.</p>
+</section>
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
@@ -170,6 +183,7 @@ with the following major steps:</p>
 <li><a class="reference internal" href="#apt-packages"><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code></a></li>
 <li><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
 <li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
+<li><a class="reference internal" href="#push-pulls-pages"><code class="docutils literal notranslate"><span class="pre">push-pulls-pages</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#implementation">Implementation</a></li>

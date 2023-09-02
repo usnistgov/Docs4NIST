@@ -38,6 +38,7 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
              apt-packages: ''
              pip-requirements: ''
              conda-environment: ''
+             push-pulls-pages: false
 
 Inputs
 ------
@@ -53,6 +54,8 @@ The folder containing your Sphinx configuration.
 ~~~~~~~~~~~~~~~~
 
 The branch linked to your documentation server.
+
+.. _PAGES_URL:
 
 ``pages-url``
 ~~~~~~~~~~~~~
@@ -125,6 +128,18 @@ The path to the pip requirements file, relative to the root of the project.
 The path to the Conda environment file, relative to the root of the
 project.
 
+``push-pulls-pages``
+~~~~~~~~~~~~~~~~~~~~
+
+Whether the results of pull requests should be pushed to
+:ref:`PAGES_BRANCH`.  For
+`security <https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows/>`
+`reasons <https://securitylab.github.com/research/github-actions-preventing-pwn-requests/>`_,
+this is impossible for pull requests from repository forks, but it is
+generally undesirable in any case (they appear with cryptic names like
+`merge_1234` and are redundant to the branch the pull is from).  As long as
+this action is set to run `on: push`, then any build products from branches
+in the same repository will appear at :ref:`PAGES_URL`.
 
 Implementation
 --------------
