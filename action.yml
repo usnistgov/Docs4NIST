@@ -63,6 +63,11 @@ inputs:
       The path to the Conda environment file, relative to the root of the
       project.
     required: false
+  push-pulls-pages:
+    description:
+      Whether the results of pull requests should be pushed to
+      `pages-branch`.
+    default: false
 runs:
   using: "composite"
   steps:
@@ -120,7 +125,10 @@ runs:
       if: >-
         (
           github.event_name != 'pull_request'
-          || github.event.pull_request.head.repo.full_name == github.repository
+          || (
+            inputs.push-pulls-pages
+            && github.event.pull_request.head.repo.full_name == github.repository
+          )
         ) && (success() || steps.build-html.conclusion == 'success')
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
