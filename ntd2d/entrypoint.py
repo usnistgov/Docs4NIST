@@ -45,7 +45,7 @@ def main():
             environment = pathlib.Path(environment)
             if environment.is_file():
                 gha_utils.debug(f"conda installing", use_subprocess=True)
-                subprocess.check_call(["conda", "env", "update", "--quiet",
+                subprocess.check_call(["conda", "env", "update",
                                        "--name", "base",
                                        "--file", environment.as_posix()])
 
