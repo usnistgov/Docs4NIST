@@ -53,7 +53,7 @@ def main():
                                 "--name", "base",
                                 "--file", environment.as_posix()],
                                 bufsize=0,
-                                timeout=60,
+                                timeout=180,
                                 check=True,
                                 capture_output=True)
 
