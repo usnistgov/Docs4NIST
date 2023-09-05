@@ -52,7 +52,6 @@ def main():
                                 "--verbose",
                                 "--name", "base",
                                 "--file", environment.as_posix()],
-                                shell=True,
                                 check=True)
 
     # Actually NIST the Docs 2 Death
