@@ -51,6 +51,7 @@ def main():
                                 # verbose to actually list what's installed
                                 "--verbose",
                                 "--name", "base",
+                                "--solver", "libmamba",
                                 "--file", environment.as_posix()],
                                 bufsize=0,
                                 timeout=180,
