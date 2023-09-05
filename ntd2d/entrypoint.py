@@ -48,8 +48,6 @@ def main():
                 subprocess.run(["conda", "env", "update",
                                 # quiet to shut off progress bars
                                 "--quiet",
-                                # verbose to actually list what's installed
-                                "--verbose",
                                 "--name", "base",
                                 "--solver", "libmamba",
                                 "--file", environment.as_posix()],
