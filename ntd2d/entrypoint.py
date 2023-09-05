@@ -54,6 +54,7 @@ def main():
                                 "--solver", "libmamba",
                                 "--file", environment.as_posix()],
                                 bufsize=1,
+                                text=True,
                                 timeout=60,
                                 check=True)
 
