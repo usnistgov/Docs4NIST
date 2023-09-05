@@ -53,10 +53,9 @@ def main():
                                 "--name", "base",
                                 "--solver", "libmamba",
                                 "--file", environment.as_posix()],
-                                bufsize=0,
+                                bufsize=1,
                                 timeout=60,
-                                check=True,
-                                capture_output=True)
+                                check=True)
 
     # Actually NIST the Docs 2 Death
     # This needs to be a subprocess so that it sees packages installed above
