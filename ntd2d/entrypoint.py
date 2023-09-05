@@ -45,9 +45,15 @@ def main():
             environment = pathlib.Path(environment)
             if environment.is_file():
                 gha_utils.debug(f"conda installing", use_subprocess=True)
-                subprocess.check_call(["conda", "env", "update",
-                                       "--name", "base",
-                                       "--file", environment.as_posix()])
+                subprocess.run(["conda", "env", "update",
+                                # quiet to shut off progress bars
+                                "--quiet",
+                                # verbose to actually list what's installed
+                                "--verbose",
+                                "--name", "base",
+                                "--file", environment.as_posix()],
+                                shell=True,
+                                check=True)
 
     # Actually NIST the Docs 2 Death
     # This needs to be a subprocess so that it sees packages installed above
