@@ -66,8 +66,8 @@ if __name__ == "__main__":
         main()
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
         gha_utils.echo(f"what is happening?", use_subprocess=True)
-        gha_utils.info(f"stdout: {e.stdout.decode('utf-8')[:1000]}", use_subprocess=True)
-#         gha_utils.info(f"stderr: {e.stderr.decode('utf-8')[:1000]}", use_subprocess=True)
+        gha_utils.echo(f"stdout: {e.stdout.decode('utf-8')[:1000]}", use_subprocess=True)
+#         gha_utils.echo(f"stderr: {e.stderr.decode('utf-8')[:1000]}", use_subprocess=True)
         sys.exit(1)
     except Exception as e:
         gha_utils.error("".join(traceback.format_exception(e)), use_subprocess=True)
