@@ -54,7 +54,7 @@ def main():
                                 "--solver", "libmamba",
                                 "--file", environment.as_posix()],
                                 bufsize=0,
-                                timeout=180,
+                                timeout=60,
                                 check=True,
                                 capture_output=True)
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
             if e.stdout is not None:
                 gha_utils.echo(f"stdout: {e.stdout.decode('utf-8')}", use_subprocess=True)
             if e.stderr is not None:
-                gha_utils.echo(f"stderr: {e.stderr.decode('utf-8')}", use_subprocess=True)
+                gha_utils.echo(f"stderr: {e.stderr.decode('utf-8')[:1000]}", use_subprocess=True)
             raise
     except Exception as e:
         gha_utils.error("".join(traceback.format_exception(e)), use_subprocess=True)
