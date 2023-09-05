@@ -47,7 +47,7 @@ def main():
                 gha_utils.debug(f"conda installing", use_subprocess=True)
                 subprocess.run(["conda", "env", "update",
                                 # quiet to shut off progress bars
-                                "--quiet",
+#                                 "--quiet",
                                 # verbose to actually list what's installed
                                 "--verbose",
                                 "--name", "base",
