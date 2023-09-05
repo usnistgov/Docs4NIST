@@ -53,6 +53,7 @@ def main():
                                 "--name", "base",
                                 "--file", environment.as_posix()],
                                 bufsize=0,
+                                timeout=60,
                                 check=True)
 
     # Actually NIST the Docs 2 Death
