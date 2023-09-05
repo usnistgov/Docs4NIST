@@ -64,6 +64,11 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+    except subprocess.CalledProcessError as e:
+        gha_utils.info(f"output: {e.output}", use_subprocess=True)
+        gha_utils.info(f"stdout: {e.stdout}", use_subprocess=True)
+        gha_utils.info(f"stderr: {e.stderr}", use_subprocess=True)
+        sys.exit(1)
     except Exception as e:
         gha_utils.error("".join(traceback.format_exception(e)), use_subprocess=True)
         sys.exit(1)
