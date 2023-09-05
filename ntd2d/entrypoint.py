@@ -47,14 +47,15 @@ def main():
                 gha_utils.debug(f"conda installing", use_subprocess=True)
                 subprocess.run(["conda", "env", "update",
                                 # quiet to shut off progress bars
-#                                 "--quiet",
+                                "--quiet",
                                 # verbose to actually list what's installed
                                 "--verbose",
                                 "--name", "base",
                                 "--file", environment.as_posix()],
                                 bufsize=0,
                                 timeout=60,
-                                check=True)
+                                check=True,
+                                capture_output=True)
 
     # Actually NIST the Docs 2 Death
     # This needs to be a subprocess so that it sees packages installed above
