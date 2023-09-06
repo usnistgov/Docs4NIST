@@ -72,20 +72,20 @@ class SphinxDocs:
                 build_command += ["-e"]
                 print(f"[sphinx-action] Running: {build_command}")
 
-                subprocess.check_output(
+                subprocess.run(
                     build_command,
                     env=dict(os.environ, SPHINXOPTS=sphinx_options),
                     cwd=self.docs_dir.as_posix(),
-                    stderr=subprocess.STDOUT
+                    check=True
                 )
             else:
                 build_command += shlex.split(sphinx_options)
                 print(f"[sphinx-action] Running: {build_command}")
 
-                subprocess.check_output(
+                subprocess.run(
                     build_command,
                     cwd=self.docs_dir.as_posix(),
-                    stderr=subprocess.STDOUT
+                    check=True
                 )
 
             if log_file.exists():
