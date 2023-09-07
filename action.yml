@@ -67,8 +67,12 @@ inputs:
     description:
       Whether the results of pull requests should be pushed to
       `pages-branch`.
-    type: boolean
-    default: false
+    # idiot GitHub Actions input doesn't support 'type'.
+    # https://stackoverflow.com/questions/76292948/github-action-boolean-input-with-default-value
+    default: 'false'
+    options:
+      - true
+      - false
 runs:
   using: "composite"
   steps:
@@ -127,7 +131,7 @@ runs:
         (
           github.event_name != 'pull_request'
           || (
-            inputs.push-pulls-pages
+            inputs.push-pulls-pages == 'true'
             && github.event.pull_request.head.repo.full_name == github.repository
           )
         ) && (success() || steps.build-html.conclusion == 'success')
