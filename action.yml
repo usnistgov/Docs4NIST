@@ -125,7 +125,9 @@ runs:
       shell: bash
       run: |
         sudo chown -R runner:docker __nist-pages
-      if: ${{ success() || steps.build-html.conclusion == 'success' }}
+      if: >-
+        env.NTD2D_PUSH_PAGES
+        && ( success() || steps.build-html.conclusion == 'success' )
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
