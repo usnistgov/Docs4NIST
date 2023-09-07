@@ -53,7 +53,11 @@ def main():
                                 "--file", environment.as_posix()],
                                 bufsize=1,
                                 text=True,
-                                timeout=300,
+                                check=True)
+                subprocess.run(["conda", "list",
+                                "--name", "base"],
+                                bufsize=1,
+                                text=True,
                                 check=True)
 
     # Actually NIST the Docs 2 Death
