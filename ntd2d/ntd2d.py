@@ -21,7 +21,7 @@ def main():
     if pre_build_command != "":
         with gha_utils.group("Executing pre-build-command", use_subprocess=True):
             gha_utils.debug(f"pre-build-command: {pre_build_command}", use_subprocess=True)
-            subprocess.run(pre_build_command, shell=True, check=True)
+            subprocess.run(pre_build_command, check=True)
 
     with gha_utils.group("Build HTML", use_subprocess=True):
         build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
@@ -39,7 +39,8 @@ def main():
             build_command = os.environ['INPUT_BUILD-EPUB-COMMAND']
             docs.build_docs(build_command=build_command)
 
-    if os.environ['NTD2D_PUSH_PAGES']:
+    gha_utils.echo(f"os.environ['NTD2D_PUSH_PAGES'] = {os.environ['NTD2D_PUSH_PAGES']}")
+    if os.environ['NTD2D_PUSH_PAGES'] == "true":
         with gha_utils.group("Update Pages", use_subprocess=True):
             repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
                               repository=os.environ['GITHUB_REPOSITORY'],
