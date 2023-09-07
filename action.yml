@@ -126,7 +126,7 @@ runs:
       run: |
         sudo chown -R runner:docker __nist-pages
       if: >-
-        env.NTD2D_PUSH_PAGES
+        env.NTD2D_PUSH_PAGES == 'true'
         && ( success() || steps.build-html.conclusion == 'success' )
     - name: Push changes
       uses: ad-m/github-push-action@master
@@ -138,7 +138,7 @@ runs:
       # to push back to pages-branch
       # https://github.com/orgs/community/discussions/26829
       if: >-
-        env.NTD2D_PUSH_PAGES
+        env.NTD2D_PUSH_PAGES == 'true'
         && (success() || steps.build-html.conclusion == 'success')
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
