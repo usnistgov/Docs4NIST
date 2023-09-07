@@ -67,7 +67,7 @@ inputs:
     description:
       Whether the results of pull requests should be pushed to
       `pages-branch`.
-    # idiot GitHub Actions input doesn't support 'type'.
+    # Idiot GitHub Actions inputs doesn't support 'type'.
     # https://stackoverflow.com/questions/76292948/github-action-boolean-input-with-default-value
     default: 'false'
     options:
@@ -86,7 +86,15 @@ runs:
       # which causes downstream grief.
       run: |
         refname=${{ github.ref_name }}
-        echo "SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
+        echo "NTD2D_SANITIZED_REF_NAME=${refname////_}" >> $GITHUB_ENV
+        pushpages=${{
+          github.event_name != 'pull_request'
+          || (
+            inputs.push-pulls-pages == 'true'
+            && github.event.pull_request.head.repo.full_name == github.repository
+          )
+        }}
+        echo "NTD2D_PUSH_PAGES=${pushpages}" >> $GITHUB_ENV
     - name: Symlink current Actions repo
       # from https://github.com/orgs/community/discussions/41927#discussioncomment-4655948
       # @mbrancato
@@ -128,13 +136,8 @@ runs:
       # to push back to pages-branch
       # https://github.com/orgs/community/discussions/26829
       if: >-
-        (
-          github.event_name != 'pull_request'
-          || (
-            inputs.push-pulls-pages == 'true'
-            && github.event.pull_request.head.repo.full_name == github.repository
-          )
-        ) && (success() || steps.build-html.conclusion == 'success')
+        env.NTD2D_PUSH_PAGES
+        && (success() || steps.build-html.conclusion == 'success')
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
@@ -156,7 +159,7 @@ runs:
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
-        name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
+        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
           ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.pdf
           ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.log

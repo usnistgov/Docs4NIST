@@ -39,16 +39,17 @@ def main():
             build_command = os.environ['INPUT_BUILD-EPUB-COMMAND']
             docs.build_docs(build_command=build_command)
 
-    with gha_utils.group("Update Pages", use_subprocess=True):
-        repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
-                          repository=os.environ['GITHUB_REPOSITORY'],
-                          branch=os.environ['INPUT_PAGES-BRANCH'],
-                          default_branch=os.environ['INPUT_DEFAULT-BRANCH'],
-                          docs=docs,
-                          pages_url=os.environ['INPUT_PAGES-URL'])
+    if os.environ['NTD2D_PUSH_PAGES']:
+        with gha_utils.group("Update Pages", use_subprocess=True):
+            repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],
+                              repository=os.environ['GITHUB_REPOSITORY'],
+                              branch=os.environ['INPUT_PAGES-BRANCH'],
+                              default_branch=os.environ['INPUT_DEFAULT-BRANCH'],
+                              docs=docs,
+                              pages_url=os.environ['INPUT_PAGES-URL'])
 
-        repo.update_pages(branch=os.environ['SANITIZED_REF_NAME'],
-                          sha=os.environ['GITHUB_SHA'])
+            repo.update_pages(branch=os.environ['NTD2D_SANITIZED_REF_NAME'],
+                              sha=os.environ['GITHUB_SHA'])
 
 if __name__ == "__main__":
     try:
