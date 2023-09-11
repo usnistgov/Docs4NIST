@@ -76,6 +76,8 @@ class SphinxDocs:
                     build_command,
                     env=dict(os.environ, SPHINXOPTS=sphinx_options),
                     cwd=self.docs_dir.as_posix(),
+                    bufsize=1,
+                    text=True,
                     check=True
                 )
             else:
@@ -85,6 +87,8 @@ class SphinxDocs:
                 subprocess.run(
                     build_command,
                     cwd=self.docs_dir.as_posix(),
+                    bufsize=1,
+                    text=True,
                     check=True
                 )
 
