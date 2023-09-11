@@ -8,6 +8,8 @@ import os
 import pathlib
 import shlex
 import shutil
+from sphinx.application import Sphinx
+from sphinx.theming import HTMLThemeFactory
 import subprocess
 import tempfile
 
@@ -44,6 +46,18 @@ class SphinxDocs:
     @property
     def pdf_file(self):
         return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
+
+    @property
+    def stylesheet(self):
+        app = Sphinx(srcdir=self.source_dir,
+                     confdir=self.source_dir,
+                     outdir=self.build_dir,
+                     doctreedir=self.build_dir / "doctrees",
+                     buildername="html")
+        theme_factory = HTMLThemeFactory(app)
+        theme = theme_factory.create(app.config.html_theme)
+
+        return theme.get_config("theme", "stylesheet")
 
     def build_docs(self, build_command):
         """Build Sphinx Documentation
@@ -129,7 +143,8 @@ class BorgedSphinxDocs(SphinxDocs):
 
         self.theme = TemplateHierarchy(name=name,
                                        destination_dir=self.conf.theme_path,
-                                       inherited_theme=self.inherited_theme)
+                                       inherited_theme=self.inherited_theme,
+                                       inherited_css=self.stylesheet)
         self.theme.write()
 
         self.conf.set_html_theme(name=name)
