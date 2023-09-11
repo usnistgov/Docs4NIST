@@ -36,7 +36,10 @@ def main():
             requirements = pathlib.Path(requirements)
             if requirements.is_file():
                 gha_utils.debug(f"pip installing", use_subprocess=True)
-                subprocess.check_call(["pip", "install", "-r", requirements.as_posix()])
+                subprocess.run(["pip", "install", "-r", requirements.as_posix()],
+                               bufsize=1,
+                               text=True,
+                               check=True)
 
     # Install any Conda packages requested
     environment = os.environ['INPUT_CONDA-ENVIRONMENT']
@@ -51,14 +54,14 @@ def main():
                                 "--name", "base",
                                 "--solver", "libmamba",
                                 "--file", environment.as_posix()],
-                                bufsize=1,
-                                text=True,
-                                check=True)
+                               bufsize=1,
+                               text=True,
+                               check=True)
                 subprocess.run(["conda", "list",
                                 "--name", "base"],
-                                bufsize=1,
-                                text=True,
-                                check=True)
+                               bufsize=1,
+                               text=True,
+                               check=True)
 
     # Actually NIST the Docs 2 Death
     # This needs to be a subprocess so that it sees packages installed above
