@@ -9,7 +9,7 @@ jobs:
       - uses: usnistgov/NISTtheDocs2Death@sphinx_rtd_theme
         with:
           docs-folder: docs/
-          pip-requirements: sphinx_rtd_theme
+          pip-requirements: docs/requirements.txt
           formats: |-
            epub
            pdf
