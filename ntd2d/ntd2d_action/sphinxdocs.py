@@ -15,6 +15,7 @@ import tempfile
 
 from .files import ConfFile
 from .files import SphinxLog, BorgedConfFile, TemplateHierarchy
+from .files.template import FileTemplate
 
 
 class SphinxDocs:
