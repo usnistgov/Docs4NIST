@@ -13,7 +13,9 @@ def main():
     with gha_utils.group("Borg the Docs", use_subprocess=True):
         original_docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
         docs = BorgedSphinxDocs(original_docs=original_docs)
-        docs.assimilate_theme(name="ntd2d")
+        insert_header_footer = (os.environ['INPUT_INSERT-HEADER-FOOTER'] == "true")
+        docs.assimilate_theme(name="ntd2d",
+                              insert_header_footer=insert_header_footer)
 
         gha_utils.set_output("borged-build-folder", docs.build_dir.as_posix())
 

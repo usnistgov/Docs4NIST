@@ -63,6 +63,16 @@ inputs:
       The path to the Conda environment file, relative to the root of the
       project.
     required: false
+  insert-header-footer:
+    description:
+      Whether to insert the NIST branding headers and footers
+      (which are incompatible with sphinx_rtd_theme).
+    # Idiot GitHub Actions inputs doesn't support 'type'.
+    # https://stackoverflow.com/questions/76292948/github-action-boolean-input-with-default-value
+    default: 'true'
+    options:
+      - true
+      - false
 outputs:
   borged-docs-folder:
     description: 'The folder containing modified Sphinx configuration'

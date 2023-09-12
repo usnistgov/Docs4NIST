@@ -138,13 +138,19 @@ class BorgedSphinxDocs(SphinxDocs):
     def inherited_theme(self):
         return self.original_docs.conf.html_theme
 
-    def assimilate_theme(self, name):
+    def assimilate_theme(self, name, insert_header_footer=True):
         """Replace configuration directory with customized html theme."""
+
+        if insert_header_footer:
+            header_footer = FileTemplate(name="header_footer_script.html").read()
+        else:
+            header_footer = ""
 
         self.theme = TemplateHierarchy(name=name,
                                        destination_dir=self.conf.theme_path,
                                        inherited_theme=self.inherited_theme,
-                                       inherited_css=self.stylesheet)
+                                       inherited_css=self.stylesheet,
+                                       header_footer_script=header_footer)
         self.theme.write()
 
         self.conf.set_html_theme(name=name)
