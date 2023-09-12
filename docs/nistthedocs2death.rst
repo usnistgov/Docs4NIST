@@ -134,7 +134,7 @@ project.
 
 Whether the results of pull requests should be pushed to
 :ref:`PAGES_BRANCH`.  For
-`security <https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows/>`
+`security <https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows/>`_
 `reasons <https://securitylab.github.com/research/github-actions-preventing-pwn-requests/>`_,
 this is impossible for pull requests from repository forks, but it is
 generally undesirable in any case (they appear with cryptic names like
