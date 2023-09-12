@@ -31,6 +31,7 @@ yourself.
         apt-packages: ''
         pip-requirements: ''
         conda-environment: ''
+        include-header-footer: true
 
 .. note::
 
@@ -140,6 +141,14 @@ The path to the pip requirements file, relative to the root of the project.
 
 The path to the Conda environment file, relative to the root of the
 project.
+
+``include-header-footer``
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Whether to insert the
+`NIST header and footer <https://pages.nist.gov/nist-header-footer>`_.
+This content conflicts with, e.g.,
+`sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/>`_.
 
 
 Outputs

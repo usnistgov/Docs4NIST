@@ -25,8 +25,7 @@
 
   <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
   <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
-  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
-
+  
 
 </head>
 
@@ -72,6 +71,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#push-pulls-pages"><code class="docutils literal notranslate"><span class="pre">push-pulls-pages</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#include-header-footer"><code class="docutils literal notranslate"><span class="pre">include-header-footer</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a></li>
@@ -135,6 +135,7 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 <span class="w">          </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">          </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">          </span><span class="nt">push-pulls-pages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">          </span><span class="nt">include-header-footer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 </section>
@@ -211,6 +212,13 @@ generally undesirable in any case (they appear with cryptic names like
 <cite>merge_1234</cite> and are redundant to the branch the pull is from).  As long as
 this action is set to run <cite>on: push</cite>, then any build products from branches
 in the same repository will appear at <a class="reference internal" href="#pages-url"><span class="std std-ref">pages-url</span></a>.</p>
+</section>
+<section id="include-header-footer">
+<h3><code class="docutils literal notranslate"><span class="pre">include-header-footer</span></code><a class="headerlink" href="#include-header-footer" title="Permalink to this heading"></a></h3>
+<p>Whether to insert the
+<a class="reference external" href="https://pages.nist.gov/nist-header-footer">NIST header and footer</a>.
+This content conflicts with, e.g.,
+<a class="reference external" href="https://sphinx-rtd-theme.readthedocs.io/">sphinx_rtd_theme</a>.</p>
 </section>
 </section>
 <section id="implementation">

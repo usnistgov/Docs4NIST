@@ -39,6 +39,7 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
              pip-requirements: ''
              conda-environment: ''
              push-pulls-pages: false
+             include-header-footer: true
 
 Inputs
 ------
@@ -140,6 +141,14 @@ generally undesirable in any case (they appear with cryptic names like
 `merge_1234` and are redundant to the branch the pull is from).  As long as
 this action is set to run `on: push`, then any build products from branches
 in the same repository will appear at :ref:`PAGES_URL`.
+
+``include-header-footer``
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Whether to insert the
+`NIST header and footer <https://pages.nist.gov/nist-header-footer>`_.
+This content conflicts with, e.g.,
+`sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/>`_.
 
 Implementation
 --------------

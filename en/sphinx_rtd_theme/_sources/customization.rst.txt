@@ -52,7 +52,7 @@ This template file controls the appearance of the dropdown menu.
 Pages templates
 --------------------------
 
-The second set of tempaltes is used by
+The second set of templates is used by
 :meth:`~ntd2d_action.repository.Repository.update_pages` to create the
 pages on the hosting site that enable switching between different
 documentation variants.

@@ -24,8 +24,7 @@
 
   <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
   <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
-  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
-
+  
 
 </head>
 
@@ -72,6 +71,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#apt-packages"><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#include-header-footer"><code class="docutils literal notranslate"><span class="pre">include-header-footer</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#outputs">Outputs</a><ul>
@@ -132,6 +132,7 @@ yourself.</p>
 <span class="w">    </span><span class="nt">apt-packages</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">    </span><span class="nt">pip-requirements</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">    </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">    </span><span class="nt">include-header-footer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -208,6 +209,13 @@ that should be installed.</p>
 <span id="ntd2d-condaenvironment"></span><h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading"></a></h3>
 <p>The path to the Conda environment file, relative to the root of the
 project.</p>
+</section>
+<section id="include-header-footer">
+<h3><code class="docutils literal notranslate"><span class="pre">include-header-footer</span></code><a class="headerlink" href="#include-header-footer" title="Permalink to this heading"></a></h3>
+<p>Whether to insert the
+<a class="reference external" href="https://pages.nist.gov/nist-header-footer">NIST header and footer</a>.
+This content conflicts with, e.g.,
+<a class="reference external" href="https://sphinx-rtd-theme.readthedocs.io/">sphinx_rtd_theme</a>.</p>
 </section>
 </section>
 <section id="outputs">
