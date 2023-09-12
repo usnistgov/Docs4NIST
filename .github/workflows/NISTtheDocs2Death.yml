@@ -10,7 +10,6 @@ jobs:
         with:
           docs-folder: docs/
           pip-requirements: docs/requirements.txt
-          insert-header-footer: false
           formats: |-
            epub
            pdf
