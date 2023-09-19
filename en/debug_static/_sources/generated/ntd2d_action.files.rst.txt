@@ -1,0 +1,42 @@
+ntd2d\_action.files
+===================
+
+.. automodule:: ntd2d_action.files
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   ntd2d_action.files.borgedconffile
+   ntd2d_action.files.conffile
+   ntd2d_action.files.cssfile
+   ntd2d_action.files.file
+   ntd2d_action.files.indexfile
+   ntd2d_action.files.menufile
+   ntd2d_action.files.nojekyllfile
+   ntd2d_action.files.pagesfile
+   ntd2d_action.files.sphinxlog
+   ntd2d_action.files.template
+   ntd2d_action.files.templatehierarchy
+   ntd2d_action.files.variantsfile
+
