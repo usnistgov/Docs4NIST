@@ -24,18 +24,32 @@ def main():
             subprocess.run(pre_build_command, check=True)
 
     with gha_utils.group("Before Build HTML", use_subprocess=True):
+        gha_utils.echo("pwd")
         subprocess.run(["pwd"], check=True, bufsize=1, text=True)
+        gha_utils.echo("ls")
         subprocess.run(["ls"], check=True, bufsize=1, text=True)
-#         subprocess.run(["ls", "_build/html"], check=True, bufsize=1, text=True)
+        gha_utils.echo("ls doc-BORGED/")
+        subprocess.run(["ls", "doc-BORGED/"], check=True, bufsize=1, text=True)
+        gha_utils.echo("ls doc-BORGED/_build/")
+        subprocess.run(["ls", "doc-BORGED/_build/"], check=True, bufsize=1, text=True)
+        gha_utils.echo("ls doc-BORGED/_build/html/")
+        subprocess.run(["ls", "doc-BORGED/_build/html/"], check=True, bufsize=1, text=True)
 
     with gha_utils.group("Build HTML", use_subprocess=True):
         build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
         docs.build_docs(build_command=build_command)
 
     with gha_utils.group("After Build HTML", use_subprocess=True):
+        gha_utils.echo("pwd")
         subprocess.run(["pwd"], check=True, bufsize=1, text=True)
+        gha_utils.echo("ls")
         subprocess.run(["ls"], check=True, bufsize=1, text=True)
-#         subprocess.run(["ls", "_build/html"], check=True, bufsize=1, text=True)
+        gha_utils.echo("ls doc-BORGED/")
+        subprocess.run(["ls", "doc-BORGED/"], check=True, bufsize=1, text=True)
+        gha_utils.echo("ls doc-BORGED/_build/")
+        subprocess.run(["ls", "doc-BORGED/_build/"], check=True, bufsize=1, text=True)
+        gha_utils.echo("ls doc-BORGED/_build/html/")
+        subprocess.run(["ls", "doc-BORGED/_build/html/"], check=True, bufsize=1, text=True)
 
     formats = os.environ['INPUT_FORMATS'].lower().split()
 
