@@ -24,14 +24,14 @@ def main():
             subprocess.run(pre_build_command, check=True)
 
     with gha_utils.group("Before Build HTML", use_subprocess=True):
-        subprocess.run(["ls", "_build/html"], check=True, buffer=1, text=True)
+        subprocess.run(["ls", "_build/html"], check=True, bufsize=1, text=True)
 
     with gha_utils.group("Build HTML", use_subprocess=True):
         build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
         docs.build_docs(build_command=build_command)
 
     with gha_utils.group("After Build HTML", use_subprocess=True):
-        subprocess.run(["ls", "_build/html"], check=True, buffer=1, text=True)
+        subprocess.run(["ls", "_build/html"], check=True, bufsize=1, text=True)
 
     formats = os.environ['INPUT_FORMATS'].lower().split()
 
