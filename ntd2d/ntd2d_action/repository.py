@@ -54,7 +54,7 @@ class Repository:
         self.repo.index.add(*args, **kwargs)
 
     def clone(self, to_path):
-        gha_utils.echo(f"Cloning {self.url}@{self.branch} to {to_path}",
+        gha_utils.echo(f"Clone {self.url}@{self.branch} -> {to_path}",
                        use_subprocess=True)
 
         self.repo = git.Repo.clone_from(self.url,
@@ -68,7 +68,7 @@ class Repository:
             author = git.Actor("GitHub Action", "action@github.com")
             self.repo.index.commit(message=message, author=author)
 
-            gha_utils.echo(f"Committed '{message}'",
+            gha_utils.echo(f"Commit '{message}'",
                            use_subprocess=True)
 
     def remove(self, *args, **kwargs):
