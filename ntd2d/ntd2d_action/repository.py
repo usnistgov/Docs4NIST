@@ -54,6 +54,9 @@ class Repository:
         self.repo.index.add(*args, **kwargs)
 
     def clone(self, to_path):
+        gha_utils.echo(f"Cloning {self.url}@{self.branch} to {to_path}",
+                       use_subprocess=True)
+
         self.repo = git.Repo.clone_from(self.url,
                                         to_path=to_path,
                                         branch=self.branch)
@@ -65,7 +68,8 @@ class Repository:
             author = git.Actor("GitHub Action", "action@github.com")
             self.repo.index.commit(message=message, author=author)
 
-            gha_utils.debug(f"Committed '{message}'")
+            gha_utils.echo(f"Committed '{message}'",
+                           use_subprocess=True)
 
     def remove(self, *args, **kwargs):
         self.repo.index.remove(*args, **kwargs)
@@ -82,20 +86,20 @@ class Repository:
           The commit SHA that triggered the workflow (:envvar:`GITHUB_SHA`).
         """
 
-        gha_utils.debug("Repository.update_pages")
+        gha_utils.debug("Repository.update_pages", use_subprocess=True)
 
         self.clone(to_path="__nist-pages")
 
-        gha_utils.debug(f"clone()")
+        gha_utils.debug(f"clone()", use_subprocess=True)
 
         NoJekyllFile(repo=self).write()
 
-        gha_utils.debug(f".nojekyll")
+        gha_utils.debug(f".nojekyll", use_subprocess=True)
 
         # replace any built documents in directory named for current branch
         variant = Variant(repo=self, name=branch, rebuild_menu=True)
 
-        gha_utils.debug(f"Variant {variant.name}")
+        gha_utils.debug(f"Variant {variant.name}", use_subprocess=True)
 
         variant.copy_html(src=self.docs.html_dir)
         variant.copy_download_file(src=self.docs.epub_file, kind="ePUB")
