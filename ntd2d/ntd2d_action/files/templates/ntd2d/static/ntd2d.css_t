@@ -1,4 +1,4 @@
-@import url("{inherited_theme}.css");
+@import url("{inherited_css}");
 
 
 .dropbtn {{
