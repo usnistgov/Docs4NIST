@@ -154,7 +154,7 @@ runs:
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
-        name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
+        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
           ${{ steps.ntd2d.outputs.borged-build-folder }}/html
       # Use always() to always run this step to publish documentation
@@ -163,7 +163,7 @@ runs:
     - uses: actions/upload-artifact@v3
       name: Upload Documentation Artifacts
       with:
-        name: ${{ github.event.repository.name }}-${{ env.SANITIZED_REF_NAME }}-${{ github.sha }}
+        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}
         path: |
           ${{ steps.ntd2d.outputs.borged-build-folder }}/epub/*.epub
       # Use always() to always run this step to publish documentation
