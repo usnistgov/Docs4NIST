@@ -21,7 +21,7 @@ def main():
     if pre_build_command != "":
         with gha_utils.group("Executing pre-build-command", use_subprocess=True):
             gha_utils.debug(f"pre-build-command: {pre_build_command}", use_subprocess=True)
-            subprocess.run(pre_build_command, shell=True, check=True)
+            subprocess.run(pre_build_command, check=True)
 
     with gha_utils.group("Build HTML", use_subprocess=True):
         build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
@@ -56,7 +56,10 @@ if __name__ == "__main__":
         try:
             main()
         except subprocess.CalledProcessError as e:
-            gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
+            if e.stdout is not None:
+                gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
+            if e.stderr is not None:
+                gha_utils.error(e.stderr.decode('utf-8'), use_subprocess=True)
             raise
     except Exception as e:
         gha_utils.error("".join(traceback.format_exception(e)), use_subprocess=True)

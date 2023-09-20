@@ -1,3 +1,4 @@
+import github_action_utils as gha_utils
 import pathlib
 
 from .template import FileTemplate, Template
@@ -23,3 +24,4 @@ class TemplateHierarchy(FileTemplate):
 
             with destination_path.open(mode='w') as destination:
                 destination.write(template.format(**self.substitutions))
+            gha_utils.echo(f"wrote {destination_path.as_posix()}", use_subprocess=True)

@@ -51,6 +51,7 @@ class Variant:
         self.rmdir()
         shutil.copytree(src, dst)
         self.repo.add(dst.as_posix())
+        gha_utils.echo(f"Copy {src} -> {dst}", use_subprocess=True)
 
     def copy_html(self, src):
         gha_utils.debug(f"{self.name}.copy_html(src={src})")
@@ -61,6 +62,7 @@ class Variant:
         os.makedirs(dst, exist_ok=True)
         shutil.copy2(src, dst)
         self.repo.add((dst / src.name).as_posix())
+        gha_utils.echo(f"Copy {src} -> {dst}", use_subprocess=True)
 
     def copy_static_file(self, src):
         self.copy_file(src=src, dst=self.dir / "_static")
