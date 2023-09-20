@@ -6,10 +6,9 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: usnistgov/NISTtheDocs2Death@sphinx_rtd_theme
+      - uses: usnistgov/NISTtheDocs2Death@main
         with:
           docs-folder: docs/
-          pip-requirements: docs/requirements.txt
           formats: |-
            epub
            pdf
