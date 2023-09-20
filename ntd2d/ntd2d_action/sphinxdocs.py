@@ -70,7 +70,8 @@ class SphinxDocs:
                 #   Cause environment variables, including those with null values, to override macro assignments within makefiles.
                 # which is exactly what we want.
                 build_command += ["-e"]
-                gha_utils.echo(f"[sphinx-action] Running: {build_command}")
+                gha_utils.echo(f"[sphinx-action] Running: {build_command}",
+                               use_subprocess=True)
 
                 subprocess.run(
                     build_command,
@@ -82,7 +83,8 @@ class SphinxDocs:
                 )
             else:
                 build_command += shlex.split(sphinx_options)
-                gha_utils.echo(f"[sphinx-action] Running: {build_command}")
+                gha_utils.echo(f"[sphinx-action] Running: {build_command}",
+                               use_subprocess=True)
 
                 subprocess.run(
                     build_command,

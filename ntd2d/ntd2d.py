@@ -23,39 +23,9 @@ def main():
             gha_utils.debug(f"pre-build-command: {pre_build_command}", use_subprocess=True)
             subprocess.run(pre_build_command, check=True)
 
-    with gha_utils.group("Before Build HTML", use_subprocess=True):
-        gha_utils.echo(f"ls {docs.docs_dir.as_posix()}", use_subprocess=True)
-        subprocess.run(["ls", docs.docs_dir.as_posix()], check=True, bufsize=1, text=True)
-#         gha_utils.echo("ls", use_subprocess=True)
-#         subprocess.run(["ls"], check=True, bufsize=1, text=True)
-#         gha_utils.echo("ls doc/", use_subprocess=True)
-#         subprocess.run(["ls", "doc/"], check=True, bufsize=1, text=True)
-#         gha_utils.echo("ls doc/_build/", use_subprocess=True)
-#         subprocess.run(["ls", "doc/_build/"], check=True, bufsize=1, text=True)
-#         gha_utils.echo("ls doc/_build/html/", use_subprocess=True)
-#         subprocess.run(["ls", "doc/_build/html/"], check=True, bufsize=1, text=True)
-
     with gha_utils.group("Build HTML", use_subprocess=True):
         build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
         docs.build_docs(build_command=build_command)
-
-    with gha_utils.group("After Build HTML", use_subprocess=True):
-        gha_utils.echo(f"ls {docs.docs_dir.as_posix()}", use_subprocess=True)
-        subprocess.run(["ls", docs.docs_dir.as_posix()], check=True, bufsize=1, text=True)
-        gha_utils.echo(f"ls {docs.build_dir.as_posix()}", use_subprocess=True)
-        subprocess.run(["ls", docs.build_dir.as_posix()], check=True, bufsize=1, text=True)
-        gha_utils.echo(f"ls {docs.html_dir.as_posix()}", use_subprocess=True)
-        subprocess.run(["ls", docs.html_dir.as_posix()], check=True, bufsize=1, text=True)
-#         gha_utils.echo("pwd", use_subprocess=True)
-#         subprocess.run(["pwd"], check=True, bufsize=1, text=True)
-#         gha_utils.echo("ls", use_subprocess=True)
-#         subprocess.run(["ls"], check=True, bufsize=1, text=True)
-#         gha_utils.echo("ls doc/", use_subprocess=True)
-#         subprocess.run(["ls", "doc/"], check=True, bufsize=1, text=True)
-#         gha_utils.echo("ls doc/_build/", use_subprocess=True)
-#         subprocess.run(["ls", "doc/_build/"], check=True, bufsize=1, text=True)
-#         gha_utils.echo("ls doc/_build/html/", use_subprocess=True)
-#         subprocess.run(["ls", "doc/_build/html/"], check=True, bufsize=1, text=True)
 
     formats = os.environ['INPUT_FORMATS'].lower().split()
 
