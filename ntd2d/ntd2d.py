@@ -86,7 +86,10 @@ if __name__ == "__main__":
         try:
             main()
         except subprocess.CalledProcessError as e:
-            gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
+            if e.stdout is not None:
+                gha_utils.error(e.stdout.decode('utf-8'), use_subprocess=True)
+            if e.stderr is not None:
+                gha_utils.error(e.stderr.decode('utf-8'), use_subprocess=True)
             raise
     except Exception as e:
         gha_utils.error("".join(traceback.format_exception(e)), use_subprocess=True)
