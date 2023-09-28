@@ -48,6 +48,12 @@ inputs:
       dependencies, for example with
       "apt-get update -y && apt-get install -y perl"
     required: false
+  pre-borg-command:
+    description:
+      Run before the borging command, you can use this to install system level
+      dependencies, for example with
+      "apt-get update -y && apt-get install -y perl"
+    required: false
   apt-packages:
     description:
       List of APT packages to install.
@@ -128,6 +134,7 @@ runs:
         build-epub-command: ${{ inputs.build-epub-command }}
         build-pdf-command: ${{ inputs.build-pdf-command }}
         pre-build-command: ${{ inputs.pre-build-command }}
+        pre-borg-command: ${{ inputs.pre-borg-command }}
         apt-packages: ${{ inputs.apt-packages }}
         pip-requirements: ${{ inputs.pip-requirements }}
         conda-environment: ${{ inputs.conda-environment }}

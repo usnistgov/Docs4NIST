@@ -10,6 +10,12 @@ from ntd2d_action.repository import Repository
 
 
 def main():
+    pre_borg_command = os.environ['INPUT_PRE-BORG-COMMAND']
+    if pre_borg_command != "":
+        with gha_utils.group("Executing pre-borg-command", use_subprocess=True):
+            gha_utils.debug(f"pre-borg-command: {pre_borg_command}", use_subprocess=True)
+            subprocess.run(pre_borg_command, shell=True, check=True)
+
     with gha_utils.group("Borg the Docs", use_subprocess=True):
         original_docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
         docs = BorgedSphinxDocs(original_docs=original_docs)
