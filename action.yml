@@ -139,6 +139,7 @@ runs:
         build-pdf-command: ${{ inputs.build-pdf-command }}
         pre-build-command: ${{ inputs.pre-build-command }}
         pre-borg-command: ${{ inputs.pre-borg-command }}
+        post-build-command: ${{ inputs.post-build-command }}
         apt-packages: ${{ inputs.apt-packages }}
         pip-requirements: ${{ inputs.pip-requirements }}
         conda-environment: ${{ inputs.conda-environment }}
