@@ -47,6 +47,12 @@ def main():
             build_command = os.environ['INPUT_BUILD-EPUB-COMMAND']
             docs.build_docs(build_command=build_command)
 
+    post_build_command = os.environ['INPUT_POST-BUILD-COMMAND']
+    if post_build_command != "":
+        with gha_utils.group("Executing post-build-command", use_subprocess=True):
+            gha_utils.debug(f"post-build-command: {post_build_command}", use_subprocess=True)
+            subprocess.run(post_build_command, shell=True, check=True)
+
     if os.environ['NTD2D_PUSH_PAGES'] == "true":
         with gha_utils.group("Update Pages", use_subprocess=True):
             repo = Repository(server_url=os.environ['GITHUB_SERVER_URL'],

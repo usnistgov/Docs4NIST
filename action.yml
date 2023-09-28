@@ -54,6 +54,10 @@ inputs:
       dependencies, for example with
       "apt-get update -y && apt-get install -y perl"
     required: false
+  post-build-command:
+    description:
+      Command to run after all the build commands
+    required: false
   apt-packages:
     description:
       List of APT packages to install.
