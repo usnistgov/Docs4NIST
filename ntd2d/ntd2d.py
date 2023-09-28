@@ -23,7 +23,7 @@ def main():
     if pre_build_command != "":
         with gha_utils.group("Executing pre-build-command", use_subprocess=True):
             gha_utils.debug(f"pre-build-command: {pre_build_command}", use_subprocess=True)
-            subprocess.run(pre_build_command, check=True)
+            subprocess.run(pre_build_command, shell=True, check=True)
 
     with gha_utils.group("Build HTML", use_subprocess=True):
         build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
