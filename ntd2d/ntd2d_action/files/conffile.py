@@ -22,23 +22,14 @@ def _working_directory(path):
 class ConfFile(File):
     """Sphinx configuration file."""
 
-    def __init__(self, source_dir):
+    def __init__(self, source_dir, config):
         self.source_dir = pathlib.Path(source_dir)
-        self.theme = None
+        self.config = config
         self._code = None
-        self._configuration = None
-
-    @property
-    def configuration(self):
-        """Text of configuration file."""
-
-        if self._configuration is None:
-            self._configuration = self.read()
-        return self._configuration
 
     @property
     def exclude_patterns(self):
-        return self.configuration.get("exclude_patterns", [])
+        return self.config.exclude_patterns
 
     @property
     def html_theme(self):
@@ -46,7 +37,7 @@ class ConfFile(File):
 
         .. _html_theme: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_theme
         """
-        return self.configuration.get("html_theme", "default")
+        return self.config.html_theme
 
     @property
     def html_theme_path(self):
@@ -54,7 +45,7 @@ class ConfFile(File):
 
         .. _html_theme_path: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_theme_path
         """
-        return self.configuration.get("html_theme_path", [])
+        return self.config.html_theme_path
 
     @property
     def language(self):
@@ -62,7 +53,7 @@ class ConfFile(File):
 
         .. _language: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language
         """
-        return self.configuration.get("language", "en")
+        return self.config.language
 
     @property
     def original_contents(self):
@@ -82,7 +73,7 @@ class ConfFile(File):
 
         .. _project: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-project
         """
-        return self.configuration["project"]
+        return self.config.project
 
     @property
     def theme_path(self):

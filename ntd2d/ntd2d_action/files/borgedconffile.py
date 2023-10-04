@@ -5,9 +5,9 @@ from .template import FileTemplate
 class BorgedConfFile(ConfFile):
     """Sphinx configuration file that overlays the html theme."""
 
-    def __init__(self, source_dir, original_docs):
+    def __init__(self, source_dir, config, original_docs):
         self.original_docs = original_docs
-        super().__init__(source_dir=source_dir)
+        super().__init__(source_dir=source_dir, config=config)
         self._html_theme = None
 
     @property

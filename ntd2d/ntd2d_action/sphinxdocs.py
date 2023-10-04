@@ -22,6 +22,7 @@ class SphinxDocs:
     """Sphinx configuration directory."""
 
     def __init__(self, docs_dir):
+        self._app = None
         self.docs_dir = pathlib.Path(docs_dir)
 
         if (self.docs_dir / "source" / "conf.py").is_file():
@@ -34,7 +35,18 @@ class SphinxDocs:
         self.conf = self.make_conf_file()
 
     def make_conf_file(self):
-        return ConfFile(source_dir=self.source_dir)
+        return ConfFile(source_dir=self.source_dir,
+                        config=self.sphinx_app.config)
+
+    @property
+    def sphinx_app(self):
+        if self._app is None:
+            self._app = Sphinx(srcdir=self.source_dir,
+                               confdir=self.source_dir,
+                               outdir=self.build_dir,
+                               doctreedir=self.build_dir / "doctrees",
+                               buildername="html")
+        return self._app
 
     @property
     def html_dir(self):
@@ -50,13 +62,8 @@ class SphinxDocs:
 
     @property
     def stylesheet(self):
-        app = Sphinx(srcdir=self.source_dir,
-                     confdir=self.source_dir,
-                     outdir=self.build_dir,
-                     doctreedir=self.build_dir / "doctrees",
-                     buildername="html")
-        theme_factory = HTMLThemeFactory(app)
-        theme = theme_factory.create(app.config.html_theme)
+        theme_factory = HTMLThemeFactory(self.sphinx_app)
+        theme = theme_factory.create(self.sphinx_app.config.html_theme)
 
         return theme.get_config("theme", "stylesheet")
 
@@ -135,6 +142,7 @@ class BorgedSphinxDocs(SphinxDocs):
 
     def make_conf_file(self):
         return BorgedConfFile(source_dir=self.source_dir,
+                              config=self.sphinx_app.config,
                               original_docs=self.original_docs)
 
     @property
