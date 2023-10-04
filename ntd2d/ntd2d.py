@@ -23,7 +23,11 @@ def main():
     if pre_build_command != "":
         with gha_utils.group("Executing pre-build-command", use_subprocess=True):
             gha_utils.debug(f"pre-build-command: {pre_build_command}", use_subprocess=True)
-            subprocess.run(pre_build_command, shell=True, check=True)
+            subprocess.run(pre_build_command,
+                           bufsize=1,
+                           text=True,
+                           shell=True,
+                           check=True)
 
     with gha_utils.group("Build HTML", use_subprocess=True):
         build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
@@ -49,6 +53,11 @@ def main():
                               default_branch=os.environ['INPUT_DEFAULT-BRANCH'],
                               docs=docs,
                               pages_url=os.environ['INPUT_PAGES-URL'])
+
+            gha_utils.debug(f"check state of conda", use_subprocess=True)
+            subprocess.run(["conda", "list"],
+                           bufsize=1,
+                           text=True)
 
             repo.update_pages(branch=os.environ['NTD2D_SANITIZED_REF_NAME'],
                               sha=os.environ['GITHUB_SHA'])
