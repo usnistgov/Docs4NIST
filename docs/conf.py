@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'NISTtheDocs2Death'
+project = 'Docs4NIST'
 copyright = u'works of NIST employees are not not subject to copyright protection in the United States'
 author = 'Jonathan E. Guyer'
 

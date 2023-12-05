@@ -124,7 +124,7 @@ class SphinxDocs:
 
 
 class BorgedSphinxDocs(SphinxDocs):
-    """Sphinx configuration directory modified by NISTtheDocs2Death.
+    """Sphinx configuration directory modified by Docs4NIST
 
     Parameters
     ----------

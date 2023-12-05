@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: NISTtheDocs2Death
+name: Docs4NIST
 description: Deploys Sphinx-built documentation to https://pages.nist.gov
 author: Jonathan Guyer
 
@@ -115,7 +115,7 @@ runs:
       id: ntd2d
       # from https://github.com/orgs/community/discussions/41927#discussioncomment-4605881
       # @mbrancato
-      # because usnistgov/NISTtheDocs2Death/ntd2d@${{ github.action_ref }}
+      # because usnistgov/Docs4NIST/ntd2d@${{ github.action_ref }}
       # doesn't work
       uses: ./../../_actions/current/ntd2d
       with:

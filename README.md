@@ -1,4 +1,4 @@
-# NISTtheDocs2Death Action
+# Docs4NIST Action
 
 This is a GitHub action that uses sphinx to build documentation and then
 host on <https://pages.nist.gov> as an approximation of
@@ -7,7 +7,7 @@ host on <https://pages.nist.gov> as an approximation of
 ## Usage
 
 - [Configure your repo for publishing on `pages.nist.gov`](https://github.com/usnistgov/pages-root/wiki/Configuring-your-repo-for-publishing-on-pages.nist.gov)
-- Create a workflow, such as `.github/workflows/NISTtheDocs2Death.yml`:
+- Create a workflow, such as `.github/workflows/Docs4NIST.yml`:
 
     ```yaml
     name: "Build Documentation"
@@ -18,7 +18,7 @@ host on <https://pages.nist.gov> as an approximation of
       docs:
         runs-on: ubuntu-latest
         steps:
-          - uses: usnistgov/NISTtheDocs2Death@0.4
+          - uses: usnistgov/Docs4NIST@0.4
             with:
               docs-folder: docs/
               formats: |-
@@ -33,4 +33,4 @@ elements, so
 to declare formats, as illustrated above.
 
 The self-generated documentation for this action is available at
-<https://pages.nist.gov/NISTtheDocs2Death>.
+<https://pages.nist.gov/Docs4NIST>.

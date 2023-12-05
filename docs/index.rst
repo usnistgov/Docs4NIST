@@ -1,7 +1,7 @@
-.. _NISTTHEDOCS2DEATH_INTRO:
+.. _DOCS4NIST_INTRO:
 
-``NISTtheDocs2Death``
-=====================
+``Docs4NIST``
+=============
 
 This `GitHub action <https://docs.github.com/en/actions>`_ [#]_ uses the
 `Sphinx <https://www.sphinx-doc.org/>`_ tool to build documentation in
@@ -21,7 +21,7 @@ Usage
   and select "Allow all actions and reusable workflows" (you may need to
   submit a request to devops@nist.gov to enable this for you).
 - For each branch of your repository where you want to host documentation, 
-  add a workflow, such as :file:`.github/workflows/NISTtheDocs2Death.yml`:
+  add a workflow, such as :file:`.github/workflows/Docs4NIST.yml`:
 
 .. code-block:: yaml
 
@@ -33,14 +33,14 @@ Usage
      docs:
        runs-on: ubuntu-latest
        steps:
-         - uses: usnistgov/NISTtheDocs2Death@0.4
+         - uses: usnistgov/Docs4NIST@0.4
            with:
              docs-folder: docs/
              formats: |-
                epub
                pdf
 
-See :ref:`NISTTHEDOCS2DEATH` for more information about configuration of
+See :ref:`DOCS4NIST` for more information about configuration of
 this workflow.
 
 .. toctree::
@@ -57,7 +57,7 @@ this workflow.
    :caption: Actions:
    :hidden:
 
-   nistthedocs2death
+   docs4nist
    ntd2d
 
 
