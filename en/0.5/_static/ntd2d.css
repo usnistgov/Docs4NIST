@@ -79,12 +79,12 @@
 
 /* add menu styling for active variant */
 
-/* note: li.ntd2d_rename_NISTtheDocs2Death doesn't reliably work with dotted names */
+/* note: li.ntd2d_0.5 doesn't reliably work with dotted names */
 
-li[class~="ntd2d_rename_NISTtheDocs2Death"] {
+li[class~="ntd2d_0.5"] {
   font-weight: bold;
 }
 
-li[class~="ntd2d_rename_NISTtheDocs2Death"] a:hover {
+li[class~="ntd2d_0.5"] a:hover {
   text-decoration: none;
 }
