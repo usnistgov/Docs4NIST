@@ -1,4 +1,4 @@
-# `NISTtheDocs2Death`: `ntd2d` Action
+# `Docs4NIST`: `ntd2d` Action
 
 This action is not intended to be called by users.  It is invoked by a
 GitHub action that uses sphinx to build documentation and then host on
@@ -58,7 +58,7 @@ runs:
     :
     :
     - name: Build documentation
-      uses: usnistgov/NISTtheDocs2Death/ntd2d@${{ github.action_ref }}
+      uses: usnistgov/Docs4NIST/ntd2d@${{ github.action_ref }}
       with:
     :
     :
