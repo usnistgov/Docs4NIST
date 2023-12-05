@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>NISTtheDocs2Death Action &#8212; NISTtheDocs2Death  documentation</title>
+    <title>Docs4NIST Action &#8212; Docs4NIST  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=88d0a8bc" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
@@ -38,15 +38,15 @@
 
           <div class="body" role="main">
             
-  <section id="nistthedocs2death-action">
-<span id="nistthedocs2death"></span><h1><code class="docutils literal notranslate"><span class="pre">NISTtheDocs2Death</span></code> Action<a class="headerlink" href="#nistthedocs2death-action" title="Permalink to this heading">¶</a></h1>
+  <section id="docs4nist-action">
+<span id="docs4nist"></span><h1><code class="docutils literal notranslate"><span class="pre">Docs4NIST</span></code> Action<a class="headerlink" href="#docs4nist-action" title="Permalink to this heading">¶</a></h1>
 <p>This <a class="reference external" href="https://docs.github.com/en/actions">GitHub action</a> uses the <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> tool to build documentation in
 <a class="reference external" href="https://github.com/usnistgov">https://github.com/usnistgov</a> projects and then host on
 <a class="reference external" href="https://pages.nist.gov">https://pages.nist.gov</a> as an approximation of <a class="reference external" href="https://readthedocs.org">ReadTheDocs</a>.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
 <p>This action is invoked by adding a workflow file to your repository, such
-as <code class="file docutils literal notranslate"><span class="pre">.github/workflows/NISTtheDocs2Death.yml</span></code>:</p>
+as <code class="file docutils literal notranslate"><span class="pre">.github/workflows/Docs4NIST.yml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Build</span><span class="nv"> </span><span class="s">Documentation&quot;</span>
 
 <span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">delete</span><span class="p p-Indicator">]</span>
@@ -55,7 +55,7 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 <span class="w">  </span><span class="nt">docs</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
 <span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">usnistgov/NISTtheDocs2Death@0.4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">usnistgov/Docs4NIST@0.4</span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">docs-folder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/</span>
 <span class="w">          </span><span class="nt">pages-branch</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;nist-pages&#39;</span>
@@ -178,7 +178,7 @@ with the following major steps:</p>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">NISTtheDocs2Death</span></code> Action</a><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Docs4NIST</span></code> Action</a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#inputs">Inputs</a><ul>
 <li><a class="reference internal" href="#docs-folder"><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code></a></li>
@@ -213,7 +213,7 @@ with the following major steps:</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/nistthedocs2death.rst.txt"
+      <li><a href="_sources/docs4nist.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -241,7 +241,7 @@ with the following major steps:</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
-      <a href="_sources/nistthedocs2death.rst.txt"
+      <a href="_sources/docs4nist.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

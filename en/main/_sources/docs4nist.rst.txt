@@ -1,7 +1,7 @@
-.. _NISTTHEDOCS2DEATH:
+.. _DOCS4NIST:
 
-``NISTtheDocs2Death`` Action
-============================
+``Docs4NIST`` Action
+====================
 
 This `GitHub action <https://docs.github.com/en/actions>`_ uses the `Sphinx
 <https://www.sphinx-doc.org/>`_ tool to build documentation in
@@ -13,7 +13,7 @@ Usage
 -----
 
 This action is invoked by adding a workflow file to your repository, such 
-as :file:`.github/workflows/NISTtheDocs2Death.yml`:
+as :file:`.github/workflows/Docs4NIST.yml`:
 
 .. code-block:: yaml
 
@@ -25,7 +25,7 @@ as :file:`.github/workflows/NISTtheDocs2Death.yml`:
      docs:
        runs-on: ubuntu-latest
        steps:
-         - uses: usnistgov/NISTtheDocs2Death@0.4
+         - uses: usnistgov/Docs4NIST@0.4
            with:
              docs-folder: docs/
              pages-branch: 'nist-pages'

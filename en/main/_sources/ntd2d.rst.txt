@@ -4,14 +4,14 @@
 ===========================
 
 This `GitHub action <https://docs.github.com/en/actions>`_ is invoked by
-the main :ref:`NISTTHEDOCS2DEATH` to move built documentation into your
+the main :ref:`DOCS4NIST` to move built documentation into your
 designated :ref:`PAGES_BRANCH`.
 
 Usage
 -----
 
 This action is invoked as a step of the composite workflow of the
-:ref:`NISTTHEDOCS2DEATH`.  There is no reason to invoke this action
+:ref:`DOCS4NIST`.  There is no reason to invoke this action
 yourself.
 
 .. code-block:: yaml
@@ -36,8 +36,8 @@ yourself.
 .. note::
 
    This action must be synchronized with the invoked version of the
-   :ref:`NISTTHEDOCS2DEATH`, but
-   "``usnistgov/NISTtheDocs2Death/borg_the_docs@${{ github.action_ref }}``"
+   :ref:`DOCS4NIST`, but
+   "``usnistgov/Docs4NIST/borg_the_docs@${{ github.action_ref }}``"
    `doesn't work
    <https://github.com/orgs/community/discussions/41927#discussioncomment-4605881>`_,
    hence the clumsy ``uses:`` statement.
