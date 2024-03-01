@@ -142,12 +142,12 @@ generally undesirable in any case (they appear with cryptic names like
 this action is set to run `on: push`, then any build products from branches
 in the same repository will appear at :ref:`PAGES_URL`.
 
-``include-header-footer``
+``insert-header-footer``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Whether to insert the
+When true, automatically inserts the
 `NIST header and footer <https://pages.nist.gov/nist-header-footer>`_.
-This content conflicts with, e.g.,
+Setting to true conflicts with, e.g.,
 `sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/>`_.
 
 Implementation
