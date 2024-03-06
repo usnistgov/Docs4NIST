@@ -36,6 +36,7 @@ napoleon_numpy_docstring = True
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'ntd2d'
+html_theme_path = ['_themes']
 html_static_path = ['_static']
 
 html_show_copyright = False
