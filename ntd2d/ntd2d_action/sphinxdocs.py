@@ -60,7 +60,7 @@ class SphinxDocs:
     def pdf_file(self):
         return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
 
-    def get_theme(theme_name):
+    def get_theme(self, theme_name):
         theme_factory = HTMLThemeFactory(self.sphinx_app)
         return theme_factory.create(theme_name)
 
