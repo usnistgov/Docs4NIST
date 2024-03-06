@@ -149,6 +149,23 @@ class BorgedSphinxDocs(SphinxDocs):
     def inherited_theme(self):
         return self.original_docs.conf.html_theme
 
+    @property
+    def inherited_layout(self):
+        """Find inherited layout.html
+
+        Inherited theme may not define its own :file:`layout.html`, but
+        rely on a theme that it, in turn, derives from.
+        `{% extends "!layout.html" %}` should work, but doesn't.
+        https://github.com/sphinx-doc/sphinx/issues/12049
+        """
+        def get_theme_layout(theme):
+            if (pathlib.Path(theme.themedir) / "layout.html").exists():
+                return f"{theme.name}/layout.html"
+            else:
+                return get_theme_layout(theme.base)
+
+        return get_theme_layout(self.inherited_theme)
+
     def assimilate_theme(self, name, insert_header_footer=True):
         """Replace configuration directory with customized html theme."""
 
@@ -160,6 +177,7 @@ class BorgedSphinxDocs(SphinxDocs):
         self.theme = TemplateHierarchy(name=name,
                                        destination_dir=self.conf.theme_path,
                                        inherited_theme=self.inherited_theme,
+                                       inherited_layout=self.inherited_layout,
                                        inherited_css=self.stylesheet,
                                        header_footer_script=header_footer)
         self.theme.write()
