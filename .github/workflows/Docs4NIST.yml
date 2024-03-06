@@ -6,12 +6,9 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: usnistgov/Docs4NIST@fix-themes
+      - uses: usnistgov/Docs4NIST@main
         with:
           docs-folder: docs/
           formats: |-
            epub
            pdf
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
