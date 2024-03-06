@@ -60,10 +60,13 @@ class SphinxDocs:
     def pdf_file(self):
         return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
 
+    def get_theme(theme_name):
+        theme_factory = HTMLThemeFactory(self.sphinx_app)
+        return theme_factory.create(theme_name)
+
     @property
     def stylesheet(self):
-        theme_factory = HTMLThemeFactory(self.sphinx_app)
-        theme = theme_factory.create(self.sphinx_app.config.html_theme)
+        theme = self.get_theme(self.sphinx_app.config.html_theme)
 
         return theme.get_config("theme", "stylesheet")
 
@@ -164,7 +167,7 @@ class BorgedSphinxDocs(SphinxDocs):
             else:
                 return get_theme_layout(theme.base)
 
-        return get_theme_layout(self.inherited_theme)
+        return get_theme_layout(self.get_theme(self.inherited_theme))
 
     def assimilate_theme(self, name, insert_header_footer=True):
         """Replace configuration directory with customized html theme."""
