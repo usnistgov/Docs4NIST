@@ -12,7 +12,6 @@ from sphinx.application import Sphinx
 from sphinx.theming import HTMLThemeFactory
 import subprocess
 import tempfile
-import github_action_utils as gha_utils
 
 from .files import ConfFile
 from .files import SphinxLog, BorgedConfFile, TemplateHierarchy
@@ -163,15 +162,9 @@ class BorgedSphinxDocs(SphinxDocs):
         https://github.com/sphinx-doc/sphinx/issues/12049
         """
         def get_theme_layout(theme):
-            gha_utils.echo(f"get theme layout for {theme.name}",
-                           use_subprocess=True)
             if (pathlib.Path(theme.themedir) / "layout.html").exists():
-                gha_utils.echo(f"{theme.name} has layout",
-                               use_subprocess=True)
                 return f"{theme.name}/layout.html"
             else:
-                gha_utils.echo(f"{theme.name} doesn't have layout: RECURSION",
-                               use_subprocess=True)
                 return get_theme_layout(theme.base)
 
         return get_theme_layout(self.get_theme(self.inherited_theme))
