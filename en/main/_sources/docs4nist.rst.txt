@@ -25,7 +25,7 @@ as :file:`.github/workflows/Docs4NIST.yml`:
      docs:
        runs-on: ubuntu-latest
        steps:
-         - uses: usnistgov/Docs4NIST@0.5
+         - uses: usnistgov/Docs4NIST@0.6
            with:
              docs-folder: docs/
              pages-branch: 'nist-pages'
