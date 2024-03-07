@@ -67,6 +67,16 @@
 (<a class="reference external" href="https://spdx.org/licenses/Apache-2.0.html">Apache-2.0</a>).</p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="ntd2d_action.sphinxdocs.BorgedSphinxDocs.inherited_layout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inherited_layout</span></span><a class="headerlink" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs.inherited_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find inherited layout.html</p>
+<p>Inherited theme may not define its own <code class="file docutils literal notranslate"><span class="pre">layout.html</span></code>, but
+rely on a theme that it, in turn, derives from.
+<cite>{% extends “!layout.html” %}</cite> should work, but doesn’t.
+<a class="reference external" href="https://github.com/sphinx-doc/sphinx/issues/12049">https://github.com/sphinx-doc/sphinx/issues/12049</a></p>
+</dd></dl>
+
 </dd></dl>
 
 <hr class="docutils" />
@@ -101,6 +111,7 @@
 <li><a class="reference internal" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs"><code class="docutils literal notranslate"><span class="pre">BorgedSphinxDocs</span></code></a><ul>
 <li><a class="reference internal" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs.assimilate_theme"><code class="docutils literal notranslate"><span class="pre">BorgedSphinxDocs.assimilate_theme()</span></code></a></li>
 <li><a class="reference internal" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs.build_docs"><code class="docutils literal notranslate"><span class="pre">BorgedSphinxDocs.build_docs()</span></code></a></li>
+<li><a class="reference internal" href="#ntd2d_action.sphinxdocs.BorgedSphinxDocs.inherited_layout"><code class="docutils literal notranslate"><span class="pre">BorgedSphinxDocs.inherited_layout</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ntd2d_action.sphinxdocs.SphinxDocs"><code class="docutils literal notranslate"><span class="pre">SphinxDocs</span></code></a><ul>
