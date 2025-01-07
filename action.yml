@@ -151,28 +151,28 @@ runs:
       if: >-
         env.NTD2D_PUSH_PAGES == 'true'
         && (success() || steps.build-html.conclusion == 'success')
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       name: Upload Documentation Artifacts
       with:
-        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}
+        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}-html
         path: |
           ${{ steps.ntd2d.outputs.borged-build-folder }}/html
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ always() }}
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       name: Upload Documentation Artifacts
       with:
-        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}
+        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}-epub
         path: |
           ${{ steps.ntd2d.outputs.borged-build-folder }}/epub/*.epub
       # Use always() to always run this step to publish documentation
       # artifacts even when there are failures
       if: ${{ contains(inputs.formats, 'epub') && always() }}
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       name: Upload Documentation Artifacts
       with:
-        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}
+        name: ${{ github.event.repository.name }}-${{ env.NTD2D_SANITIZED_REF_NAME }}-${{ github.sha }}-latex
         path: |
           ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.pdf
           ${{ steps.ntd2d.outputs.borged-build-folder }}/latex/${{ github.event.repository.name }}.log
