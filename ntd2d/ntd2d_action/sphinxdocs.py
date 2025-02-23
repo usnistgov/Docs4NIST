@@ -4,6 +4,7 @@
 __docformat__ = 'restructuredtext'
 
 import github_action_utils as gha_utils
+import importlib
 import os
 import pathlib
 import shlex
@@ -11,7 +12,9 @@ import shutil
 from sphinx.application import Sphinx
 from sphinx.theming import HTMLThemeFactory
 import subprocess
+import sys
 import tempfile
+import traceback
 
 from .files import ConfFile
 from .files import SphinxLog, BorgedConfFile, TemplateHierarchy
@@ -162,10 +165,38 @@ class BorgedSphinxDocs(SphinxDocs):
         https://github.com/sphinx-doc/sphinx/issues/12049
         """
         def get_theme_layout(theme):
-            if (pathlib.Path(theme.themedir) / "layout.html").exists():
+            # Handle both old and new Sphinx theme implementations
+            theme_dir = None
+            
+            # Try different ways to get the theme directory
+            if hasattr(theme, 'themedir'):
+                theme_dir = theme.themedir
+            elif hasattr(theme, '_template_dir'):
+                theme_dir = theme._template_dir
+            elif hasattr(theme, 'get_theme_dir'):
+                theme_dir = theme.get_theme_dir()
+            elif hasattr(theme, 'dirs'):
+                # Some themes store their files in a 'dirs' list
+                theme_dir = theme.dirs[0] if theme.dirs else None
+                
+            if theme_dir is None:
+                # If we can't find the theme directory, try to get it from the module
+                try:
+                    theme_module = __import__(theme.name.replace("-", "_"), fromlist=[''])
+                    theme_dir = os.path.dirname(os.path.abspath(theme_module.__file__))
+                except ImportError:
+                    # If all else fails, try to construct a path from the theme name
+                    theme_dir = os.path.join(self.conf.theme_path, theme.name)
+
+            layout_path = pathlib.Path(theme_dir) / "layout.html"
+            
+            if layout_path.exists():
                 return f"{theme.name}/layout.html"
-            else:
+            elif hasattr(theme, 'base') and theme.base is not None:
                 return get_theme_layout(theme.base)
+            else:
+                # If we can't find a layout, return a basic one
+                return "basic/layout.html"
 
         return get_theme_layout(self.get_theme(self.inherited_theme))
 
