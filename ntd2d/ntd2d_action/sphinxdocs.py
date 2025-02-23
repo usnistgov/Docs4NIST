@@ -3,6 +3,7 @@
 """
 __docformat__ = 'restructuredtext'
 
+import importlib
 import github_action_utils as gha_utils
 import os
 import pathlib
@@ -162,13 +163,13 @@ class BorgedSphinxDocs(SphinxDocs):
         https://github.com/sphinx-doc/sphinx/issues/12049
         """
         def get_theme_layout(theme):
-            if hasattr(theme, "themedir"):
-                if (pathlib.Path(theme.themedir) / "layout.html").exists():
-                    return f"{theme.name}/layout.html"
-                else:
-                    return get_theme_layout(theme.base)
-            else:
+            if hasattr(theme, "themedir") and (pathlib.Path(theme.themedir) / "layout.html").exists():
+                return f"{theme.name}/layout.html"
+            elif hasattr(theme, "base"):
                 return get_theme_layout(theme.base)
+            else:
+                with importlib.resources.path(theme.name, "") as path:
+                    return f"{path}/layout.html"
 
         return get_theme_layout(self.get_theme(self.inherited_theme))
 
