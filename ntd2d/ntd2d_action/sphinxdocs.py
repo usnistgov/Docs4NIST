@@ -165,7 +165,7 @@ class BorgedSphinxDocs(SphinxDocs):
         for dir in theme.get_theme_dirs():
             layout = pathlib.Path(dir) / "layout.html"
             if layout.exists():
-                return layout.
+                break
 
         return layout.as_posix()
 
