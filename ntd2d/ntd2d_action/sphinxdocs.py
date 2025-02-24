@@ -161,13 +161,13 @@ class BorgedSphinxDocs(SphinxDocs):
         `{% extends "!layout.html" %}` should work, but doesn't.
         https://github.com/sphinx-doc/sphinx/issues/12049
         """
-        def get_theme_layout(theme):
-            if (pathlib.Path(theme.themedir) / "layout.html").exists():
-                return f"{theme.name}/layout.html"
-            else:
-                return get_theme_layout(theme.base)
+        theme = self.get_theme(self.inherited_theme)
+        for dir in theme.get_theme_dirs():
+            layout = pathlib.Path(dir) / "layout.html"
+            if layout.exists():
+                break
 
-        return get_theme_layout(self.get_theme(self.inherited_theme))
+        return layout.as_posix()
 
     def assimilate_theme(self, name, insert_header_footer=True):
         """Replace configuration directory with customized html theme."""
