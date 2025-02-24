@@ -27,8 +27,8 @@
    :toctree:
    :recursive:
 
-   files
-   repository
-   sphinxdocs
-   variants
+   ntd2d_action.files
+   ntd2d_action.repository
+   ntd2d_action.sphinxdocs
+   ntd2d_action.variants
 

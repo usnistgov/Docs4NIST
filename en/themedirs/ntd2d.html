@@ -1,360 +1,49 @@
-
 <!DOCTYPE html>
 
-
-<html lang="en" >
-
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>ntd2d Sub-Action &#8212; Docs4NIST  documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=525a25f0" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
-
-    <script src="_static/documentation_options.js?v=8a448e45"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ntd2d';</script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=88d0a8bc" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Docs4NIST Action" href="docs4nist.html" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
 
   <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
   <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
   <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
 
 
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-<div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
-    <span class="fa-solid fa-bars"></span>
-  </label>
-  
-  <div class="navbar-header-items__start">
-    
-      <div class="navbar-item">
+  </head><body>
   
 
-<a class="navbar-brand logo" href="index.html">
-  
-  
-  
-  
-  
-    <p class="title logo__title">Docs4NIST  documentation</p>
-  
-</a></div>
-    
-  </div>
-  
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
-  <ul class="bd-navbar-elements navbar-nav">
-    
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="customization.html">
-                        Customization
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="QandA.html">
-                        Q & A
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="API.html">
-                        API
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="docs4nist.html">
-                        Docs4NIST Action
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
-                        ntd2d Sub-Action
-                      </a>
-                    </li>
-                
-  </ul>
-</nav></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-        </div>
-      
-      
-        <div class="navbar-item">
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-    </div>
-  
 
-  
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
-      <span class="fa-solid fa-outdent"></span>
-    </label>
-  
-</div>
-
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
-  <ul class="bd-navbar-elements navbar-nav">
-    
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="customization.html">
-                        Customization
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="QandA.html">
-                        Q & A
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="API.html">
-                        API
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="docs4nist.html">
-                        Docs4NIST Action
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
-                        ntd2d Sub-Action
-                      </a>
-                    </li>
-                
-  </ul>
-</nav></div>
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script></div>
-        
-      </div>
-    
-  </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
-
-
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><code class="docutils literal notranslate"><span class="pre">ntd2d</span></code> Sub-Action</li>
-  </ul>
-</nav>
-</div>
-      
-    </div>
-  
-  
-</div>
-</div>
-              
-              
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+          <div class="body" role="main">
+            
   <section id="ntd2d-sub-action">
-<span id="ntd2d"></span><h1><code class="docutils literal notranslate"><span class="pre">ntd2d</span></code> Sub-Action<a class="headerlink" href="#ntd2d-sub-action" title="Link to this heading">#</a></h1>
+<span id="ntd2d"></span><h1><code class="docutils literal notranslate"><span class="pre">ntd2d</span></code> Sub-Action<a class="headerlink" href="#ntd2d-sub-action" title="Permalink to this heading">¶</a></h1>
 <p>This <a class="reference external" href="https://docs.github.com/en/actions">GitHub action</a> is invoked by
 the main <a class="reference internal" href="docs4nist.html#docs4nist"><span class="std std-ref">Docs4NIST Action</span></a> to move built documentation into your
 designated <a class="reference internal" href="docs4nist.html#pages-branch"><span class="std std-ref">pages-branch</span></a>.</p>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
 <p>This action is invoked as a step of the composite workflow of the
 <a class="reference internal" href="docs4nist.html#docs4nist"><span class="std std-ref">Docs4NIST Action</span></a>.  There is no reason to invoke this action
 yourself.</p>
@@ -386,25 +75,25 @@ hence the clumsy <code class="docutils literal notranslate"><span class="pre">us
 </div>
 </section>
 <section id="inputs">
-<h2>Inputs<a class="headerlink" href="#inputs" title="Link to this heading">#</a></h2>
+<h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading">¶</a></h2>
 <section id="docs-folder">
-<h3><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code><a class="headerlink" href="#docs-folder" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code><a class="headerlink" href="#docs-folder" title="Permalink to this heading">¶</a></h3>
 <p>The folder containing your Sphinx configuration.</p>
 </section>
 <section id="default-branch">
-<span id="ntd2d-default-branch"></span><h3><code class="docutils literal notranslate"><span class="pre">default-branch</span></code><a class="headerlink" href="#default-branch" title="Link to this heading">#</a></h3>
+<span id="ntd2d-default-branch"></span><h3><code class="docutils literal notranslate"><span class="pre">default-branch</span></code><a class="headerlink" href="#default-branch" title="Permalink to this heading">¶</a></h3>
 <p>The default branch <a class="reference external" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch">configured in GitHub</a>.</p>
 </section>
 <section id="pages-branch">
-<span id="ntd2d-pages-branch"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Link to this heading">#</a></h3>
+<span id="ntd2d-pages-branch"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Permalink to this heading">¶</a></h3>
 <p>The branch linked to your documentation server.</p>
 </section>
 <section id="pages-url">
-<span id="ntd2d-pages-url"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Link to this heading">#</a></h3>
+<span id="ntd2d-pages-url"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Permalink to this heading">¶</a></h3>
 <p>URL of the web server for served documentation.</p>
 </section>
 <section id="formats">
-<span id="ntd2d-formats"></span><h3><code class="docutils literal notranslate"><span class="pre">formats</span></code><a class="headerlink" href="#formats" title="Link to this heading">#</a></h3>
+<span id="ntd2d-formats"></span><h3><code class="docutils literal notranslate"><span class="pre">formats</span></code><a class="headerlink" href="#formats" title="Permalink to this heading">¶</a></h3>
 <p>Type(s) of output desired in addition to html (<code class="docutils literal notranslate"><span class="pre">pdf</span></code>, and/or <code class="docutils literal notranslate"><span class="pre">epub</span></code>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -419,40 +108,40 @@ to declare formats, e.g.,</p>
 </div>
 </section>
 <section id="build-html-command">
-<h3><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code><a class="headerlink" href="#build-html-command" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code><a class="headerlink" href="#build-html-command" title="Permalink to this heading">¶</a></h3>
 <p>The command used to build your html documentation.</p>
 </section>
 <section id="build-epub-command">
-<h3><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code><a class="headerlink" href="#build-epub-command" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code><a class="headerlink" href="#build-epub-command" title="Permalink to this heading">¶</a></h3>
 <p>The command used to build your ePUB documentation.</p>
 </section>
 <section id="build-pdf-command">
-<h3><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code><a class="headerlink" href="#build-pdf-command" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code><a class="headerlink" href="#build-pdf-command" title="Permalink to this heading">¶</a></h3>
 <p>The command used to build your PDF documentation.</p>
 </section>
 <section id="pre-build-command">
-<span id="ntd2d-prebuildcommand"></span><h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Link to this heading">#</a></h3>
+<span id="ntd2d-prebuildcommand"></span><h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
 <p>Run before the build command.  You can use this to install
 system level dependencies, for example, with “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">-y</span> <span class="pre">&amp;&amp;</span> <span class="pre">apt-get</span>
 <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”, although those are better installed with
 <a class="reference internal" href="#ntd2d-aptpackages"><span class="std std-ref">apt-packages</span></a>.</p>
 </section>
 <section id="apt-packages">
-<span id="ntd2d-aptpackages"></span><h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Link to this heading">#</a></h3>
+<span id="ntd2d-aptpackages"></span><h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Permalink to this heading">¶</a></h3>
 <p>List of any <a class="reference external" href="https://en.wikipedia.org/wiki/APT_(software)">APT</a> packages
 that should be installed.</p>
 </section>
 <section id="pip-requirements">
-<span id="ntd2d-piprequirements"></span><h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Link to this heading">#</a></h3>
+<span id="ntd2d-piprequirements"></span><h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
 <p>The path to the pip requirements file, relative to the root of the project.</p>
 </section>
 <section id="conda-environment">
-<span id="ntd2d-condaenvironment"></span><h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Link to this heading">#</a></h3>
+<span id="ntd2d-condaenvironment"></span><h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading">¶</a></h3>
 <p>The path to the Conda environment file, relative to the root of the
 project.</p>
 </section>
 <section id="include-header-footer">
-<h3><code class="docutils literal notranslate"><span class="pre">include-header-footer</span></code><a class="headerlink" href="#include-header-footer" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">include-header-footer</span></code><a class="headerlink" href="#include-header-footer" title="Permalink to this heading">¶</a></h3>
 <p>Whether to insert the
 <a class="reference external" href="https://pages.nist.gov/nist-header-footer">NIST header and footer</a>.
 This content conflicts with, e.g.,
@@ -460,14 +149,14 @@ This content conflicts with, e.g.,
 </section>
 </section>
 <section id="outputs">
-<h2>Outputs<a class="headerlink" href="#outputs" title="Link to this heading">#</a></h2>
+<h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">¶</a></h2>
 <section id="borged-build-folder">
-<h3><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code><a class="headerlink" href="#borged-build-folder" title="Link to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code><a class="headerlink" href="#borged-build-folder" title="Permalink to this heading">¶</a></h3>
 <p>The folder containing the Sphinx build outputs.</p>
 </section>
 </section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
 <p>This action implements a <a class="reference external" href="https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action">Docker workflow step</a>.
 The Docker <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code></p>
 <ul class="simple">
@@ -491,120 +180,88 @@ html and any other formats specified in <a class="reference internal" href="#ntd
 </section>
 
 
-                </article>
-              
-              
-              
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="docs4nist.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">Docs4NIST</span></code> Action</p>
-      </div>
-    </a>
-</div></div>
-  
-</div>
-
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docs-folder"><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-branch"><code class="docutils literal notranslate"><span class="pre">default-branch</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-branch"><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pages-url"><code class="docutils literal notranslate"><span class="pre">pages-url</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formats"><code class="docutils literal notranslate"><span class="pre">formats</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-html-command"><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-epub-command"><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-pdf-command"><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-build-command"><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apt-packages"><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#include-header-footer"><code class="docutils literal notranslate"><span class="pre">include-header-footer</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#borged-build-folder"><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
-  <div class="tocsection sourcelink">
-    <a href="_sources/ntd2d.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
-
-</div></div>
-              
-            
           </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ntd2d</span></code> Sub-Action</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#inputs">Inputs</a><ul>
+<li><a class="reference internal" href="#docs-folder"><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code></a></li>
+<li><a class="reference internal" href="#default-branch"><code class="docutils literal notranslate"><span class="pre">default-branch</span></code></a></li>
+<li><a class="reference internal" href="#pages-branch"><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code></a></li>
+<li><a class="reference internal" href="#pages-url"><code class="docutils literal notranslate"><span class="pre">pages-url</span></code></a></li>
+<li><a class="reference internal" href="#formats"><code class="docutils literal notranslate"><span class="pre">formats</span></code></a></li>
+<li><a class="reference internal" href="#build-html-command"><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code></a></li>
+<li><a class="reference internal" href="#build-epub-command"><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code></a></li>
+<li><a class="reference internal" href="#build-pdf-command"><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code></a></li>
+<li><a class="reference internal" href="#pre-build-command"><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code></a></li>
+<li><a class="reference internal" href="#apt-packages"><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code></a></li>
+<li><a class="reference internal" href="#pip-requirements"><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code></a></li>
+<li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
+<li><a class="reference internal" href="#include-header-footer"><code class="docutils literal notranslate"><span class="pre">include-header-footer</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#outputs">Outputs</a><ul>
+<li><a class="reference internal" href="#borged-build-folder"><code class="docutils literal notranslate"><span class="pre">borged-build-folder</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+</ul>
 
-
-  
-  <footer class="bd-footer">
-<div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
-  <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
-    <br/>
-  </p>
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="docs4nist.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">Docs4NIST</span></code> Action</a></li>
+  </ul></li>
+</ul>
 </div>
-      
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ntd2d.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
     </div>
-  
-  
-    <div class="footer-items__end">
-      
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
-</p></div>
-      
-    </div>
-  
 </div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
 
-  </footer>
+  
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/ntd2d.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
 
   <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
   <iframe src="_static/ntd2d_menu.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
