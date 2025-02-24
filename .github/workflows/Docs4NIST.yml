@@ -9,6 +9,7 @@ jobs:
       - uses: usnistgov/Docs4NIST@main
         with:
           docs-folder: docs/
+          conda-environement: docs/environment.yml
           formats: |-
            epub
            pdf

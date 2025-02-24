@@ -1,0 +1,9 @@
+name: ntd2d
+
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - sphinx
+  - pydata-sphinx-theme==0.13.3
+  - sphinx-design
