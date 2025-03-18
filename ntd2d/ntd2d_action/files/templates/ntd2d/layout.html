@@ -1,6 +1,15 @@
 {{% extends "{inherited_layout}" %}}
 
 {{%- block extrahead %}}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RJSMY46M5C');
+  </script>
+
   {{{{ super() }}}}
 
   <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
