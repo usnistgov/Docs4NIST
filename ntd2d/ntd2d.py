@@ -10,15 +10,6 @@ from ntd2d_action.repository import Repository
 
 
 def main():
-    with gha_utils.group("Borg the Docs", use_subprocess=True):
-        original_docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
-        docs = BorgedSphinxDocs(original_docs=original_docs)
-        insert_header_footer = (os.environ['INPUT_INSERT-HEADER-FOOTER'] == "true")
-        docs.assimilate_theme(name="ntd2d",
-                              insert_header_footer=insert_header_footer)
-
-        gha_utils.set_output("borged-build-folder", docs.build_dir.as_posix())
-
     pre_build_command = os.environ['INPUT_PRE-BUILD-COMMAND']
     if pre_build_command != "":
         with gha_utils.group("Executing pre-build-command", use_subprocess=True):
@@ -28,6 +19,15 @@ def main():
                            text=True,
                            shell=True,
                            check=True)
+
+    with gha_utils.group("Borg the Docs", use_subprocess=True):
+        original_docs = SphinxDocs(docs_dir=os.environ['INPUT_DOCS-FOLDER'])
+        docs = BorgedSphinxDocs(original_docs=original_docs)
+        insert_header_footer = (os.environ['INPUT_INSERT-HEADER-FOOTER'] == "true")
+        docs.assimilate_theme(name="ntd2d",
+                              insert_header_footer=insert_header_footer)
+
+        gha_utils.set_output("borged-build-folder", docs.build_dir.as_posix())
 
     with gha_utils.group("Build HTML", use_subprocess=True):
         build_command = os.environ['INPUT_BUILD-HTML-COMMAND']
