@@ -74,7 +74,7 @@ class Repository:
     def remove(self, *args, **kwargs):
         self.repo.index.remove(*args, **kwargs)
 
-    def update_pages(self, branch, sha):
+    def update_pages(self, branch, sha, hidden=False):
         """Commit built documentation to :ref:`NTD2D_PAGES-BRANCH`.
 
         Parameters
@@ -100,6 +100,9 @@ class Repository:
         variant = Variant(repo=self, name=branch, rebuild_menu=True)
 
         gha_utils.debug(f"Variant {variant.name}", use_subprocess=True)
+
+        if hidden:
+            (self.docs.html_dir / ".hidden").touch()
 
         variant.copy_html(src=self.docs.html_dir)
         variant.copy_download_file(src=self.docs.epub_file, kind="ePUB")

@@ -60,7 +60,8 @@ def main():
                            text=True)
 
             repo.update_pages(branch=os.environ['NTD2D_SANITIZED_REF_NAME'],
-                              sha=os.environ['GITHUB_SHA'])
+                              sha=os.environ['GITHUB_SHA'],
+                              hidden=os.environ['INPUT_HIDDEN'] == "true")
 
 if __name__ == "__main__":
     try:

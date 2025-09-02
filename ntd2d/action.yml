@@ -73,6 +73,13 @@ inputs:
     options:
       - true
       - false
+  hidden:
+    description:
+      Whether to remove current revision from dropdown version menu.
+    default: 'false'
+    options:
+      - true
+      - false
 outputs:
   borged-docs-folder:
     description: 'The folder containing modified Sphinx configuration'
