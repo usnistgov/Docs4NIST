@@ -6,7 +6,7 @@ import git
 import github_action_utils as gha_utils
 import pathlib
 
-from .files import NoJekyllFile
+from .files import NoJekyllFile, HiddenFile
 from .variants import Variant, VariantCollector
 
 class Repository:
@@ -102,7 +102,7 @@ class Repository:
         gha_utils.debug(f"Variant {variant.name}", use_subprocess=True)
 
         if hidden:
-            (self.docs.html_dir / ".hidden").touch()
+            HiddenFile(html_dir=self.docs.html_dir).write()
 
         variant.copy_html(src=self.docs.html_dir)
         variant.copy_download_file(src=self.docs.epub_file, kind="ePUB")
