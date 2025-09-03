@@ -6,7 +6,7 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: usnistgov/Docs4NIST@hidden
+      - uses: usnistgov/Docs4NIST@main
         with:
           docs-folder: docs/
           formats: |-
