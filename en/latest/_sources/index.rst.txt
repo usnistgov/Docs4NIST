@@ -33,7 +33,7 @@ Usage
      docs:
        runs-on: ubuntu-latest
        steps:
-         - uses: usnistgov/Docs4NIST@0.7
+         - uses: usnistgov/Docs4NIST@0.8
            with:
              docs-folder: docs/
              formats: |-
