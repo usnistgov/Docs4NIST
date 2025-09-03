@@ -139,6 +139,7 @@ runs:
         pip-requirements: ${{ inputs.pip-requirements }}
         conda-environment: ${{ inputs.conda-environment }}
         insert-header-footer: ${{ inputs.insert-header-footer }}
+        hidden: ${{ inputs.hidden }}
     - name: Change ownership
       shell: bash
       run: |
