@@ -18,4 +18,4 @@ class File:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open(mode='w') as file:
             file.write(self.get_contents())
-        gha_utils.echo(f"Write {self.path.as_posix()}", use_subprocess=True)
+        gha_utils.echo(f"wrote {self.path.as_posix()}", use_subprocess=True)
