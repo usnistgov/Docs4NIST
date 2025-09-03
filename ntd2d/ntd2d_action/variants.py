@@ -129,13 +129,16 @@ class Variant:
         return re.sub(f"([{esc}])", r"\\\1", self.name)
 
     def get_html(self):
-        link_dir = (pathlib.PurePath("/") / self.repo.repository
-                    / self.dir.relative_to(self.repo.working_dir))
-        href = link_dir / "index.html"
-        template = PagesTemplate(working_dir=self.repo.working_dir,
-                                 name="variant_item.html").read()
-        return template.format(href=href,
-                               variant=self.name)
+        if (self.dir / ".hidden").exists():
+            return ""
+        else:
+            link_dir = (pathlib.PurePath("/") / self.repo.repository
+                        / self.dir.relative_to(self.repo.working_dir))
+            href = link_dir / "index.html"
+            template = PagesTemplate(working_dir=self.repo.working_dir,
+                                     name="variant_item.html").read()
+            return template.format(href=href,
+                                   variant=self.name)
 
 class Version(Variant):
     """A :class:`~ntd2d_action.variants.Variant` that satisfies the :pep:`440` version specification

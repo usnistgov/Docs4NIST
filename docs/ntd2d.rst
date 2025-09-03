@@ -32,6 +32,7 @@ yourself.
         pip-requirements: ''
         conda-environment: ''
         include-header-footer: true
+        hidden: false
 
 .. note::
 
@@ -150,6 +151,10 @@ Whether to insert the
 This content conflicts with, e.g.,
 `sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/>`_.
 
+``hidden``
+~~~~~~~~~~
+
+When true, removes the active branch or tag from the version dropdown menu.
 
 Outputs
 -------
