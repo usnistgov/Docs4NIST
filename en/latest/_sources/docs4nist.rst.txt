@@ -40,6 +40,7 @@ as :file:`.github/workflows/Docs4NIST.yml`:
              conda-environment: ''
              push-pulls-pages: false
              include-header-footer: true
+             hidden: false
 
 Inputs
 ------
@@ -149,6 +150,11 @@ When true, automatically inserts the
 `NIST header and footer <https://pages.nist.gov/nist-header-footer>`_.
 Setting to true conflicts with, e.g.,
 `sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/>`_.
+
+``hidden``
+~~~~~~~~~~
+
+When true, removes the active branch or tag from the version dropdown menu.
 
 Implementation
 --------------

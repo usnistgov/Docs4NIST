@@ -1,7 +1,7 @@
-ntd2d\_action.files.sphinxlog
-=============================
+ntd2d\_action.files.hiddenfile
+==============================
 
-.. automodule:: ntd2d_action.files.sphinxlog
+.. automodule:: ntd2d_action.files.hiddenfile
 
    
    
@@ -16,7 +16,7 @@ ntd2d\_action.files.sphinxlog
    .. rubric:: Classes
 
    
-   .. autoclass:: SphinxLog
+   .. autoclass:: HiddenFile
       :members:
       :inherited-members:
       :show-inheritance:

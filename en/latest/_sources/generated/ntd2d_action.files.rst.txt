@@ -31,6 +31,7 @@ ntd2d\_action.files
    ntd2d_action.files.conffile
    ntd2d_action.files.cssfile
    ntd2d_action.files.file
+   ntd2d_action.files.hiddenfile
    ntd2d_action.files.indexfile
    ntd2d_action.files.menufile
    ntd2d_action.files.nojekyllfile

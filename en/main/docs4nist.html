@@ -70,6 +70,7 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 <span class="w">          </span><span class="nt">conda-environment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="w">          </span><span class="nt">push-pulls-pages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">          </span><span class="nt">include-header-footer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">          </span><span class="nt">hidden</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </pre></div>
 </div>
 </section>
@@ -154,6 +155,10 @@ in the same repository will appear at <a class="reference internal" href="#pages
 Setting to true conflicts with, e.g.,
 <a class="reference external" href="https://sphinx-rtd-theme.readthedocs.io/">sphinx_rtd_theme</a>.</p>
 </section>
+<section id="hidden">
+<h3><code class="docutils literal notranslate"><span class="pre">hidden</span></code><a class="headerlink" href="#hidden" title="Permalink to this heading">¶</a></h3>
+<p>When true, removes the active branch or tag from the version dropdown menu.</p>
+</section>
 </section>
 <section id="implementation">
 <h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
@@ -194,6 +199,7 @@ with the following major steps:</p>
 <li><a class="reference internal" href="#conda-environment"><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code></a></li>
 <li><a class="reference internal" href="#push-pulls-pages"><code class="docutils literal notranslate"><span class="pre">push-pulls-pages</span></code></a></li>
 <li><a class="reference internal" href="#insert-header-footer"><code class="docutils literal notranslate"><span class="pre">insert-header-footer</span></code></a></li>
+<li><a class="reference internal" href="#hidden"><code class="docutils literal notranslate"><span class="pre">hidden</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#implementation">Implementation</a></li>
