@@ -118,6 +118,7 @@ runs:
       # because usnistgov/Docs4NIST/ntd2d@${{ github.action_ref }}
       # doesn't work
       uses: ./../../_actions/current/ntd2d
+      env: ${{ env }}
       with:
         docs-folder: ${{ inputs.docs-folder }}
         default-branch: ${{ github.event.repository.default_branch }}

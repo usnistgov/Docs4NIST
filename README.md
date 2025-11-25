@@ -19,12 +19,17 @@ host on <https://pages.nist.gov> as an approximation of
         runs-on: ubuntu-latest
         steps:
           - uses: usnistgov/Docs4NIST@0.7
+            env:
+              MY_ENV: "1"
+              ANOTHER_VAR: "value"
             with:
               docs-folder: docs/
               formats: |-
                 epub
                 pdf
     ```
+
+Optional environment variables can be passed to the Docker container before the conda environment is installed. This is useful for setting build-time configuration or credentials needed during dependency installation
 
 **Note:**
 [GitHub Actions' YAML implementation does not support list or array](https://github.com/actions/toolkit/issues/184)
