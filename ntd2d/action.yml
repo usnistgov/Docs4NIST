@@ -79,3 +79,4 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+  env: ${{ env }}
