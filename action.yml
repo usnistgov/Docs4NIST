@@ -63,6 +63,12 @@ inputs:
       The path to the Conda environment file, relative to the root of the
       project.
     required: false
+  extra-env:
+    description:
+      Additional environment variables to set during package installation.
+      Format as 'KEY1=value1,KEY2=value2' or multiline 'KEY1=value1\nKEY2=value2'.
+    required: false
+    default: ''
   push-pulls-pages:
     description:
       Whether the results of pull requests should be pushed to
@@ -118,7 +124,6 @@ runs:
       # because usnistgov/Docs4NIST/ntd2d@${{ github.action_ref }}
       # doesn't work
       uses: ./../../_actions/current/ntd2d
-      env: ${{ env }}
       with:
         docs-folder: ${{ inputs.docs-folder }}
         default-branch: ${{ github.event.repository.default_branch }}
@@ -132,6 +137,7 @@ runs:
         apt-packages: ${{ inputs.apt-packages }}
         pip-requirements: ${{ inputs.pip-requirements }}
         conda-environment: ${{ inputs.conda-environment }}
+        extra-env: ${{ inputs.extra-env }}
         insert-header-footer: ${{ inputs.insert-header-footer }}
     - name: Change ownership
       shell: bash

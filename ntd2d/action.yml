@@ -63,6 +63,12 @@ inputs:
       The path to the Conda environment file, relative to the root of the
       project.
     required: false
+  extra-env:
+    description:
+      Additional environment variables to set during package installation.
+      Format as 'KEY1=value1,KEY2=value2' or multiline 'KEY1=value1\nKEY2=value2'.
+    required: false
+    default: ''
   insert-header-footer:
     description:
       Whether to insert the NIST branding headers and footers
@@ -79,4 +85,3 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  env: ${{ env }}

@@ -10,6 +10,24 @@ import traceback
 
 
 def main():
+    # Set any extra environment variables
+    extra_env = os.environ.get('INPUT_EXTRA-ENV', '')
+    if extra_env:
+        with gha_utils.group("Setting extra environment variables", use_subprocess=True):
+            # Support both comma-separated and newline-separated formats
+            env_pairs = []
+            if ',' in extra_env:
+                env_pairs = extra_env.split(',')
+            else:
+                env_pairs = extra_env.strip().split('\n')
+            
+            for pair in env_pairs:
+                pair = pair.strip()
+                if '=' in pair:
+                    key, value = pair.split('=', 1)
+                    os.environ[key.strip()] = value.strip()
+                    gha_utils.debug(f"Set environment variable: {key.strip()}={value.strip()}", use_subprocess=True)
+    
     # Install any APT packages
     apt_packages = os.environ['INPUT_APT-PACKAGES']
     if apt_packages != "":
