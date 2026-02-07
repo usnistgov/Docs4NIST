@@ -50,15 +50,46 @@ class SphinxDocs:
 
     @property
     def html_dir(self):
-        return self.build_dir / "html"
+        # Prefer the configured build_dir, but fall back to common defaults
+        # because the user-provided build command (for example, a Makefile)
+        # may write to a different location (``_build`` vs ``build``).
+        candidates = [
+            self.build_dir / "html",
+            self.docs_dir / "_build" / "html",
+            self.docs_dir / "build" / "html",
+        ]
+        for path in candidates:
+            if path.exists():
+                return path
+        # If nothing exists yet (e.g., before the first build), fall back to
+        # the first candidate so callers still get a sensible Path object.
+        return candidates[0]
 
     @property
     def epub_file(self):
-        return self.build_dir / "epub" / f"{self.conf.project}.epub"
+        # Support either ``build`` or ``_build`` directories depending on the
+        # user's Makefile or sphinx-build invocation.
+        candidates = [
+            self.build_dir / "epub" / f"{self.conf.project}.epub",
+            self.docs_dir / "_build" / "epub" / f"{self.conf.project}.epub",
+            self.docs_dir / "build" / "epub" / f"{self.conf.project}.epub",
+        ]
+        for path in candidates:
+            if path.exists():
+                return path
+        return candidates[0]
 
     @property
     def pdf_file(self):
-        return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
+        candidates = [
+            self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf",
+            self.docs_dir / "_build" / "latex" / f"{self.conf.project.lower()}.pdf",
+            self.docs_dir / "build" / "latex" / f"{self.conf.project.lower()}.pdf",
+        ]
+        for path in candidates:
+            if path.exists():
+                return path
+        return candidates[0]
 
     def get_theme(self, theme_name):
         theme_factory = HTMLThemeFactory(self.sphinx_app)

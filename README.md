@@ -19,17 +19,17 @@ host on <https://pages.nist.gov> as an approximation of
         runs-on: ubuntu-latest
         steps:
           - uses: usnistgov/Docs4NIST@0.7
-            env:
-              MY_ENV: "1"
-              ANOTHER_VAR: "value"
             with:
               docs-folder: docs/
               formats: |-
                 epub
                 pdf
+              extra-env: |-
+                MY_ENV=1
+                ANOTHER_VAR=value
     ```
 
-Optional environment variables can be passed to the Docker container before the conda environment is installed. This is useful for setting build-time configuration or credentials needed during dependency installation
+Use the `extra-env` input to inject environment variables into the Docker container **before** the conda environment is installed. This is useful for build-time configuration or credentials needed during dependency installation. Provide values as a comma-separated string (`KEY1=value1,KEY2=value2`) or a multiline block as shown above.
 
 **Note:**
 [GitHub Actions' YAML implementation does not support list or array](https://github.com/actions/toolkit/issues/184)

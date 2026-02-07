@@ -11,9 +11,7 @@ import traceback
 
 def main():
     # Set any extra environment variables
-    # GitHub normalizes input names to uppercase with dashes preserved, but callers
-    # may also provide INPUT_EXTRA_ENV with an underscore. Support both.
-    extra_env = os.environ.get('INPUT_EXTRA-ENV', '') or os.environ.get('INPUT_EXTRA_ENV', '')
+    extra_env = os.environ.get('INPUT_EXTRA_ENV', '')
     if extra_env:
         with gha_utils.group("Setting extra environment variables", use_subprocess=True):
             # Support both comma-separated and newline-separated formats
