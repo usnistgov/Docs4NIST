@@ -11,7 +11,9 @@ import traceback
 
 def main():
     # Set any extra environment variables
-    extra_env = os.environ.get('INPUT_EXTRA-ENV', '')
+    # GitHub normalizes input names to uppercase with dashes preserved, but callers
+    # may also provide INPUT_EXTRA_ENV with an underscore. Support both.
+    extra_env = os.environ.get('INPUT_EXTRA-ENV', '') or os.environ.get('INPUT_EXTRA_ENV', '')
     if extra_env:
         with gha_utils.group("Setting extra environment variables", use_subprocess=True):
             # Support both comma-separated and newline-separated formats
@@ -20,9 +22,11 @@ def main():
                 env_pairs = extra_env.split(',')
             else:
                 env_pairs = extra_env.strip().split('\n')
-            
+
             for pair in env_pairs:
                 pair = pair.strip()
+                if not pair:
+                    continue
                 if '=' in pair:
                     key, value = pair.split('=', 1)
                     os.environ[key.strip()] = value.strip()
@@ -54,10 +58,15 @@ def main():
             requirements = pathlib.Path(requirements)
             if requirements.is_file():
                 gha_utils.debug(f"pip installing", use_subprocess=True)
+                # Debug: Log environment variables before pip installation
+                print("Environment variables before pip installation:")
+                for key, value in os.environ.items():
+                    print(f"{key}={value}")
                 subprocess.run(["pip", "install", "-r", requirements.as_posix()],
                                bufsize=1,
                                text=True,
-                               check=True)
+                               check=True,
+                               env=os.environ.copy())
 
     # Install any Conda packages requested
     environment = os.environ['INPUT_CONDA-ENVIRONMENT']
@@ -74,7 +83,8 @@ def main():
                                 "--file", environment.as_posix()],
                                bufsize=1,
                                text=True,
-                               check=True)
+                               check=True,
+                               env=os.environ.copy())
                 subprocess.run(["conda", "list",
                                 "--name", "base"],
                                bufsize=1,
