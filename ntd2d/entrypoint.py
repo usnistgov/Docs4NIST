@@ -11,7 +11,7 @@ import traceback
 
 def main():
     # Set any extra environment variables
-    extra_env = os.environ.get('INPUT_EXTRA_ENV', '')
+    extra_env = os.environ.get('INPUT_EXTRA-ENV', '') or os.environ.get('INPUT_EXTRA_ENV', '')
     if extra_env:
         with gha_utils.group("Setting extra environment variables", use_subprocess=True):
             # Support both comma-separated and newline-separated formats
