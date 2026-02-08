@@ -40,6 +40,7 @@ as :file:`.github/workflows/Docs4NIST.yml`:
              conda-environment: ''
              push-pulls-pages: false
              include-header-footer: true
+             extra-env: ''
 
 Inputs
 ------
@@ -149,6 +150,22 @@ When true, automatically inserts the
 `NIST header and footer <https://pages.nist.gov/nist-header-footer>`_.
 Setting to true conflicts with, e.g.,
 `sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/>`_.
+
+``extra-env``
+~~~~~~~~~~~~~~~~
+
+A new input parameter that allows passing additional environment variables to the Docker container during the build process. These variables can be specified as a comma-separated or newline-separated list in the format `KEY=value`. This is particularly useful for providing build-time configurations such as tokens or flags.
+
+Example usage:
+
+.. code-block:: yaml
+
+   with:
+     extra-env: |
+       TOKEN=abc123
+       FLAG=true
+
+These variables will be injected into the environment before the package installation step.
 
 Implementation
 --------------
