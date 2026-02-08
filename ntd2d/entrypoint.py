@@ -56,10 +56,6 @@ def main():
             requirements = pathlib.Path(requirements)
             if requirements.is_file():
                 gha_utils.debug(f"pip installing", use_subprocess=True)
-                # Debug: Log environment variables before pip installation
-                print("Environment variables before pip installation:")
-                for key, value in os.environ.items():
-                    print(f"{key}={value}")
                 subprocess.run(["pip", "install", "-r", requirements.as_posix()],
                                bufsize=1,
                                text=True,

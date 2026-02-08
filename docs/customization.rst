@@ -189,3 +189,70 @@ Available subsitution keywords are:
 .. |variant_item.html| replace:: :file:`variant_item.html`
 .. _variant_item.html: https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/variant_item.html
 
+
+Troubleshooting
+===============
+
+Footer positioning with sphinx_rtd_theme
+-----------------------------------------
+
+Some Sphinx themes may display the NIST footer at the top of the page.
+This occurs when the theme's CSS conflicts with the dynamically injected
+NIST header and footer elements.
+
+To fix this, create a custom ``layout.html`` template in your
+``_templates/`` directory:
+
+.. code-block:: jinja
+
+   {% extends "!layout.html" %}
+
+   {%- block extrahead %}
+     {{ super() }}
+
+     <!-- Fix NIST footer positioning -->
+     <style>
+       /* Target the wrapper divs created by NIST JavaScript */
+       #nistheadergoeshere {
+         position: relative !important;
+         display: block !important;
+         z-index: 10;
+         width: 100%;
+       }
+
+       #nistfootergoeshere {
+         position: relative !important;
+         display: block !important;
+         clear: both !important;
+         margin-top: 2rem !important;
+         width: 100%;
+       }
+
+       /* Also target the actual footer/header elements inside */
+       #nistfootergoeshere footer,
+       #nistheadergoeshere header {
+         position: relative !important;
+         display: block !important;
+       }
+
+       /* Ensure theme content doesn't overlap */
+       .wy-grid-for-nav {
+         position: relative;
+         z-index: 1;
+       }
+
+       .wy-nav-content-wrap {
+         min-height: calc(100vh - 200px);
+       }
+
+       .rst-footer-buttons {
+         margin-bottom: 2rem;
+       }
+     </style>
+   {%- endblock %}
+
+Add ``templates_path = ['_templates']`` to your ``conf.py`` if not already
+present. The ``.wy-*`` selectors target ``sphinx_rtd_theme``; other themes may
+require different CSS adjustments.
+
+
