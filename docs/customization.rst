@@ -35,6 +35,57 @@ modifies your chosen documentation theme.
 This template file inserts standard NIST headers and footers and a dropdown
 menu that allows selecting different versions of your documentation.
 
+Some Sphinx themes may display the NIST footer at the top of the page.
+This occurs when the theme's CSS conflicts with the dynamically injected
+NIST header and footer elements.
+
+To fix this, create a custom ``layout.html`` template in your
+``_templates/`` directory:
+
+.. code-block:: jinja
+   {% extends "!layout.html" %}
+   {%- block extrahead %}
+     {{ super() }}
+     <!-- Fix NIST footer positioning -->
+     <style>
+       /* Target the wrapper divs created by NIST JavaScript */
+       #nistheadergoeshere {
+         position: relative !important;
+         display: block !important;
+         z-index: 10;
+         width: 100%;
+       }
+       #nistfootergoeshere {
+         position: relative !important;
+         display: block !important;
+         clear: both !important;
+         margin-top: 2rem !important;
+         width: 100%;
+       }
+       /* Also target the actual footer/header elements inside */
+       #nistfootergoeshere footer,
+       #nistheadergoeshere header {
+         position: relative !important;
+         display: block !important;
+       }
+       /* Ensure theme content doesn't overlap */
+       .wy-grid-for-nav {
+         position: relative;
+         z-index: 1;
+       }
+       .wy-nav-content-wrap {
+         min-height: calc(100vh - 200px);
+       }
+       .rst-footer-buttons {
+         margin-bottom: 2rem;
+       }
+     </style>
+   {%- endblock %}
+
+Add ``templates_path = ['_templates']`` to your ``conf.py`` if not already
+present. The ``.wy-*`` selectors target ``sphinx_rtd_theme``; other themes may
+require different CSS adjustments.
+
 |static/ntd2d.css_t|_
 .....................
 
@@ -74,7 +125,7 @@ not getting fancy, here).
 A section inserted into :ref:`MENU_HTML` if a documentation variant has
 any downloadable output, e.g., PDF or ePUB.
 
-Available subsitution keywords are:
+Available substitution keywords are:
 
 - ``downloads``: A pre-formatted string with each downloadable output
   formatted by :ref:`DOWNLOAD_ITEM_HTML`.
@@ -86,7 +137,7 @@ Available subsitution keywords are:
 
 Formats a link to a single downloadable output.
 
-Available subsitution keywords are:
+Available substitution keywords are:
 
 - ``href``: URL of the downloadable output.
 - ``kind``: Type of downloadable output, e.g., PDF or ePUB.
@@ -99,7 +150,7 @@ Available subsitution keywords are:
 The default page for your documentation displayed at
 https://pages.nist.gov/`{repository}`.
 
-Available subsitution keywords are:
+Available substitution keywords are:
 
 - ``owner``: The GitHub
   `user or organization
@@ -116,7 +167,7 @@ Available subsitution keywords are:
 The dropdown menu that allows selecting different branches and tags of your
 documentation.
 
-Available subsitution keywords are:
+Available substitution keywords are:
 
 - ``downloads``: The result of filling the :ref:`DOWNLOADS_HTML` template.
 - ``tree_url``: The GitHub URL corresponding to the active tag or branch.
@@ -131,7 +182,7 @@ Available subsitution keywords are:
 Style sheet that controls the appearance of the active tag or branch in the
 dropdown menu.
 
-Available subsitution keywords are:
+Available substitution keywords are:
 
 - ``variant``: The name of the active tag or branch.
 
@@ -143,7 +194,7 @@ Available subsitution keywords are:
 Lists tags and branches that are :ref:`configured <USAGE>` to serve
 documentation with this Action.
 
-Available subsitution keywords are:
+Available substitution keywords are:
 
 - ``branches``: A pre-formatted string with each git branch formatted by
   :ref:`VARIANT_ITEM_HTML`.
@@ -168,10 +219,10 @@ Available subsitution keywords are:
 
 Formats a link to a single tag or branch.
 
-Available subsitution keywords are:
+Available substitution keywords are:
 
 - ``href``: URL of the downloadable output.
-- ``kind``: Type of downloadale output, e.g., PDF or ePUB.
+- ``kind``: Type of downloadable output, e.g., PDF or ePUB.
 
 
 .. |downloads.html|   replace:: :file:`downloads.html`
