@@ -46,7 +46,6 @@ this workflow.
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
-   :hidden:
 
    customization
    QandA
@@ -55,7 +54,6 @@ this workflow.
 .. toctree::
    :maxdepth: 1
    :caption: Actions:
-   :hidden:
 
    docs4nist
    ntd2d
