@@ -37,5 +37,14 @@ napoleon_numpy_docstring = True
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+html_sidebars = {
+    '**': [
+        'about.html',
+        'searchfield.html',
+        'navigation.html',
+        'relations.html',
+        'donate.html',
+    ]
+}
 
 html_show_copyright = False
