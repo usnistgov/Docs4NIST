@@ -43,6 +43,7 @@ To fix this, create a custom ``layout.html`` template in your
 ``_templates/`` directory:
 
 .. code-block:: jinja
+
    {% extends "!layout.html" %}
    {%- block extrahead %}
      {{ super() }}
