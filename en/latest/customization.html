@@ -61,6 +61,54 @@ modifies your chosen documentation theme.</p>
 <h4><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/layout.html"><code class="file docutils literal notranslate"><span class="pre">ntd2d/layout.html</span></code></a><a class="headerlink" href="#layout-html" title="Permalink to this heading">¶</a></h4>
 <p>This template file inserts standard NIST headers and footers and a dropdown
 menu that allows selecting different versions of your documentation.</p>
+<p>Some Sphinx themes may display the NIST footer at the top of the page.
+This occurs when the theme’s CSS conflicts with the dynamically injected
+NIST header and footer elements.</p>
+<p>To fix this, create a custom <code class="docutils literal notranslate"><span class="pre">layout.html</span></code> template in your
+<code class="docutils literal notranslate"><span class="pre">_templates/</span></code> directory:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;!layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span>- <span class="k">block</span> <span class="nv">extrahead</span> <span class="cp">%}</span>
+<span class="x">  </span><span class="cp">{{</span> <span class="nb">super</span><span class="o">()</span> <span class="cp">}}</span>
+<span class="x">  &lt;!-- Fix NIST footer positioning --&gt;</span>
+<span class="x">  &lt;style&gt;</span>
+<span class="x">    /* Target the wrapper divs created by NIST JavaScript */</span>
+<span class="x">    #nistheadergoeshere {</span>
+<span class="x">      position: relative !important;</span>
+<span class="x">      display: block !important;</span>
+<span class="x">      z-index: 10;</span>
+<span class="x">      width: 100%;</span>
+<span class="x">    }</span>
+<span class="x">    #nistfootergoeshere {</span>
+<span class="x">      position: relative !important;</span>
+<span class="x">      display: block !important;</span>
+<span class="x">      clear: both !important;</span>
+<span class="x">      margin-top: 2rem !important;</span>
+<span class="x">      width: 100%;</span>
+<span class="x">    }</span>
+<span class="x">    /* Also target the actual footer/header elements inside */</span>
+<span class="x">    #nistfootergoeshere footer,</span>
+<span class="x">    #nistheadergoeshere header {</span>
+<span class="x">      position: relative !important;</span>
+<span class="x">      display: block !important;</span>
+<span class="x">    }</span>
+<span class="x">    /* Ensure theme content doesn&#39;t overlap */</span>
+<span class="x">    .wy-grid-for-nav {</span>
+<span class="x">      position: relative;</span>
+<span class="x">      z-index: 1;</span>
+<span class="x">    }</span>
+<span class="x">    .wy-nav-content-wrap {</span>
+<span class="x">      min-height: calc(100vh - 200px);</span>
+<span class="x">    }</span>
+<span class="x">    .rst-footer-buttons {</span>
+<span class="x">      margin-bottom: 2rem;</span>
+<span class="x">    }</span>
+<span class="x">  &lt;/style&gt;</span>
+<span class="cp">{%</span>- <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>Add <code class="docutils literal notranslate"><span class="pre">templates_path</span> <span class="pre">=</span> <span class="pre">['_templates']</span></code> to your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> if not already
+present. The <code class="docutils literal notranslate"><span class="pre">.wy-*</span></code> selectors target <code class="docutils literal notranslate"><span class="pre">sphinx_rtd_theme</span></code>; other themes may
+require different CSS adjustments.</p>
 </section>
 <section id="static-ntd2d-css-t">
 <h4><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d/static/ntd2d.css_t"><code class="file docutils literal notranslate"><span class="pre">ntd2d/static/ntd2d.css_t</span></code></a><a class="headerlink" href="#static-ntd2d-css-t" title="Permalink to this heading">¶</a></h4>
@@ -84,7 +132,7 @@ not getting fancy, here).</p>
 <span id="id5"></span><h3><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/downloads.html"><code class="file docutils literal notranslate"><span class="pre">downloads.html</span></code></a><a class="headerlink" href="#downloads-html" title="Permalink to this heading">¶</a></h3>
 <p>A section inserted into <a class="reference internal" href="#menu-html"><span class="std std-ref">menu.html</span></a> if a documentation variant has
 any downloadable output, e.g., PDF or ePUB.</p>
-<p>Available subsitution keywords are:</p>
+<p>Available substitution keywords are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">downloads</span></code>: A pre-formatted string with each downloadable output
 formatted by <a class="reference internal" href="#download-item-html"><span class="std std-ref">download_item.html</span></a>.</p></li>
@@ -93,7 +141,7 @@ formatted by <a class="reference internal" href="#download-item-html"><span clas
 <section id="download-item-html">
 <span id="id6"></span><h3><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/download_item.html"><code class="file docutils literal notranslate"><span class="pre">download_item.html</span></code></a><a class="headerlink" href="#download-item-html" title="Permalink to this heading">¶</a></h3>
 <p>Formats a link to a single downloadable output.</p>
-<p>Available subsitution keywords are:</p>
+<p>Available substitution keywords are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">href</span></code>: URL of the downloadable output.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kind</span></code>: Type of downloadable output, e.g., PDF or ePUB.</p></li>
@@ -103,7 +151,7 @@ formatted by <a class="reference internal" href="#download-item-html"><span clas
 <span id="id7"></span><h3><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/index.html"><code class="file docutils literal notranslate"><span class="pre">index.html</span></code></a><a class="headerlink" href="#index-html" title="Permalink to this heading">¶</a></h3>
 <p>The default page for your documentation displayed at
 <a class="reference external" href="https://pages.nist.gov/">https://pages.nist.gov/</a><cite>{repository}</cite>.</p>
-<p>Available subsitution keywords are:</p>
+<p>Available substitution keywords are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">owner</span></code>: The GitHub
 <a class="reference external" href="https://docs.github.com/en/get-started/learning-about-github/types-of-github-accounts">user or organization</a>
@@ -116,7 +164,7 @@ for your repository.</p></li>
 <span id="id8"></span><h3><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/menu.html"><code class="file docutils literal notranslate"><span class="pre">menu.html</span></code></a><a class="headerlink" href="#menu-html" title="Permalink to this heading">¶</a></h3>
 <p>The dropdown menu that allows selecting different branches and tags of your
 documentation.</p>
-<p>Available subsitution keywords are:</p>
+<p>Available substitution keywords are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">downloads</span></code>: The result of filling the <a class="reference internal" href="#downloads-html"><span class="std std-ref">downloads.html</span></a> template.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tree_url</span></code>: The GitHub URL corresponding to the active tag or branch.</p></li>
@@ -128,7 +176,7 @@ documentation.</p>
 <span id="id9"></span><h3><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/ntd2d_active.css"><code class="file docutils literal notranslate"><span class="pre">ntd2d_active.css</span></code></a><a class="headerlink" href="#ntd2d-active-css" title="Permalink to this heading">¶</a></h3>
 <p>Style sheet that controls the appearance of the active tag or branch in the
 dropdown menu.</p>
-<p>Available subsitution keywords are:</p>
+<p>Available substitution keywords are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">variant</span></code>: The name of the active tag or branch.</p></li>
 </ul>
@@ -137,7 +185,7 @@ dropdown menu.</p>
 <span id="id10"></span><h3><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/variants.html"><code class="file docutils literal notranslate"><span class="pre">variants.html</span></code></a><a class="headerlink" href="#variants-html" title="Permalink to this heading">¶</a></h3>
 <p>Lists tags and branches that are <a class="reference internal" href="index.html#usage"><span class="std std-ref">configured</span></a> to serve
 documentation with this Action.</p>
-<p>Available subsitution keywords are:</p>
+<p>Available substitution keywords are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">branches</span></code>: A pre-formatted string with each git branch formatted by
 <a class="reference internal" href="#variant-item-html"><span class="std std-ref">variant_item.html</span></a>.</p></li>
@@ -158,10 +206,10 @@ satisfy the <span class="target" id="index-1"></span><a class="pep reference ext
 <section id="variant-item-html">
 <span id="id11"></span><h3><a class="reference external" href="https://github.com/usnistgov/Docs4NIST/blob/main/ntd2d/ntd2d_action/files/templates/variant_item.html"><code class="file docutils literal notranslate"><span class="pre">variant_item.html</span></code></a><a class="headerlink" href="#variant-item-html" title="Permalink to this heading">¶</a></h3>
 <p>Formats a link to a single tag or branch.</p>
-<p>Available subsitution keywords are:</p>
+<p>Available substitution keywords are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">href</span></code>: URL of the downloadable output.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kind</span></code>: Type of downloadale output, e.g., PDF or ePUB.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kind</span></code>: Type of downloadable output, e.g., PDF or ePUB.</p></li>
 </ul>
 </section>
 </section>

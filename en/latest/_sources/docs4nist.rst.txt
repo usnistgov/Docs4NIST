@@ -39,7 +39,7 @@ as :file:`.github/workflows/Docs4NIST.yml`:
              pip-requirements: ''
              conda-environment: ''
              push-pulls-pages: false
-             include-header-footer: true
+             insert-header-footer: true
              hidden: false
 
 Inputs

@@ -31,7 +31,7 @@ yourself.
         apt-packages: ''
         pip-requirements: ''
         conda-environment: ''
-        include-header-footer: true
+        insert-header-footer: true
         hidden: false
 
 .. note::
@@ -143,7 +143,7 @@ The path to the pip requirements file, relative to the root of the project.
 The path to the Conda environment file, relative to the root of the
 project.
 
-``include-header-footer``
+``insert-header-footer``
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Whether to insert the
