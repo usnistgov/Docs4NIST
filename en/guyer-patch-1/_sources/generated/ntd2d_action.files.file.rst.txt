@@ -1,0 +1,35 @@
+ntd2d\_action.files.file
+========================
+
+.. automodule:: ntd2d_action.files.file
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   
+   .. autoclass:: File
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

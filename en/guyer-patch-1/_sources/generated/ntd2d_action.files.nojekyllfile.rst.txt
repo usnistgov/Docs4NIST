@@ -1,0 +1,35 @@
+ntd2d\_action.files.nojekyllfile
+================================
+
+.. automodule:: ntd2d_action.files.nojekyllfile
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   
+   .. autoclass:: NoJekyllFile
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

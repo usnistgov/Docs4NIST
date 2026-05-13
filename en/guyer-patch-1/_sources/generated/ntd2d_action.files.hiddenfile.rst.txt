@@ -1,0 +1,35 @@
+ntd2d\_action.files.hiddenfile
+==============================
+
+.. automodule:: ntd2d_action.files.hiddenfile
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   
+   .. autoclass:: HiddenFile
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,35 @@
+ntd2d\_action.files.sphinxlog
+=============================
+
+.. automodule:: ntd2d_action.files.sphinxlog
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   
+   .. autoclass:: SphinxLog
+      :members:
+      :inherited-members:
+      :show-inheritance:
+
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
