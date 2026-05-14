@@ -1,6 +1,5 @@
 FROM ghcr.io/usnistgov/docs4nist:docker
 
-
 LABEL maintainer="Jonathan Guyer <guyer@nist.gov>"
 
 RUN git config --global --add safe.directory /github/workspace
