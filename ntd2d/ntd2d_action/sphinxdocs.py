@@ -61,7 +61,14 @@ class SphinxDocs:
         return self.build_dir / "latex" / f"{self.conf.project.lower()}.pdf"
 
     def get_theme(self, theme_name):
-        theme_factory = HTMLThemeFactory(self.sphinx_app)
+        try:
+            theme_factory = HTMLThemeFactory(app=self.sphinx_app)
+        except AssertionError:
+            # Sphinx 9.x changed API in annoying way
+            theme_factory = HTMLThemeFactory(confdir=self.sphinx_app.confdir,
+                                             app=self.sphinx_app,
+                                             config=self.sphinx_app.config,
+                                             registry=self.sphinx_app.registry)
         return theme_factory.create(theme_name)
 
     @property
