@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Docs4NIST Action &#8212; Docs4NIST  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=88d0a8bc" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=c31d9815" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ntd2d Sub-Action" href="ntd2d.html" />
@@ -19,8 +19,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
 
   <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
@@ -39,12 +40,12 @@
           <div class="body" role="main">
             
   <section id="docs4nist-action">
-<span id="docs4nist"></span><h1><code class="docutils literal notranslate"><span class="pre">Docs4NIST</span></code> Action<a class="headerlink" href="#docs4nist-action" title="Permalink to this heading">¶</a></h1>
+<span id="docs4nist"></span><h1><code class="docutils literal notranslate"><span class="pre">Docs4NIST</span></code> Action<a class="headerlink" href="#docs4nist-action" title="Link to this heading">¶</a></h1>
 <p>This <a class="reference external" href="https://docs.github.com/en/actions">GitHub action</a> uses the <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> tool to build documentation in
 <a class="reference external" href="https://github.com/usnistgov">https://github.com/usnistgov</a> projects and then host on
 <a class="reference external" href="https://pages.nist.gov">https://pages.nist.gov</a> as an approximation of <a class="reference external" href="https://readthedocs.org">ReadTheDocs</a>.</p>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <p>This action is invoked by adding a workflow file to your repository, such
 as <code class="file docutils literal notranslate"><span class="pre">.github/workflows/Docs4NIST.yml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Build</span><span class="nv"> </span><span class="s">Documentation&quot;</span>
@@ -75,21 +76,21 @@ as <code class="file docutils literal notranslate"><span class="pre">.github/wor
 </div>
 </section>
 <section id="inputs">
-<h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading">¶</a></h2>
+<h2>Inputs<a class="headerlink" href="#inputs" title="Link to this heading">¶</a></h2>
 <section id="docs-folder">
-<h3><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code><a class="headerlink" href="#docs-folder" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">docs-folder</span></code><a class="headerlink" href="#docs-folder" title="Link to this heading">¶</a></h3>
 <p>The folder containing your Sphinx configuration.</p>
 </section>
 <section id="pages-branch">
-<span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Permalink to this heading">¶</a></h3>
+<span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-branch</span></code><a class="headerlink" href="#pages-branch" title="Link to this heading">¶</a></h3>
 <p>The branch linked to your documentation server.</p>
 </section>
 <section id="pages-url">
-<span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Permalink to this heading">¶</a></h3>
+<span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">pages-url</span></code><a class="headerlink" href="#pages-url" title="Link to this heading">¶</a></h3>
 <p>URL of the web server for served documentation.</p>
 </section>
 <section id="formats">
-<h3><code class="docutils literal notranslate"><span class="pre">formats</span></code><a class="headerlink" href="#formats" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">formats</span></code><a class="headerlink" href="#formats" title="Link to this heading">¶</a></h3>
 <p>Type(s) of output desired in addition to html (<code class="docutils literal notranslate"><span class="pre">pdf</span></code>, and/or <code class="docutils literal notranslate"><span class="pre">epub</span></code>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -104,40 +105,40 @@ to declare formats, e.g.,</p>
 </div>
 </section>
 <section id="build-html-command">
-<h3><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code><a class="headerlink" href="#build-html-command" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">build-html-command</span></code><a class="headerlink" href="#build-html-command" title="Link to this heading">¶</a></h3>
 <p>The command used by <a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a> to build your html documentation.</p>
 </section>
 <section id="build-epub-command">
-<h3><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code><a class="headerlink" href="#build-epub-command" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">build-epub-command</span></code><a class="headerlink" href="#build-epub-command" title="Link to this heading">¶</a></h3>
 <p>The command used by <a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a> to build your ePUB documentation.</p>
 </section>
 <section id="build-pdf-command">
-<h3><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code><a class="headerlink" href="#build-pdf-command" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">build-pdf-command</span></code><a class="headerlink" href="#build-pdf-command" title="Link to this heading">¶</a></h3>
 <p>The command used by <a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a> to build your PDF documentation.</p>
 </section>
 <section id="pre-build-command">
-<h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">pre-build-command</span></code><a class="headerlink" href="#pre-build-command" title="Link to this heading">¶</a></h3>
 <p>Run by <a class="reference external" href="https://github.com/usnistgov/sphinx-action"><code class="docutils literal notranslate"><span class="pre">usnistgov/sphinx-action</span></code></a> before the build command.  You can use this to install
 system level dependencies, for example, with “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">-y</span> <span class="pre">&amp;&amp;</span> <span class="pre">apt-get</span>
 <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">perl</span></code>”, although those are better installed with
 <a class="reference internal" href="#aptpackages"><span class="std std-ref">apt-packages</span></a>.</p>
 </section>
 <section id="apt-packages">
-<span id="aptpackages"></span><h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Permalink to this heading">¶</a></h3>
+<span id="aptpackages"></span><h3><code class="docutils literal notranslate"><span class="pre">apt-packages</span></code><a class="headerlink" href="#apt-packages" title="Link to this heading">¶</a></h3>
 <p>List of any <a class="reference external" href="https://en.wikipedia.org/wiki/APT_(software)">APT</a> packages
 that should be installed.</p>
 </section>
 <section id="pip-requirements">
-<span id="piprequirements"></span><h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Permalink to this heading">¶</a></h3>
+<span id="piprequirements"></span><h3><code class="docutils literal notranslate"><span class="pre">pip-requirements</span></code><a class="headerlink" href="#pip-requirements" title="Link to this heading">¶</a></h3>
 <p>The path to the pip requirements file, relative to the root of the project.</p>
 </section>
 <section id="conda-environment">
-<span id="condaenvironment"></span><h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Permalink to this heading">¶</a></h3>
+<span id="condaenvironment"></span><h3><code class="docutils literal notranslate"><span class="pre">conda-environment</span></code><a class="headerlink" href="#conda-environment" title="Link to this heading">¶</a></h3>
 <p>The path to the Conda environment file, relative to the root of the
 project.</p>
 </section>
 <section id="push-pulls-pages">
-<h3><code class="docutils literal notranslate"><span class="pre">push-pulls-pages</span></code><a class="headerlink" href="#push-pulls-pages" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">push-pulls-pages</span></code><a class="headerlink" href="#push-pulls-pages" title="Link to this heading">¶</a></h3>
 <p>Whether the results of pull requests should be pushed to
 <a class="reference internal" href="#pages-branch"><span class="std std-ref">pages-branch</span></a>.  For
 <a class="reference external" href="https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows/">security</a>
@@ -149,19 +150,19 @@ this action is set to run <cite>on: push</cite>, then any build products from br
 in the same repository will appear at <a class="reference internal" href="#pages-url"><span class="std std-ref">pages-url</span></a>.</p>
 </section>
 <section id="insert-header-footer">
-<h3><code class="docutils literal notranslate"><span class="pre">insert-header-footer</span></code><a class="headerlink" href="#insert-header-footer" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">insert-header-footer</span></code><a class="headerlink" href="#insert-header-footer" title="Link to this heading">¶</a></h3>
 <p>When true, automatically inserts the
 <a class="reference external" href="https://pages.nist.gov/nist-header-footer">NIST header and footer</a>.
 Setting to true conflicts with, e.g.,
 <a class="reference external" href="https://sphinx-rtd-theme.readthedocs.io/">sphinx_rtd_theme</a>.</p>
 </section>
 <section id="hidden">
-<h3><code class="docutils literal notranslate"><span class="pre">hidden</span></code><a class="headerlink" href="#hidden" title="Permalink to this heading">¶</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">hidden</span></code><a class="headerlink" href="#hidden" title="Link to this heading">¶</a></h3>
 <p>When true, removes the active branch or tag from the version dropdown menu.</p>
 </section>
 </section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">¶</a></h2>
 <p>This action implements a <a class="reference external" href="https://docs.github.com/en/actions/creating-actions/creating-a-composite-action">composite workflow</a>
 with the following major steps:</p>
 <ol class="arabic simple">
@@ -178,7 +179,7 @@ with the following major steps:</p>
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="index.html">Docs4NIST</a></h1>
 
@@ -190,14 +191,14 @@ with the following major steps:</p>
 
 
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -258,8 +259,8 @@ with the following major steps:</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/docs4nist.rst.txt"
