@@ -1,4 +1,4 @@
-FROM ghcr.io/usnistgov/docs4nist:docker
+FROM ghcr.io/usnistgov/docs4nist:guyer-patch-2
 
 LABEL maintainer="Jonathan Guyer <guyer@nist.gov>"
 
