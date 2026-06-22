@@ -27,6 +27,7 @@ RUN apt-get update \
       gsfonts \
       texlive-science \
       texlive-extra-utils \
+      texlive-font-utils \
       librsvg2-bin \
       \
       git \
